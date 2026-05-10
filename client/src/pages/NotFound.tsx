@@ -1,49 +1,81 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { AlertCircle, Home } from "lucide-react";
-import { useLocation } from "wouter";
+/**
+ * 404 Not Found — Cafe&Bar Luxor
+ * Design: "Warme Patina" — Dark luxury 404 page
+ */
+import { Link } from 'wouter';
+
+const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
 
 export default function NotFound() {
-  const [, setLocation] = useLocation();
-
-  const handleGoHome = () => {
-    setLocation("/");
-  };
-
   return (
-    <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100">
-      <Card className="w-full max-w-lg mx-4 shadow-lg border-0 bg-white/80 backdrop-blur-sm">
-        <CardContent className="pt-8 pb-8 text-center">
-          <div className="flex justify-center mb-6">
-            <div className="relative">
-              <div className="absolute inset-0 bg-red-100 rounded-full animate-pulse" />
-              <AlertCircle className="relative h-16 w-16 text-red-500" />
-            </div>
-          </div>
+    <div
+      className="min-h-screen flex flex-col items-center justify-center text-center px-4 relative overflow-hidden"
+      style={{ background: '#0a0603' }}
+    >
+      {/* Background */}
+      <div
+        className="absolute inset-0 bg-cover bg-center opacity-15"
+        style={{ backgroundImage: `url(${HERO_BG})` }}
+      />
+      <div className="absolute inset-0 bg-[#0a0603]/80" />
 
-          <h1 className="text-4xl font-bold text-slate-900 mb-2">404</h1>
+      {/* Content */}
+      <div className="relative z-10">
+        {/* 404 Number */}
+        <div
+          className="text-[120px] md:text-[180px] font-bold leading-none"
+          style={{
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            background: 'linear-gradient(135deg, #c9a84c 0%, #e8c87a 50%, #c9a84c 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            opacity: 0.8,
+          }}
+        >
+          404
+        </div>
 
-          <h2 className="text-xl font-semibold text-slate-700 mb-4">
-            Page Not Found
-          </h2>
+        {/* Gold divider */}
+        <div className="flex items-center justify-center gap-4 mb-6">
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a84c]" />
+          <span className="text-[#c9a84c] text-lg">✦</span>
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a84c]" />
+        </div>
 
-          <p className="text-slate-600 mb-8 leading-relaxed">
-            Sorry, the page you are looking for doesn't exist.
-            <br />
-            It may have been moved or deleted.
+        <h1
+          className="text-2xl md:text-3xl font-semibold text-white mb-3"
+          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+        >
+          Seite nicht gefunden · Page not found
+        </h1>
+
+        <p
+          className="text-white/50 text-base mb-8 max-w-md mx-auto"
+          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+        >
+          Diese Seite existiert leider nicht. Vielleicht finden Sie, was Sie suchen, auf unserer Startseite.
+        </p>
+
+        <Link href="/">
+          <button
+            className="px-8 py-4 bg-[#c9a84c] text-[#0a0603] font-semibold text-sm tracking-widest uppercase hover:bg-[#e8c87a] transition-all duration-300 hover:scale-105"
+            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          >
+            ← Zurück zur Startseite
+          </button>
+        </Link>
+
+        {/* Logo */}
+        <div className="mt-12 opacity-30">
+          <p
+            className="text-[#c9a84c] text-sm tracking-[0.3em] uppercase"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+          >
+            Cafe&Bar Luxor
           </p>
-
-          <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <Button
-              onClick={handleGoHome}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2.5 rounded-lg transition-all duration-200 shadow-md hover:shadow-lg"
-            >
-              <Home className="w-4 h-4 mr-2" />
-              Go Home
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 }
