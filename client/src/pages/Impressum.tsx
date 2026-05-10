@@ -39,7 +39,7 @@ export default function Impressum() {
             {/* Angaben gemäß § 5 TMG */}
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
               <h2
-                className="text-xl font-semibold text-[#c9a84c] mb-4"
+                className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
               >
                 {t('impressum.angaben')}
@@ -55,7 +55,7 @@ export default function Impressum() {
             {/* Kontakt */}
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
               <h2
-                className="text-xl font-semibold text-[#c9a84c] mb-4"
+                className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
               >
                 {t('impressum.kontakt')}
@@ -65,7 +65,7 @@ export default function Impressum() {
                   E-Mail:{' '}
                   <a
                     href="mailto:stoyansarakostov73@gmail.com"
-                    className="text-[#c9a84c] hover:text-[#e8c87a] transition-colors"
+                    className="text-red-700 hover:text-[#dc5050] transition-colors"
                   >
                     stoyansarakostov73@gmail.com
                   </a>
@@ -76,7 +76,7 @@ export default function Impressum() {
             {/* Gewerbeanmeldung */}
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
               <h2
-                className="text-xl font-semibold text-[#c9a84c] mb-4"
+                className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
               >
                 {t('impressum.gewerbe')}
@@ -90,7 +90,7 @@ export default function Impressum() {
             {/* Steuernummer & USt */}
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
               <h2
-                className="text-xl font-semibold text-[#c9a84c] mb-4"
+                className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
               >
                 Steuerliche Angaben
@@ -110,7 +110,7 @@ export default function Impressum() {
             {/* Verantwortlich */}
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
               <h2
-                className="text-xl font-semibold text-[#c9a84c] mb-4"
+                className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
               >
                 {t('impressum.verantwortlich')}
@@ -125,7 +125,7 @@ export default function Impressum() {
             {/* Haftungsausschluss */}
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
               <h2
-                className="text-xl font-semibold text-[#c9a84c] mb-4"
+                className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
               >
                 Haftungsausschluss
@@ -146,7 +146,7 @@ export default function Impressum() {
             {/* Back link */}
             <div className="mt-8">
               <Link href="/">
-                <span className="text-[#c9a84c] text-sm hover:text-[#e8c87a] transition-colors cursor-pointer flex items-center gap-2"
+                <span className="text-red-700 text-sm hover:text-[#dc5050] transition-colors cursor-pointer flex items-center gap-2"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   ← {t('common.back')}
                 </span>

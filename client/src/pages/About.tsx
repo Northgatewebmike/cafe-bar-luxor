@@ -67,8 +67,8 @@ export default function About() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/60 to-[#0a0603]/30" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 w-full">
           <div className="flex items-center gap-3 mb-2">
-            <div className="h-px w-8 bg-[#c9a84c]" />
-            <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+            <div className="h-px w-8 bg-red-700" />
+            <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
               {t('about.subtitle')}
             </span>
@@ -97,9 +97,9 @@ export default function About() {
                 <div className="absolute inset-0 bg-gradient-to-tr from-[#0a0603]/40 to-transparent" />
               </div>
               {/* Decorative gold border */}
-              <div className="absolute -bottom-3 -right-3 w-full h-full border border-[#c9a84c]/30 pointer-events-none" />
+              <div className="absolute -bottom-3 -right-3 w-full h-full border border-red-700/30 pointer-events-none" />
               {/* Gold accent */}
-              <div className="absolute top-4 left-4 w-16 h-16 border-t-2 border-l-2 border-[#c9a84c]" />
+              <div className="absolute top-4 left-4 w-16 h-16 border-t-2 border-l-2 border-red-700" />
             </div>
 
             {/* Text */}
@@ -108,7 +108,7 @@ export default function About() {
                 className="text-3xl md:text-4xl font-semibold text-white mb-6"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
               >
-                Cafe&Bar <span className="text-[#c9a84c]">Luxor</span>
+                Cafe&Bar <span className="text-red-700">Luxor</span>
               </h2>
               <div className="space-y-4">
                 {[t('about.story.p1'), t('about.story.p2'), t('about.story.p3')].map((para, i) => (
@@ -123,11 +123,11 @@ export default function About() {
               </div>
 
               {/* Gold divider */}
-              <div className="my-6 h-px w-24 bg-gradient-to-r from-[#c9a84c] to-transparent" />
+              <div className="my-6 h-px w-24 bg-gradient-to-r from-red-700 to-transparent" />
 
               {/* Address */}
               <div className="flex items-center gap-3">
-                <span className="text-[#c9a84c] text-lg">📍</span>
+                <span className="text-red-700 text-lg">📍</span>
                 <span className="text-white/50 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   Ohligser Markt 5, 42696 Solingen
                 </span>
@@ -148,12 +148,12 @@ export default function About() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14 reveal">
             <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-px w-12 bg-gradient-to-r from-transparent to-[#c9a84c]" />
-              <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-red-700" />
+              <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 {t('about.values.title')}
               </span>
-              <div className="h-px w-12 bg-gradient-to-l from-transparent to-[#c9a84c]" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-red-700" />
             </div>
             <h2
               className="text-3xl md:text-4xl font-semibold text-white"
@@ -167,14 +167,14 @@ export default function About() {
             {values.map((value, i) => (
               <div
                 key={i}
-                className="reveal card-3d p-8 text-center border border-white/8 hover:border-[#c9a84c]/30 transition-all duration-500"
+                className="reveal card-3d p-8 text-center border border-white/8 hover:border-red-700/30 transition-all duration-500"
                 style={{
                   background: 'linear-gradient(135deg, rgba(201,168,76,0.05) 0%, rgba(255,255,255,0.02) 100%)',
                   transitionDelay: `${i * 100}ms`,
                 }}
               >
                 <div
-                  className="text-4xl text-[#c9a84c] mb-4"
+                  className="text-4xl text-red-700 mb-4"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                 >
                   {value.icon}
@@ -213,13 +213,13 @@ export default function About() {
             {features.map((feature, i) => (
               <div
                 key={i}
-                className="reveal flex items-center gap-3 p-4 border border-white/8 hover:border-[#c9a84c]/30 transition-all duration-300 group"
+                className="reveal flex items-center gap-3 p-4 border border-white/8 hover:border-red-700/30 transition-all duration-300 group"
                 style={{
                   background: 'rgba(255,255,255,0.02)',
                   transitionDelay: `${i * 60}ms`,
                 }}
               >
-                <span className="text-[#c9a84c] group-hover:scale-110 transition-transform duration-300">
+                <span className="text-red-700 group-hover:scale-110 transition-transform duration-300">
                   {feature.icon}
                 </span>
                 <span

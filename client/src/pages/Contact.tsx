@@ -56,7 +56,7 @@ export default function Contact() {
     }
   };
 
-  const inputClass = `w-full bg-white/5 border border-white/15 text-white placeholder-white/30 px-4 py-3 text-sm focus:outline-none focus:border-[#c9a84c]/60 focus:bg-white/8 transition-all duration-300`;
+  const inputClass = `w-full bg-white/5 border border-white/15 text-white placeholder-white/30 px-4 py-3 text-sm focus:outline-none focus:border-red-700/60 focus:bg-white/8 transition-all duration-300`;
 
   return (
     <div className="page-enter pt-16 md:pt-20 min-h-screen bg-[#0a0603]">
@@ -69,8 +69,8 @@ export default function Contact() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/60 to-[#0a0603]/30" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 w-full">
           <div className="flex items-center gap-3 mb-2">
-            <div className="h-px w-8 bg-[#c9a84c]" />
-            <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+            <div className="h-px w-8 bg-red-700" />
+            <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
               Cafe&Bar Luxor
             </span>
@@ -204,7 +204,7 @@ export default function Contact() {
                   <button
                     type="submit"
                     disabled={status === 'sending'}
-                    className="flex items-center gap-3 px-8 py-4 bg-[#c9a84c] text-[#0a0603] font-semibold text-sm tracking-widest uppercase hover:bg-[#e8c87a] transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="flex items-center gap-3 px-8 py-4 bg-red-700 text-[#0a0603] font-semibold text-sm tracking-widest uppercase hover:bg-[#dc5050] transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
                     style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                   >
                     <Send size={16} />
@@ -226,9 +226,9 @@ export default function Contact() {
 
                 <div className="space-y-5">
                   {/* Address */}
-                  <div className="flex items-start gap-4 p-4 border border-white/8 hover:border-[#c9a84c]/30 transition-all duration-300"
+                  <div className="flex items-start gap-4 p-4 border border-white/8 hover:border-red-700/30 transition-all duration-300"
                     style={{ background: 'rgba(255,255,255,0.02)' }}>
-                    <MapPin size={20} className="text-[#c9a84c] flex-shrink-0 mt-0.5" />
+                    <MapPin size={20} className="text-red-700 flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="text-white/40 text-xs tracking-widest uppercase mb-1"
                         style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
@@ -244,9 +244,9 @@ export default function Contact() {
                   </div>
 
                   {/* Email */}
-                  <div className="flex items-start gap-4 p-4 border border-white/8 hover:border-[#c9a84c]/30 transition-all duration-300"
+                  <div className="flex items-start gap-4 p-4 border border-white/8 hover:border-red-700/30 transition-all duration-300"
                     style={{ background: 'rgba(255,255,255,0.02)' }}>
-                    <Mail size={20} className="text-[#c9a84c] flex-shrink-0 mt-0.5" />
+                    <Mail size={20} className="text-red-700 flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="text-white/40 text-xs tracking-widest uppercase mb-1"
                         style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
@@ -254,7 +254,7 @@ export default function Contact() {
                       </p>
                       <a
                         href="mailto:stoyansarakostov73@gmail.com"
-                        className="text-[#c9a84c] hover:text-[#e8c87a] text-sm transition-colors break-all"
+                        className="text-red-700 hover:text-[#dc5050] text-sm transition-colors break-all"
                         style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                       >
                         stoyansarakostov73@gmail.com
@@ -263,9 +263,9 @@ export default function Contact() {
                   </div>
 
                   {/* Hours */}
-                  <div className="flex items-start gap-4 p-4 border border-white/8 hover:border-[#c9a84c]/30 transition-all duration-300"
+                  <div className="flex items-start gap-4 p-4 border border-white/8 hover:border-red-700/30 transition-all duration-300"
                     style={{ background: 'rgba(255,255,255,0.02)' }}>
-                    <Clock size={20} className="text-[#c9a84c] flex-shrink-0 mt-0.5" />
+                    <Clock size={20} className="text-red-700 flex-shrink-0 mt-0.5" />
                     <div>
                       <p className="text-white/40 text-xs tracking-widest uppercase mb-1"
                         style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
@@ -280,8 +280,8 @@ export default function Contact() {
                   </div>
 
                   {/* Reservation note */}
-                  <div className="p-4 border border-[#c9a84c]/20 bg-[#c9a84c]/5">
-                    <p className="text-[#c9a84c] text-xs tracking-widest uppercase mb-1 font-semibold"
+                  <div className="p-4 border border-red-700/20 bg-red-700/5">
+                    <p className="text-red-700 text-xs tracking-widest uppercase mb-1 font-semibold"
                       style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                       {t('contact.reservation')}
                     </p>
@@ -298,8 +298,8 @@ export default function Contact() {
           {/* ============ GOOGLE MAPS ============ */}
           <div className="mt-14 reveal">
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-[#c9a84c]" />
-              <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+              <div className="h-px w-8 bg-red-700" />
+              <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 {t('contact.map.title')}
               </span>
@@ -339,7 +339,7 @@ export default function Contact() {
                 href="https://maps.app.goo.gl/AqP7qYQ39kBf4gvz6"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-[#c9a84c] text-xs hover:text-[#e8c87a] transition-colors flex items-center gap-1"
+                className="text-red-700 text-xs hover:text-[#dc5050] transition-colors flex items-center gap-1"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
                 <MapPin size={12} />

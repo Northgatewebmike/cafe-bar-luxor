@@ -35,7 +35,7 @@ export default function Datenschutz() {
           <div style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
 
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <h2 className="text-xl font-semibold text-[#c9a84c] mb-4"
+              <h2 className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                 1. Datenschutz auf einen Blick
               </h2>
@@ -50,7 +50,7 @@ export default function Datenschutz() {
             </div>
 
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <h2 className="text-xl font-semibold text-[#c9a84c] mb-4"
+              <h2 className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                 2. Verantwortliche Stelle
               </h2>
@@ -62,7 +62,7 @@ export default function Datenschutz() {
                 <p className="mt-2">
                   E-Mail:{' '}
                   <a href="mailto:stoyansarakostov73@gmail.com"
-                    className="text-[#c9a84c] hover:text-[#e8c87a] transition-colors">
+                    className="text-red-700 hover:text-[#dc5050] transition-colors">
                     stoyansarakostov73@gmail.com
                   </a>
                 </p>
@@ -70,7 +70,7 @@ export default function Datenschutz() {
             </div>
 
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <h2 className="text-xl font-semibold text-[#c9a84c] mb-4"
+              <h2 className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                 3. Datenerfassung auf dieser Website
               </h2>
@@ -85,7 +85,7 @@ export default function Datenschutz() {
             </div>
 
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <h2 className="text-xl font-semibold text-[#c9a84c] mb-4"
+              <h2 className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                 4. Ihre Rechte
               </h2>
@@ -98,19 +98,19 @@ export default function Datenschutz() {
             </div>
 
             <div className="mb-8 p-6 border border-white/10" style={{ background: 'rgba(255,255,255,0.02)' }}>
-              <h2 className="text-xl font-semibold text-[#c9a84c] mb-4"
+              <h2 className="text-xl font-semibold text-red-700 mb-4"
                 style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                 5. Google Maps
               </h2>
               <p className="text-white/60 text-sm leading-relaxed">
-                Diese Seite nutzt den Kartendienst Google Maps. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Zur Nutzung der Funktionen von Google Maps ist es notwendig, Ihre IP-Adresse zu speichern. Diese Informationen werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Mehr Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-[#c9a84c] hover:text-[#e8c87a] transition-colors">https://policies.google.com/privacy</a>.
+                Diese Seite nutzt den Kartendienst Google Maps. Anbieter ist die Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland. Zur Nutzung der Funktionen von Google Maps ist es notwendig, Ihre IP-Adresse zu speichern. Diese Informationen werden in der Regel an einen Server von Google in den USA übertragen und dort gespeichert. Mehr Informationen zum Umgang mit Nutzerdaten finden Sie in der Datenschutzerklärung von Google: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="text-red-700 hover:text-[#dc5050] transition-colors">https://policies.google.com/privacy</a>.
               </p>
             </div>
 
             {/* Back link */}
             <div className="mt-8">
               <Link href="/">
-                <span className="text-[#c9a84c] text-sm hover:text-[#e8c87a] transition-colors cursor-pointer flex items-center gap-2"
+                <span className="text-red-700 text-sm hover:text-[#dc5050] transition-colors cursor-pointer flex items-center gap-2"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   ← {t('common.back')}
                 </span>

@@ -98,8 +98,8 @@ export default function Gallery() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/60 to-[#0a0603]/30" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 w-full">
           <div className="flex items-center gap-3 mb-2">
-            <div className="h-px w-8 bg-[#c9a84c]" />
-            <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+            <div className="h-px w-8 bg-red-700" />
+            <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
               {t('gallery.subtitle')}
             </span>
@@ -148,7 +148,7 @@ export default function Gallery() {
                 {/* Hover overlay */}
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-400 flex items-center justify-center">
                   <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100 flex flex-col items-center gap-2">
-                    <ZoomIn size={28} className="text-[#c9a84c]" />
+                    <ZoomIn size={28} className="text-red-700" />
                     <span
                       className="text-white text-xs tracking-widest uppercase"
                       style={{ fontFamily: "'Source Sans 3', sans-serif" }}
@@ -159,8 +159,8 @@ export default function Gallery() {
                 </div>
 
                 {/* Gold corner accent */}
-                <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-[#c9a84c]/0 group-hover:border-[#c9a84c]/80 transition-all duration-300" />
-                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-[#c9a84c]/0 group-hover:border-[#c9a84c]/80 transition-all duration-300" />
+                <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-red-700/0 group-hover:border-red-700/80 transition-all duration-300" />
+                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-red-700/0 group-hover:border-red-700/80 transition-all duration-300" />
               </div>
             ))}
           </div>
@@ -205,7 +205,7 @@ export default function Gallery() {
               style={{ background: 'linear-gradient(to top, rgba(10,6,3,0.9), transparent)' }}
             >
               <p
-                className="text-[#c9a84c] text-sm tracking-widest uppercase"
+                className="text-red-700 text-sm tracking-widest uppercase"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
                 {galleryImages[lightboxIndex].label}
@@ -217,15 +217,15 @@ export default function Gallery() {
             </div>
 
             {/* Gold corner accents */}
-            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#c9a84c]" />
-            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-[#c9a84c]" />
-            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-[#c9a84c]" />
-            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#c9a84c]" />
+            <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-red-700" />
+            <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 border-red-700" />
+            <div className="absolute bottom-0 left-0 w-8 h-8 border-b-2 border-l-2 border-red-700" />
+            <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-red-700" />
           </div>
 
           {/* Close button */}
           <button
-            className="absolute top-4 right-4 p-2 text-white/60 hover:text-[#c9a84c] transition-colors z-10 border border-white/20 hover:border-[#c9a84c]/50"
+            className="absolute top-4 right-4 p-2 text-white/60 hover:text-red-700 transition-colors z-10 border border-white/20 hover:border-red-700/50"
             onClick={closeLightbox}
             aria-label={t('gallery.close')}
           >
@@ -234,7 +234,7 @@ export default function Gallery() {
 
           {/* Prev button */}
           <button
-            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-[#c9a84c] transition-colors border border-white/20 hover:border-[#c9a84c]/50 bg-black/40"
+            className="absolute left-4 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-red-700 transition-colors border border-white/20 hover:border-red-700/50 bg-black/40"
             onClick={(e) => { e.stopPropagation(); prevImage(); }}
             aria-label={t('gallery.prev')}
           >
@@ -243,7 +243,7 @@ export default function Gallery() {
 
           {/* Next button */}
           <button
-            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-[#c9a84c] transition-colors border border-white/20 hover:border-[#c9a84c]/50 bg-black/40"
+            className="absolute right-4 top-1/2 -translate-y-1/2 p-3 text-white/60 hover:text-red-700 transition-colors border border-white/20 hover:border-red-700/50 bg-black/40"
             onClick={(e) => { e.stopPropagation(); nextImage(); }}
             aria-label={t('gallery.next')}
           >
@@ -256,7 +256,7 @@ export default function Gallery() {
               <button
                 key={i}
                 className={`flex-shrink-0 w-10 h-10 overflow-hidden border-2 transition-all duration-200 ${
-                  i === lightboxIndex ? 'border-[#c9a84c] scale-110' : 'border-transparent opacity-50 hover:opacity-80'
+                  i === lightboxIndex ? 'border-red-700 scale-110' : 'border-transparent opacity-50 hover:opacity-80'
                 }`}
                 onClick={(e) => {
                   e.stopPropagation();

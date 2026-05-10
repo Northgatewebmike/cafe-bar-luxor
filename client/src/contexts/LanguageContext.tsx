@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect } from 'react';
 
 export type Language = 'de' | 'en';
 
@@ -23,6 +23,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.gallery': 'Galerie',
     'nav.hours': 'Öffnungszeiten',
     'nav.contact': 'Kontakt',
+    'nav.automaten': 'Automaten',
     'nav.impressum': 'Impressum',
     'nav.datenschutz': 'Datenschutz',
 
@@ -77,88 +78,32 @@ const translations: Record<Language, Record<string, string>> = {
     // Menu
     'menu.title': 'Speisekarte',
     'menu.subtitle': 'Blättern Sie durch unsere Karte',
-    'menu.instruction': 'Klicken Sie auf die Seiten oder nutzen Sie die Pfeile zum Blättern',
+    'menu.instruction': 'Klicken Sie auf die Pfeile oder wischen Sie zum Blättern',
     'menu.prev': 'Zurück',
     'menu.next': 'Weiter',
     'menu.cover.title': 'Cafe & Bar Luxor',
     'menu.cover.subtitle': 'Speisekarte',
     'menu.cover.address': 'Ohligser Markt 5 · Solingen',
-    'menu.cat.coffee': 'Kaffee & Heißgetränke',
+    'menu.cover.open': 'Öffnen',
+    'menu.recipe': 'Rezept',
+    'menu.ingredients': 'Zutaten',
+    'menu.preparation': 'Zubereitung',
+
+    // Menu categories
+    'menu.cat.coffee': 'Kaffee',
     'menu.cat.cold': 'Kaltgetränke',
-    'menu.cat.cocktails': 'Cocktails & Longdrinks',
-    'menu.cat.beer': 'Bier & Wein',
-    'menu.cat.food': 'Speisen',
-    'menu.cat.snacks': 'Snacks & Kleinigkeiten',
-
-    // Menu items — Coffee
-    'menu.espresso': 'Espresso',
-    'menu.espresso.desc': 'Kräftiger Einzelespresso',
-    'menu.doppio': 'Doppio',
-    'menu.doppio.desc': 'Doppelter Espresso',
-    'menu.cappuccino': 'Cappuccino',
-    'menu.cappuccino.desc': 'Espresso mit aufgeschäumter Milch',
-    'menu.latte': 'Caffè Latte',
-    'menu.latte.desc': 'Espresso mit viel Milch',
-    'menu.americano': 'Americano',
-    'menu.americano.desc': 'Espresso mit heißem Wasser',
-    'menu.macchiato': 'Macchiato',
-    'menu.macchiato.desc': 'Espresso mit einem Hauch Milchschaum',
-    'menu.flatwhite': 'Flat White',
-    'menu.flatwhite.desc': 'Doppelter Ristretto mit Milch',
-    'menu.tee': 'Tee',
-    'menu.tee.desc': 'Auswahl verschiedener Teesorten',
-    'menu.heisskakao': 'Heiße Schokolade',
-    'menu.heisskakao.desc': 'Cremige heiße Schokolade',
-
-    // Menu items — Cold drinks
-    'menu.wasser': 'Wasser',
-    'menu.wasser.desc': 'Still oder mit Kohlensäure',
-    'menu.softdrink': 'Softdrinks',
-    'menu.softdrink.desc': 'Cola, Fanta, Sprite u.v.m.',
-    'menu.saft': 'Fruchtsaft',
-    'menu.saft.desc': 'Orange, Apfel, Multivitamin',
-    'menu.eiskaffee': 'Eiskaffee',
-    'menu.eiskaffee.desc': 'Kalter Kaffee mit Eis und Sahne',
-    'menu.smoothie': 'Smoothie',
-    'menu.smoothie.desc': 'Frisch zubereitete Fruchtmixe',
-
-    // Menu items — Cocktails
-    'menu.aperol': 'Aperol Spritz',
-    'menu.aperol.desc': 'Aperol, Prosecco, Soda, Orange',
-    'menu.hugo': 'Hugo',
-    'menu.hugo.desc': 'Holunderblütensirup, Prosecco, Minze',
-    'menu.mojito': 'Mojito',
-    'menu.mojito.desc': 'Rum, Limette, Minze, Zucker, Soda',
-    'menu.gin.tonic': 'Gin & Tonic',
-    'menu.gin.tonic.desc': 'Premium Gin mit Tonic Water',
-    'menu.longdrink': 'Longdrinks',
-    'menu.longdrink.desc': 'Vodka, Rum, Gin mit Mixer nach Wahl',
-    'menu.negroni': 'Negroni',
-    'menu.negroni.desc': 'Gin, Campari, roter Wermut',
-
-    // Menu items — Beer & Wine
-    'menu.bier.draft': 'Bier vom Fass',
-    'menu.bier.draft.desc': '0,3l / 0,5l',
-    'menu.bier.bottle': 'Flaschenbier',
-    'menu.bier.bottle.desc': 'Verschiedene Sorten',
-    'menu.wein.rot': 'Rotwein',
-    'menu.wein.rot.desc': 'Glas / Flasche',
-    'menu.wein.weiss': 'Weißwein',
-    'menu.wein.weiss.desc': 'Glas / Flasche',
-    'menu.sekt': 'Sekt / Prosecco',
-    'menu.sekt.desc': 'Glas / Flasche',
-
-    // Menu items — Food
-    'menu.toast': 'Toast',
-    'menu.toast.desc': 'Mit Käse und Schinken',
-    'menu.sandwich': 'Sandwich',
-    'menu.sandwich.desc': 'Belegt nach Tagesangebot',
-    'menu.kuchen': 'Kuchen',
-    'menu.kuchen.desc': 'Hausgemachter Kuchen des Tages',
-    'menu.croissant': 'Croissant',
-    'menu.croissant.desc': 'Buttercroissant, pur oder belegt',
-    'menu.snacks': 'Snacks',
-    'menu.snacks.desc': 'Nüsse, Chips, Oliven',
+    'menu.cat.lemonade': 'Hausgemachte Limonade',
+    'menu.cat.tee': 'Tee',
+    'menu.cat.cocktails': 'Cocktails',
+    'menu.cat.cocktails.nona': 'Alkoholfreie Cocktails',
+    'menu.cat.spirits': 'Alkohol & Shots',
+    'menu.cat.whiskey': 'Whiskey',
+    'menu.cat.longdrinks': 'Longdrinks',
+    'menu.cat.aperitif': 'Aperitif',
+    'menu.cat.beer.draft': 'Zapfbier',
+    'menu.cat.beer.bottle': 'Flaschenbier',
+    'menu.cat.wine': 'Wein & Sekt',
+    'menu.cat.eis': 'Eis & Shakes',
 
     // Gallery
     'gallery.title': 'Galerie',
@@ -189,6 +134,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hours.today': 'Heute',
     'hours.find.us': 'So finden Sie uns',
     'hours.address': 'Ohligser Markt 5, 42696 Solingen',
+    'hours.maps.link': 'In Google Maps öffnen',
 
     // Contact
     'contact.title': 'Kontakt',
@@ -208,6 +154,23 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.reservation': 'Reservierung',
     'contact.reservation.desc': 'Für Reservierungen und Gruppenanfragen kontaktieren Sie uns bitte direkt.',
     'contact.map.title': 'Standort',
+    'contact.map.open': 'In Google Maps öffnen',
+
+    // Automaten
+    'automaten.title': 'Automaten',
+    'automaten.subtitle': 'Unterhaltung & Komfort',
+    'automaten.intro': 'Im Cafe&Bar Luxor stehen Ihnen verschiedene Automaten für Ihren Komfort und Ihre Unterhaltung zur Verfügung.',
+    'automaten.cigarette.title': 'Zigarettenautomat',
+    'automaten.cigarette.desc': 'Unser Zigarettenautomat bietet eine Auswahl der beliebtesten Zigarettenmarken. Rund um die Uhr verfügbar für unsere Gäste.',
+    'automaten.cigarette.note': 'Nur für Personen ab 18 Jahren. Bitte Ausweis bereithalten.',
+    'automaten.spielautomat.title': 'Spielautomat',
+    'automaten.spielautomat.desc': 'Zwei moderne Spielautomaten stehen Ihnen für spannende Unterhaltung zur Verfügung. Spielen Sie verantwortungsbewusst.',
+    'automaten.spielautomat.note': 'Nur für Personen ab 18 Jahren. Spielen Sie verantwortungsvoll.',
+    'automaten.spielautomat.count': '2 Spielautomaten verfügbar',
+    'automaten.age.warning': 'Alle Automaten sind ausschließlich für Personen ab 18 Jahren zugänglich.',
+    'automaten.responsible': 'Spielen Sie verantwortungsvoll',
+    'automaten.help': 'Hilfe bei Spielsucht',
+    'automaten.help.desc': 'Bei Problemen mit Glücksspiel wenden Sie sich an die Bundeszentrale für gesundheitliche Aufklärung:',
 
     // Impressum
     'impressum.title': 'Impressum',
@@ -220,6 +183,13 @@ const translations: Record<Language, Record<string, string>> = {
     'impressum.ust': 'Umsatzsteuer-ID',
     'impressum.incoming': '(wird nachgereicht)',
     'impressum.verantwortlich': 'Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV',
+    'impressum.haftung': 'Haftungsausschluss',
+    'impressum.haftung.inhalte': 'Haftung für Inhalte',
+    'impressum.haftung.inhalte.text': 'Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.',
+    'impressum.haftung.links': 'Haftung für Links',
+    'impressum.haftung.links.text': 'Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen.',
+    'impressum.urheberrecht': 'Urheberrecht',
+    'impressum.urheberrecht.text': 'Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.',
 
     // Datenschutz
     'datenschutz.title': 'Datenschutzerklärung',
@@ -231,6 +201,11 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.datenschutz': 'Datenschutz',
     'footer.tagline': 'Kaffee, Cocktails & unvergessliche Momente',
     'footer.address': 'Ohligser Markt 5, 42696 Solingen',
+    'footer.nav.title': 'Navigation',
+    'footer.contact.title': 'Kontakt',
+    'footer.hours.title': 'Öffnungszeiten',
+    'footer.hours.weekday': 'Mo–Sa: 09:00–21:00 Uhr',
+    'footer.hours.sunday': 'So: 10:00–20:00 Uhr',
 
     // Common
     'common.back': 'Zurück',
@@ -238,6 +213,9 @@ const translations: Record<Language, Record<string, string>> = {
     'common.close': 'Schließen',
     'common.open.now': 'Jetzt geöffnet',
     'common.closed.now': 'Derzeit geschlossen',
+    'common.uhr': 'Uhr',
+    'common.age18': 'Ab 18 Jahren',
+    'common.address': 'Adresse',
   },
 
   en: {
@@ -248,6 +226,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.gallery': 'Gallery',
     'nav.hours': 'Opening Hours',
     'nav.contact': 'Contact',
+    'nav.automaten': 'Machines',
     'nav.impressum': 'Legal Notice',
     'nav.datenschutz': 'Privacy Policy',
 
@@ -302,88 +281,32 @@ const translations: Record<Language, Record<string, string>> = {
     // Menu
     'menu.title': 'Menu',
     'menu.subtitle': 'Browse our menu',
-    'menu.instruction': 'Click on the pages or use the arrows to browse',
+    'menu.instruction': 'Click the arrows or swipe to browse',
     'menu.prev': 'Previous',
     'menu.next': 'Next',
     'menu.cover.title': 'Cafe & Bar Luxor',
     'menu.cover.subtitle': 'Menu',
     'menu.cover.address': 'Ohligser Markt 5 · Solingen',
-    'menu.cat.coffee': 'Coffee & Hot Drinks',
+    'menu.cover.open': 'Open',
+    'menu.recipe': 'Recipe',
+    'menu.ingredients': 'Ingredients',
+    'menu.preparation': 'Preparation',
+
+    // Menu categories
+    'menu.cat.coffee': 'Coffee',
     'menu.cat.cold': 'Cold Drinks',
-    'menu.cat.cocktails': 'Cocktails & Long Drinks',
-    'menu.cat.beer': 'Beer & Wine',
-    'menu.cat.food': 'Food',
-    'menu.cat.snacks': 'Snacks & Light Bites',
-
-    // Menu items — Coffee
-    'menu.espresso': 'Espresso',
-    'menu.espresso.desc': 'Strong single espresso',
-    'menu.doppio': 'Doppio',
-    'menu.doppio.desc': 'Double espresso',
-    'menu.cappuccino': 'Cappuccino',
-    'menu.cappuccino.desc': 'Espresso with steamed milk foam',
-    'menu.latte': 'Caffè Latte',
-    'menu.latte.desc': 'Espresso with plenty of milk',
-    'menu.americano': 'Americano',
-    'menu.americano.desc': 'Espresso with hot water',
-    'menu.macchiato': 'Macchiato',
-    'menu.macchiato.desc': 'Espresso with a touch of milk foam',
-    'menu.flatwhite': 'Flat White',
-    'menu.flatwhite.desc': 'Double ristretto with milk',
-    'menu.tee': 'Tea',
-    'menu.tee.desc': 'Selection of various teas',
-    'menu.heisskakao': 'Hot Chocolate',
-    'menu.heisskakao.desc': 'Creamy hot chocolate',
-
-    // Menu items — Cold drinks
-    'menu.wasser': 'Water',
-    'menu.wasser.desc': 'Still or sparkling',
-    'menu.softdrink': 'Soft Drinks',
-    'menu.softdrink.desc': 'Cola, Fanta, Sprite and more',
-    'menu.saft': 'Fruit Juice',
-    'menu.saft.desc': 'Orange, apple, multivitamin',
-    'menu.eiskaffee': 'Iced Coffee',
-    'menu.eiskaffee.desc': 'Cold coffee with ice cream and cream',
-    'menu.smoothie': 'Smoothie',
-    'menu.smoothie.desc': 'Freshly prepared fruit blends',
-
-    // Menu items — Cocktails
-    'menu.aperol': 'Aperol Spritz',
-    'menu.aperol.desc': 'Aperol, Prosecco, soda, orange',
-    'menu.hugo': 'Hugo',
-    'menu.hugo.desc': 'Elderflower syrup, Prosecco, mint',
-    'menu.mojito': 'Mojito',
-    'menu.mojito.desc': 'Rum, lime, mint, sugar, soda',
-    'menu.gin.tonic': 'Gin & Tonic',
-    'menu.gin.tonic.desc': 'Premium gin with tonic water',
-    'menu.longdrink': 'Long Drinks',
-    'menu.longdrink.desc': 'Vodka, rum, gin with mixer of your choice',
-    'menu.negroni': 'Negroni',
-    'menu.negroni.desc': 'Gin, Campari, red vermouth',
-
-    // Menu items — Beer & Wine
-    'menu.bier.draft': 'Draft Beer',
-    'menu.bier.draft.desc': '0.3l / 0.5l',
-    'menu.bier.bottle': 'Bottled Beer',
-    'menu.bier.bottle.desc': 'Various varieties',
-    'menu.wein.rot': 'Red Wine',
-    'menu.wein.rot.desc': 'Glass / Bottle',
-    'menu.wein.weiss': 'White Wine',
-    'menu.wein.weiss.desc': 'Glass / Bottle',
-    'menu.sekt': 'Sparkling Wine / Prosecco',
-    'menu.sekt.desc': 'Glass / Bottle',
-
-    // Menu items — Food
-    'menu.toast': 'Toast',
-    'menu.toast.desc': 'With cheese and ham',
-    'menu.sandwich': 'Sandwich',
-    'menu.sandwich.desc': 'Filled according to daily specials',
-    'menu.kuchen': 'Cake',
-    'menu.kuchen.desc': 'Homemade cake of the day',
-    'menu.croissant': 'Croissant',
-    'menu.croissant.desc': 'Butter croissant, plain or filled',
-    'menu.snacks': 'Snacks',
-    'menu.snacks.desc': 'Nuts, crisps, olives',
+    'menu.cat.lemonade': 'Homemade Lemonade',
+    'menu.cat.tee': 'Tea',
+    'menu.cat.cocktails': 'Cocktails',
+    'menu.cat.cocktails.nona': 'Non-Alcoholic Cocktails',
+    'menu.cat.spirits': 'Spirits & Shots',
+    'menu.cat.whiskey': 'Whiskey',
+    'menu.cat.longdrinks': 'Long Drinks',
+    'menu.cat.aperitif': 'Aperitif',
+    'menu.cat.beer.draft': 'Draft Beer',
+    'menu.cat.beer.bottle': 'Bottled Beer',
+    'menu.cat.wine': 'Wine & Sparkling',
+    'menu.cat.eis': 'Ice Cream & Shakes',
 
     // Gallery
     'gallery.title': 'Gallery',
@@ -414,6 +337,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hours.today': 'Today',
     'hours.find.us': 'How to find us',
     'hours.address': 'Ohligser Markt 5, 42696 Solingen',
+    'hours.maps.link': 'Open in Google Maps',
 
     // Contact
     'contact.title': 'Contact',
@@ -433,6 +357,23 @@ const translations: Record<Language, Record<string, string>> = {
     'contact.reservation': 'Reservation',
     'contact.reservation.desc': 'For reservations and group enquiries, please contact us directly.',
     'contact.map.title': 'Location',
+    'contact.map.open': 'Open in Google Maps',
+
+    // Automaten
+    'automaten.title': 'Machines',
+    'automaten.subtitle': 'Entertainment & Convenience',
+    'automaten.intro': 'At Cafe&Bar Luxor, various machines are available for your convenience and entertainment.',
+    'automaten.cigarette.title': 'Cigarette Machine',
+    'automaten.cigarette.desc': 'Our cigarette machine offers a selection of the most popular cigarette brands. Available around the clock for our guests.',
+    'automaten.cigarette.note': 'For persons aged 18 and over only. Please have your ID ready.',
+    'automaten.spielautomat.title': 'Slot Machine',
+    'automaten.spielautomat.desc': 'Two modern slot machines are available for exciting entertainment. Please play responsibly.',
+    'automaten.spielautomat.note': 'For persons aged 18 and over only. Please gamble responsibly.',
+    'automaten.spielautomat.count': '2 slot machines available',
+    'automaten.age.warning': 'All machines are exclusively accessible to persons aged 18 and over.',
+    'automaten.responsible': 'Please gamble responsibly',
+    'automaten.help': 'Help with gambling addiction',
+    'automaten.help.desc': 'If you have problems with gambling, contact the Federal Centre for Health Education:',
 
     // Impressum
     'impressum.title': 'Legal Notice',
@@ -445,6 +386,13 @@ const translations: Record<Language, Record<string, string>> = {
     'impressum.ust': 'VAT ID',
     'impressum.incoming': '(to be provided)',
     'impressum.verantwortlich': 'Responsible for content pursuant to § 55 para. 2 RStV',
+    'impressum.haftung': 'Disclaimer',
+    'impressum.haftung.inhalte': 'Liability for Content',
+    'impressum.haftung.inhalte.text': 'The contents of our pages were created with the utmost care. However, we cannot guarantee the accuracy, completeness or topicality of the content.',
+    'impressum.haftung.links': 'Liability for Links',
+    'impressum.haftung.links.text': 'Our offer contains links to external third-party websites over whose content we have no influence. Therefore, we cannot assume any liability for these external contents.',
+    'impressum.urheberrecht': 'Copyright',
+    'impressum.urheberrecht.text': 'The content and works created by the site operators on these pages are subject to German copyright law.',
 
     // Datenschutz
     'datenschutz.title': 'Privacy Policy',
@@ -456,6 +404,11 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.datenschutz': 'Privacy Policy',
     'footer.tagline': 'Coffee, cocktails & unforgettable moments',
     'footer.address': 'Ohligser Markt 5, 42696 Solingen',
+    'footer.nav.title': 'Navigation',
+    'footer.contact.title': 'Contact',
+    'footer.hours.title': 'Opening Hours',
+    'footer.hours.weekday': 'Mon–Sat: 09:00–21:00',
+    'footer.hours.sunday': 'Sun: 10:00–20:00',
 
     // Common
     'common.back': 'Back',
@@ -463,6 +416,9 @@ const translations: Record<Language, Record<string, string>> = {
     'common.close': 'Close',
     'common.open.now': 'Open now',
     'common.closed.now': 'Currently closed',
+    'common.uhr': '',
+    'common.age18': 'Ages 18+',
+    'common.address': 'Address',
   },
 };
 
@@ -470,8 +426,7 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<Language>(() => {
     const stored = localStorage.getItem('luxor-lang');
     if (stored === 'en' || stored === 'de') return stored;
-    const browserLang = navigator.language.toLowerCase();
-    return browserLang.startsWith('de') ? 'de' : 'de'; // Default to German
+    return 'de'; // Default to German
   });
 
   const setLang = (newLang: Language) => {

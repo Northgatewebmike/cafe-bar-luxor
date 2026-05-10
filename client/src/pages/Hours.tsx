@@ -68,8 +68,8 @@ export default function Hours() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/60 to-[#0a0603]/30" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 w-full">
           <div className="flex items-center gap-3 mb-2">
-            <div className="h-px w-8 bg-[#c9a84c]" />
-            <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+            <div className="h-px w-8 bg-red-700" />
+            <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
               Cafe&Bar Luxor
             </span>
@@ -128,14 +128,14 @@ export default function Hours() {
                   key={i}
                   className={`flex items-center justify-between px-6 py-4 border-b border-white/5 last:border-0 transition-all duration-300 ${
                     isToday
-                      ? 'bg-[#c9a84c]/10 border-l-2 border-l-[#c9a84c]'
+                      ? 'bg-red-700/10 border-l-2 border-l-[rgba(180,0,0,0.85)]'
                       : 'hover:bg-white/3'
                   }`}
                 >
                   <div className="flex items-center gap-3">
                     {isToday && (
                       <span
-                        className="text-[#c9a84c] text-xs font-bold tracking-widest uppercase"
+                        className="text-red-700 text-xs font-bold tracking-widest uppercase"
                         style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                       >
                         {t('hours.today')}
@@ -143,7 +143,7 @@ export default function Hours() {
                     )}
                     <span
                       className={`text-base font-medium ${
-                        isToday ? 'text-[#c9a84c]' : 'text-white/80'
+                        isToday ? 'text-red-700' : 'text-white/80'
                       }`}
                       style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.1rem' }}
                     >
@@ -155,7 +155,7 @@ export default function Hours() {
                     {item.isOpen ? (
                       <span
                         className={`text-base font-medium ${
-                          isToday ? 'text-[#c9a84c]' : 'text-white/70'
+                          isToday ? 'text-red-700' : 'text-white/70'
                         }`}
                         style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                       >
@@ -170,7 +170,7 @@ export default function Hours() {
                       </span>
                     )}
                     {isToday && (
-                      <Clock size={14} className="text-[#c9a84c]" />
+                      <Clock size={14} className="text-red-700" />
                     )}
                   </div>
                 </div>
@@ -189,8 +189,8 @@ export default function Hours() {
           {/* Location Card */}
           <div className="mt-12 reveal">
             <div className="flex items-center gap-3 mb-6">
-              <div className="h-px w-8 bg-[#c9a84c]" />
-              <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+              <div className="h-px w-8 bg-red-700" />
+              <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 {t('hours.find.us')}
               </span>
@@ -200,7 +200,7 @@ export default function Hours() {
               className="p-6 border border-white/10 flex flex-col sm:flex-row items-start sm:items-center gap-4"
               style={{ background: 'rgba(255,255,255,0.02)' }}
             >
-              <MapPin size={24} className="text-[#c9a84c] flex-shrink-0" />
+              <MapPin size={24} className="text-red-700 flex-shrink-0" />
               <div>
                 <p
                   className="text-white text-base font-medium"
@@ -219,7 +219,7 @@ export default function Hours() {
                 href="https://maps.app.goo.gl/AqP7qYQ39kBf4gvz6"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="sm:ml-auto px-4 py-2 border border-[#c9a84c]/40 text-[#c9a84c] text-xs font-medium tracking-wide uppercase hover:bg-[#c9a84c]/10 transition-all duration-300"
+                className="sm:ml-auto px-4 py-2 border border-red-700/40 text-red-700 text-xs font-medium tracking-wide uppercase hover:bg-red-700/10 transition-all duration-300"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
                 Google Maps →

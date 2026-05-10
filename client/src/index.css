@@ -5,8 +5,8 @@
 
 /* =============================================================
    CAFE & BAR LUXOR — Design System
-   Philosophy: "Warme Patina" — Industrial Bistro Warmth
-   Colors: Deep Brown, Warm Amber, Gold, Cream, Deep Wine
+   Philosophy: "Luxor Red" — Elegant Red & Black Premium
+   Colors: Deep Black, Crimson Red, Dark Red, White
    Typography: Cormorant Garamond (display) + Source Sans 3 (body)
    ============================================================= */
 
@@ -37,44 +37,42 @@
 }
 
 :root {
-  --radius: 0.375rem;
+  --radius: 0.25rem;
 
-  /* Luxor Warm Dark Palette */
-  --background: oklch(0.10 0.025 45);        /* Deep dark brown */
-  --foreground: oklch(0.93 0.015 75);         /* Warm cream */
-  --card: oklch(0.14 0.022 45);              /* Slightly lighter brown */
-  --card-foreground: oklch(0.93 0.015 75);
-  --popover: oklch(0.12 0.022 45);
-  --popover-foreground: oklch(0.93 0.015 75);
+  /* Luxor Red & Black Palette */
+  --background: oklch(0.07 0.015 15);         /* Deep black with red tint */
+  --foreground: oklch(0.93 0.008 60);          /* Near white */
+  --card: oklch(0.10 0.018 15);               /* Dark card */
+  --card-foreground: oklch(0.93 0.008 60);
+  --popover: oklch(0.09 0.015 15);
+  --popover-foreground: oklch(0.93 0.008 60);
 
-  /* Gold as primary */
-  --primary: oklch(0.72 0.12 65);            /* Warm gold */
-  --primary-foreground: oklch(0.10 0.025 45);
+  /* Red as primary */
+  --primary: oklch(0.50 0.22 25);             /* Crimson red */
+  --primary-foreground: oklch(0.97 0.005 60);
 
-  --secondary: oklch(0.18 0.022 45);
-  --secondary-foreground: oklch(0.85 0.015 75);
+  --secondary: oklch(0.14 0.018 15);
+  --secondary-foreground: oklch(0.85 0.008 60);
 
-  --muted: oklch(0.16 0.018 45);
-  --muted-foreground: oklch(0.65 0.020 65);
+  --muted: oklch(0.12 0.015 15);
+  --muted-foreground: oklch(0.55 0.015 30);
 
-  --accent: oklch(0.55 0.14 40);             /* Deep amber/wine */
-  --accent-foreground: oklch(0.95 0.010 75);
+  --accent: oklch(0.42 0.18 22);              /* Deep red accent */
+  --accent-foreground: oklch(0.97 0.005 60);
 
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
 
-  --border: oklch(0.25 0.025 55);
-  --input: oklch(0.20 0.022 45);
-  --ring: oklch(0.72 0.12 65);
+  --border: oklch(0.20 0.018 20);
+  --input: oklch(0.15 0.015 15);
+  --ring: oklch(0.50 0.22 25);
 
-  /* Custom Luxor tokens */
-  --gold: oklch(0.72 0.12 65);
-  --gold-light: oklch(0.82 0.10 70);
-  --amber: oklch(0.62 0.15 50);
-  --cream: oklch(0.93 0.015 75);
-  --dark-brown: oklch(0.10 0.025 45);
-  --medium-brown: oklch(0.18 0.022 45);
-  --wine: oklch(0.38 0.12 20);
+  /* Custom Luxor Red tokens */
+  --luxor-red: #b00000;
+  --luxor-red-light: #dc5050;
+  --luxor-red-dark: #6a0000;
+  --luxor-black: #0a0000;
+  --luxor-dark: #120000;
 }
 
 @layer base {
@@ -93,6 +91,7 @@
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    background-color: #0a0000;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -138,10 +137,10 @@
     }
   }
 
-  /* Gold divider line */
-  .gold-line {
+  /* Red divider line */
+  .red-line {
     height: 1px;
-    background: linear-gradient(90deg, transparent, oklch(0.72 0.12 65), transparent);
+    background: linear-gradient(90deg, transparent, rgba(180,0,0,0.8), transparent);
   }
 
   /* Noise texture overlay */
@@ -149,12 +148,24 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 1;
   }
 
-  /* Section reveal animation */
+  /* Scroll reveal animation */
+  .scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .scroll-reveal.revealed {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Legacy reveal classes */
   .reveal {
     opacity: 0;
     transform: translateY(40px);
@@ -196,12 +207,12 @@
 
   .card-3d:hover {
     transform: translateY(-8px) rotateX(2deg);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px rgba(200, 160, 80, 0.1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(180, 0, 0, 0.1);
   }
 
-  /* Gold text gradient */
-  .text-gold-gradient {
-    background: linear-gradient(135deg, oklch(0.82 0.10 70), oklch(0.62 0.15 50));
+  /* Red text gradient */
+  .text-red-gradient {
+    background: linear-gradient(135deg, #dc5050, #b00000);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -225,13 +236,13 @@
 
   /* Flip book 3D */
   .book-scene {
-    perspective: 1200px;
-    perspective-origin: center center;
+    perspective: 1400px;
+    perspective-origin: center 40%;
   }
 
   .book-page {
     transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1.000);
+    transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .book-page-front,
@@ -246,19 +257,25 @@
 
   /* Scrollbar styling */
   ::-webkit-scrollbar {
-    width: 6px;
+    width: 5px;
   }
 
   ::-webkit-scrollbar-track {
-    background: oklch(0.10 0.025 45);
+    background: #0a0000;
   }
 
   ::-webkit-scrollbar-thumb {
-    background: oklch(0.35 0.06 55);
+    background: rgba(120,0,0,0.5);
     border-radius: 3px;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: oklch(0.72 0.12 65);
+    background: rgba(180,0,0,0.8);
+  }
+
+  /* Selection color */
+  ::selection {
+    background: rgba(180,0,0,0.3);
+    color: white;
   }
 }

@@ -26,7 +26,7 @@ export default function NotFound() {
           className="text-[120px] md:text-[180px] font-bold leading-none"
           style={{
             fontFamily: "'Cormorant Garamond', Georgia, serif",
-            background: 'linear-gradient(135deg, #c9a84c 0%, #e8c87a 50%, #c9a84c 100%)',
+            background: 'linear-gradient(135deg, rgba(180,0,0,0.85) 0%, #dc5050 50%, rgba(180,0,0,0.85) 100%)',
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
@@ -38,9 +38,9 @@ export default function NotFound() {
 
         {/* Gold divider */}
         <div className="flex items-center justify-center gap-4 mb-6">
-          <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a84c]" />
-          <span className="text-[#c9a84c] text-lg">✦</span>
-          <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a84c]" />
+          <div className="h-px w-16 bg-gradient-to-r from-transparent to-red-700" />
+          <span className="text-red-700 text-lg">✦</span>
+          <div className="h-px w-16 bg-gradient-to-l from-transparent to-red-700" />
         </div>
 
         <h1
@@ -59,7 +59,7 @@ export default function NotFound() {
 
         <Link href="/">
           <button
-            className="px-8 py-4 bg-[#c9a84c] text-[#0a0603] font-semibold text-sm tracking-widest uppercase hover:bg-[#e8c87a] transition-all duration-300 hover:scale-105"
+            className="px-8 py-4 bg-red-700 text-[#0a0603] font-semibold text-sm tracking-widest uppercase hover:bg-[#dc5050] transition-all duration-300 hover:scale-105"
             style={{ fontFamily: "'Source Sans 3', sans-serif" }}
           >
             ← Zurück zur Startseite
@@ -69,7 +69,7 @@ export default function NotFound() {
         {/* Logo */}
         <div className="mt-12 opacity-30">
           <p
-            className="text-[#c9a84c] text-sm tracking-[0.3em] uppercase"
+            className="text-red-700 text-sm tracking-[0.3em] uppercase"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
           >
             Cafe&Bar Luxor

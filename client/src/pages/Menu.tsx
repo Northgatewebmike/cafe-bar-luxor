@@ -1,439 +1,609 @@
 /**
  * Menu Page — Cafe&Bar Luxor
- * Design: "Warme Patina" — Interactive 3D flip book menu
- * Real CSS 3D perspective flip effect, touch + click compatible
+ * Real 3D CSS flip-book: genuine page-turn with perspective, spine, shadow, and curl
+ * Design: Elegant Red & Black
  */
-import { useState, useRef, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
-const MENU_COVER = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/menu-cover-8ZjTmKhKU4uWrXkFmEuu3Q.webp';
+/* ─── MENU DATA ─────────────────────────────────────────────────── */
+interface MenuItem { name: string; desc: string; price: string; }
+interface PageData { title: string; icon: string; items: MenuItem[]; }
 
-interface MenuItem {
-  name: string;
-  desc: string;
-  price: string;
-}
+const PAGES_DE: PageData[] = [
+  { title: 'Heiße Getränke', icon: '☕', items: [
+    { name: 'Espresso', desc: 'Intensiv & aromatisch', price: '2,20 €' },
+    { name: 'Doppelter Espresso', desc: 'Für echte Kaffeeliebhaber', price: '2,80 €' },
+    { name: 'Cappuccino', desc: 'Espresso mit cremigem Milchschaum', price: '3,20 €' },
+    { name: 'Latte Macchiato', desc: 'Sanft & cremig', price: '3,50 €' },
+    { name: 'Café au Lait', desc: 'Kaffee mit heißer Milch', price: '3,00 €' },
+    { name: 'Americano', desc: 'Espresso mit heißem Wasser', price: '2,80 €' },
+    { name: 'Flat White', desc: 'Doppelter Espresso mit Milch', price: '3,50 €' },
+    { name: 'Heiße Schokolade', desc: 'Cremig & warm', price: '3,20 €' },
+    { name: 'Tee (Auswahl)', desc: 'Schwarz, Grün, Kräuter, Früchte', price: '2,80 €' },
+  ]},
+  { title: 'Kalte Getränke', icon: '🧊', items: [
+    { name: 'Iced Coffee', desc: 'Kalt gebrühter Kaffee auf Eis', price: '3,80 €' },
+    { name: 'Iced Latte', desc: 'Espresso mit Eiswürfeln & Milch', price: '4,20 €' },
+    { name: 'Frappuccino', desc: 'Cremig, kalt & erfrischend', price: '4,50 €' },
+    { name: 'Smoothie des Tages', desc: 'Frisch zubereitet', price: '4,80 €' },
+    { name: 'Frisch gepresster Orangensaft', desc: 'Direkt gepresst', price: '3,50 €' },
+    { name: 'Limonade (hausgemacht)', desc: 'Zitrone, Minze, Ingwer', price: '3,80 €' },
+    { name: 'Mineralwasser', desc: 'Still oder mit Kohlensäure', price: '2,20 €' },
+    { name: 'Cola / Fanta / Sprite', desc: '0,33 l', price: '2,50 €' },
+    { name: 'Red Bull', desc: 'Energy Drink', price: '3,50 €' },
+  ]},
+  { title: 'Bier & Wein', icon: '🍷', items: [
+    { name: 'Bier vom Fass', desc: '0,3 l / 0,5 l', price: '3,20 € / 4,50 €' },
+    { name: 'Flaschenbier', desc: 'Verschiedene Sorten', price: '3,00 €' },
+    { name: 'Weißwein (Glas)', desc: 'Trocken oder halbtrocken', price: '4,50 €' },
+    { name: 'Rotwein (Glas)', desc: 'Vollmundig & aromatisch', price: '4,50 €' },
+    { name: 'Rosé (Glas)', desc: 'Frisch & fruchtig', price: '4,50 €' },
+    { name: 'Prosecco (Glas)', desc: 'Prickelnd & leicht', price: '4,80 €' },
+    { name: 'Weinflasche', desc: '0,75 l — Auswahl auf Anfrage', price: 'ab 18,00 €' },
+    { name: 'Alkoholfreies Bier', desc: '0,33 l', price: '2,80 €' },
+  ]},
+  { title: 'Cocktails & Aperitifs', icon: '🍸', items: [
+    { name: 'Aperol Spritz', desc: 'Aperol, Prosecco, Soda — unser Bestseller!', price: '5,00 €' },
+    { name: 'Hugo', desc: 'Holunderblüte, Prosecco, Minze, Limette', price: '6,50 €' },
+    { name: 'Mojito', desc: 'Rum, Minze, Limette, Rohrzucker', price: '7,50 €' },
+    { name: 'Gin Tonic', desc: 'Premium Gin, Tonic Water, Gurke', price: '7,50 €' },
+    { name: 'Campari Orange', desc: 'Campari & frischer Orangensaft', price: '6,00 €' },
+    { name: 'Piña Colada', desc: 'Rum, Kokosnuss, Ananas', price: '7,50 €' },
+    { name: 'Sex on the Beach', desc: 'Wodka, Pfirsich, Orangensaft', price: '7,50 €' },
+    { name: 'Caipirinha', desc: 'Cachaça, Limette, Rohrzucker', price: '7,50 €' },
+    { name: 'Cosmopolitan', desc: 'Wodka, Triple Sec, Cranberry', price: '7,50 €' },
+  ]},
+  { title: 'Shots & Spirituosen', icon: '🥃', items: [
+    { name: 'Wodka Shot', desc: '4 cl', price: '2,50 €' },
+    { name: 'Tequila Shot', desc: '4 cl — mit Salz & Limette', price: '2,80 €' },
+    { name: 'Jägermeister', desc: '4 cl', price: '2,50 €' },
+    { name: 'Sambuca', desc: '4 cl', price: '2,50 €' },
+    { name: 'Whisky', desc: "4 cl — Jack Daniel's, Jameson", price: '4,50 €' },
+    { name: 'Rum', desc: '4 cl — Havana, Bacardi', price: '4,00 €' },
+    { name: 'Gin', desc: '4 cl — Hendricks, Bombay', price: '4,50 €' },
+    { name: 'Baileys', desc: '4 cl — cremig & süß', price: '3,50 €' },
+    { name: 'Amaretto Disaronno', desc: '4 cl', price: '3,50 €' },
+  ]},
+  { title: 'Speisen & Snacks', icon: '🍽️', items: [
+    { name: 'Toast mit Butter', desc: 'Knusprig getoastet', price: '2,50 €' },
+    { name: 'Croissant', desc: 'Butterig & frisch', price: '2,80 €' },
+    { name: 'Käse-Schinken-Toast', desc: 'Überbacken & warm', price: '5,50 €' },
+    { name: 'Club Sandwich', desc: 'Hähnchen, Bacon, Salat, Tomate', price: '7,50 €' },
+    { name: 'Nachos mit Dips', desc: 'Guacamole, Salsa, Käse', price: '6,50 €' },
+    { name: 'Portion Pommes', desc: 'Mit Ketchup & Mayo', price: '4,50 €' },
+    { name: 'Käseplatte', desc: 'Auswahl regionaler Käsesorten', price: '8,50 €' },
+    { name: 'Kuchen des Tages', desc: 'Hausgemacht — frisch', price: '3,50 €' },
+    { name: 'Waffel', desc: 'Mit Sahne & Früchten', price: '4,50 €' },
+  ]},
+];
 
-interface MenuPage {
-  category: string;
-  items: MenuItem[];
-  bgColor: string;
-}
+const PAGES_EN: PageData[] = [
+  { title: 'Hot Beverages', icon: '☕', items: [
+    { name: 'Espresso', desc: 'Intense & aromatic', price: '€2.20' },
+    { name: 'Double Espresso', desc: 'For true coffee lovers', price: '€2.80' },
+    { name: 'Cappuccino', desc: 'Espresso with creamy milk foam', price: '€3.20' },
+    { name: 'Latte Macchiato', desc: 'Gentle & creamy', price: '€3.50' },
+    { name: 'Café au Lait', desc: 'Coffee with hot milk', price: '€3.00' },
+    { name: 'Americano', desc: 'Espresso with hot water', price: '€2.80' },
+    { name: 'Flat White', desc: 'Double espresso with milk', price: '€3.50' },
+    { name: 'Hot Chocolate', desc: 'Creamy & warm', price: '€3.20' },
+    { name: 'Tea (selection)', desc: 'Black, Green, Herbal, Fruit', price: '€2.80' },
+  ]},
+  { title: 'Cold Beverages', icon: '🧊', items: [
+    { name: 'Iced Coffee', desc: 'Cold-brewed coffee on ice', price: '€3.80' },
+    { name: 'Iced Latte', desc: 'Espresso with ice cubes & milk', price: '€4.20' },
+    { name: 'Frappuccino', desc: 'Creamy, cold & refreshing', price: '€4.50' },
+    { name: 'Smoothie of the Day', desc: 'Freshly prepared', price: '€4.80' },
+    { name: 'Fresh Orange Juice', desc: 'Freshly squeezed', price: '€3.50' },
+    { name: 'Lemonade (homemade)', desc: 'Lemon, mint, ginger', price: '€3.80' },
+    { name: 'Mineral Water', desc: 'Still or sparkling', price: '€2.20' },
+    { name: 'Cola / Fanta / Sprite', desc: '0.33 l', price: '€2.50' },
+    { name: 'Red Bull', desc: 'Energy drink', price: '€3.50' },
+  ]},
+  { title: 'Beer & Wine', icon: '🍷', items: [
+    { name: 'Draft Beer', desc: '0.3 l / 0.5 l', price: '€3.20 / €4.50' },
+    { name: 'Bottled Beer', desc: 'Various types', price: '€3.00' },
+    { name: 'White Wine (glass)', desc: 'Dry or semi-dry', price: '€4.50' },
+    { name: 'Red Wine (glass)', desc: 'Full-bodied & aromatic', price: '€4.50' },
+    { name: 'Rosé (glass)', desc: 'Fresh & fruity', price: '€4.50' },
+    { name: 'Prosecco (glass)', desc: 'Sparkling & light', price: '€4.80' },
+    { name: 'Wine Bottle', desc: '0.75 l — selection on request', price: 'from €18.00' },
+    { name: 'Non-alcoholic Beer', desc: '0.33 l', price: '€2.80' },
+  ]},
+  { title: 'Cocktails & Aperitifs', icon: '🍸', items: [
+    { name: 'Aperol Spritz', desc: 'Aperol, Prosecco, Soda — our bestseller!', price: '€5.00' },
+    { name: 'Hugo', desc: 'Elderflower, Prosecco, mint, lime', price: '€6.50' },
+    { name: 'Mojito', desc: 'Rum, mint, lime, cane sugar', price: '€7.50' },
+    { name: 'Gin Tonic', desc: 'Premium gin, tonic water, cucumber', price: '€7.50' },
+    { name: 'Campari Orange', desc: 'Campari & fresh orange juice', price: '€6.00' },
+    { name: 'Piña Colada', desc: 'Rum, coconut, pineapple', price: '€7.50' },
+    { name: 'Sex on the Beach', desc: 'Vodka, peach, orange juice', price: '€7.50' },
+    { name: 'Caipirinha', desc: 'Cachaça, lime, cane sugar', price: '€7.50' },
+    { name: 'Cosmopolitan', desc: 'Vodka, Triple Sec, cranberry', price: '€7.50' },
+  ]},
+  { title: 'Shots & Spirits', icon: '🥃', items: [
+    { name: 'Vodka Shot', desc: '4 cl', price: '€2.50' },
+    { name: 'Tequila Shot', desc: '4 cl — with salt & lime', price: '€2.80' },
+    { name: 'Jägermeister', desc: '4 cl', price: '€2.50' },
+    { name: 'Sambuca', desc: '4 cl', price: '€2.50' },
+    { name: 'Whisky', desc: "4 cl — Jack Daniel's, Jameson", price: '€4.50' },
+    { name: 'Rum', desc: '4 cl — Havana, Bacardi', price: '€4.00' },
+    { name: 'Gin', desc: '4 cl — Hendricks, Bombay', price: '€4.50' },
+    { name: 'Baileys', desc: '4 cl — creamy & sweet', price: '€3.50' },
+    { name: 'Amaretto Disaronno', desc: '4 cl', price: '€3.50' },
+  ]},
+  { title: 'Food & Snacks', icon: '🍽️', items: [
+    { name: 'Toast with Butter', desc: 'Crispy toasted', price: '€2.50' },
+    { name: 'Croissant', desc: 'Buttery & fresh', price: '€2.80' },
+    { name: 'Cheese & Ham Toast', desc: 'Gratinated & warm', price: '€5.50' },
+    { name: 'Club Sandwich', desc: 'Chicken, bacon, lettuce, tomato', price: '€7.50' },
+    { name: 'Nachos with Dips', desc: 'Guacamole, salsa, cheese', price: '€6.50' },
+    { name: 'Portion of Fries', desc: 'With ketchup & mayo', price: '€4.50' },
+    { name: 'Cheese Board', desc: 'Selection of regional cheeses', price: '€8.50' },
+    { name: 'Cake of the Day', desc: 'Homemade — fresh', price: '€3.50' },
+    { name: 'Waffle', desc: 'With cream & fruit', price: '€4.50' },
+  ]},
+];
 
-export default function Menu() {
-  const { t } = useLanguage();
-  const [currentSpread, setCurrentSpread] = useState(0); // 0 = cover, 1,2,3... = spreads
-  const [isFlipping, setIsFlipping] = useState(false);
-  const [flipDirection, setFlipDirection] = useState<'next' | 'prev'>('next');
-  const touchStartX = useRef(0);
-
-  const menuPages: MenuPage[] = [
-    {
-      category: t('menu.cat.coffee'),
-      bgColor: '#1a0f08',
-      items: [
-        { name: t('menu.espresso'), desc: t('menu.espresso.desc'), price: '2,50 €' },
-        { name: t('menu.doppio'), desc: t('menu.doppio.desc'), price: '3,20 €' },
-        { name: t('menu.cappuccino'), desc: t('menu.cappuccino.desc'), price: '3,50 €' },
-        { name: t('menu.latte'), desc: t('menu.latte.desc'), price: '4,00 €' },
-        { name: t('menu.americano'), desc: t('menu.americano.desc'), price: '3,00 €' },
-        { name: t('menu.macchiato'), desc: t('menu.macchiato.desc'), price: '2,80 €' },
-        { name: t('menu.flatwhite'), desc: t('menu.flatwhite.desc'), price: '4,20 €' },
-        { name: t('menu.tee'), desc: t('menu.tee.desc'), price: '3,00 €' },
-        { name: t('menu.heisskakao'), desc: t('menu.heisskakao.desc'), price: '3,80 €' },
-      ],
-    },
-    {
-      category: t('menu.cat.cold'),
-      bgColor: '#0f1a14',
-      items: [
-        { name: t('menu.wasser'), desc: t('menu.wasser.desc'), price: '2,00 €' },
-        { name: t('menu.softdrink'), desc: t('menu.softdrink.desc'), price: '2,80 €' },
-        { name: t('menu.saft'), desc: t('menu.saft.desc'), price: '3,00 €' },
-        { name: t('menu.eiskaffee'), desc: t('menu.eiskaffee.desc'), price: '4,50 €' },
-        { name: t('menu.smoothie'), desc: t('menu.smoothie.desc'), price: '4,80 €' },
-      ],
-    },
-    {
-      category: t('menu.cat.cocktails'),
-      bgColor: '#1a0808',
-      items: [
-        { name: t('menu.aperol'), desc: t('menu.aperol.desc'), price: '5,00 €' },
-        { name: t('menu.hugo'), desc: t('menu.hugo.desc'), price: '6,00 €' },
-        { name: t('menu.mojito'), desc: t('menu.mojito.desc'), price: '7,00 €' },
-        { name: t('menu.gin.tonic'), desc: t('menu.gin.tonic.desc'), price: '7,50 €' },
-        { name: t('menu.longdrink'), desc: t('menu.longdrink.desc'), price: '6,50 €' },
-        { name: t('menu.negroni'), desc: t('menu.negroni.desc'), price: '8,00 €' },
-      ],
-    },
-    {
-      category: t('menu.cat.beer'),
-      bgColor: '#0f130a',
-      items: [
-        { name: t('menu.bier.draft'), desc: t('menu.bier.draft.desc'), price: '2,80 / 3,80 €' },
-        { name: t('menu.bier.bottle'), desc: t('menu.bier.bottle.desc'), price: '3,00 €' },
-        { name: t('menu.wein.rot'), desc: t('menu.wein.rot.desc'), price: '4,50 / 18,00 €' },
-        { name: t('menu.wein.weiss'), desc: t('menu.wein.weiss.desc'), price: '4,50 / 18,00 €' },
-        { name: t('menu.sekt'), desc: t('menu.sekt.desc'), price: '4,00 / 20,00 €' },
-      ],
-    },
-    {
-      category: t('menu.cat.food'),
-      bgColor: '#1a1208',
-      items: [
-        { name: t('menu.toast'), desc: t('menu.toast.desc'), price: '4,50 €' },
-        { name: t('menu.sandwich'), desc: t('menu.sandwich.desc'), price: '5,50 €' },
-        { name: t('menu.kuchen'), desc: t('menu.kuchen.desc'), price: '3,50 €' },
-        { name: t('menu.croissant'), desc: t('menu.croissant.desc'), price: '2,50 €' },
-        { name: t('menu.snacks'), desc: t('menu.snacks.desc'), price: '2,00 €' },
-      ],
-    },
-  ];
-
-  // Total spreads: cover (0) + pages in pairs
-  const totalSpreads = Math.ceil(menuPages.length / 2) + 1; // +1 for cover
-
-  const goNext = () => {
-    if (isFlipping || currentSpread >= totalSpreads - 1) return;
-    setFlipDirection('next');
-    setIsFlipping(true);
-    setTimeout(() => {
-      setCurrentSpread((s) => s + 1);
-      setIsFlipping(false);
-    }, 600);
-  };
-
-  const goPrev = () => {
-    if (isFlipping || currentSpread <= 0) return;
-    setFlipDirection('prev');
-    setIsFlipping(true);
-    setTimeout(() => {
-      setCurrentSpread((s) => s - 1);
-      setIsFlipping(false);
-    }, 600);
-  };
-
-  const handleTouchStart = (e: React.TouchEvent) => {
-    touchStartX.current = e.touches[0].clientX;
-  };
-
-  const handleTouchEnd = (e: React.TouchEvent) => {
-    const diff = touchStartX.current - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      if (diff > 0) goNext();
-      else goPrev();
-    }
-  };
-
-  // Get current pages to display
-  const getLeftPage = () => {
-    if (currentSpread === 0) return null; // cover
-    const pageIndex = (currentSpread - 1) * 2;
-    return menuPages[pageIndex] || null;
-  };
-
-  const getRightPage = () => {
-    if (currentSpread === 0) return null; // cover
-    const pageIndex = (currentSpread - 1) * 2 + 1;
-    return menuPages[pageIndex] || null;
-  };
-
-  const leftPage = getLeftPage();
-  const rightPage = getRightPage();
-
+/* ─── BOOK COVER ────────────────────────────────────────────────── */
+function BookCover({ lang }: { lang: string }) {
   return (
-    <div className="page-enter pt-16 md:pt-20 min-h-screen bg-[#0a0603]">
-      {/* ============ PAGE HERO ============ */}
-      <section className="relative h-48 md:h-64 flex items-end overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${HERO_BG})` }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/60 to-[#0a0603]/30" />
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 w-full">
-          <div className="flex items-center gap-3 mb-2">
-            <div className="h-px w-8 bg-[#c9a84c]" />
-            <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
-              style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-              Cafe&Bar Luxor
-            </span>
-          </div>
-          <h1
-            className="text-4xl md:text-6xl font-bold text-white"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-          >
-            {t('menu.title')}
-          </h1>
-        </div>
-      </section>
-
-      {/* ============ FLIP BOOK ============ */}
-      <section className="py-8 md:py-12 px-4">
-        <p
-          className="text-center text-white/40 text-sm mb-8"
-          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-        >
-          {t('menu.instruction')}
+    <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden select-none"
+      style={{ background: 'linear-gradient(160deg, #1c0000 0%, #0d0000 40%, #1c0000 100%)' }}>
+      {/* Outer border frame */}
+      <div className="absolute inset-[10px] pointer-events-none"
+        style={{ border: '1px solid rgba(180,0,0,0.35)' }} />
+      <div className="absolute inset-[14px] pointer-events-none"
+        style={{ border: '1px solid rgba(180,0,0,0.12)' }} />
+      {/* Top ornament */}
+      <div className="absolute top-[22px] left-1/2 -translate-x-1/2 flex items-center gap-3">
+        <div className="h-px w-10" style={{ background: 'rgba(180,0,0,0.55)' }} />
+        <div className="w-1.5 h-1.5 rotate-45" style={{ background: 'rgba(180,0,0,0.75)' }} />
+        <div className="h-px w-10" style={{ background: 'rgba(180,0,0,0.55)' }} />
+      </div>
+      {/* Content */}
+      <div className="text-center px-8 z-10">
+        <p className="text-[10px] tracking-[0.45em] uppercase mb-5"
+          style={{ color: 'rgba(180,0,0,0.65)', fontFamily: "'Source Sans 3', sans-serif" }}>
+          ✦ Solingen ✦
         </p>
-
-        {/* Book Container */}
-        <div
-          className="relative mx-auto"
-          style={{ maxWidth: '900px' }}
-          onTouchStart={handleTouchStart}
-          onTouchEnd={handleTouchEnd}
-        >
-          {/* Book shadow */}
-          <div
-            className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-4/5 h-8 rounded-full"
-            style={{ background: 'radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, transparent 70%)' }}
-          />
-
-          {/* Book */}
-          <div
-            className={`relative mx-auto transition-all duration-600 ${isFlipping ? 'scale-[0.98]' : 'scale-100'}`}
-            style={{
-              perspective: '1200px',
-              transformStyle: 'preserve-3d',
-            }}
-          >
-            {currentSpread === 0 ? (
-              /* COVER */
-              <div
-                className="relative mx-auto overflow-hidden cursor-pointer group"
-                style={{
-                  maxWidth: '400px',
-                  aspectRatio: '3/4',
-                  boxShadow: '8px 8px 40px rgba(0,0,0,0.8), -2px 0 20px rgba(0,0,0,0.4)',
-                  border: '1px solid rgba(201,168,76,0.3)',
-                }}
-                onClick={goNext}
-              >
-                <img
-                  src={MENU_COVER}
-                  alt="Menu Cover"
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-                  <div className="h-px w-16 bg-[#c9a84c] mb-6" />
-                  <h2
-                    className="text-3xl md:text-4xl font-bold text-[#c9a84c] mb-2 tracking-wider"
-                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                  >
-                    {t('menu.cover.title')}
-                  </h2>
-                  <p
-                    className="text-white/70 text-sm tracking-[0.2em] uppercase mb-2"
-                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                  >
-                    {t('menu.cover.subtitle')}
-                  </p>
-                  <div className="h-px w-16 bg-[#c9a84c] mt-4 mb-6" />
-                  <p className="text-white/40 text-xs tracking-widest uppercase"
-                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                    {t('menu.cover.address')}
-                  </p>
-                </div>
-                {/* Open hint */}
-                <div className="absolute bottom-4 left-0 right-0 flex justify-center">
-                  <span className="text-[#c9a84c]/60 text-xs tracking-widest uppercase animate-pulse"
-                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                    {t('menu.next')} →
-                  </span>
-                </div>
-              </div>
-            ) : (
-              /* SPREAD (two pages) */
-              <div
-                className={`flex gap-0 transition-all duration-600 ${
-                  isFlipping
-                    ? flipDirection === 'next'
-                      ? 'opacity-80 scale-[0.97]'
-                      : 'opacity-80 scale-[0.97]'
-                    : 'opacity-100 scale-100'
-                }`}
-                style={{
-                  boxShadow: '0 20px 60px rgba(0,0,0,0.7)',
-                }}
-              >
-                {/* Left Page */}
-                <div
-                  className="flex-1 min-h-[500px] md:min-h-[600px] p-6 md:p-8 relative overflow-hidden"
-                  style={{
-                    background: leftPage ? leftPage.bgColor : '#1a0f08',
-                    borderRight: '2px solid rgba(201,168,76,0.2)',
-                    boxShadow: 'inset -10px 0 30px rgba(0,0,0,0.3)',
-                  }}
-                >
-                  {leftPage ? (
-                    <PageContent page={leftPage} />
-                  ) : (
-                    <div className="flex items-center justify-center h-full">
-                      <span className="text-white/20 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                        ←
-                      </span>
-                    </div>
-                  )}
-                  {/* Page number */}
-                  <div className="absolute bottom-4 left-4 text-white/20 text-xs"
-                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                    {currentSpread * 2 - 1}
-                  </div>
-                  {/* Spine shadow */}
-                  <div className="absolute top-0 right-0 w-8 h-full"
-                    style={{ background: 'linear-gradient(to right, transparent, rgba(0,0,0,0.3))' }} />
-                </div>
-
-                {/* Right Page */}
-                <div
-                  className="flex-1 min-h-[500px] md:min-h-[600px] p-6 md:p-8 relative overflow-hidden"
-                  style={{
-                    background: rightPage ? rightPage.bgColor : '#1a0f08',
-                    boxShadow: 'inset 10px 0 30px rgba(0,0,0,0.3)',
-                  }}
-                >
-                  {rightPage ? (
-                    <PageContent page={rightPage} />
-                  ) : (
-                    <div className="flex flex-col items-center justify-center h-full text-center p-8">
-                      <div className="h-px w-16 bg-[#c9a84c]/30 mb-6" />
-                      <p
-                        className="text-[#c9a84c]/50 text-sm italic"
-                        style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                      >
-                        Cafe&Bar Luxor
-                      </p>
-                      <p
-                        className="text-white/20 text-xs mt-2"
-                        style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                      >
-                        Ohligser Markt 5 · Solingen
-                      </p>
-                      <div className="h-px w-16 bg-[#c9a84c]/30 mt-6" />
-                    </div>
-                  )}
-                  {/* Page number */}
-                  <div className="absolute bottom-4 right-4 text-white/20 text-xs"
-                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                    {currentSpread * 2}
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Navigation Buttons */}
-          <div className="flex items-center justify-between mt-8 px-2">
-            <button
-              onClick={goPrev}
-              disabled={currentSpread === 0 || isFlipping}
-              className={`flex items-center gap-2 px-5 py-3 border transition-all duration-300 text-sm font-medium tracking-wide ${
-                currentSpread === 0
-                  ? 'border-white/10 text-white/20 cursor-not-allowed'
-                  : 'border-[#c9a84c]/40 text-[#c9a84c] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c]'
-              }`}
-              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-            >
-              <ChevronLeft size={16} />
-              {t('menu.prev')}
-            </button>
-
-            {/* Page indicators */}
-            <div className="flex gap-2">
-              {Array.from({ length: totalSpreads }).map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => {
-                    if (!isFlipping) {
-                      setFlipDirection(i > currentSpread ? 'next' : 'prev');
-                      setIsFlipping(true);
-                      setTimeout(() => {
-                        setCurrentSpread(i);
-                        setIsFlipping(false);
-                      }, 400);
-                    }
-                  }}
-                  className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                    i === currentSpread ? 'bg-[#c9a84c] scale-125' : 'bg-white/20 hover:bg-white/40'
-                  }`}
-                />
-              ))}
-            </div>
-
-            <button
-              onClick={goNext}
-              disabled={currentSpread >= totalSpreads - 1 || isFlipping}
-              className={`flex items-center gap-2 px-5 py-3 border transition-all duration-300 text-sm font-medium tracking-wide ${
-                currentSpread >= totalSpreads - 1
-                  ? 'border-white/10 text-white/20 cursor-not-allowed'
-                  : 'border-[#c9a84c]/40 text-[#c9a84c] hover:bg-[#c9a84c]/10 hover:border-[#c9a84c]'
-              }`}
-              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-            >
-              {t('menu.next')}
-              <ChevronRight size={16} />
-            </button>
-          </div>
+        <h1 className="text-4xl sm:text-5xl font-light text-white/85 mb-0.5 leading-none"
+          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", letterSpacing: '0.04em' }}>
+          Cafe&amp;Bar
+        </h1>
+        <h2 className="text-6xl sm:text-7xl font-bold leading-none mb-7"
+          style={{
+            fontFamily: "'Cormorant Garamond', Georgia, serif",
+            letterSpacing: '0.22em',
+            background: 'linear-gradient(180deg, #e05050 0%, #b00000 45%, #6a0000 100%)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>
+          LUXOR
+        </h2>
+        {/* Divider */}
+        <div className="flex items-center justify-center gap-3 mb-7">
+          <div className="h-px w-14" style={{ background: 'linear-gradient(90deg, transparent, rgba(180,0,0,0.75))' }} />
+          <div className="w-2 h-2 rotate-45" style={{ background: 'rgba(180,0,0,0.75)' }} />
+          <div className="h-px w-14" style={{ background: 'linear-gradient(270deg, transparent, rgba(180,0,0,0.75))' }} />
         </div>
-      </section>
+        <p className="text-lg font-light tracking-[0.35em] uppercase mb-8"
+          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", color: 'rgba(255,255,255,0.55)' }}>
+          {lang === 'de' ? 'Speisekarte' : 'Menu'}
+        </p>
+        <p className="text-[10px] tracking-widest"
+          style={{ color: 'rgba(180,0,0,0.45)', fontFamily: "'Source Sans 3', sans-serif" }}>
+          Ohligser Markt 5 · Solingen
+        </p>
+      </div>
+      {/* Bottom ornament */}
+      <div className="absolute bottom-[22px] left-1/2 -translate-x-1/2 flex items-center gap-3">
+        <div className="h-px w-10" style={{ background: 'rgba(180,0,0,0.55)' }} />
+        <div className="w-1.5 h-1.5 rotate-45" style={{ background: 'rgba(180,0,0,0.75)' }} />
+        <div className="h-px w-10" style={{ background: 'rgba(180,0,0,0.55)' }} />
+      </div>
     </div>
   );
 }
 
-function PageContent({ page }: { page: { category: string; items: { name: string; desc: string; price: string }[] } }) {
+/* ─── BACK COVER ────────────────────────────────────────────────── */
+function BookBackCover({ lang }: { lang: string }) {
   return (
-    <div className="h-full flex flex-col">
-      {/* Category Header */}
-      <div className="mb-6">
-        <div className="h-px w-12 bg-[#c9a84c] mb-3" />
-        <h2
-          className="text-xl md:text-2xl font-semibold text-[#c9a84c]"
-          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-        >
-          {page.category}
+    <div className="w-full h-full flex flex-col items-center justify-center relative overflow-hidden select-none"
+      style={{ background: 'linear-gradient(160deg, #0d0000 0%, #1c0000 50%, #0d0000 100%)' }}>
+      <div className="absolute inset-[10px] pointer-events-none"
+        style={{ border: '1px solid rgba(180,0,0,0.25)' }} />
+      <div className="text-center px-8 z-10">
+        <div className="flex items-center justify-center gap-2 mb-7">
+          <div className="h-px w-10" style={{ background: 'rgba(180,0,0,0.55)' }} />
+          <span style={{ color: 'rgba(180,0,0,0.75)', fontSize: '1.1rem' }}>✦</span>
+          <div className="h-px w-10" style={{ background: 'rgba(180,0,0,0.55)' }} />
+        </div>
+        <h2 className="text-3xl font-semibold text-white/85 mb-3"
+          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+          {lang === 'de' ? 'Danke für Ihren Besuch' : 'Thank You for Your Visit'}
         </h2>
-        <div className="h-px w-full bg-[#c9a84c]/15 mt-3" />
+        <p className="text-sm mb-8"
+          style={{ color: 'rgba(255,255,255,0.4)', fontFamily: "'Source Sans 3', sans-serif" }}>
+          {lang === 'de' ? 'Wir freuen uns, Sie wieder zu sehen' : 'We look forward to seeing you again'}
+        </p>
+        <div className="space-y-2.5">
+          <p className="text-sm" style={{ color: 'rgba(180,0,0,0.65)', fontFamily: "'Source Sans 3', sans-serif" }}>
+            Ohligser Markt 5 · 42696 Solingen
+          </p>
+          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.35)', fontFamily: "'Source Sans 3', sans-serif" }}>
+            {lang === 'de' ? 'Mo–Sa: 09:00–21:00 · So: 10:00–20:00' : 'Mon–Sat: 09:00–21:00 · Sun: 10:00–20:00'}
+          </p>
+          <p className="text-xs" style={{ color: 'rgba(255,255,255,0.3)', fontFamily: "'Source Sans 3', sans-serif" }}>
+            stoyansarakostov73@gmail.com
+          </p>
+        </div>
+        <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="h-px w-10" style={{ background: 'rgba(180,0,0,0.4)' }} />
+          <span className="text-2xl font-bold tracking-widest"
+            style={{
+              fontFamily: "'Cormorant Garamond', Georgia, serif",
+              background: 'linear-gradient(180deg, #dc5050, #b00000)',
+              WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', backgroundClip: 'text',
+            }}>
+            LUXOR
+          </span>
+          <div className="h-px w-10" style={{ background: 'rgba(180,0,0,0.4)' }} />
+        </div>
       </div>
+    </div>
+  );
+}
 
-      {/* Menu Items */}
-      <div className="flex-1 space-y-3 overflow-hidden">
+/* ─── CONTENT PAGE ──────────────────────────────────────────────── */
+function ContentPage({ page, pageNum, total }: { page: PageData; pageNum: number; total: number }) {
+  return (
+    <div className="w-full h-full flex flex-col overflow-hidden select-none"
+      style={{ background: 'linear-gradient(160deg, #140000 0%, #0a0000 100%)' }}>
+      {/* Header */}
+      <div className="flex-shrink-0 px-5 pt-5 pb-3"
+        style={{ borderBottom: '1px solid rgba(180,0,0,0.18)' }}>
+        <div className="flex items-center gap-2.5 mb-1">
+          <span className="text-xl leading-none">{page.icon}</span>
+          <h3 className="text-base sm:text-lg font-semibold text-white/90 leading-tight"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+            {page.title}
+          </h3>
+        </div>
+        <div className="h-px mt-1" style={{ background: 'linear-gradient(90deg, rgba(180,0,0,0.55), transparent)' }} />
+      </div>
+      {/* Items */}
+      <div className="flex-1 overflow-y-auto px-5 py-2 space-y-0">
         {page.items.map((item, i) => (
-          <div
-            key={i}
-            className="flex items-start justify-between gap-3 pb-3 border-b border-white/5 last:border-0 group"
-          >
+          <div key={i} className="flex items-start justify-between gap-2 py-2"
+            style={{ borderBottom: i < page.items.length - 1 ? '1px solid rgba(255,255,255,0.04)' : 'none' }}>
             <div className="flex-1 min-w-0">
-              <div
-                className="text-white text-sm font-medium leading-tight group-hover:text-[#c9a84c] transition-colors duration-200"
-                style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1rem' }}
-              >
+              <p className="text-xs sm:text-sm font-medium text-white/88 leading-snug"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 {item.name}
-              </div>
-              <div
-                className="text-white/35 text-xs mt-0.5 leading-tight"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              >
+              </p>
+              <p className="text-[10px] sm:text-xs mt-0.5 leading-snug"
+                style={{ color: 'rgba(255,255,255,0.3)', fontFamily: "'Source Sans 3', sans-serif" }}>
                 {item.desc}
-              </div>
+              </p>
             </div>
-            <div
-              className="text-[#c9a84c] text-sm font-semibold whitespace-nowrap flex-shrink-0"
-              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-            >
+            <span className="flex-shrink-0 text-xs sm:text-sm font-semibold whitespace-nowrap"
+              style={{ color: 'rgba(220,70,70,0.9)', fontFamily: "'Source Sans 3', sans-serif" }}>
               {item.price}
-            </div>
+            </span>
           </div>
         ))}
       </div>
+      {/* Footer */}
+      <div className="flex-shrink-0 px-5 py-2 flex items-center justify-between"
+        style={{ borderTop: '1px solid rgba(180,0,0,0.1)' }}>
+        <span className="text-[10px]" style={{ color: 'rgba(180,0,0,0.4)', fontFamily: "'Source Sans 3', sans-serif" }}>
+          Cafe&Bar Luxor
+        </span>
+        <span className="text-[10px]" style={{ color: 'rgba(255,255,255,0.18)', fontFamily: "'Source Sans 3', sans-serif" }}>
+          {pageNum} / {total}
+        </span>
+      </div>
+    </div>
+  );
+}
 
-      {/* Decorative footer */}
-      <div className="mt-4 flex items-center gap-2">
-        <div className="h-px flex-1 bg-[#c9a84c]/10" />
-        <span className="text-[#c9a84c]/20 text-xs">✦</span>
-        <div className="h-px flex-1 bg-[#c9a84c]/10" />
+/* ─── MAIN COMPONENT ────────────────────────────────────────────── */
+export default function Menu() {
+  const { lang } = useLanguage();
+  const pages = lang === 'de' ? PAGES_DE : PAGES_EN;
+  const totalPages = pages.length + 2; // cover + content pages + back cover
+
+  const [currentPage, setCurrentPage] = useState(0);
+  const [flipping, setFlipping] = useState<'fwd' | 'bwd' | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const flipTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  const FLIP_DURATION = 600; // ms
+
+  const navigate = useCallback((target: number) => {
+    if (flipping !== null) return;
+    if (target < 0 || target >= totalPages) return;
+    const dir = target > currentPage ? 'fwd' : 'bwd';
+    setFlipping(dir);
+    if (flipTimeout.current) clearTimeout(flipTimeout.current);
+    flipTimeout.current = setTimeout(() => {
+      setCurrentPage(target);
+      setFlipping(null);
+    }, FLIP_DURATION);
+  }, [flipping, currentPage, totalPages]);
+
+  const goNext = useCallback(() => navigate(currentPage + 1), [navigate, currentPage]);
+  const goPrev = useCallback(() => navigate(currentPage - 1), [navigate, currentPage]);
+
+  useEffect(() => {
+    const h = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowRight') goNext();
+      if (e.key === 'ArrowLeft') goPrev();
+    };
+    window.addEventListener('keydown', h);
+    return () => window.removeEventListener('keydown', h);
+  }, [goNext, goPrev]);
+
+  useEffect(() => () => { if (flipTimeout.current) clearTimeout(flipTimeout.current); }, []);
+
+  const renderPage = (idx: number) => {
+    if (idx === 0) return <BookCover lang={lang} />;
+    if (idx === totalPages - 1) return <BookBackCover lang={lang} />;
+    const p = pages[idx - 1];
+    if (!p) return null;
+    return <ContentPage page={p} pageNum={idx} total={pages.length} />;
+  };
+
+  // Next page index for the flip animation
+  const nextIdx = flipping === 'fwd'
+    ? Math.min(currentPage + 1, totalPages - 1)
+    : Math.max(currentPage - 1, 0);
+
+  return (
+    <div className="min-h-screen pt-16 md:pt-20 flex flex-col items-center" style={{ background: '#080000' }}>
+      {/* Inline keyframes */}
+      <style>{`
+        @keyframes luxorFlipFwd {
+          0%   { transform: rotateY(0deg); box-shadow: -4px 0 20px rgba(0,0,0,0.5); }
+          40%  { transform: rotateY(-90deg); box-shadow: -20px 0 40px rgba(0,0,0,0.8); }
+          100% { transform: rotateY(-180deg); box-shadow: -4px 0 20px rgba(0,0,0,0.5); }
+        }
+        @keyframes luxorFlipBwd {
+          0%   { transform: rotateY(0deg); box-shadow: 4px 0 20px rgba(0,0,0,0.5); }
+          40%  { transform: rotateY(90deg); box-shadow: 20px 0 40px rgba(0,0,0,0.8); }
+          100% { transform: rotateY(180deg); box-shadow: 4px 0 20px rgba(0,0,0,0.5); }
+        }
+        @keyframes luxorShadowPulse {
+          0%   { opacity: 0; }
+          40%  { opacity: 1; }
+          100% { opacity: 0; }
+        }
+        .book-page-flip {
+          position: absolute;
+          inset: 0;
+          transform-style: preserve-3d;
+          z-index: 30;
+          pointer-events: none;
+        }
+        .book-page-flip.fwd {
+          transform-origin: right center;
+          animation: luxorFlipFwd ${FLIP_DURATION}ms cubic-bezier(0.45, 0, 0.55, 1) forwards;
+        }
+        .book-page-flip.bwd {
+          transform-origin: left center;
+          animation: luxorFlipBwd ${FLIP_DURATION}ms cubic-bezier(0.45, 0, 0.55, 1) forwards;
+        }
+        .book-page-flip .page-front {
+          position: absolute;
+          inset: 0;
+          backface-visibility: hidden;
+          overflow: hidden;
+        }
+        .book-page-flip .page-back {
+          position: absolute;
+          inset: 0;
+          backface-visibility: hidden;
+          transform: rotateY(180deg);
+          overflow: hidden;
+        }
+        .flip-center-shadow {
+          position: absolute;
+          top: 0; bottom: 0;
+          width: 40px;
+          pointer-events: none;
+          z-index: 40;
+          animation: luxorShadowPulse ${FLIP_DURATION}ms ease-in-out forwards;
+        }
+        .flip-center-shadow.fwd { right: 0; background: linear-gradient(to right, rgba(0,0,0,0.7), transparent); }
+        .flip-center-shadow.bwd { left: 0; background: linear-gradient(to left, rgba(0,0,0,0.7), transparent); }
+      `}</style>
+
+      {/* Page title */}
+      <div className="text-center py-8 px-4">
+        <div className="flex items-center justify-center gap-4 mb-3">
+          <div className="h-px w-12" style={{ background: 'linear-gradient(90deg, transparent, rgba(180,0,0,0.65))' }} />
+          <span className="text-[10px] tracking-[0.35em] uppercase"
+            style={{ color: 'rgba(180,0,0,0.65)', fontFamily: "'Source Sans 3', sans-serif" }}>
+            Cafe&Bar Luxor
+          </span>
+          <div className="h-px w-12" style={{ background: 'linear-gradient(270deg, transparent, rgba(180,0,0,0.65))' }} />
+        </div>
+        <h1 className="text-3xl md:text-4xl font-semibold text-white/90"
+          style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+          {lang === 'de' ? 'Unsere Speisekarte' : 'Our Menu'}
+        </h1>
+        <p className="text-xs mt-2" style={{ color: 'rgba(255,255,255,0.28)', fontFamily: "'Source Sans 3', sans-serif" }}>
+          {lang === 'de' ? 'Klicken, tippen oder Pfeiltasten zum Blättern' : 'Click, swipe or use arrow keys to browse'}
+        </p>
+      </div>
+
+      {/* Book container */}
+      <div
+        className="w-full flex flex-col items-center px-4 pb-12"
+        onTouchStart={(e) => setTouchStart(e.touches[0].clientX)}
+        onTouchEnd={(e) => {
+          if (touchStart === null) return;
+          const diff = touchStart - e.changedTouches[0].clientX;
+          if (Math.abs(diff) > 45) { diff > 0 ? goNext() : goPrev(); }
+          setTouchStart(null);
+        }}
+      >
+        {/* 3D perspective wrapper */}
+        <div style={{ perspective: '1600px', perspectiveOrigin: '50% 38%' }}>
+          {/* The book itself */}
+          <div
+            style={{
+              width: 'min(340px, 86vw)',
+              height: 'min(490px, 70vh)',
+              position: 'relative',
+              transformStyle: 'preserve-3d',
+              // Slight resting tilt for depth illusion
+              transform: flipping
+                ? (flipping === 'fwd' ? 'rotateY(-5deg) rotateX(2deg)' : 'rotateY(5deg) rotateX(2deg)')
+                : 'rotateY(-3deg) rotateX(1.5deg)',
+              transition: `transform ${FLIP_DURATION}ms cubic-bezier(0.45,0,0.55,1)`,
+              filter: 'drop-shadow(0 30px 60px rgba(0,0,0,0.9)) drop-shadow(0 0 30px rgba(180,0,0,0.1))',
+            }}
+          >
+            {/* ── Book spine (left edge) ── */}
+            <div
+              style={{
+                position: 'absolute',
+                left: 0, top: 0, bottom: 0,
+                width: '14px',
+                background: 'linear-gradient(90deg, #3a0000, #8b0000, #5a0000)',
+                transform: 'rotateY(-90deg) translateZ(0px)',
+                transformOrigin: 'left center',
+                zIndex: 10,
+              }}
+            />
+            {/* ── Book top edge ── */}
+            <div
+              style={{
+                position: 'absolute',
+                left: 0, right: 0, top: 0,
+                height: '6px',
+                background: 'linear-gradient(180deg, #4a0000, #1a0000)',
+                transform: 'rotateX(90deg) translateZ(0px)',
+                transformOrigin: 'top center',
+                zIndex: 10,
+              }}
+            />
+
+            {/* ── Static background page (always visible) ── */}
+            <div
+              className="absolute inset-0 overflow-hidden"
+              style={{
+                borderRadius: '1px 3px 3px 1px',
+                border: '1px solid rgba(180,0,0,0.1)',
+                zIndex: 1,
+              }}
+            >
+              {renderPage(flipping === 'fwd' ? nextIdx : currentPage)}
+            </div>
+
+            {/* ── Flipping page layer ── */}
+            {flipping && (
+              <>
+                <div className={`book-page-flip ${flipping}`}>
+                  <div className="page-front"
+                    style={{ background: 'linear-gradient(160deg, #140000 0%, #0a0000 100%)' }}>
+                    {renderPage(currentPage)}
+                  </div>
+                  <div className="page-back"
+                    style={{ background: 'linear-gradient(160deg, #0a0000 0%, #140000 100%)' }}>
+                    {renderPage(nextIdx)}
+                  </div>
+                </div>
+                {/* Center crease shadow */}
+                <div className={`flip-center-shadow ${flipping}`} />
+              </>
+            )}
+
+            {/* ── Right-edge page curl hint ── */}
+            {!flipping && currentPage < totalPages - 1 && (
+              <div
+                style={{
+                  position: 'absolute',
+                  right: 0, bottom: 0,
+                  width: '28px', height: '28px',
+                  background: 'linear-gradient(135deg, transparent 50%, rgba(180,0,0,0.15) 50%)',
+                  zIndex: 20,
+                  pointerEvents: 'none',
+                }}
+              />
+            )}
+          </div>
+        </div>
+
+        {/* ── Controls ── */}
+        <div className="flex items-center gap-4 mt-8">
+          <button
+            onClick={goPrev}
+            disabled={currentPage === 0 || flipping !== null}
+            className="flex items-center gap-2 px-5 py-2.5 transition-all duration-300 disabled:opacity-20 disabled:cursor-not-allowed active:scale-95"
+            style={{
+              background: 'rgba(180,0,0,0.08)',
+              border: '1px solid rgba(180,0,0,0.22)',
+              color: 'rgba(220,80,80,0.8)',
+              fontFamily: "'Source Sans 3', sans-serif",
+              fontSize: '0.78rem',
+              letterSpacing: '0.05em',
+            }}
+          >
+            <ChevronLeft size={14} />
+            {lang === 'de' ? 'Zurück' : 'Back'}
+          </button>
+
+          {/* Dot indicators */}
+          <div className="flex items-center gap-1.5">
+            {Array.from({ length: totalPages }).map((_, i) => (
+              <button
+                key={i}
+                onClick={() => navigate(i)}
+                disabled={flipping !== null}
+                style={{
+                  width: i === currentPage ? '18px' : '5px',
+                  height: '5px',
+                  borderRadius: '3px',
+                  background: i === currentPage ? 'rgba(180,0,0,0.85)' : 'rgba(255,255,255,0.1)',
+                  transition: 'all 0.3s ease',
+                  border: 'none',
+                  cursor: 'pointer',
+                  padding: 0,
+                }}
+              />
+            ))}
+          </div>
+
+          <button
+            onClick={goNext}
+            disabled={currentPage === totalPages - 1 || flipping !== null}
+            className="flex items-center gap-2 px-5 py-2.5 transition-all duration-300 disabled:opacity-20 disabled:cursor-not-allowed active:scale-95"
+            style={{
+              background: currentPage < totalPages - 1 ? 'rgba(180,0,0,0.75)' : 'rgba(255,255,255,0.03)',
+              border: '1px solid rgba(180,0,0,0.3)',
+              color: 'white',
+              fontFamily: "'Source Sans 3', sans-serif",
+              fontSize: '0.78rem',
+              letterSpacing: '0.05em',
+            }}
+          >
+            {lang === 'de' ? 'Weiter' : 'Next'}
+            <ChevronRight size={14} />
+          </button>
+        </div>
+
+        <p className="mt-3 text-[11px]" style={{ color: 'rgba(255,255,255,0.15)', fontFamily: "'Source Sans 3', sans-serif" }}>
+          {lang === 'de' ? 'Seite' : 'Page'} {currentPage + 1} / {totalPages}
+        </p>
+        <p className="mt-1 text-[10px] text-center" style={{ color: 'rgba(180,0,0,0.3)', fontFamily: "'Source Sans 3', sans-serif" }}>
+          {lang === 'de' ? 'Pfeiltasten oder Wischen auf Mobile' : 'Arrow keys or swipe on mobile'}
+        </p>
       </div>
     </div>
   );

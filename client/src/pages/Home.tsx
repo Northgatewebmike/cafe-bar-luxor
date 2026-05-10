@@ -68,14 +68,14 @@ export default function Home() {
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           {/* Pre-title */}
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-px w-12 bg-[#c9a84c]" />
+            <div className="h-px w-12 bg-[rgba(180,0,0,0.9)]" />
             <span
-              className="text-[#c9a84c] text-xs font-semibold tracking-[0.3em] uppercase"
+              className="text-[rgba(180,0,0,0.9)] text-xs font-semibold tracking-[0.3em] uppercase"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}
             >
               Solingen · Ohligser Markt
             </span>
-            <div className="h-px w-12 bg-[#c9a84c]" />
+            <div className="h-px w-12 bg-[rgba(180,0,0,0.9)]" />
           </div>
 
           {/* Main Title */}
@@ -85,7 +85,7 @@ export default function Home() {
           >
             Cafe&Bar
             <br />
-            <span className="text-[#c9a84c]">Luxor</span>
+            <span className="text-[rgba(180,0,0,0.9)]">Luxor</span>
           </h1>
 
           {/* Tagline */}
@@ -107,13 +107,12 @@ export default function Home() {
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/speisekarte">
-              <button className="px-8 py-4 bg-[#c9a84c] text-[#0a0603] font-semibold text-sm tracking-widest uppercase hover:bg-[#e8c87a] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#c9a84c]/30"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              <button className="px-8 py-4 font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-105" style={{ background: 'rgba(180,0,0,0.85)', color: 'white', fontFamily: "'Source Sans 3', sans-serif" }}>
                 {t('home.hero.cta')}
               </button>
             </Link>
             <Link href="/kontakt">
-              <button className="px-8 py-4 border border-white/40 text-white font-medium text-sm tracking-widest uppercase hover:border-[#c9a84c] hover:text-[#c9a84c] transition-all duration-300"
+              <button className="px-8 py-4 border border-white/40 text-white font-medium text-sm tracking-widest uppercase hover:border-[rgba(180,0,0,0.9)] hover:text-[rgba(180,0,0,0.9)] transition-all duration-300"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 {t('home.hero.cta2')}
               </button>
@@ -123,15 +122,15 @@ export default function Home() {
 
         {/* Scroll indicator */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <ChevronDown size={20} className="text-[#c9a84c]/60" />
+          <ChevronDown size={20} className="text-[rgba(180,0,0,0.9)]/60" />
         </div>
       </section>
 
       {/* ============ FEATURES SECTION ============ */}
-      <section className="py-20 md:py-28 bg-[#0a0603] relative overflow-hidden">
+      <section className="py-20 md:py-28 bg-[#0a0000] relative overflow-hidden">
         {/* Background texture */}
         <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: 'repeating-linear-gradient(45deg, #c9a84c 0, #c9a84c 1px, transparent 0, transparent 50%)',
+          backgroundImage: 'repeating-linear-gradient(45deg, rgba(180,0,0,0.9) 0, rgba(180,0,0,0.9) 1px, transparent 0, transparent 50%)',
           backgroundSize: '20px 20px'
         }} />
 
@@ -139,12 +138,12 @@ export default function Home() {
           {/* Section header */}
           <div className="text-center mb-16 reveal">
             <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a84c]" />
-              <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[rgba(180,0,0,0.9)]" />
+              <span className="text-[rgba(180,0,0,0.9)] text-xs tracking-[0.3em] uppercase font-medium"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 Cafe & Bar Luxor
               </span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a84c]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[rgba(180,0,0,0.9)]" />
             </div>
             <h2
               className="text-4xl md:text-5xl font-semibold text-white"
@@ -158,21 +157,21 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
-                icon: <Coffee size={28} className="text-[#c9a84c]" />,
+                icon: <Coffee size={28} className="text-[rgba(180,0,0,0.9)]" />,
                 title: t('home.features.coffee.title'),
                 desc: t('home.features.coffee.desc'),
                 delay: '0ms',
                 img: COFFEE_IMG,
               },
               {
-                icon: <span className="text-2xl text-[#c9a84c]">🍸</span>,
+                icon: <span className="text-2xl text-[rgba(180,0,0,0.9)]">🍸</span>,
                 title: t('home.features.cocktails.title'),
                 desc: t('home.features.cocktails.desc'),
                 delay: '150ms',
                 img: COCKTAIL_IMG,
               },
               {
-                icon: <Sparkles size={28} className="text-[#c9a84c]" />,
+                icon: <Sparkles size={28} className="text-[rgba(180,0,0,0.9)]" />,
                 title: t('home.features.atmosphere.title'),
                 desc: t('home.features.atmosphere.desc'),
                 delay: '300ms',
@@ -181,7 +180,7 @@ export default function Home() {
             ].map((feature, i) => (
               <div
                 key={i}
-                className="reveal card-3d group relative overflow-hidden border border-white/5 hover:border-[#c9a84c]/30 transition-all duration-500"
+                className="reveal card-3d group relative overflow-hidden border border-white/5 hover:border-[rgba(180,0,0,0.9)]/30 transition-all duration-500"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)',
                   transitionDelay: feature.delay,
@@ -195,7 +194,7 @@ export default function Home() {
                     alt={feature.title}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/40 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0a0000] via-[#0a0000]/40 to-transparent" />
                   <div className="absolute bottom-4 left-4">
                     {feature.icon}
                   </div>
@@ -203,7 +202,7 @@ export default function Home() {
                 {/* Content */}
                 <div className="p-6">
                   <h3
-                    className="text-xl font-semibold text-white mb-3 group-hover:text-[#c9a84c] transition-colors duration-300"
+                    className="text-xl font-semibold text-white mb-3 group-hover:text-[rgba(180,0,0,0.9)] transition-colors duration-300"
                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                   >
                     {feature.title}
@@ -216,7 +215,7 @@ export default function Home() {
                   </p>
                 </div>
                 {/* Gold bottom line on hover */}
-                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[#c9a84c] group-hover:w-full transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[rgba(180,0,0,0.9)] group-hover:w-full transition-all duration-500" />
               </div>
             ))}
           </div>
@@ -229,14 +228,14 @@ export default function Home() {
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${ABOUT_BG})` }}
         />
-        <div className="absolute inset-0 bg-[#0a0603]/85" />
+        <div className="absolute inset-0 bg-[#0a0000]/85" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="reveal-left">
               <div className="flex items-center gap-3 mb-4">
-                <div className="h-px w-10 bg-[#c9a84c]" />
-                <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+                <div className="h-px w-10 bg-[rgba(180,0,0,0.9)]" />
+                <span className="text-[rgba(180,0,0,0.9)] text-xs tracking-[0.3em] uppercase font-medium"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   {t('about.subtitle')}
                 </span>
@@ -254,7 +253,7 @@ export default function Home() {
                 {t('about.story.p1')}
               </p>
               <Link href="/ueber-uns">
-                <button className="flex items-center gap-3 text-[#c9a84c] font-medium text-sm tracking-wide hover:gap-5 transition-all duration-300 group"
+                <button className="flex items-center gap-3 text-[rgba(180,0,0,0.9)] font-medium text-sm tracking-wide hover:gap-5 transition-all duration-300 group"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   <span>{t('common.more')}</span>
                   <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
@@ -272,11 +271,11 @@ export default function Home() {
               ].map((stat, i) => (
                 <div
                   key={i}
-                  className="p-6 border border-white/10 hover:border-[#c9a84c]/40 transition-all duration-300 text-center group"
+                  className="p-6 border border-white/10 hover:border-[rgba(180,0,0,0.9)]/40 transition-all duration-300 text-center group"
                   style={{ background: 'rgba(255,255,255,0.03)' }}
                 >
                   <div
-                    className="text-3xl md:text-4xl font-bold text-[#c9a84c] mb-2"
+                    className="text-3xl md:text-4xl font-bold text-[rgba(180,0,0,0.9)] mb-2"
                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                   >
                     {stat.num}
@@ -295,17 +294,17 @@ export default function Home() {
       </section>
 
       {/* ============ TESTIMONIALS ============ */}
-      <section className="py-20 md:py-28 bg-[#080503]">
+      <section className="py-20 md:py-28 bg-[#080000]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
           <div className="text-center mb-14 reveal">
             <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#c9a84c]" />
-              <span className="text-[#c9a84c] text-xs tracking-[0.3em] uppercase font-medium"
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[rgba(180,0,0,0.9)]" />
+              <span className="text-[rgba(180,0,0,0.9)] text-xs tracking-[0.3em] uppercase font-medium"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 Google Reviews
               </span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#c9a84c]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[rgba(180,0,0,0.9)]" />
             </div>
             <h2
               className="text-4xl md:text-5xl font-semibold text-white"
@@ -345,7 +344,7 @@ export default function Home() {
             ].map((testimonial, i) => (
               <div
                 key={i}
-                className="reveal card-3d p-6 md:p-8 border border-white/8 hover:border-[#c9a84c]/25 transition-all duration-500 relative"
+                className="reveal card-3d p-6 md:p-8 border border-white/8 hover:border-[rgba(180,0,0,0.9)]/25 transition-all duration-500 relative"
                 style={{
                   background: 'linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(255,255,255,0.02) 100%)',
                   transitionDelay: testimonial.delay,
@@ -353,7 +352,7 @@ export default function Home() {
               >
                 {/* Quote mark */}
                 <div
-                  className="text-6xl text-[#c9a84c]/20 leading-none mb-2 -mt-2"
+                  className="text-6xl text-[rgba(180,0,0,0.9)]/20 leading-none mb-2 -mt-2"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                 >
                   "
@@ -362,7 +361,7 @@ export default function Home() {
                 {/* Stars */}
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: testimonial.stars }).map((_, j) => (
-                    <Star key={j} size={14} className="text-[#c9a84c] fill-[#c9a84c]" />
+                    <Star key={j} size={14} className="text-[rgba(180,0,0,0.9)] fill-[rgba(180,0,0,0.9)]" />
                   ))}
                 </div>
 
@@ -376,8 +375,8 @@ export default function Home() {
 
                 {/* Author */}
                 <div className="flex items-center gap-3 pt-4 border-t border-white/8">
-                  <div className="w-10 h-10 rounded-full bg-[#c9a84c]/20 border border-[#c9a84c]/30 flex items-center justify-center">
-                    <span className="text-[#c9a84c] text-xs font-bold">{testimonial.initials}</span>
+                  <div className="w-10 h-10 rounded-full bg-[rgba(180,0,0,0.9)]/20 border border-[rgba(180,0,0,0.9)]/30 flex items-center justify-center">
+                    <span className="text-[rgba(180,0,0,0.9)] text-xs font-bold">{testimonial.initials}</span>
                   </div>
                   <div>
                     <div className="text-white text-sm font-semibold"
@@ -395,35 +394,33 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       {/* ============ CTA BANNER ============ */}
-      <section className="py-16 bg-[#c9a84c] relative overflow-hidden">
+      <section className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0a0000 0%, #1a0000 50%, #0a0000 100%)' }}>
         <div className="absolute inset-0 opacity-10" style={{
           backgroundImage: 'repeating-linear-gradient(-45deg, #0a0603 0, #0a0603 1px, transparent 0, transparent 50%)',
           backgroundSize: '10px 10px'
         }} />
         <div className="relative max-w-4xl mx-auto px-4 text-center">
           <h2
-            className="text-3xl md:text-4xl font-bold text-[#0a0603] mb-4"
+            className="text-3xl md:text-4xl font-bold text-white mb-4"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
           >
             {t('home.hero.tagline')}
           </h2>
           <p
-            className="text-[#0a0603]/70 mb-8 text-base"
+            className="text-white/60 mb-8 text-base"
             style={{ fontFamily: "'Source Sans 3', sans-serif" }}
           >
             Ohligser Markt 5 · 42696 Solingen · Mo–Sa 09:00–21:00 · So 10:00–20:00
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/speisekarte">
-              <button className="px-8 py-3 bg-[#0a0603] text-[#c9a84c] font-semibold text-sm tracking-widest uppercase hover:bg-[#1a0f08] transition-all duration-300 hover:scale-105"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              <button className="px-8 py-3 font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-105" style={{ background: 'rgba(180,0,0,0.85)', color: 'white', fontFamily: "'Source Sans 3', sans-serif" }}>
                 {t('home.hero.cta')}
               </button>
             </Link>
             <Link href="/oeffnungszeiten">
-              <button className="px-8 py-3 border-2 border-[#0a0603] text-[#0a0603] font-semibold text-sm tracking-widest uppercase hover:bg-[#0a0603] hover:text-[#c9a84c] transition-all duration-300"
+              <button className="px-8 py-3 border border-white/30 text-white/80 font-semibold text-sm tracking-widest uppercase hover:border-red-700 hover:text-red-400 transition-all duration-300"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 {t('nav.hours')}
               </button>

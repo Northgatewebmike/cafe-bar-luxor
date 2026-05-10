@@ -14,6 +14,7 @@ import Hours from "./pages/Hours";
 import Contact from "./pages/Contact";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
+import Automaten from "./pages/Automaten";
 import NotFound from "./pages/NotFound";
 
 function Router() {
@@ -30,6 +31,7 @@ function Router() {
           <Route path="/kontakt" component={Contact} />
           <Route path="/impressum" component={Impressum} />
           <Route path="/datenschutz" component={Datenschutz} />
+          <Route path="/automaten" component={Automaten} />
           <Route component={NotFound} />
         </Switch>
       </main>
