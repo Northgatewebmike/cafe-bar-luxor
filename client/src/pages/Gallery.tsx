@@ -38,7 +38,6 @@ export default function Gallery() {
     { src: PHOTO_INTERIOR, label: t('gallery.img1'), aspect: 'portrait' },
     { src: PHOTO_TERRACE_SUNSET, label: t('gallery.img2'), aspect: 'landscape' },
     { src: PHOTO_TERRACE_DAY, label: t('gallery.img3'), aspect: 'landscape' },
-    { src: PHOTO_EVENING, label: t('gallery.img4'), aspect: 'portrait' },
   ];
 
   const openLightbox = (index: number) => {
