@@ -23,26 +23,19 @@ declare global {
   }
 }
 
-// All 18 menu page images v4 — exact photos per section, 4-photo grid, numbered spirits list
+// Clean menu — 11 pages, no photos, sections paired, bigger fonts
 const MENU_PAGES = [
-  '/manus-storage/p00_cover_7698b1e9.png',      // Cover
-  '/manus-storage/p01_welcome_4955d288.png',     // Welcome
-  '/manus-storage/p02_coffee_81da2a69.png',      // Coffee
-  '/manus-storage/p03_tea_d5906052.png',         // Tea — v5 fixed
-  '/manus-storage/p04_cold_48eb2bec.png',        // Cold drinks — v5 fixed
-  '/manus-storage/p05_limo_a9cc0564.png',        // Lemonade
-  '/manus-storage/p06_draft_beer_e8c1201e.png',  // Draft beer — v5 fixed
-  '/manus-storage/p07_bottle_beer_ab38cc58.png', // Bottle beer — v5 fixed
-  '/manus-storage/p08_cocktails_0fc8ed1a.png',   // Cocktails — v5 fixed
-  '/manus-storage/p09_nonalco_cf6f4cd9.png',     // Non-alco cocktails
-  '/manus-storage/p10_spirits_95008741.png',     // Spirits — v5 fixed
-  '/manus-storage/p11_whiskey_8cd5c25d.png',     // Whiskey — v5 fixed
-  '/manus-storage/p12_longdrinks_901fe979.png',  // Long drinks — v5 fixed
-  '/manus-storage/p13_aperitif_69f39d3d.png',    // Aperitif — v5 fixed
-  '/manus-storage/p14_wine_fb15630f.png',        // Wine — v5 fixed
-  '/manus-storage/p15_ice_f4d98307.png',         // Ice cream — v5 fixed
-  '/manus-storage/p16_thanks_fc7d88b0.png',      // Vielen Dank
-  '/manus-storage/p17_back_442dd1e9.png',        // Back cover
+  '/manus-storage/p00_cover_a78b9987.png',           // Cover
+  '/manus-storage/p01_welcome_c8017bc0.png',          // Welcome
+  '/manus-storage/p02_coffee_tea_9da124e7.png',       // Kaffee + Tee
+  '/manus-storage/p03_cold_limo_30ab75b3.png',        // Kaltgetränke + Limonade
+  '/manus-storage/p04_beer_044236d0.png',             // Zapfenbier + Flaschenbier
+  '/manus-storage/p05_cocktails_70f553aa.png',        // Cocktails mit Rezepten
+  '/manus-storage/p06_nonalco_spirits_5f344318.png',  // Alkoholfrei + Alkohol Shots
+  '/manus-storage/p07_longdrinks_whiskey_da9476d5.png',// Long Drinks + Whiskey
+  '/manus-storage/p08_aperitif_wine_eac0c8ff.png',    // Aperitif + Wein & Sekt
+  '/manus-storage/p09_ice_5ecfbba7.png',              // Eis
+  '/manus-storage/p10_thanks_ac9cd9a6.png',           // Vielen Dank
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
