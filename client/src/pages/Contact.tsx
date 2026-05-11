@@ -289,6 +289,16 @@ export default function Contact() {
                       style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                       {t('contact.reservation.desc')}
                     </p>
+                    <a
+                      href="tel:+4917621899372"
+                      className="inline-flex items-center gap-2 mt-3 font-semibold text-sm transition-colors duration-200"
+                      style={{ color: 'rgba(220,80,80,0.9)', fontFamily: "'Source Sans 3', sans-serif" }}
+                      onMouseEnter={e => (e.currentTarget.style.color = 'rgba(255,120,120,1)')}
+                      onMouseLeave={e => (e.currentTarget.style.color = 'rgba(220,80,80,0.9)')}
+                    >
+                      <span>&#128222;</span>
+                      +49 176 21899372
+                    </a>
                   </div>
                 </div>
               </div>

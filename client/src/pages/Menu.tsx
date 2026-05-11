@@ -14,7 +14,7 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useRef, useState, useCallback } from "react";
 
 // ─── PAGE TURN SOUND ─────────────────────────────────────────────────────────
-const PAGE_TURN_SOUND_URL = "/manus-storage/page-turn_26c6ef38.wav";
+const PAGE_TURN_SOUND_URL = "/manus-storage/page-turn-soft_b1c99287.wav";
 let _audioCtx: AudioContext | null = null;
 let _audioBuffer: AudioBuffer | null = null;
 
@@ -562,7 +562,6 @@ export default function Menu() {
   // spread 0 = pages[1]+pages[2], spread 1 = pages[3]+pages[4], etc.
   const [spreadIndex, setSpreadIndex] = useState(0);
   const [flipping, setFlipping] = useState<"forward" | "backward" | null>(null);
-  const [flipAngle, setFlipAngle] = useState(0); // 0 = not flipping
   const flipTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const touchStartX = useRef<number | null>(null);
 
@@ -598,13 +597,8 @@ export default function Menu() {
     // Play sound immediately on user gesture (no delay)
     playPageTurn();
 
-    // Set flipping + reset angle in one batch, then a single rAF to start the transition
+    // Set flipping state — the CSS @keyframe animation starts INSTANTLY on mount
     setFlipping(dir);
-    setFlipAngle(0);
-
-    requestAnimationFrame(() => {
-      setFlipAngle(dir === "forward" ? -180 : 180);
-    });
 
     // Commit new spread after CSS transition ends
     flipTimerRef.current = setTimeout(() => {
@@ -619,7 +613,6 @@ export default function Menu() {
         }
       }
       setFlipping(null);
-      setFlipAngle(0);
     }, FLIP_MS + 30);
   }, [flipping, spreadIndex]);  // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -650,7 +643,7 @@ export default function Menu() {
 
   return (
     <div className="min-h-screen" style={{ background: "#0a0000", paddingTop: 80 }}>
-      {/* Keyframe for hint pulse */}
+      {/* Keyframes */}
       <style>{`
         @keyframes pulse-hint {
           0%, 100% { opacity: 0.85; transform: translateX(-50%) scale(1); }
@@ -659,6 +652,14 @@ export default function Menu() {
         @keyframes book-open-cover {
           0% { transform: rotateY(0deg); }
           100% { transform: rotateY(-180deg); }
+        }
+        @keyframes flip-forward {
+          0%   { transform: rotateY(0deg); }
+          100% { transform: rotateY(-180deg); }
+        }
+        @keyframes flip-backward {
+          0%   { transform: rotateY(0deg); }
+          100% { transform: rotateY(180deg); }
         }
       `}</style>
 
@@ -788,18 +789,18 @@ export default function Menu() {
                 </div>
 
                 {/* ── FLIPPING LEAF (the actual 3D page turn) ── */}
+                {/* Uses CSS @keyframes so animation starts INSTANTLY on mount — no React state delay */}
                 {flipping && (
                   <div style={{
                     position: "absolute",
                     top: 0, bottom: 0,
-                    // Forward: leaf starts on right half, flips left
-                    // Backward: leaf starts on left half, flips right
                     left: flipping === "forward" ? "50%" : 0,
                     right: flipping === "forward" ? 0 : "50%",
                     transformOrigin: flipping === "forward" ? "left center" : "right center",
                     transformStyle: "preserve-3d",
-                    transform: `rotateY(${flipAngle}deg)`,
-                    transition: "transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1)",
+                    animation: flipping === "forward"
+                      ? "flip-forward 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards"
+                      : "flip-backward 0.5s cubic-bezier(0.4, 0.0, 0.2, 1) forwards",
                     zIndex: 20,
                     pointerEvents: "none",
                   }}>

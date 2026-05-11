@@ -127,14 +127,15 @@ export default function Home() {
                 {t('home.hero.cta')}
               </button>
             </Link>
-            <Link href="/kontakt">
+            <a href="tel:+4917621899372">
               <button
                 className="px-8 py-4 border border-white/40 text-white font-medium text-sm tracking-widest uppercase hover:border-red-600 hover:text-red-400 transition-all duration-300"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
               >
                 {t('home.hero.cta2')}
+                <span className="block text-xs text-white/50 mt-0.5 normal-case tracking-normal" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>+49 176 21899372</span>
               </button>
-            </Link>
+            </a>
           </div>
         </div>
         {/* NO scroll indicator — removed as requested */}
