@@ -2,7 +2,7 @@
  * Menu Page — Cafe&Bar Luxor
  * Uses the real dFlip 3D Flipbook library (same as altohligs.de)
  * dFlip uses Three.js WebGL for authentic page-curl animation with sound.
- * Source: image array (10 menu page PNGs)
+ * Single-page mode: one page fills the full width — big readable text, no zoom needed.
  */
 
 import { useEffect, useRef, useState } from 'react';
@@ -23,19 +23,26 @@ declare global {
   }
 }
 
-// v7 hi-res menu — AI cover + 10 pages at 1800x2400px for sharp zoom quality
+// v8 single-page mode — 17 pages, big readable text, no zoom needed
 const MENU_PAGES = [
   '/manus-storage/menu-cover-luxor-v2_ecb75175.png',       // AI Cover (black leather gold)
-  '/manus-storage/p01_welcome_8c73be87.png',
-  '/manus-storage/p02_coffee_tea_b2d2f52a.png',
-  '/manus-storage/p03_cold_limo_c6bc5807.png',
-  '/manus-storage/p04_beer_6874b466.png',
-  '/manus-storage/p05_cocktails_edc06e85.png',
-  '/manus-storage/p06_nonalco_spirits_9d5ba6fe.png',
-  '/manus-storage/p07_longdrinks_whiskey_62dcf7d9.png',
-  '/manus-storage/p08_aperitif_wine_4597843b.png',
-  '/manus-storage/p09_ice_ace92ffc.png',
-  '/manus-storage/p10_thanks_9b578242.png',
+  '/manus-storage/p01_welcome_efde7e19.png',
+  '/manus-storage/p02_kaffee_67a5b6f9.png',
+  '/manus-storage/p03_tee_103d4695.png',
+  '/manus-storage/p04_kalt_56cb366d.png',
+  '/manus-storage/p05_limo_2a2b7ce8.png',
+  '/manus-storage/p06_zapfen_268a5b39.png',
+  '/manus-storage/p07_flasche_6ef357fa.png',
+  '/manus-storage/p08_cocktails1_30f41147.png',
+  '/manus-storage/p09_cocktails2_49a2196e.png',
+  '/manus-storage/p10_alkfrei_6f904122.png',
+  '/manus-storage/p11_shots_602fc877.png',
+  '/manus-storage/p12_longdrinks_c61f25ab.png',
+  '/manus-storage/p13_whiskey_043de7a9.png',
+  '/manus-storage/p14_aperitif_672d6ae6.png',
+  '/manus-storage/p15_wein_d3696d42.png',
+  '/manus-storage/p16_eis_6e71a681.png',
+  '/manus-storage/p17_thanks_d18260fb.png',
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
@@ -79,29 +86,27 @@ function DFlipBook() {
               element: containerRef.current,
               // 3D WebGL mode — the key feature
               is3D: true,
-              // Sound — the exact same sound file as altohligs.de
+              // Sound
               enableSound: true,
               soundFile: SOUND_URL,
-              // Double page mode (real book look)
-              pageMode: 2,
-              singlePageMode: 2,
-              // Zoom: keep 3D animation active even when zoomed
-              zoomRatio: 2,
-              maxZoomRatio: 2,
+              // SINGLE page mode — one page fills full width, big readable text, no zoom needed
+              pageMode: 1,
+              singlePageMode: 1,
+              // No zoom controls needed — text is already big enough
+              showZoomControl: false,
               // Appearance
               backgroundColor: '#0a0000',
-              // Controls at bottom like altohligs.de
+              // Controls at bottom
               controlsPosition: 'bottom',
               showDownloadControl: false,
               showShareControl: false,
               showFullScreenControl: true,
-              showZoomControl: true,
               // Hard cover
               cover3DType: true,
               flipbookHardPages: 'cover',
-              // Height — bigger for readability on all screens
-              height: 820,
-              // Flip speed — smooth and fast (ms)
+              // Auto height — fills available width proportionally
+              height: 'auto',
+              // Flip speed — smooth
               duration: 700,
             });
           } catch (err) {
@@ -140,7 +145,7 @@ function DFlipBook() {
       <div
         ref={containerRef}
         id="luxor-flipbook"
-        style={{ width: '100%', minHeight: '620px' }}
+        style={{ width: '100%', minHeight: '500px' }}
       />
     </div>
   );
@@ -193,7 +198,7 @@ export default function Menu() {
 
       {/* ============ FLIPBOOK ============ */}
       <section className="pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto px-0 sm:px-2 reveal">
+        <div className="w-full px-0 reveal">
           <DFlipBook />
         </div>
       </section>
