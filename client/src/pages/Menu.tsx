@@ -23,21 +23,26 @@ declare global {
   }
 }
 
-// All 13 menu page images v2 — correct full menu, section photos, bigger size
+// All 18 menu page images v3 — bigger fonts, correct order, 2 photos per page, recipes inline
 const MENU_PAGES = [
-  '/manus-storage/page_00_cover_c064b298.png',
-  '/manus-storage/page_01_welcome_7f7c0fff.png',
-  '/manus-storage/page_02_coffee_fe1a03f7.png',
-  '/manus-storage/page_03_beer_d952d1c7.png',
-  '/manus-storage/page_04_cold_ee367241.png',
-  '/manus-storage/page_05_limo_tea_e4210fd7.png',
-  '/manus-storage/page_06_cocktails_cc9c1625.png',
-  '/manus-storage/page_07_spirits_ddb6d1d3.png',
-  '/manus-storage/page_08_wine_3e3def49.png',
-  '/manus-storage/page_09_ice_2cc86332.png',
-  '/manus-storage/page_10_recipes1_4d88bcf0.png',
-  '/manus-storage/page_11_recipes2_62cda7d3.png',
-  '/manus-storage/page_12_back_dce4876f.png',
+  '/manus-storage/p00_cover_15ec0865.png',
+  '/manus-storage/p01_welcome_4ddaf6ef.png',
+  '/manus-storage/p02_coffee_517cc349.png',
+  '/manus-storage/p03_tea_22f74248.png',
+  '/manus-storage/p04_cold_54354f6f.png',
+  '/manus-storage/p05_limo_413c3524.png',
+  '/manus-storage/p06_draft_beer_f9b2da96.png',
+  '/manus-storage/p07_bottle_beer_430f9907.png',
+  '/manus-storage/p08_cocktails_eaed7abf.png',
+  '/manus-storage/p09_nonalco_682a737a.png',
+  '/manus-storage/p10_spirits_3c6c2398.png',
+  '/manus-storage/p11_whiskey_f064c294.png',
+  '/manus-storage/p12_longdrinks_a35928f6.png',
+  '/manus-storage/p13_aperitif_d000465d.png',
+  '/manus-storage/p14_wine_1ff8434b.png',
+  '/manus-storage/p15_ice_933ecd8e.png',
+  '/manus-storage/p16_thanks_8427e7b1.png',
+  '/manus-storage/p17_back_301d6830.png',
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
@@ -98,8 +103,8 @@ function DFlipBook() {
               // Hard cover
               cover3DType: true,
               flipbookHardPages: 'cover',
-              // Height — bigger so text is readable
-              height: 750,
+              // Height — bigger for readability on all screens
+              height: 820,
               // Flip speed — smooth and fast (ms)
               duration: 700,
             });
