@@ -23,19 +23,19 @@ declare global {
   }
 }
 
-// v6 menu — AI cover + 10 clean pages, old design style, no photos, sections paired
+// v7 hi-res menu — AI cover + 10 pages at 1800x2400px for sharp zoom quality
 const MENU_PAGES = [
   '/manus-storage/menu-cover-luxor-v2_ecb75175.png',       // AI Cover (black leather gold)
-  '/manus-storage/p01_welcome_d1a90cb6.png',
-  '/manus-storage/p02_coffee_tea_51d7621a.png',
-  '/manus-storage/p03_cold_limo_5292b429.png',
-  '/manus-storage/p04_beer_fa7e461d.png',
-  '/manus-storage/p05_cocktails_98bcb256.png',
-  '/manus-storage/p06_nonalco_spirits_5a38ec77.png',
-  '/manus-storage/p07_longdrinks_whiskey_033dbaa2.png',
-  '/manus-storage/p08_aperitif_wine_265de709.png',
-  '/manus-storage/p09_ice_b198248a.png',
-  '/manus-storage/p10_thanks_0d6b74fd.png',
+  '/manus-storage/p01_welcome_8c73be87.png',
+  '/manus-storage/p02_coffee_tea_b2d2f52a.png',
+  '/manus-storage/p03_cold_limo_c6bc5807.png',
+  '/manus-storage/p04_beer_6874b466.png',
+  '/manus-storage/p05_cocktails_edc06e85.png',
+  '/manus-storage/p06_nonalco_spirits_9d5ba6fe.png',
+  '/manus-storage/p07_longdrinks_whiskey_62dcf7d9.png',
+  '/manus-storage/p08_aperitif_wine_4597843b.png',
+  '/manus-storage/p09_ice_ace92ffc.png',
+  '/manus-storage/p10_thanks_9b578242.png',
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
@@ -85,6 +85,9 @@ function DFlipBook() {
               // Double page mode (real book look)
               pageMode: 2,
               singlePageMode: 2,
+              // Zoom: keep 3D animation active even when zoomed
+              zoomRatio: 2,
+              maxZoomRatio: 2,
               // Appearance
               backgroundColor: '#0a0000',
               // Controls at bottom like altohligs.de
