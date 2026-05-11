@@ -23,18 +23,21 @@ declare global {
   }
 }
 
-// All 10 menu page images (uploaded to CDN)
+// All 13 menu page images v2 — correct full menu, section photos, bigger size
 const MENU_PAGES = [
-  '/manus-storage/page_00_cover_3f01b27e.png',
-  '/manus-storage/page_01_welcome_f8905258.png',
-  '/manus-storage/page_02_coffee_6358c238.png',
-  '/manus-storage/page_03_beer_8e42e24c.png',
-  '/manus-storage/page_04_cocktails1_62bfb99d.png',
-  '/manus-storage/page_05_cocktails2_5a159f91.png',
-  '/manus-storage/page_06_softdrinks_2e7391c3.png',
-  '/manus-storage/page_07_wine_091bcc54.png',
-  '/manus-storage/page_08_togo_6db4aba3.png',
-  '/manus-storage/page_09_back_f9020a1f.png',
+  '/manus-storage/page_00_cover_c064b298.png',
+  '/manus-storage/page_01_welcome_7f7c0fff.png',
+  '/manus-storage/page_02_coffee_fe1a03f7.png',
+  '/manus-storage/page_03_beer_d952d1c7.png',
+  '/manus-storage/page_04_cold_ee367241.png',
+  '/manus-storage/page_05_limo_tea_e4210fd7.png',
+  '/manus-storage/page_06_cocktails_cc9c1625.png',
+  '/manus-storage/page_07_spirits_ddb6d1d3.png',
+  '/manus-storage/page_08_wine_3e3def49.png',
+  '/manus-storage/page_09_ice_2cc86332.png',
+  '/manus-storage/page_10_recipes1_4d88bcf0.png',
+  '/manus-storage/page_11_recipes2_62cda7d3.png',
+  '/manus-storage/page_12_back_dce4876f.png',
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
@@ -95,8 +98,8 @@ function DFlipBook() {
               // Hard cover
               cover3DType: true,
               flipbookHardPages: 'cover',
-              // Height
-              height: 620,
+              // Height — bigger so text is readable
+              height: 750,
               // Flip speed — smooth and fast (ms)
               duration: 700,
             });
