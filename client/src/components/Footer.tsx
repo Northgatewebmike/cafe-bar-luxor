@@ -119,12 +119,12 @@ export default function Footer() {
           <p className="text-white/25 text-xs" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
             © {year} Cafe&Bar Luxor — Ivan Sarakostov. {t('footer.rights')}
           </p>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap justify-center">
             <Link href="/impressum">
               <span className="text-white/25 text-xs transition-colors cursor-pointer"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(220,80,80,0.8)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>  
                 {t('footer.impressum')}
               </span>
             </Link>
@@ -133,11 +133,35 @@ export default function Footer() {
               <span className="text-white/25 text-xs transition-colors cursor-pointer"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(220,80,80,0.8)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>  
                 {t('footer.datenschutz')}
               </span>
             </Link>
           </div>
+        </div>
+
+        {/* Northgateweb credit */}
+        <div className="pt-4 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.04)', marginTop: 8 }}>
+          <a
+            href="https://www.northgateweb.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 transition-all duration-300 group"
+            style={{ textDecoration: 'none' }}
+          >
+            <span
+              className="text-white/20 text-xs group-hover:text-white/45 transition-colors duration-300"
+              style={{ fontFamily: "'Source Sans 3', sans-serif", letterSpacing: '0.05em' }}
+            >
+              Made by
+            </span>
+            <span
+              className="text-white/30 text-xs font-semibold group-hover:text-red-400/70 transition-colors duration-300"
+              style={{ fontFamily: "'Source Sans 3', sans-serif", letterSpacing: '0.08em' }}
+            >
+              Northgateweb.org
+            </span>
+          </a>
         </div>
       </div>
     </footer>

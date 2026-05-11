@@ -13,6 +13,38 @@
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useEffect, useRef, useState, useCallback } from "react";
 
+// ─── PAGE TURN SOUND ─────────────────────────────────────────────────────────
+const PAGE_TURN_SOUND_URL = "/manus-storage/page-turn_26c6ef38.wav";
+let _audioCtx: AudioContext | null = null;
+let _audioBuffer: AudioBuffer | null = null;
+
+async function preloadPageTurnSound() {
+  try {
+    if (_audioBuffer) return;
+    const Ctx = (window.AudioContext ||
+      (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext);
+    _audioCtx = new Ctx();
+    const res = await fetch(PAGE_TURN_SOUND_URL);
+    const arrayBuf = await res.arrayBuffer();
+    _audioBuffer = await _audioCtx.decodeAudioData(arrayBuf);
+  } catch { /* sound not critical */ }
+}
+
+function playPageTurn() {
+  try {
+    if (!_audioCtx || !_audioBuffer) return;
+    // Resume context if suspended (browser autoplay policy)
+    if (_audioCtx.state === "suspended") _audioCtx.resume();
+    const src = _audioCtx.createBufferSource();
+    src.buffer = _audioBuffer;
+    const gain = _audioCtx.createGain();
+    gain.gain.value = 0.75;
+    src.connect(gain);
+    gain.connect(_audioCtx.destination);
+    src.start(0);
+  } catch { /* silently fail */ }
+}
+
 // ─── CDN URLS ────────────────────────────────────────────────────────────────
 const COVER_URL = "https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/menu-cover-luxor-VY6RCEYWD9EiQRDJoFjiKM.png";
 
@@ -558,26 +590,28 @@ export default function Menu() {
   const canGoForward = isOpen && spreadIndex < totalSpreads - 1 && !flipping;
   const canGoBackward = isOpen && !flipping;
 
+  const FLIP_MS = 500; // matches CSS transition below
+
   const startFlip = useCallback((dir: "forward" | "backward") => {
     if (flipping) return;
+
+    // Play sound immediately on user gesture (no delay)
+    playPageTurn();
+
+    // Set flipping + reset angle in one batch, then a single rAF to start the transition
     setFlipping(dir);
-    // Animate angle from 0 → -180 (forward) or 0 → 180 (backward)
-    // We use CSS transition on the element directly via state
     setFlipAngle(0);
-    // Small delay so initial state renders before transition starts
+
     requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setFlipAngle(dir === "forward" ? -180 : 180);
-      });
+      setFlipAngle(dir === "forward" ? -180 : 180);
     });
 
-    // After animation completes, update spread
+    // Commit new spread after CSS transition ends
     flipTimerRef.current = setTimeout(() => {
       if (dir === "forward") {
         setSpreadIndex(i => i + 1);
       } else {
         if (spreadIndex <= 0) {
-          // Close the book
           setIsOpen(false);
           setSpreadIndex(0);
         } else {
@@ -586,10 +620,12 @@ export default function Menu() {
       }
       setFlipping(null);
       setFlipAngle(0);
-    }, 750);
-  }, [flipping, spreadIndex]);
+    }, FLIP_MS + 30);
+  }, [flipping, spreadIndex]);  // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Preload sound on mount
   useEffect(() => {
+    preloadPageTurnSound();
     return () => {
       if (flipTimerRef.current) clearTimeout(flipTimerRef.current);
     };
@@ -763,7 +799,7 @@ export default function Menu() {
                     transformOrigin: flipping === "forward" ? "left center" : "right center",
                     transformStyle: "preserve-3d",
                     transform: `rotateY(${flipAngle}deg)`,
-                    transition: "transform 0.75s cubic-bezier(0.645, 0.045, 0.355, 1.000)",
+                    transition: "transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1)",
                     zIndex: 20,
                     pointerEvents: "none",
                   }}>
@@ -824,16 +860,44 @@ export default function Menu() {
                 ))}
               </div>
 
-              {/* Close button */}
-              <div style={{ textAlign: "center", marginTop: 12 }}>
+              {/* Mobile nav buttons */}
+              <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 12, marginTop: 14 }}>
+                <button
+                  onClick={() => canGoBackward && startFlip("backward")}
+                  disabled={!canGoBackward}
+                  style={{
+                    fontFamily: fontSans, fontSize: "0.65rem", color: canGoBackward ? "rgba(220,80,80,0.9)" : "rgba(255,255,255,0.2)",
+                    background: canGoBackward ? "rgba(139,26,26,0.15)" : "rgba(255,255,255,0.04)",
+                    border: `1px solid ${canGoBackward ? "rgba(139,26,26,0.4)" : "rgba(255,255,255,0.08)"}`,
+                    cursor: canGoBackward ? "pointer" : "not-allowed",
+                    padding: "6px 16px", letterSpacing: "0.06em", borderRadius: 2,
+                    transition: "all 0.2s",
+                  }}
+                >
+                  ‹ {lang === "de" ? "Zurück" : "Back"}
+                </button>
                 <button
                   onClick={() => { setIsOpen(false); setSpreadIndex(0); setFlipping(null); }}
                   style={{
                     fontFamily: fontSans, fontSize: "0.6rem", color: "rgba(255,255,255,0.35)",
-                    background: "none", border: "none", cursor: "pointer", letterSpacing: "0.1em", padding: "4px 8px",
+                    background: "none", border: "none", cursor: "pointer", letterSpacing: "0.1em", padding: "6px 8px",
                   }}
                 >
-                  ✕ {lang === "de" ? "Karte schließen" : "Close menu"}
+                  ✕ {lang === "de" ? "Schließen" : "Close"}
+                </button>
+                <button
+                  onClick={() => canGoForward && startFlip("forward")}
+                  disabled={!canGoForward}
+                  style={{
+                    fontFamily: fontSans, fontSize: "0.65rem", color: canGoForward ? "rgba(220,80,80,0.9)" : "rgba(255,255,255,0.2)",
+                    background: canGoForward ? "rgba(139,26,26,0.15)" : "rgba(255,255,255,0.04)",
+                    border: `1px solid ${canGoForward ? "rgba(139,26,26,0.4)" : "rgba(255,255,255,0.08)"}`,
+                    cursor: canGoForward ? "pointer" : "not-allowed",
+                    padding: "6px 16px", letterSpacing: "0.06em", borderRadius: 2,
+                    transition: "all 0.2s",
+                  }}
+                >
+                  {lang === "de" ? "Weiter" : "Next"} ›
                 </button>
               </div>
             </div>
