@@ -29,10 +29,9 @@ const MENU_PAGES = [
   '/manus-storage/p01_welcome_4f08091a.png',                            // Welcome + Öffnungszeiten (Mo-Do+So 09-21, Fr-Sa 09-23)
   '/manus-storage/p02_kaffee_tee_aa1e6a36.png',                         // Kaffee + Tee
   '/manus-storage/p03_kalt_8faf681a.png',                               // Kaltgetränke
-  '/manus-storage/p04_limo_234c3a0c.png',                               // Hausgemachte Limonade
+  '/manus-storage/p04_limo_cd8587be.png',                               // Hausgemachte Limonade — 5 Sorten, 0,5l 4,20€
   '/manus-storage/p05_bier_f10b393e.png',                               // Früh Kölsch + Flaschenbier
-  '/manus-storage/p06_cocktails1_374e29b6.png',                         // Cocktails (1) — ingredients only
-  '/manus-storage/p07_cocktails2_76afe3bd.png',                         // Cocktails (2) + Alkoholfrei
+  '/manus-storage/p06_cocktails1_b8a811a7.png',                         // Cocktails (alkoholisch + alkoholfrei) — 1 Seite
   '/manus-storage/p08_shots_f79d743e.png',                              // Jägermeister + Pfirsichlikör fixed
   '/manus-storage/p09_longdrinks_whiskey_aperitif_aecd3f7b.png',        // Long Drinks + Whiskey + Aperitif
   '/manus-storage/p10_wein_eis_34be8fcc.png',                           // Wein & Sekt + Eis
