@@ -32,6 +32,9 @@
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 
+    <!-- dFlip 3D Flipbook CSS -->
+    <link rel="stylesheet" href="/manus-storage/dflip.min_f418d53d.css" />
+
     <!-- Google Fonts: Cormorant Garamond (display) + Source Sans 3 (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -80,6 +83,14 @@
 
   <body>
     <div id="root"></div>
+    <!-- jQuery (required by dFlip) -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <!-- Three.js (required by dFlip for WebGL 3D) -->
+    <script src="/manus-storage/three.min_98c01b76.js"></script>
+    <!-- PDF.js (required by dFlip for PDF mode) -->
+    <script src="/manus-storage/pdf.min_b18585e0.js"></script>
+    <!-- dFlip main library -->
+    <script src="/manus-storage/dflip.min_33fd7677.js"></script>
     <script type="module" src="/src/main.tsx"></script>
     <script
       defer
