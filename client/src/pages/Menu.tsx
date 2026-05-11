@@ -23,19 +23,19 @@ declare global {
   }
 }
 
-// Clean menu — 11 pages, no photos, sections paired, bigger fonts
+// v6 menu — AI cover + 10 clean pages, old design style, no photos, sections paired
 const MENU_PAGES = [
-  '/manus-storage/p00_cover_a78b9987.png',           // Cover
-  '/manus-storage/p01_welcome_c8017bc0.png',          // Welcome
-  '/manus-storage/p02_coffee_tea_9da124e7.png',       // Kaffee + Tee
-  '/manus-storage/p03_cold_limo_30ab75b3.png',        // Kaltgetränke + Limonade
-  '/manus-storage/p04_beer_044236d0.png',             // Zapfenbier + Flaschenbier
-  '/manus-storage/p05_cocktails_70f553aa.png',        // Cocktails mit Rezepten
-  '/manus-storage/p06_nonalco_spirits_5f344318.png',  // Alkoholfrei + Alkohol Shots
-  '/manus-storage/p07_longdrinks_whiskey_da9476d5.png',// Long Drinks + Whiskey
-  '/manus-storage/p08_aperitif_wine_eac0c8ff.png',    // Aperitif + Wein & Sekt
-  '/manus-storage/p09_ice_5ecfbba7.png',              // Eis
-  '/manus-storage/p10_thanks_ac9cd9a6.png',           // Vielen Dank
+  '/manus-storage/menu-cover-luxor-v2_ecb75175.png',       // AI Cover (black leather gold)
+  '/manus-storage/p01_welcome_ca7e0623.png',               // Welcome
+  '/manus-storage/p02_coffee_tea_0eb52a10.png',            // Kaffee + Tee
+  '/manus-storage/p03_cold_limo_3672f9e2.png',             // Kaltgetränke + Limonade
+  '/manus-storage/p04_beer_a91f3874.png',                  // Zapfenbier + Flaschenbier
+  '/manus-storage/p05_cocktails_fa3d32c2.png',             // Cocktails mit Rezepten
+  '/manus-storage/p06_nonalco_spirits_5f4bfa5e.png',       // Alkoholfrei + Alkohol Shots
+  '/manus-storage/p07_longdrinks_whiskey_b4f61ff4.png',    // Long Drinks + Whiskey
+  '/manus-storage/p08_aperitif_wine_c2d57682.png',         // Aperitif + Wein & Sekt
+  '/manus-storage/p09_ice_19cb7ff5.png',                   // Eis
+  '/manus-storage/p10_thanks_bd8c1edb.png',                // Vielen Dank
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
