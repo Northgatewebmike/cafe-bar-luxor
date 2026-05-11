@@ -23,26 +23,20 @@ declare global {
   }
 }
 
-// v8 single-page mode — 17 pages, big readable text, no zoom needed
+// v9 full-page mode — 12 pages, every page fills full height, no empty space
 const MENU_PAGES = [
   '/manus-storage/menu-cover-luxor-v2_ecb75175.png',       // AI Cover (black leather gold)
-  '/manus-storage/p01_welcome_efde7e19.png',
-  '/manus-storage/p02_kaffee_67a5b6f9.png',
-  '/manus-storage/p03_tee_103d4695.png',
-  '/manus-storage/p04_kalt_56cb366d.png',
-  '/manus-storage/p05_limo_2a2b7ce8.png',
-  '/manus-storage/p06_zapfen_268a5b39.png',
-  '/manus-storage/p07_flasche_6ef357fa.png',
-  '/manus-storage/p08_cocktails1_2ef031f0.png',
-  '/manus-storage/p09_cocktails2_ace82fa0.png',
-  '/manus-storage/p10_alkfrei_a68ccd49.png',
-  '/manus-storage/p11_shots_602fc877.png',
-  '/manus-storage/p12_longdrinks_c61f25ab.png',
-  '/manus-storage/p13_whiskey_043de7a9.png',
-  '/manus-storage/p14_aperitif_672d6ae6.png',
-  '/manus-storage/p15_wein_d3696d42.png',
-  '/manus-storage/p16_eis_6e71a681.png',
-  '/manus-storage/p17_thanks_d18260fb.png',
+  '/manus-storage/p01_welcome_29cc0727.png',               // Welcome + Öffnungszeiten
+  '/manus-storage/p02_kaffee_tee_b37da977.png',            // Kaffee + Tee
+  '/manus-storage/p03_kalt_ece325af.png',                  // Kaltgetränke
+  '/manus-storage/p04_limo_8ce245e6.png',                  // Hausgemachte Limonade
+  '/manus-storage/p05_bier_f24c777f.png',                  // Zapfenbier + Flaschenbier
+  '/manus-storage/p06_cocktails1_4e79f85f.png',            // Cocktails (1)
+  '/manus-storage/p07_cocktails2_47cf3cd9.png',            // Cocktails (2) + Alkoholfrei
+  '/manus-storage/p08_shots_5736e2d8.png',                 // Shots
+  '/manus-storage/p09_longdrinks_whiskey_aperitif_2e8aba36.png', // Long Drinks + Whiskey + Aperitif
+  '/manus-storage/p10_wein_eis_f939c2f6.png',              // Wein & Sekt + Eis
+  '/manus-storage/p11_thanks_89edf9e1.png',                // Vielen Dank
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
