@@ -98,11 +98,7 @@ export default function Impressum() {
               <div className="text-white/70 text-sm space-y-1 leading-relaxed">
                 <p>
                   <span className="text-white/50">{t('impressum.steuer')}:</span>{' '}
-                  <span className="text-white/40 italic">{t('impressum.incoming')}</span>
-                </p>
-                <p>
-                  <span className="text-white/50">{t('impressum.ust')}:</span>{' '}
-                  <span className="text-white/40 italic">{t('impressum.incoming')}</span>
+                  <span className="text-white">128/5528/5468</span>
                 </p>
               </div>
             </div>
