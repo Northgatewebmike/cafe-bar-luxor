@@ -228,22 +228,38 @@ export default function About() {
             {/* Beer Card */}
             <div className="reveal-right relative overflow-hidden group" style={{ border: '1px solid rgba(180,0,0,0.2)' }}>
               <div
-                className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-40 transition-opacity duration-700"
-                style={{ backgroundImage: `url(https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&q=80)` }}
+                className="absolute inset-0 bg-cover bg-center opacity-35 group-hover:opacity-45 transition-opacity duration-700"
+                style={{ backgroundImage: `url(/manus-storage/menu-bg-veltins_56de1f1c.jpg)` }}
               />
-              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,0,0,0.92) 0%, rgba(10,0,0,0.75) 100%)' }} />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,0,0,0.90) 0%, rgba(10,0,0,0.72) 100%)' }} />
               <div className="relative p-8 md:p-10">
                 <div className="text-5xl mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", color: 'rgba(180,0,0,0.8)' }}>🍺</div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                  Frisch Gezapftes Bier
+                  Frisch Gezapftes Bier vom Fass
                 </h3>
                 <div className="h-px w-12 bg-red-700 mb-4" />
-                <p className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                  Eiskaltes, frisch gezapftes Veltins und Früh Kölsch — direkt vom Fass, mit perfekter Schaumkrone. Einzigartig im Geschmack, unvergleichlich im Erlebnis. Das Beste aus der Zapfanlage, für Sie.
+                <p className="text-white/70 text-sm leading-relaxed mb-5" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  Unser Bier kommt direkt vom Fass — frisch gezapft, eiskalt und mit der perfekten Schaumkrone. Veltins und Früh Kölsch, zwei der beliebtesten deutschen Biere, stehen bei uns immer frisch an der Zapfanlage bereit. Jeder Schluck ist ein Erlebnis: das unverwechselbare Aroma, die natürliche Frische und der unvergleichliche Geschmack eines echten Fassbiers. Besonders im Sommer — aber auch in jeder anderen Jahreszeit — gibt es nichts Erfrischenderes als ein eiskaltes Bier vom Fass. Und das Beste: Wir bieten das günstigste Fassbier im Umkreis von Solingen, Remscheid und Wuppertal.
                 </p>
-                <p className="text-white/40 text-xs mt-3 italic" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                  Ice-cold, freshly tapped Veltins and Früh Kölsch — straight from the tap, with a perfect head.
-                </p>
+                {/* Sizes & prices */}
+                <div className="grid grid-cols-3 gap-2 mb-4">
+                  {[
+                    { size: '0,2 l', price: '€2,00' },
+                    { size: '0,3 l', price: '€2,70' },
+                    { size: '0,4 l', price: '€3,60' },
+                    { size: '0,5 l', price: '€4,50' },
+                  ].map((s, i) => (
+                    <div key={i} className="text-center py-2 px-1" style={{ background: 'rgba(180,0,0,0.1)', border: '1px solid rgba(180,0,0,0.25)' }}>
+                      <div className="text-white text-sm font-bold" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>{s.size}</div>
+                      <div className="text-red-400 text-xs font-semibold">{s.price}</div>
+                    </div>
+                  ))}
+                </div>
+                <div className="flex items-center gap-2 mt-2">
+                  <div className="h-px flex-1 bg-red-700/20" />
+                  <span className="text-red-400/80 text-xs tracking-wide" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>🏆 Günstigstes Bier · Solingen · Remscheid · Wuppertal</span>
+                  <div className="h-px flex-1 bg-red-700/20" />
+                </div>
               </div>
             </div>
 

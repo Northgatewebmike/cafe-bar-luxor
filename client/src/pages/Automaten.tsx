@@ -3,13 +3,17 @@
  * Cigarette machine + 2 slot machines
  * Design: Red & Black premium
  */
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Cigarette, Dices, AlertTriangle, Phone } from 'lucide-react';
 
-const HERO_BG = '/manus-storage/real-photo-7_1a05954b.jpg';   // Slot machines - real photo
-const CIGS_PHOTO = '/manus-storage/real-photo-6_c606c2b5.jpg'; // Cigarette machine - real photo
-const SLOTS_PHOTO = '/manus-storage/real-photo-7_1a05954b.jpg'; // Slot machines - real photo
+const HERO_BG = '/manus-storage/real-photo-7_0555fc42.jpg';   // Slot machines - real photo
+const CIGS_PHOTOS = [
+  '/manus-storage/cigarette-machine_e20343bd.jpg',    // Front view
+  '/manus-storage/cigarette-selection_0bce1145.jpg',  // Selection panel
+  '/manus-storage/cigarette-side_ff22e91c.jpg',       // Side / contactless payment
+];
+const SLOTS_PHOTO = '/manus-storage/real-photo-7_0555fc42.jpg'; // Slot machines - real photo
 
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -40,6 +44,92 @@ function RevealCard({ children, delay = 0 }: { children: React.ReactNode; delay?
       style={{ transitionDelay: `${delay}ms` }}
     >
       {children}
+    </div>
+  );
+}
+
+// ─── CIGARETTE MACHINE GALLERY ──────────────────────────────────────────────
+function CigsGallery() {
+  const [active, setActive] = useState(0);
+  const [lightbox, setLightbox] = useState<number | null>(null);
+
+  return (
+    <div className="mb-6">
+      {/* Main image */}
+      <div
+        className="relative overflow-hidden mb-2 cursor-zoom-in"
+        style={{ borderRadius: '4px', border: '1px solid rgba(180,0,0,0.3)', aspectRatio: '4/3' }}
+        onClick={() => setLightbox(active)}
+      >
+        {CIGS_PHOTOS.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt={`Zigarettenautomat ${i + 1}`}
+            className="absolute inset-0 w-full h-full object-cover object-center transition-opacity duration-500"
+            style={{ opacity: i === active ? 1 : 0, filter: 'brightness(0.9)' }}
+          />
+        ))}
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(10,0,0,0.45) 0%, transparent 60%)' }} />
+        {/* Zoom hint */}
+        <div className="absolute top-2 right-2 bg-black/50 text-white/70 text-xs px-2 py-1 rounded-sm pointer-events-none" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+          🔍 Klicken zum Vergrößern
+        </div>
+      </div>
+      {/* Thumbnails */}
+      <div className="flex gap-2">
+        {CIGS_PHOTOS.map((src, i) => (
+          <button
+            key={i}
+            onClick={() => setActive(i)}
+            className="flex-1 overflow-hidden transition-all duration-200"
+            style={{
+              borderRadius: '3px',
+              border: i === active ? '2px solid rgba(180,0,0,0.8)' : '2px solid rgba(180,0,0,0.2)',
+              aspectRatio: '4/3',
+              padding: 0,
+              background: 'none',
+              cursor: 'pointer',
+            }}
+          >
+            <img src={src} alt={`Thumbnail ${i + 1}`} className="w-full h-full object-cover" style={{ filter: i === active ? 'brightness(1)' : 'brightness(0.6)' }} />
+          </button>
+        ))}
+      </div>
+      {/* Lightbox */}
+      {lightbox !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center"
+          style={{ background: 'rgba(0,0,0,0.92)' }}
+          onClick={() => setLightbox(null)}
+        >
+          <div className="relative max-w-3xl w-full mx-4" onClick={e => e.stopPropagation()}>
+            <img
+              src={CIGS_PHOTOS[lightbox]}
+              alt="Zigarettenautomat"
+              className="w-full rounded-sm"
+              style={{ maxHeight: '80vh', objectFit: 'contain' }}
+            />
+            {/* Prev/Next */}
+            {lightbox > 0 && (
+              <button onClick={() => setLightbox(l => (l !== null ? l - 1 : l))}
+                className="absolute left-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/60 text-white text-xl rounded-full hover:bg-red-700/60 transition-colors">
+                ‹
+              </button>
+            )}
+            {lightbox < CIGS_PHOTOS.length - 1 && (
+              <button onClick={() => setLightbox(l => (l !== null ? l + 1 : l))}
+                className="absolute right-2 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-black/60 text-white text-xl rounded-full hover:bg-red-700/60 transition-colors">
+                ›
+              </button>
+            )}
+            <button onClick={() => setLightbox(null)}
+              className="absolute top-2 right-2 w-8 h-8 flex items-center justify-center bg-black/60 text-white/80 rounded-full hover:bg-red-700/60 transition-colors text-sm">
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
@@ -143,16 +233,8 @@ export default function Automaten() {
                   {t('automaten.cigarette.desc')}
                 </p>
 
-                {/* Real cigarette machine photo */}
-                <div className="relative mb-6 overflow-hidden" style={{ borderRadius: '4px', border: '1px solid rgba(180,0,0,0.3)' }}>
-                  <img
-                    src={CIGS_PHOTO}
-                    alt="Zigarettenautomat"
-                    className="w-full h-48 object-cover object-center"
-                    style={{ filter: 'brightness(0.9)' }}
-                  />
-                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,0,0,0.5) 0%, transparent 60%)' }} />
-                </div>
+                {/* Cigarette machine gallery — 3 photos */}
+                <CigsGallery />
 
                 {/* Age warning */}
                 <div
