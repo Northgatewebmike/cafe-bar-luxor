@@ -106,8 +106,8 @@ export default function Footer() {
               <div className="flex items-start gap-3">
                 <Clock size={15} className="mt-0.5 flex-shrink-0" style={{ color: 'rgba(180,0,0,0.7)' }} />
                 <div className="text-white/40 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                  {lang === 'de' ? 'Mo–Sa' : 'Mon–Sat'}: 09:00–21:00<br />
-                  {lang === 'de' ? 'So' : 'Sun'}: 10:00–20:00
+                  {lang === 'de' ? 'Mo–Sa' : 'Mon–Sat'}: 09:00–23:00<br />
+                  {lang === 'de' ? 'So' : 'Sun'}: 10:00–22:00
                 </div>
               </div>
             </div>

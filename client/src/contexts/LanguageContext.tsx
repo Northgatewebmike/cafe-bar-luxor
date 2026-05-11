@@ -204,8 +204,8 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.nav.title': 'Navigation',
     'footer.contact.title': 'Kontakt',
     'footer.hours.title': 'Öffnungszeiten',
-    'footer.hours.weekday': 'Mo–Sa: 09:00–21:00 Uhr',
-    'footer.hours.sunday': 'So: 10:00–20:00 Uhr',
+    'footer.hours.weekday': 'Mo–Sa: 09:00–23:00 Uhr',
+    'footer.hours.sunday': 'So: 10:00–22:00 Uhr',
 
     // Common
     'common.back': 'Zurück',
@@ -407,8 +407,8 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.nav.title': 'Navigation',
     'footer.contact.title': 'Contact',
     'footer.hours.title': 'Opening Hours',
-    'footer.hours.weekday': 'Mon–Sat: 09:00–21:00',
-    'footer.hours.sunday': 'Sun: 10:00–20:00',
+    'footer.hours.weekday': 'Mon–Sat: 09:00–23:00',
+    'footer.hours.sunday': 'Sun: 10:00–22:00',
 
     // Common
     'common.back': 'Back',

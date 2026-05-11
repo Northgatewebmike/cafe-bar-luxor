@@ -33,11 +33,11 @@ function isCurrentlyOpen(): boolean {
   const time = hours * 60 + minutes;
 
   if (day === 0) {
-    // Sunday: 10:00–20:00
-    return time >= 600 && time < 1200;
+    // Sunday: 10:00–22:00
+    return time >= 600 && time < 1320;
   } else if (day >= 1 && day <= 6) {
-    // Mon–Sat: 09:00–21:00
-    return time >= 540 && time < 1260;
+    // Mon–Sat: 09:00–23:00
+    return time >= 540 && time < 1380;
   }
   return false;
 }
@@ -50,13 +50,13 @@ export default function Hours() {
   useReveal();
 
   const schedule = [
-    { key: 'hours.monday', day: 1, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.tuesday', day: 2, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.wednesday', day: 3, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.thursday', day: 4, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.friday', day: 5, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.saturday', day: 6, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.sunday', day: 0, open: '10:00', close: '20:00', isOpen: true },
+    { key: 'hours.monday', day: 1, open: '09:00', close: '23:00', isOpen: true },
+    { key: 'hours.tuesday', day: 2, open: '09:00', close: '23:00', isOpen: true },
+    { key: 'hours.wednesday', day: 3, open: '09:00', close: '23:00', isOpen: true },
+    { key: 'hours.thursday', day: 4, open: '09:00', close: '23:00', isOpen: true },
+    { key: 'hours.friday', day: 5, open: '09:00', close: '23:00', isOpen: true },
+    { key: 'hours.saturday', day: 6, open: '09:00', close: '23:00', isOpen: true },
+    { key: 'hours.sunday', day: 0, open: '10:00', close: '22:00', isOpen: true },
   ];
 
   return (

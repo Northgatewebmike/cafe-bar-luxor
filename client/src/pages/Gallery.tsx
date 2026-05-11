@@ -11,6 +11,10 @@ const PHOTO_INTERIOR = '/manus-storage/real-photo-1_8c74bd6b.jpg';   // Interior
 const PHOTO_TERRACE_DAY = '/manus-storage/real-photo-2_e4b6d6ba.jpg'; // Terrace daytime
 const PHOTO_TERRACE_SUNSET = '/manus-storage/real-photo-3_90e7752e.jpg'; // Terrace golden hour
 const PHOTO_EVENING = '/manus-storage/real-photo-8_da6a67e8.jpg';     // Evening with guests
+// New terrace photos (May 2026)
+const PHOTO_TERRACE_NEW1 = '/manus-storage/1000011501_26ad3baf.jpg';  // Terrace wide view with Luxor sign
+const PHOTO_TERRACE_NEW2 = '/manus-storage/1000011502_96f266a9.jpg';  // Terrace panorama morning
+const PHOTO_TERRACE_NEW3 = '/manus-storage/1000011503_f266baf2.jpg';  // Terrace close-up tables
 
 function useReveal() {
   useEffect(() => {
@@ -38,6 +42,9 @@ export default function Gallery() {
     { src: PHOTO_INTERIOR, label: t('gallery.img1'), aspect: 'portrait' },
     { src: PHOTO_TERRACE_SUNSET, label: t('gallery.img2'), aspect: 'landscape' },
     { src: PHOTO_TERRACE_DAY, label: t('gallery.img3'), aspect: 'landscape' },
+    { src: PHOTO_TERRACE_NEW1, label: 'Cafe & Bar Luxor — Terrasse', aspect: 'landscape' },
+    { src: PHOTO_TERRACE_NEW2, label: 'Terrasse — Panorama', aspect: 'landscape' },
+    { src: PHOTO_TERRACE_NEW3, label: 'Terrasse — Tische', aspect: 'landscape' },
   ];
 
   const openLightbox = (index: number) => {
