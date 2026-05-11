@@ -26,10 +26,10 @@ function useReveal() {
   }, []);
 }
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
-const ABOUT_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/about-bg-2vMEk2NZGSdNcMaLn7t4Mh.webp';
-const COCKTAIL_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/gallery-2-gyAU8VZZPmDtsvTHnEbb8j.webp';
-const COFFEE_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/gallery-1-T4DBiubgsWCM4UCyaH7Sqw.webp';
+const HERO_BG = '/manus-storage/real-photo-8_da6a67e8.jpg';
+const ABOUT_BG = '/manus-storage/real-photo-3_90e7752e.jpg';
+const COCKTAIL_IMG = '/manus-storage/real-photo-2_e4b6d6ba.jpg';
+const COFFEE_IMG = '/manus-storage/real-photo-1_8c74bd6b.jpg';
 
 export default function Home() {
   const { t } = useLanguage();

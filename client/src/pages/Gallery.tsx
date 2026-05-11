@@ -6,10 +6,14 @@ import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
-const ABOUT_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/about-bg-2vMEk2NZGSdNcMaLn7t4Mh.webp';
-const COFFEE_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/gallery-1-T4DBiubgsWCM4UCyaH7Sqw.webp';
-const COCKTAIL_IMG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/gallery-2-gyAU8VZZPmDtsvTHnEbb8j.webp';
+// Real photos from Cafe&Bar Luxor
+const PHOTO_INTERIOR = '/manus-storage/real-photo-1_8c74bd6b.jpg';   // Interior blue neon bar
+const PHOTO_TERRACE_DAY = '/manus-storage/real-photo-2_e4b6d6ba.jpg'; // Terrace daytime
+const PHOTO_TERRACE_SUNSET = '/manus-storage/real-photo-3_90e7752e.jpg'; // Terrace golden hour
+const PHOTO_CIGS_FRONT = '/manus-storage/real-photo-4_5b2d2d1a.jpg';  // Cigarette machine
+const PHOTO_CIGS_SIDE = '/manus-storage/real-photo-5_9df15a1c.jpg';   // Cigarette machine side
+const PHOTO_SLOTS = '/manus-storage/real-photo-7_1a05954b.jpg';       // Slot machines
+const PHOTO_EVENING = '/manus-storage/real-photo-8_da6a67e8.jpg';     // Evening with guests
 
 function useReveal() {
   useEffect(() => {
@@ -34,14 +38,13 @@ export default function Gallery() {
   useReveal();
 
   const galleryImages = [
-    { src: HERO_BG, label: t('gallery.img1'), aspect: 'landscape' },
-    { src: COCKTAIL_IMG, label: t('gallery.img2'), aspect: 'square' },
-    { src: COFFEE_IMG, label: t('gallery.img3'), aspect: 'square' },
-    { src: ABOUT_BG, label: t('gallery.img4'), aspect: 'landscape' },
-    { src: HERO_BG, label: t('gallery.img5'), aspect: 'landscape' },
-    { src: COCKTAIL_IMG, label: t('gallery.img6'), aspect: 'square' },
-    { src: COFFEE_IMG, label: t('gallery.img1'), aspect: 'square' },
-    { src: ABOUT_BG, label: t('gallery.img2'), aspect: 'landscape' },
+    { src: PHOTO_INTERIOR, label: t('gallery.img1'), aspect: 'portrait' },
+    { src: PHOTO_TERRACE_SUNSET, label: t('gallery.img2'), aspect: 'landscape' },
+    { src: PHOTO_TERRACE_DAY, label: t('gallery.img3'), aspect: 'landscape' },
+    { src: PHOTO_EVENING, label: t('gallery.img4'), aspect: 'portrait' },
+    { src: PHOTO_CIGS_FRONT, label: t('gallery.img5'), aspect: 'portrait' },
+    { src: PHOTO_CIGS_SIDE, label: t('gallery.img6'), aspect: 'portrait' },
+    { src: PHOTO_SLOTS, label: t('gallery.img1'), aspect: 'landscape' },
   ];
 
   const openLightbox = (index: number) => {
@@ -93,7 +96,7 @@ export default function Gallery() {
       <section className="relative h-48 md:h-64 flex items-end overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${HERO_BG})` }}
+          style={{ backgroundImage: `url(${PHOTO_TERRACE_SUNSET})` }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/60 to-[#0a0603]/30" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 w-full">

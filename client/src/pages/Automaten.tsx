@@ -7,7 +7,9 @@ import { useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Cigarette, Dices, AlertTriangle, Phone } from 'lucide-react';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
+const HERO_BG = '/manus-storage/real-photo-7_1a05954b.jpg';   // Slot machines - real photo
+const CIGS_PHOTO = '/manus-storage/real-photo-6_c606c2b5.jpg'; // Cigarette machine - real photo
+const SLOTS_PHOTO = '/manus-storage/real-photo-7_1a05954b.jpg'; // Slot machines - real photo
 
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);
@@ -141,47 +143,15 @@ export default function Automaten() {
                   {t('automaten.cigarette.desc')}
                 </p>
 
-                {/* Visual: cigarette machine illustration */}
-                <div
-                  className="relative mx-auto mb-6 overflow-hidden"
-                  style={{
-                    width: '140px',
-                    height: '200px',
-                    background: 'linear-gradient(180deg, #1a0000 0%, #0f0000 100%)',
-                    border: '2px solid rgba(180,0,0,0.3)',
-                    boxShadow: 'inset 0 0 20px rgba(0,0,0,0.5)',
-                  }}
-                >
-                  {/* Machine screen */}
-                  <div
-                    className="mx-3 mt-3 mb-2"
-                    style={{
-                      height: '60px',
-                      background: 'rgba(0,0,0,0.6)',
-                      border: '1px solid rgba(180,0,0,0.2)',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                    }}
-                  >
-                    <span className="text-red-500/70 text-xs font-mono">LUXOR</span>
-                  </div>
-                  {/* Slots */}
-                  {[0, 1, 2, 3].map(i => (
-                    <div
-                      key={i}
-                      className="mx-3 mb-1.5 flex items-center gap-1"
-                      style={{ height: '18px' }}
-                    >
-                      <div style={{ width: '60px', height: '12px', background: 'rgba(180,0,0,0.15)', border: '1px solid rgba(180,0,0,0.2)' }} />
-                      <div style={{ width: '30px', height: '12px', background: 'rgba(180,0,0,0.1)', border: '1px solid rgba(180,0,0,0.15)' }} />
-                    </div>
-                  ))}
-                  {/* Coin slot */}
-                  <div
-                    className="absolute bottom-4 left-1/2 -translate-x-1/2"
-                    style={{ width: '30px', height: '6px', background: 'rgba(0,0,0,0.8)', border: '1px solid rgba(180,0,0,0.3)', borderRadius: '2px' }}
+                {/* Real cigarette machine photo */}
+                <div className="relative mb-6 overflow-hidden" style={{ borderRadius: '4px', border: '1px solid rgba(180,0,0,0.3)' }}>
+                  <img
+                    src={CIGS_PHOTO}
+                    alt="Zigarettenautomat"
+                    className="w-full h-48 object-cover object-center"
+                    style={{ filter: 'brightness(0.9)' }}
                   />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,0,0,0.5) 0%, transparent 60%)' }} />
                 </div>
 
                 {/* Age warning */}
@@ -241,62 +211,15 @@ export default function Automaten() {
                   {t('automaten.spielautomat.desc')}
                 </p>
 
-                {/* Two slot machine visuals */}
-                <div className="flex gap-4 justify-center mb-6">
-                  {[1, 2].map(num => (
-                    <div
-                      key={num}
-                      className="relative overflow-hidden"
-                      style={{
-                        width: '100px',
-                        height: '160px',
-                        background: 'linear-gradient(180deg, #1a0000 0%, #0f0000 100%)',
-                        border: '2px solid rgba(180,0,0,0.35)',
-                        boxShadow: 'inset 0 0 15px rgba(0,0,0,0.5)',
-                      }}
-                    >
-                      {/* Screen with reels */}
-                      <div
-                        className="mx-2 mt-2 mb-2 flex gap-1 items-center justify-center"
-                        style={{
-                          height: '70px',
-                          background: 'rgba(0,0,0,0.7)',
-                          border: '1px solid rgba(180,0,0,0.25)',
-                        }}
-                      >
-                        {['7', '♦', '7'].map((sym, i) => (
-                          <div
-                            key={i}
-                            className="flex items-center justify-center text-red-500 font-bold"
-                            style={{
-                              width: '22px',
-                              height: '50px',
-                              background: 'rgba(180,0,0,0.1)',
-                              border: '1px solid rgba(180,0,0,0.2)',
-                              fontSize: '14px',
-                            }}
-                          >
-                            {sym}
-                          </div>
-                        ))}
-                      </div>
-                      {/* Label */}
-                      <div className="text-center">
-                        <span className="text-red-500/50 text-xs font-mono">#{num}</span>
-                      </div>
-                      {/* Button */}
-                      <div
-                        className="absolute bottom-3 left-1/2 -translate-x-1/2"
-                        style={{
-                          width: '40px',
-                          height: '14px',
-                          background: 'rgba(180,0,0,0.3)',
-                          border: '1px solid rgba(180,0,0,0.5)',
-                          borderRadius: '2px',
-                        }}
-                      />
-                    </div>
-                  ))}
+                {/* Real slot machines photo */}
+                <div className="relative mb-6 overflow-hidden" style={{ borderRadius: '4px', border: '1px solid rgba(180,0,0,0.3)' }}>
+                  <img
+                    src={SLOTS_PHOTO}
+                    alt="Spielautomaten"
+                    className="w-full h-48 object-cover object-center"
+                    style={{ filter: 'brightness(0.9)' }}
+                  />
+                  <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(10,0,0,0.5) 0%, transparent 60%)' }} />
                 </div>
 
                 {/* Warning */}

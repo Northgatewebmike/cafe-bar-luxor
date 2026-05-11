@@ -6,8 +6,9 @@ import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Wifi, Calendar, CreditCard, Dog, Accessibility, Tv } from 'lucide-react';
 
-const ABOUT_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/about-bg-2vMEk2NZGSdNcMaLn7t4Mh.webp';
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
+const ABOUT_BG = '/manus-storage/real-photo-3_90e7752e.jpg';  // Terrace golden hour
+const HERO_BG = '/manus-storage/real-photo-2_e4b6d6ba.jpg';   // Terrace daytime
+const INTERIOR_BG = '/manus-storage/real-photo-1_8c74bd6b.jpg'; // Interior blue neon
 
 function useReveal() {
   useEffect(() => {
@@ -62,9 +63,9 @@ export default function About() {
       <section className="relative h-64 md:h-80 flex items-end overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: `url(${HERO_BG})` }}
+          style={{ backgroundImage: `url(${INTERIOR_BG})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/60 to-[#0a0603]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0000] via-[#0a0000]/60 to-[#0a0000]/30" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10 w-full">
           <div className="flex items-center gap-3 mb-2">
             <div className="h-px w-8 bg-red-700" />
@@ -141,9 +142,9 @@ export default function About() {
       <section className="py-16 md:py-24 relative overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center opacity-15"
-          style={{ backgroundImage: `url(${HERO_BG})` }}
+          style={{ backgroundImage: `url(${ABOUT_BG})` }}
         />
-        <div className="absolute inset-0 bg-[#0a0603]/90" />
+        <div className="absolute inset-0 bg-[#0a0000]/88" />
 
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14 reveal">
