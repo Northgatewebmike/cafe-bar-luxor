@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Coffee, Sparkles, Star, MapPin, Clock, CreditCard } from 'lucide-react';
+import { MapView } from '@/components/Map';
 
 // Scroll reveal hook
 function useReveal() {
@@ -35,6 +36,7 @@ const COFFEE_IMG = '/manus-storage/real-photo-1_8c74bd6b.jpg';
 export default function Home() {
   const { t, lang } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
+  const mapRef = useRef<google.maps.Map | null>(null);
   useReveal();
 
   useEffect(() => {
@@ -437,7 +439,69 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ============ GOOGLE MAPS ============ */}
+      {/* ============ COFFEE TO GO + BEER HIGHLIGHT ============ */}
+      <section className="py-16 bg-[#0a0000] border-t border-white/5">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Coffee to Go card */}
+            <div className="reveal-left relative overflow-hidden border border-white/8 hover:border-red-700/30 transition-all duration-500 p-8"
+              style={{ background: 'linear-gradient(135deg, rgba(60,20,0,0.4) 0%, rgba(10,0,0,0.8) 100%)' }}>
+              <div className="flex items-center gap-3 mb-4">
+                <Coffee size={24} className="text-red-500" />
+                <h3 className="text-2xl font-semibold text-white"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                  {lang === 'de' ? 'Kaffee to Go' : 'Coffee to Go'}
+                </h3>
+              </div>
+              <p className="text-white/65 text-sm leading-relaxed mb-4"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                {lang === 'de'
+                  ? 'Keine Zeit zum Verweilen? Kein Problem. Unser Kaffee to Go ist frisch gebrüht und begleitet Sie perfekt durch den Tag — ob Espresso, Cappuccino oder Latte Macchiato.'
+                  : 'No time to stay? No problem. Our coffee to go is freshly brewed and the perfect companion for your day — espresso, cappuccino or latte macchiato.'}
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {['Espresso €2', 'Cappuccino €3', 'Latte Macchiato €3', 'Frappé €3–3,50'].map(item => (
+                  <span key={item} className="px-3 py-1 text-xs border border-red-700/30 text-red-400"
+                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}>{item}</span>
+                ))}
+              </div>
+              <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-red-700 group-hover:w-full transition-all duration-500" />
+            </div>
+
+            {/* Fresh beer highlight card */}
+            <div className="reveal-right relative overflow-hidden border border-white/8 hover:border-red-700/30 transition-all duration-500 p-8"
+              style={{ background: 'linear-gradient(135deg, rgba(10,0,0,0.8) 0%, rgba(40,10,0,0.5) 100%)' }}>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-2xl">🍺</span>
+                <h3 className="text-2xl font-semibold text-white"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                  {lang === 'de' ? 'Frisch Gezapftes Bier' : 'Fresh Draft Beer'}
+                </h3>
+              </div>
+              <p className="text-white/65 text-sm leading-relaxed mb-4"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                {lang === 'de'
+                  ? 'Eiskalt, frisch gezapft und unschlagbar günstig — das günstigste Bier im Umkreis von Solingen, Remscheid und Wuppertal. Veltins vom Fass und Früh Kölsch, perfekt für jede Jahreszeit.'
+                  : 'Ice cold, freshly tapped and unbeatable value — the most affordable beer in the Solingen, Remscheid and Wuppertal area. Veltins on tap and Früh Kölsch, perfect for every season.'}
+              </p>
+              <div className="p-3 border border-red-700/25 inline-block"
+                style={{ background: 'rgba(180,0,0,0.08)' }}>
+                <p className="text-red-400 text-sm font-semibold"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                  {lang === 'de'
+                    ? '🏆 Das günstigste Bier in Solingen · Remscheid · Wuppertal'
+                    : '🏆 Most affordable beer in Solingen · Remscheid · Wuppertal'}
+                </p>
+                <p className="text-white/50 text-xs mt-1" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  Veltins 0,5l ab €4,50 · Früh Kölsch 0,4l ab €3,60
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ GOOGLE MAPS (Interactive) ============ */}
       <section className="py-16 bg-[#080000]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-10 reveal">
@@ -457,19 +521,22 @@ export default function Home() {
             </p>
           </div>
 
-          {/* Map embed */}
-          <div className="reveal relative overflow-hidden border border-white/10 hover:border-red-700/30 transition-all duration-500" style={{ height: '380px' }}>
-            <iframe
-              title="Cafe&Bar Luxor — Ohligser Markt 5 Solingen"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2498.2!2d7.0044!3d51.1647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8e4b3c3c3c3c3%3A0x0!2sOhligser+Markt+5%2C+42696+Solingen!5e0!3m2!1sde!2sde!4v1699999999999!5m2!1sde!2sde"
-              width="100%"
-              height="100%"
-              style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.85)' }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
+          {/* Interactive Google Maps */}
+          <div className="reveal relative overflow-hidden border border-white/10 hover:border-red-700/30 transition-all duration-500">
+            <MapView
+              className="w-full h-[380px]"
+              initialCenter={{ lat: 51.1656, lng: 7.0044 }}
+              initialZoom={16}
+              onMapReady={(map) => {
+                mapRef.current = map;
+                // Add a marker for Cafe&Bar Luxor
+                new window.google.maps.marker.AdvancedMarkerElement({
+                  map,
+                  position: { lat: 51.1656, lng: 7.0044 },
+                  title: 'Cafe&Bar Luxor',
+                });
+              }}
             />
-            {/* Overlay for dark styling */}
             <div className="absolute inset-0 pointer-events-none border border-red-700/20" />
           </div>
 

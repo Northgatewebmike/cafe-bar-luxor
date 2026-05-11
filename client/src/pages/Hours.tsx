@@ -2,9 +2,10 @@
  * Opening Hours Page — Cafe&Bar Luxor
  * Design: "Warme Patina" — Clean, elegant hours display with today highlight
  */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Clock, MapPin, CheckCircle, XCircle } from 'lucide-react';
+import { MapView } from '@/components/Map';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
 
@@ -45,6 +46,7 @@ export default function Hours() {
   const { t, lang } = useLanguage();
   const today = new Date().getDay(); // 0=Sun
   const openNow = isCurrentlyOpen();
+  const mapRef = useRef<google.maps.Map | null>(null);
   useReveal();
 
   const schedule = [
@@ -227,7 +229,7 @@ export default function Hours() {
             </div>
           </div>
 
-          {/* ============ GOOGLE MAPS EMBED ============ */}
+          {/* ============ INTERACTIVE GOOGLE MAPS ============ */}
           <div className="mt-12 reveal">
             <div className="flex items-center gap-3 mb-6">
               <div className="h-px w-8 bg-red-700" />
@@ -236,16 +238,19 @@ export default function Hours() {
                 {lang === 'de' ? 'Karte & Anfahrt' : 'Map & Directions'}
               </span>
             </div>
-            <div className="relative overflow-hidden border border-white/10 hover:border-red-700/30 transition-all duration-500" style={{ height: '360px' }}>
-              <iframe
-                title="Cafe&Bar Luxor — Ohligser Markt 5 Solingen"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2498.2!2d7.0044!3d51.1647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8e4b3c3c3c3c3%3A0x0!2sOhligser+Markt+5%2C+42696+Solingen!5e0!3m2!1sde!2sde!4v1699999999999!5m2!1sde!2sde"
-                width="100%"
-                height="100%"
-                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.85)' }}
-                allowFullScreen
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
+            <div className="relative overflow-hidden border border-white/10 hover:border-red-700/30 transition-all duration-500">
+              <MapView
+                className="w-full h-[360px]"
+                initialCenter={{ lat: 51.1656, lng: 7.0044 }}
+                initialZoom={16}
+                onMapReady={(map) => {
+                  mapRef.current = map;
+                  new window.google.maps.marker.AdvancedMarkerElement({
+                    map,
+                    position: { lat: 51.1656, lng: 7.0044 },
+                    title: 'Cafe&Bar Luxor',
+                  });
+                }}
               />
               <div className="absolute inset-0 pointer-events-none border border-red-700/20" />
             </div>
