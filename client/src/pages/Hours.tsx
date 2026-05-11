@@ -42,7 +42,7 @@ function isCurrentlyOpen(): boolean {
 }
 
 export default function Hours() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const today = new Date().getDay(); // 0=Sun
   const openNow = isCurrentlyOpen();
   useReveal();
@@ -225,6 +225,40 @@ export default function Hours() {
                 Google Maps →
               </a>
             </div>
+          </div>
+
+          {/* ============ GOOGLE MAPS EMBED ============ */}
+          <div className="mt-12 reveal">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="h-px w-8 bg-red-700" />
+              <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                {lang === 'de' ? 'Karte & Anfahrt' : 'Map & Directions'}
+              </span>
+            </div>
+            <div className="relative overflow-hidden border border-white/10 hover:border-red-700/30 transition-all duration-500" style={{ height: '360px' }}>
+              <iframe
+                title="Cafe&Bar Luxor — Ohligser Markt 5 Solingen"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2498.2!2d7.0044!3d51.1647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8e4b3c3c3c3c3%3A0x0!2sOhligser+Markt+5%2C+42696+Solingen!5e0!3m2!1sde!2sde!4v1699999999999!5m2!1sde!2sde"
+                width="100%"
+                height="100%"
+                style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.85)' }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
+              <div className="absolute inset-0 pointer-events-none border border-red-700/20" />
+            </div>
+            <a
+              href="https://maps.app.goo.gl/AqP7qYQ39kBf4gvz6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-3 flex items-center justify-center gap-2 py-3 border border-red-700/30 hover:border-red-600 hover:bg-red-700/10 transition-all duration-300 text-red-500 text-sm font-semibold tracking-wide uppercase"
+              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+            >
+              <MapPin size={15} />
+              {lang === 'de' ? 'In Google Maps öffnen' : 'Open in Google Maps'}
+            </a>
           </div>
         </div>
       </section>

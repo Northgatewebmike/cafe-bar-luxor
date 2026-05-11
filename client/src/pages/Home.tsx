@@ -1,11 +1,12 @@
 /**
  * Home Page — Cafe&Bar Luxor
  * Design: "Warme Patina" — Cinematic hero, 3D scroll animations, testimonials
+ * Updates: removed scroll button, strong hook, Google Maps, payment methods
  */
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { Coffee, Martini, Sparkles, Star, ChevronDown } from 'lucide-react';
+import { Coffee, Sparkles, Star, MapPin, Clock, CreditCard } from 'lucide-react';
 
 // Scroll reveal hook
 function useReveal() {
@@ -32,7 +33,7 @@ const COCKTAIL_IMG = '/manus-storage/real-photo-2_e4b6d6ba.jpg';
 const COFFEE_IMG = '/manus-storage/real-photo-1_8c74bd6b.jpg';
 
 export default function Home() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   useReveal();
 
@@ -59,23 +60,23 @@ export default function Home() {
         />
         {/* Dark gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/80" />
-        {/* Warm amber vignette */}
+        {/* Warm vignette */}
         <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(10,6,3,0.7) 100%)'
+          background: 'radial-gradient(ellipse at center, transparent 30%, rgba(10,0,0,0.7) 100%)'
         }} />
 
         {/* Hero Content */}
         <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
           {/* Pre-title */}
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="h-px w-12 bg-[rgba(180,0,0,0.9)]" />
+            <div className="h-px w-12 bg-red-700" />
             <span
-              className="text-[rgba(180,0,0,0.9)] text-xs font-semibold tracking-[0.3em] uppercase"
+              className="text-red-500 text-xs font-semibold tracking-[0.3em] uppercase"
               style={{ fontFamily: "'Source Sans 3', sans-serif" }}
             >
               Solingen · Ohligser Markt
             </span>
-            <div className="h-px w-12 bg-[rgba(180,0,0,0.9)]" />
+            <div className="h-px w-12 bg-red-700" />
           </div>
 
           {/* Main Title */}
@@ -85,65 +86,74 @@ export default function Home() {
           >
             Cafe&Bar
             <br />
-            <span className="text-[rgba(180,0,0,0.9)]">Luxor</span>
+            <span className="text-red-600">Luxor</span>
           </h1>
 
-          {/* Tagline */}
+          {/* Strong Hook — 2-3 sentences */}
           <p
-            className="text-xl sm:text-2xl md:text-3xl text-white/90 italic mb-3 font-light"
-            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", textShadow: '0 2px 20px rgba(0,0,0,0.6)' }}
+            className="text-xl sm:text-2xl md:text-3xl text-white font-semibold mb-3 leading-snug"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", textShadow: '0 2px 20px rgba(0,0,0,0.8)' }}
           >
-            {t('home.hero.tagline')}
+            {lang === 'de'
+              ? 'Kein gewöhnlicher Ort. Ein Erlebnis.'
+              : 'Not just a place. An experience.'}
           </p>
-
-          {/* Subtitle */}
+          <p
+            className="text-base sm:text-lg text-white/80 mb-3 max-w-2xl mx-auto leading-relaxed"
+            style={{ fontFamily: "'Source Sans 3', sans-serif", textShadow: '0 1px 10px rgba(0,0,0,0.7)' }}
+          >
+            {lang === 'de'
+              ? 'Frisch gezapftes Bier, handgemachte Cocktails und der beste Kaffee der Stadt — mitten auf dem Ohligser Markt.'
+              : 'Freshly tapped beer, handcrafted cocktails and the best coffee in town — right in the heart of Ohligser Markt.'}
+          </p>
           <p
             className="text-sm sm:text-base text-white/60 mb-10 max-w-xl mx-auto"
             style={{ fontFamily: "'Source Sans 3', sans-serif" }}
           >
-            {t('home.hero.subtitle')}
+            {lang === 'de'
+              ? 'Seit 2024 der Treffpunkt für unvergessliche Momente in Solingen.'
+              : 'Since 2024, the meeting point for unforgettable moments in Solingen.'}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/speisekarte">
-              <button className="px-8 py-4 font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-105" style={{ background: 'rgba(180,0,0,0.85)', color: 'white', fontFamily: "'Source Sans 3', sans-serif" }}>
+              <button
+                className="px-8 py-4 font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-105 hover:brightness-110"
+                style={{ background: 'rgba(180,0,0,0.9)', color: 'white', fontFamily: "'Source Sans 3', sans-serif" }}
+              >
                 {t('home.hero.cta')}
               </button>
             </Link>
             <Link href="/kontakt">
-              <button className="px-8 py-4 border border-white/40 text-white font-medium text-sm tracking-widest uppercase hover:border-[rgba(180,0,0,0.9)] hover:text-[rgba(180,0,0,0.9)] transition-all duration-300"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              <button
+                className="px-8 py-4 border border-white/40 text-white font-medium text-sm tracking-widest uppercase hover:border-red-600 hover:text-red-400 transition-all duration-300"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+              >
                 {t('home.hero.cta2')}
               </button>
             </Link>
           </div>
         </div>
-
-        {/* Scroll indicator */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-bounce">
-          <ChevronDown size={20} className="text-[rgba(180,0,0,0.9)]/60" />
-        </div>
+        {/* NO scroll indicator — removed as requested */}
       </section>
 
       {/* ============ FEATURES SECTION ============ */}
       <section className="py-20 md:py-28 bg-[#0a0000] relative overflow-hidden">
-        {/* Background texture */}
         <div className="absolute inset-0 opacity-5" style={{
-          backgroundImage: 'repeating-linear-gradient(45deg, rgba(180,0,0,0.9) 0, rgba(180,0,0,0.9) 1px, transparent 0, transparent 50%)',
+          backgroundImage: 'repeating-linear-gradient(45deg, #b00000 0, #b00000 1px, transparent 0, transparent 50%)',
           backgroundSize: '20px 20px'
         }} />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          {/* Section header */}
           <div className="text-center mb-16 reveal">
             <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[rgba(180,0,0,0.9)]" />
-              <span className="text-[rgba(180,0,0,0.9)] text-xs tracking-[0.3em] uppercase font-medium"
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-red-700" />
+              <span className="text-red-500 text-xs tracking-[0.3em] uppercase font-medium"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                Cafe & Bar Luxor
+                Cafe &amp; Bar Luxor
               </span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[rgba(180,0,0,0.9)]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-red-700" />
             </div>
             <h2
               className="text-4xl md:text-5xl font-semibold text-white"
@@ -153,25 +163,24 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Feature Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
             {[
               {
-                icon: <Coffee size={28} className="text-[rgba(180,0,0,0.9)]" />,
+                icon: <Coffee size={28} className="text-red-500" />,
                 title: t('home.features.coffee.title'),
                 desc: t('home.features.coffee.desc'),
                 delay: '0ms',
                 img: COFFEE_IMG,
               },
               {
-                icon: <span className="text-2xl text-[rgba(180,0,0,0.9)]">🍸</span>,
+                icon: <span className="text-2xl">🍸</span>,
                 title: t('home.features.cocktails.title'),
                 desc: t('home.features.cocktails.desc'),
                 delay: '150ms',
                 img: COCKTAIL_IMG,
               },
               {
-                icon: <Sparkles size={28} className="text-[rgba(180,0,0,0.9)]" />,
+                icon: <Sparkles size={28} className="text-red-500" />,
                 title: t('home.features.atmosphere.title'),
                 desc: t('home.features.atmosphere.desc'),
                 delay: '300ms',
@@ -180,14 +189,13 @@ export default function Home() {
             ].map((feature, i) => (
               <div
                 key={i}
-                className="reveal card-3d group relative overflow-hidden border border-white/5 hover:border-[rgba(180,0,0,0.9)]/30 transition-all duration-500"
+                className="reveal card-3d group relative overflow-hidden border border-white/5 hover:border-red-700/30 transition-all duration-500"
                 style={{
                   background: 'linear-gradient(135deg, rgba(255,255,255,0.04) 0%, rgba(255,255,255,0.01) 100%)',
                   transitionDelay: feature.delay,
                   backdropFilter: 'blur(10px)',
                 }}
               >
-                {/* Image overlay */}
                 <div className="relative h-48 overflow-hidden">
                   <img
                     src={feature.img}
@@ -199,10 +207,9 @@ export default function Home() {
                     {feature.icon}
                   </div>
                 </div>
-                {/* Content */}
                 <div className="p-6">
                   <h3
-                    className="text-xl font-semibold text-white mb-3 group-hover:text-[rgba(180,0,0,0.9)] transition-colors duration-300"
+                    className="text-xl font-semibold text-white mb-3 group-hover:text-red-500 transition-colors duration-300"
                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                   >
                     {feature.title}
@@ -214,8 +221,7 @@ export default function Home() {
                     {feature.desc}
                   </p>
                 </div>
-                {/* Gold bottom line on hover */}
-                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-[rgba(180,0,0,0.9)] group-hover:w-full transition-all duration-500" />
+                <div className="absolute bottom-0 left-0 h-0.5 w-0 bg-red-700 group-hover:w-full transition-all duration-500" />
               </div>
             ))}
           </div>
@@ -234,8 +240,8 @@ export default function Home() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="reveal-left">
               <div className="flex items-center gap-3 mb-4">
-                <div className="h-px w-10 bg-[rgba(180,0,0,0.9)]" />
-                <span className="text-[rgba(180,0,0,0.9)] text-xs tracking-[0.3em] uppercase font-medium"
+                <div className="h-px w-10 bg-red-700" />
+                <span className="text-red-500 text-xs tracking-[0.3em] uppercase font-medium"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   {t('about.subtitle')}
                 </span>
@@ -253,7 +259,7 @@ export default function Home() {
                 {t('about.story.p1')}
               </p>
               <Link href="/ueber-uns">
-                <button className="flex items-center gap-3 text-[rgba(180,0,0,0.9)] font-medium text-sm tracking-wide hover:gap-5 transition-all duration-300 group"
+                <button className="flex items-center gap-3 text-red-500 font-medium text-sm tracking-wide hover:gap-5 transition-all duration-300 group"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   <span>{t('common.more')}</span>
                   <span className="text-lg group-hover:translate-x-1 transition-transform">→</span>
@@ -261,21 +267,20 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* Stats */}
             <div className="reveal-right grid grid-cols-2 gap-4">
               {[
-                { num: '2024', label: 'Eröffnet / Founded' },
+                { num: '2024', label: lang === 'de' ? 'Eröffnet' : 'Founded' },
                 { num: '5★', label: 'Google Bewertung' },
-                { num: '€5', label: 'Aperol Spritz' },
-                { num: '∞', label: 'Herzlichkeit / Warmth' },
+                { num: '€2', label: lang === 'de' ? 'Espresso ab' : 'Espresso from' },
+                { num: '∞', label: lang === 'de' ? 'Herzlichkeit' : 'Warmth' },
               ].map((stat, i) => (
                 <div
                   key={i}
-                  className="p-6 border border-white/10 hover:border-[rgba(180,0,0,0.9)]/40 transition-all duration-300 text-center group"
+                  className="p-6 border border-white/10 hover:border-red-700/40 transition-all duration-300 text-center group"
                   style={{ background: 'rgba(255,255,255,0.03)' }}
                 >
                   <div
-                    className="text-3xl md:text-4xl font-bold text-[rgba(180,0,0,0.9)] mb-2"
+                    className="text-3xl md:text-4xl font-bold text-red-600 mb-2"
                     style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                   >
                     {stat.num}
@@ -296,15 +301,14 @@ export default function Home() {
       {/* ============ TESTIMONIALS ============ */}
       <section className="py-20 md:py-28 bg-[#080000]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
           <div className="text-center mb-14 reveal">
             <div className="flex items-center justify-center gap-4 mb-4">
-              <div className="h-px w-16 bg-gradient-to-r from-transparent to-[rgba(180,0,0,0.9)]" />
-              <span className="text-[rgba(180,0,0,0.9)] text-xs tracking-[0.3em] uppercase font-medium"
+              <div className="h-px w-16 bg-gradient-to-r from-transparent to-red-700" />
+              <span className="text-red-500 text-xs tracking-[0.3em] uppercase font-medium"
                 style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                 Google Reviews
               </span>
-              <div className="h-px w-16 bg-gradient-to-l from-transparent to-[rgba(180,0,0,0.9)]" />
+              <div className="h-px w-16 bg-gradient-to-l from-transparent to-red-700" />
             </div>
             <h2
               className="text-4xl md:text-5xl font-semibold text-white"
@@ -314,69 +318,36 @@ export default function Home() {
             </h2>
           </div>
 
-          {/* Testimonial Cards */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {[
-              {
-                text: t('home.testimonials.1.text'),
-                author: t('home.testimonials.1.author'),
-                role: t('home.testimonials.1.role'),
-                stars: 5,
-                delay: '0ms',
-                initials: 'JF',
-              },
-              {
-                text: t('home.testimonials.2.text'),
-                author: t('home.testimonials.2.author'),
-                role: t('home.testimonials.2.role'),
-                stars: 5,
-                delay: '150ms',
-                initials: 'LK',
-              },
-              {
-                text: t('home.testimonials.3.text'),
-                author: t('home.testimonials.3.author'),
-                role: t('home.testimonials.3.role'),
-                stars: 5,
-                delay: '300ms',
-                initials: 'DN',
-              },
+              { text: t('home.testimonials.1.text'), author: t('home.testimonials.1.author'), role: t('home.testimonials.1.role'), stars: 5, delay: '0ms', initials: 'JF' },
+              { text: t('home.testimonials.2.text'), author: t('home.testimonials.2.author'), role: t('home.testimonials.2.role'), stars: 5, delay: '150ms', initials: 'LK' },
+              { text: t('home.testimonials.3.text'), author: t('home.testimonials.3.author'), role: t('home.testimonials.3.role'), stars: 5, delay: '300ms', initials: 'DN' },
             ].map((testimonial, i) => (
               <div
                 key={i}
-                className="reveal card-3d p-6 md:p-8 border border-white/8 hover:border-[rgba(180,0,0,0.9)]/25 transition-all duration-500 relative"
+                className="reveal card-3d p-6 md:p-8 border border-white/8 hover:border-red-700/25 transition-all duration-500 relative"
                 style={{
-                  background: 'linear-gradient(135deg, rgba(201,168,76,0.06) 0%, rgba(255,255,255,0.02) 100%)',
+                  background: 'linear-gradient(135deg, rgba(176,0,0,0.06) 0%, rgba(255,255,255,0.02) 100%)',
                   transitionDelay: testimonial.delay,
                 }}
               >
-                {/* Quote mark */}
-                <div
-                  className="text-6xl text-[rgba(180,0,0,0.9)]/20 leading-none mb-2 -mt-2"
-                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
-                >
+                <div className="text-6xl text-red-700/20 leading-none mb-2 -mt-2"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
                   "
                 </div>
-
-                {/* Stars */}
                 <div className="flex gap-1 mb-4">
                   {Array.from({ length: testimonial.stars }).map((_, j) => (
-                    <Star key={j} size={14} className="text-[rgba(180,0,0,0.9)] fill-[rgba(180,0,0,0.9)]" />
+                    <Star key={j} size={14} className="text-red-600 fill-red-600" />
                   ))}
                 </div>
-
-                {/* Text */}
-                <p
-                  className="text-white/70 text-sm leading-relaxed mb-6 italic"
-                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1rem' }}
-                >
+                <p className="text-white/70 text-sm leading-relaxed mb-6 italic"
+                  style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1rem' }}>
                   „{testimonial.text}"
                 </p>
-
-                {/* Author */}
                 <div className="flex items-center gap-3 pt-4 border-t border-white/8">
-                  <div className="w-10 h-10 rounded-full bg-[rgba(180,0,0,0.9)]/20 border border-[rgba(180,0,0,0.9)]/30 flex items-center justify-center">
-                    <span className="text-[rgba(180,0,0,0.9)] text-xs font-bold">{testimonial.initials}</span>
+                  <div className="w-10 h-10 rounded-full bg-red-700/20 border border-red-700/30 flex items-center justify-center">
+                    <span className="text-red-500 text-xs font-bold">{testimonial.initials}</span>
                   </div>
                   <div>
                     <div className="text-white text-sm font-semibold"
@@ -394,10 +365,158 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ============ PAYMENT METHODS ============ */}
+      <section className="py-16 bg-[#0a0000] border-t border-white/5">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 reveal">
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-red-700" />
+              <CreditCard size={18} className="text-red-500" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-red-700" />
+            </div>
+            <h2
+              className="text-2xl md:text-3xl font-semibold text-white mb-2"
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+            >
+              {lang === 'de' ? 'Zahlungsmethoden' : 'Payment Methods'}
+            </h2>
+            <p className="text-white/50 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              {lang === 'de'
+                ? 'Wir akzeptieren Barzahlung sowie alle gängigen Karten und digitalen Zahlungen via SumUp.'
+                : 'We accept cash and all major cards and digital payments via SumUp.'}
+            </p>
+          </div>
+
+          <div className="reveal grid grid-cols-2 sm:grid-cols-4 gap-4 mb-6">
+            {/* Cash */}
+            <div className="flex flex-col items-center gap-2 p-4 border border-white/8 hover:border-red-700/30 transition-all duration-300"
+              style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <span className="text-3xl">💵</span>
+              <span className="text-white/70 text-xs font-medium tracking-wide uppercase"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                {lang === 'de' ? 'Bargeld' : 'Cash'}
+              </span>
+            </div>
+            {/* Visa */}
+            <div className="flex flex-col items-center gap-2 p-4 border border-white/8 hover:border-red-700/30 transition-all duration-300"
+              style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <span className="text-white font-bold text-xl italic tracking-tight" style={{ fontFamily: 'sans-serif' }}>VISA</span>
+              <span className="text-white/70 text-xs font-medium tracking-wide uppercase"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Visa</span>
+            </div>
+            {/* Mastercard */}
+            <div className="flex flex-col items-center gap-2 p-4 border border-white/8 hover:border-red-700/30 transition-all duration-300"
+              style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <div className="flex">
+                <div className="w-6 h-6 rounded-full bg-red-600 opacity-90" />
+                <div className="w-6 h-6 rounded-full bg-orange-400 opacity-90 -ml-3" />
+              </div>
+              <span className="text-white/70 text-xs font-medium tracking-wide uppercase"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Mastercard</span>
+            </div>
+            {/* G Pay / Apple Pay */}
+            <div className="flex flex-col items-center gap-2 p-4 border border-white/8 hover:border-red-700/30 transition-all duration-300"
+              style={{ background: 'rgba(255,255,255,0.03)' }}>
+              <span className="text-white text-sm font-semibold">G Pay</span>
+              <span className="text-white/70 text-xs font-medium tracking-wide uppercase"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>Apple Pay</span>
+            </div>
+          </div>
+
+          {/* More payment methods */}
+          <div className="reveal flex flex-wrap items-center justify-center gap-3 text-white/40 text-xs"
+            style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+            {['V Pay', 'Maestro', 'American Express', 'Diners Club', 'Discover', 'UnionPay', 'NFC Kontaktlos'].map((m) => (
+              <span key={m} className="px-3 py-1 border border-white/8 rounded-sm">{m}</span>
+            ))}
+          </div>
+          <p className="text-center text-white/25 text-xs mt-4" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+            {lang === 'de' ? 'Powered by SumUp' : 'Powered by SumUp'}
+          </p>
+        </div>
+      </section>
+
+      {/* ============ GOOGLE MAPS ============ */}
+      <section className="py-16 bg-[#080000]">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-10 reveal">
+            <div className="flex items-center justify-center gap-4 mb-4">
+              <div className="h-px w-12 bg-gradient-to-r from-transparent to-red-700" />
+              <MapPin size={18} className="text-red-500" />
+              <div className="h-px w-12 bg-gradient-to-l from-transparent to-red-700" />
+            </div>
+            <h2
+              className="text-2xl md:text-3xl font-semibold text-white mb-2"
+              style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+            >
+              {lang === 'de' ? 'So finden Sie uns' : 'Find Us'}
+            </h2>
+            <p className="text-white/50 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              Ohligser Markt 5 · 42696 Solingen · Deutschland
+            </p>
+          </div>
+
+          {/* Map embed */}
+          <div className="reveal relative overflow-hidden border border-white/10 hover:border-red-700/30 transition-all duration-500" style={{ height: '380px' }}>
+            <iframe
+              title="Cafe&Bar Luxor — Ohligser Markt 5 Solingen"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2498.2!2d7.0044!3d51.1647!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b8e4b3c3c3c3c3%3A0x0!2sOhligser+Markt+5%2C+42696+Solingen!5e0!3m2!1sde!2sde!4v1699999999999!5m2!1sde!2sde"
+              width="100%"
+              height="100%"
+              style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg) saturate(0.8) brightness(0.85)' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+            {/* Overlay for dark styling */}
+            <div className="absolute inset-0 pointer-events-none border border-red-700/20" />
+          </div>
+
+          {/* Address + hours quick info */}
+          <div className="reveal mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="flex items-start gap-3 p-4 border border-white/8"
+              style={{ background: 'rgba(255,255,255,0.02)' }}>
+              <MapPin size={16} className="text-red-500 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-white text-sm font-medium" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  Ohligser Markt 5
+                </p>
+                <p className="text-white/50 text-xs" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  42696 Solingen, Deutschland
+                </p>
+              </div>
+            </div>
+            <div className="flex items-start gap-3 p-4 border border-white/8"
+              style={{ background: 'rgba(255,255,255,0.02)' }}>
+              <Clock size={16} className="text-red-500 mt-0.5 shrink-0" />
+              <div>
+                <p className="text-white text-sm font-medium" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  Mo–Sa: 09:00–21:00
+                </p>
+                <p className="text-white/50 text-xs" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  So: 10:00–20:00
+                </p>
+              </div>
+            </div>
+            <a
+              href="https://maps.app.goo.gl/AqP7qYQ39kBf4gvz6"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 p-4 border border-red-700/30 hover:border-red-600 hover:bg-red-700/10 transition-all duration-300 text-red-500 text-sm font-semibold tracking-wide uppercase"
+              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+            >
+              <MapPin size={16} />
+              {lang === 'de' ? 'In Google Maps öffnen' : 'Open in Google Maps'}
+            </a>
+          </div>
+        </div>
+      </section>
+
       {/* ============ CTA BANNER ============ */}
       <section className="py-16 relative overflow-hidden" style={{ background: 'linear-gradient(135deg, #0a0000 0%, #1a0000 50%, #0a0000 100%)' }}>
         <div className="absolute inset-0 opacity-10" style={{
-          backgroundImage: 'repeating-linear-gradient(-45deg, #0a0603 0, #0a0603 1px, transparent 0, transparent 50%)',
+          backgroundImage: 'repeating-linear-gradient(-45deg, #1a0000 0, #1a0000 1px, transparent 0, transparent 50%)',
           backgroundSize: '10px 10px'
         }} />
         <div className="relative max-w-4xl mx-auto px-4 text-center">
@@ -405,7 +524,7 @@ export default function Home() {
             className="text-3xl md:text-4xl font-bold text-white mb-4"
             style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
           >
-            {t('home.hero.tagline')}
+            {lang === 'de' ? 'Besuchen Sie uns noch heute' : 'Visit Us Today'}
           </h2>
           <p
             className="text-white/60 mb-8 text-base"
@@ -415,13 +534,18 @@ export default function Home() {
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/speisekarte">
-              <button className="px-8 py-3 font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-105" style={{ background: 'rgba(180,0,0,0.85)', color: 'white', fontFamily: "'Source Sans 3', sans-serif" }}>
+              <button
+                className="px-8 py-3 font-semibold text-sm tracking-widest uppercase transition-all duration-300 hover:scale-105"
+                style={{ background: 'rgba(180,0,0,0.9)', color: 'white', fontFamily: "'Source Sans 3', sans-serif" }}
+              >
                 {t('home.hero.cta')}
               </button>
             </Link>
             <Link href="/oeffnungszeiten">
-              <button className="px-8 py-3 border border-white/30 text-white/80 font-semibold text-sm tracking-widest uppercase hover:border-red-700 hover:text-red-400 transition-all duration-300"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              <button
+                className="px-8 py-3 border border-white/30 text-white/80 font-semibold text-sm tracking-widest uppercase hover:border-red-700 hover:text-red-400 transition-all duration-300"
+                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+              >
                 {t('nav.hours')}
               </button>
             </Link>

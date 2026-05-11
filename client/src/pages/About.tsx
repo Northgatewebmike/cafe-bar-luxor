@@ -198,6 +198,59 @@ export default function About() {
         </div>
       </section>
 
+      {/* ============ COFFEE & BEER HIGHLIGHT ============ */}
+      <section className="py-16 md:py-24 bg-[#0a0000]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+
+            {/* Coffee Card */}
+            <div className="reveal-left relative overflow-hidden group" style={{ border: '1px solid rgba(180,0,0,0.2)' }}>
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-40 transition-opacity duration-700"
+                style={{ backgroundImage: `url(https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80)` }}
+              />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,0,0,0.92) 0%, rgba(10,0,0,0.75) 100%)' }} />
+              <div className="relative p-8 md:p-10">
+                <div className="text-5xl mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", color: 'rgba(180,0,0,0.8)' }}>☕</div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                  Kaffeekultur
+                </h3>
+                <div className="h-px w-12 bg-red-700 mb-4" />
+                <p className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  Von einem perfekten Espresso bis zum cremigen Cappuccino — jede Tasse wird mit Sorgfalt zubereitet. Unser Kaffee ist der ideale Begleiter für einen entspannten Morgen oder eine kurze Auszeit vom Alltag.
+                </p>
+                <p className="text-white/40 text-xs mt-3 italic" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  From a perfect espresso to a creamy cappuccino — every cup crafted with care.
+                </p>
+              </div>
+            </div>
+
+            {/* Beer Card */}
+            <div className="reveal-right relative overflow-hidden group" style={{ border: '1px solid rgba(180,0,0,0.2)' }}>
+              <div
+                className="absolute inset-0 bg-cover bg-center opacity-30 group-hover:opacity-40 transition-opacity duration-700"
+                style={{ backgroundImage: `url(https://images.unsplash.com/photo-1608270586620-248524c67de9?w=800&q=80)` }}
+              />
+              <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,0,0,0.92) 0%, rgba(10,0,0,0.75) 100%)' }} />
+              <div className="relative p-8 md:p-10">
+                <div className="text-5xl mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", color: 'rgba(180,0,0,0.8)' }}>🍺</div>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
+                  Frisch Gezapftes Bier
+                </h3>
+                <div className="h-px w-12 bg-red-700 mb-4" />
+                <p className="text-white/60 text-sm leading-relaxed" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  Eiskaltes, frisch gezapftes Veltins und Früh Kölsch — direkt vom Fass, mit perfekter Schaumkrone. Einzigartig im Geschmack, unvergleichlich im Erlebnis. Das Beste aus der Zapfanlage, für Sie.
+                </p>
+                <p className="text-white/40 text-xs mt-3 italic" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  Ice-cold, freshly tapped Veltins and Früh Kölsch — straight from the tap, with a perfect head.
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
       {/* ============ FEATURES / AMENITIES ============ */}
       <section className="py-16 md:py-24 bg-[#080503]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

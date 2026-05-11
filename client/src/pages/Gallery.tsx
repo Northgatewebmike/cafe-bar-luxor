@@ -6,13 +6,10 @@ import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
 
-// Real photos from Cafe&Bar Luxor
+// Real photos from Cafe&Bar Luxor — café/bar photos only (no machines)
 const PHOTO_INTERIOR = '/manus-storage/real-photo-1_8c74bd6b.jpg';   // Interior blue neon bar
 const PHOTO_TERRACE_DAY = '/manus-storage/real-photo-2_e4b6d6ba.jpg'; // Terrace daytime
 const PHOTO_TERRACE_SUNSET = '/manus-storage/real-photo-3_90e7752e.jpg'; // Terrace golden hour
-const PHOTO_CIGS_FRONT = '/manus-storage/real-photo-4_5b2d2d1a.jpg';  // Cigarette machine
-const PHOTO_CIGS_SIDE = '/manus-storage/real-photo-5_9df15a1c.jpg';   // Cigarette machine side
-const PHOTO_SLOTS = '/manus-storage/real-photo-7_1a05954b.jpg';       // Slot machines
 const PHOTO_EVENING = '/manus-storage/real-photo-8_da6a67e8.jpg';     // Evening with guests
 
 function useReveal() {
@@ -42,9 +39,6 @@ export default function Gallery() {
     { src: PHOTO_TERRACE_SUNSET, label: t('gallery.img2'), aspect: 'landscape' },
     { src: PHOTO_TERRACE_DAY, label: t('gallery.img3'), aspect: 'landscape' },
     { src: PHOTO_EVENING, label: t('gallery.img4'), aspect: 'portrait' },
-    { src: PHOTO_CIGS_FRONT, label: t('gallery.img5'), aspect: 'portrait' },
-    { src: PHOTO_CIGS_SIDE, label: t('gallery.img6'), aspect: 'portrait' },
-    { src: PHOTO_SLOTS, label: t('gallery.img1'), aspect: 'landscape' },
   ];
 
   const openLightbox = (index: number) => {

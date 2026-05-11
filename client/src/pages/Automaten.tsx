@@ -238,83 +238,17 @@ export default function Automaten() {
           </RevealCard>
         </div>
 
-        {/* ── Age Warning Banner ── */}
-        <div className="max-w-5xl mx-auto mt-8">
-          <RevealCard delay={300}>
-            <div
-              className="flex items-center gap-4 p-5"
-              style={{
-                background: 'rgba(180,0,0,0.06)',
-                border: '1px solid rgba(180,0,0,0.2)',
-              }}
-            >
-              <div
-                className="flex-shrink-0 w-12 h-12 flex items-center justify-center text-white font-bold text-lg"
-                style={{
-                  background: 'rgba(180,0,0,0.2)',
-                  border: '2px solid rgba(180,0,0,0.5)',
-                  fontFamily: "'Cormorant Garamond', Georgia, serif",
-                }}
-              >
-                18+
-              </div>
-              <p
-                className="text-white/60 text-sm leading-relaxed"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              >
-                {t('automaten.age.warning')}
-              </p>
-            </div>
-          </RevealCard>
-        </div>
-
-        {/* ── Responsible Gambling ── */}
-        <div className="max-w-5xl mx-auto mt-6">
-          <RevealCard delay={400}>
-            <div
-              className="p-5 md:p-6"
-              style={{
-                background: 'linear-gradient(135deg, #0f0000, #180000)',
-                border: '1px solid rgba(180,0,0,0.15)',
-              }}
-            >
-              <div className="flex items-start gap-4">
-                <Phone size={20} className="text-red-600/60 flex-shrink-0 mt-1" />
-                <div>
-                  <h3
-                    className="text-white/70 font-semibold mb-1"
-                    style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.1rem' }}
-                  >
-                    {t('automaten.help')}
-                  </h3>
-                  <p
-                    className="text-white/40 text-sm mb-2"
-                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                  >
-                    {t('automaten.help.desc')}
-                  </p>
-                  <a
-                    href="https://www.bzga.de"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-red-500/70 text-sm hover:text-red-400 transition-colors"
-                    style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                  >
-                    www.bzga.de — Bundeszentrale für gesundheitliche Aufklärung
-                  </a>
-                  <div className="mt-1">
-                    <a
-                      href="tel:08001372700"
-                      className="text-red-500/70 text-sm hover:text-red-400 transition-colors"
-                      style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                    >
-                      0800 137 27 00 (kostenlos / free)
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </RevealCard>
+        {/* ── Legal footnote (small, discrete) ── */}
+        <div className="max-w-5xl mx-auto mt-10 border-t border-white/5 pt-6">
+          <p
+            className="text-white/20 text-xs text-center leading-relaxed"
+            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          >
+            {t('automaten.age.warning')} &mdash; {t('automaten.help.desc')}{' '}
+            <a href="https://www.bzga.de" target="_blank" rel="noopener noreferrer" className="underline hover:text-white/40 transition-colors">www.bzga.de</a>
+            {' '}&mdash;{' '}
+            <a href="tel:08001372700" className="underline hover:text-white/40 transition-colors">0800 137 27 00</a>
+          </p>
         </div>
       </section>
     </div>
