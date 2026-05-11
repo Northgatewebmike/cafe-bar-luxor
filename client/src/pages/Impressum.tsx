@@ -48,7 +48,7 @@ export default function Impressum() {
                 <p className="font-semibold text-white">Ivan Sarakostov</p>
                 <p>Cafe &amp; Bar Luxor</p>
                 <p>Ohligser Markt 5</p>
-                <p>42696 Solingen, Deutschland</p>
+                <p>42697 Solingen, Deutschland</p>
               </div>
             </div>
 
@@ -118,7 +118,7 @@ export default function Impressum() {
               <div className="text-white/70 text-sm space-y-1 leading-relaxed">
                 <p className="font-semibold text-white">Ivan Sarakostov</p>
                 <p>Ohligser Markt 5</p>
-                <p>42696 Solingen, Deutschland</p>
+                <p>42697 Solingen, Deutschland</p>
               </div>
             </div>
 

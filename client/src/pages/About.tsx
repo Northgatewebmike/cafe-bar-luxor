@@ -130,7 +130,7 @@ export default function About() {
               <div className="flex items-center gap-3">
                 <span className="text-red-700 text-lg">📍</span>
                 <span className="text-white/50 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                  Ohligser Markt 5, 42696 Solingen
+                  Ohligser Markt 5, 42697 Solingen
                 </span>
               </div>
             </div>

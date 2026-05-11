@@ -556,7 +556,7 @@ export default function Home() {
               {lang === 'de' ? 'So finden Sie uns' : 'Find Us'}
             </h2>
             <p className="text-white/50 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-              Ohligser Markt 5 · 42696 Solingen · Deutschland
+              Ohligser Markt 5 · 42697 Solingen · Deutschland
             </p>
           </div>
 
@@ -564,14 +564,14 @@ export default function Home() {
           <div className="reveal relative overflow-hidden border border-white/10 hover:border-red-700/30 transition-all duration-500">
             <MapView
               className="w-full h-[380px]"
-              initialCenter={{ lat: 51.1656, lng: 7.0044 }}
+              initialCenter={{ lat: 51.16245, lng: 6.9989 }}
               initialZoom={16}
               onMapReady={(map) => {
                 mapRef.current = map;
                 // Add a marker for Cafe&Bar Luxor
                 new window.google.maps.marker.AdvancedMarkerElement({
                   map,
-                  position: { lat: 51.1656, lng: 7.0044 },
+                  position: { lat: 51.16245, lng: 6.9989 },
                   title: 'Cafe&Bar Luxor',
                 });
               }}
@@ -589,7 +589,7 @@ export default function Home() {
                   Ohligser Markt 5
                 </p>
                 <p className="text-white/50 text-xs" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                  42696 Solingen, Deutschland
+                  42697 Solingen, Deutschland
                 </p>
               </div>
             </div>
@@ -636,7 +636,7 @@ export default function Home() {
             className="text-white/60 mb-8 text-base"
             style={{ fontFamily: "'Source Sans 3', sans-serif" }}
           >
-            Ohligser Markt 5 · 42696 Solingen · Mo–Sa 09:00–21:00 · So 10:00–20:00
+            Ohligser Markt 5 · 42697 Solingen · Mo–Sa 09:00–21:00 · So 10:00–20:00
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/speisekarte">

@@ -88,7 +88,7 @@ export default function Footer() {
                 <MapPin size={15} className="mt-0.5 flex-shrink-0" style={{ color: 'rgba(180,0,0,0.7)' }} />
                 <span className="text-white/40 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   Ohligser Markt 5<br />
-                  42696 Solingen{lang === 'de' ? ', Deutschland' : ', Germany'}
+                  42697 Solingen{lang === 'de' ? ', Deutschland' : ', Germany'}
                 </span>
               </div>
               <div className="flex items-center gap-3">

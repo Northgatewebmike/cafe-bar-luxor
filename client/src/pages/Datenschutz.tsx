@@ -58,7 +58,7 @@ export default function Datenschutz() {
                 <p className="font-semibold text-white">Ivan Sarakostov</p>
                 <p>Cafe &amp; Bar Luxor</p>
                 <p>Ohligser Markt 5</p>
-                <p>42696 Solingen, Deutschland</p>
+                <p>42697 Solingen, Deutschland</p>
                 <p className="mt-2">
                   E-Mail:{' '}
                   <a href="mailto:stoyansarakostov73@gmail.com"

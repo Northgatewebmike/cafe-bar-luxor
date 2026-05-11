@@ -241,13 +241,13 @@ export default function Hours() {
             <div className="relative overflow-hidden border border-white/10 hover:border-red-700/30 transition-all duration-500">
               <MapView
                 className="w-full h-[360px]"
-                initialCenter={{ lat: 51.1656, lng: 7.0044 }}
+                initialCenter={{ lat: 51.16245, lng: 6.9989 }}
                 initialZoom={16}
                 onMapReady={(map) => {
                   mapRef.current = map;
                   new window.google.maps.marker.AdvancedMarkerElement({
                     map,
-                    position: { lat: 51.1656, lng: 7.0044 },
+                    position: { lat: 51.16245, lng: 6.9989 },
                     title: 'Cafe&Bar Luxor',
                   });
                 }}

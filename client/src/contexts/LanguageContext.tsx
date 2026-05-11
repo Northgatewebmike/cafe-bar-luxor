@@ -133,7 +133,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hours.note': '* An Feiertagen können die Öffnungszeiten abweichen.',
     'hours.today': 'Heute',
     'hours.find.us': 'So finden Sie uns',
-    'hours.address': 'Ohligser Markt 5, 42696 Solingen',
+    'hours.address': 'Ohligser Markt 5, 42697 Solingen',
     'hours.maps.link': 'In Google Maps öffnen',
 
     // Contact
@@ -200,7 +200,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.impressum': 'Impressum',
     'footer.datenschutz': 'Datenschutz',
     'footer.tagline': 'Kaffee, Cocktails & unvergessliche Momente',
-    'footer.address': 'Ohligser Markt 5, 42696 Solingen',
+    'footer.address': 'Ohligser Markt 5, 42697 Solingen',
     'footer.nav.title': 'Navigation',
     'footer.contact.title': 'Kontakt',
     'footer.hours.title': 'Öffnungszeiten',
@@ -336,7 +336,7 @@ const translations: Record<Language, Record<string, string>> = {
     'hours.note': '* Opening hours may vary on public holidays.',
     'hours.today': 'Today',
     'hours.find.us': 'How to find us',
-    'hours.address': 'Ohligser Markt 5, 42696 Solingen',
+    'hours.address': 'Ohligser Markt 5, 42697 Solingen',
     'hours.maps.link': 'Open in Google Maps',
 
     // Contact
@@ -403,7 +403,7 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.impressum': 'Legal Notice',
     'footer.datenschutz': 'Privacy Policy',
     'footer.tagline': 'Coffee, cocktails & unforgettable moments',
-    'footer.address': 'Ohligser Markt 5, 42696 Solingen',
+    'footer.address': 'Ohligser Markt 5, 42697 Solingen',
     'footer.nav.title': 'Navigation',
     'footer.contact.title': 'Contact',
     'footer.hours.title': 'Opening Hours',
