@@ -271,8 +271,7 @@ function PageContent({ section, lang }: { section: MenuSection; lang: string }) 
 }
 
 export default function Menu() {
-  const { language } = useLanguage();
-  const lang = language;
+  const { lang } = useLanguage();
   const [current, setCurrent] = useState(0);
   const [flipping, setFlipping] = useState<'fwd' | 'bwd' | null>(null);
   const touchX = useRef<number | null>(null);
