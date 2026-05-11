@@ -25,24 +25,24 @@ declare global {
 
 // All 18 menu page images v4 — exact photos per section, 4-photo grid, numbered spirits list
 const MENU_PAGES = [
-  '/manus-storage/p00_cover_7698b1e9.png',
-  '/manus-storage/p01_welcome_4955d288.png',
-  '/manus-storage/p02_coffee_81da2a69.png',
-  '/manus-storage/p03_tea_14149c84.png',
-  '/manus-storage/p04_cold_d7f19eff.png',
-  '/manus-storage/p05_limo_a9cc0564.png',
-  '/manus-storage/p06_draft_beer_7170aa62.png',
-  '/manus-storage/p07_bottle_beer_5df73e10.png',
-  '/manus-storage/p08_cocktails_3370e6db.png',
-  '/manus-storage/p09_nonalco_cf6f4cd9.png',
-  '/manus-storage/p10_spirits_624dfa69.png',
-  '/manus-storage/p11_whiskey_d01b3df9.png',
-  '/manus-storage/p12_longdrinks_810899af.png',
-  '/manus-storage/p13_aperitif_74fc2b03.png',
-  '/manus-storage/p14_wine_5a6b0d34.png',
-  '/manus-storage/p15_ice_bfc3faed.png',
-  '/manus-storage/p16_thanks_fc7d88b0.png',
-  '/manus-storage/p17_back_442dd1e9.png',
+  '/manus-storage/p00_cover_7698b1e9.png',      // Cover
+  '/manus-storage/p01_welcome_4955d288.png',     // Welcome
+  '/manus-storage/p02_coffee_81da2a69.png',      // Coffee
+  '/manus-storage/p03_tea_d5906052.png',         // Tea — v5 fixed
+  '/manus-storage/p04_cold_48eb2bec.png',        // Cold drinks — v5 fixed
+  '/manus-storage/p05_limo_a9cc0564.png',        // Lemonade
+  '/manus-storage/p06_draft_beer_e8c1201e.png',  // Draft beer — v5 fixed
+  '/manus-storage/p07_bottle_beer_ab38cc58.png', // Bottle beer — v5 fixed
+  '/manus-storage/p08_cocktails_0fc8ed1a.png',   // Cocktails — v5 fixed
+  '/manus-storage/p09_nonalco_cf6f4cd9.png',     // Non-alco cocktails
+  '/manus-storage/p10_spirits_95008741.png',     // Spirits — v5 fixed
+  '/manus-storage/p11_whiskey_8cd5c25d.png',     // Whiskey — v5 fixed
+  '/manus-storage/p12_longdrinks_901fe979.png',  // Long drinks — v5 fixed
+  '/manus-storage/p13_aperitif_69f39d3d.png',    // Aperitif — v5 fixed
+  '/manus-storage/p14_wine_fb15630f.png',        // Wine — v5 fixed
+  '/manus-storage/p15_ice_f4d98307.png',         // Ice cream — v5 fixed
+  '/manus-storage/p16_thanks_fc7d88b0.png',      // Vielen Dank
+  '/manus-storage/p17_back_442dd1e9.png',        // Back cover
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
