@@ -4,7 +4,8 @@
  */
 import { useEffect, useRef } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
-import { MapPin, Clock, Phone } from 'lucide-react';
+import { MapPin, Clock, Phone, Shield } from 'lucide-react';
+import { Link } from 'wouter';
 import { MapView } from '@/components/Map';
 
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
@@ -28,7 +29,7 @@ function useReveal() {
 }
 
 export default function Contact() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   const mapRef = useRef<google.maps.Map | null>(null);
   useReveal();
 
@@ -187,8 +188,8 @@ export default function Contact() {
                       className="text-white/80 text-sm"
                       style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                     >
-                      {t('hours.monday')}–{t('hours.saturday')}: 09:00–21:00 Uhr<br />
-                      {t('hours.sunday')}: 10:00–20:00 Uhr
+                      Mo–Do + So: 09:00–21:00 Uhr<br />
+                      Fr–Sa: 09:00–23:00 Uhr
                     </p>
                   </div>
                 </div>
@@ -245,6 +246,26 @@ export default function Contact() {
                 </a>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* DSGVO Art. 13 privacy notice — full width below grid */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 mb-10">
+          <div
+            className="flex items-start gap-3 p-4 border border-white/8"
+            style={{ background: 'rgba(255,255,255,0.015)' }}
+          >
+            <Shield size={16} className="text-white/25 flex-shrink-0 mt-0.5" />
+            <p className="text-white/30 text-xs leading-relaxed" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              {lang === 'de'
+                ? 'Ihre Kontaktdaten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben. Rechtsgrundlage: Art. 6 Abs. 1 lit. b/f DSGVO. '
+                : 'Your contact details are used solely to process your inquiry and are not shared with third parties. Legal basis: Art. 6(1)(b)/(f) GDPR. '}
+              <Link href="/datenschutz">
+                <span className="text-red-700/60 hover:text-red-700 transition-colors cursor-pointer underline">
+                  {lang === 'de' ? 'Datenschutzerklärung' : 'Privacy Policy'}
+                </span>
+              </Link>
+            </p>
           </div>
         </div>
       </section>
