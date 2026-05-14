@@ -25,6 +25,7 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import Automaten from "./pages/Automaten";
 import NotFound from "./pages/NotFound";
+import CookieBanner from "./components/CookieBanner";
 
 function Router() {
   return (
@@ -46,6 +47,7 @@ function Router() {
         </Switch>
       </main>
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
