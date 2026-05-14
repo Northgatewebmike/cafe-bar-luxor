@@ -1,6 +1,6 @@
 /**
  * Impressum — Cafe&Bar Luxor
- * Pflichtangaben gemäß § 5 TMG (Telemediengesetz) und § 55 RStV
+ * Pflichtangaben gemäß § 5 TMG (Telemediengesetz) und § 18 Abs. 2 MStV
  * Last updated: 2026
  */
 import { Link } from 'wouter';
@@ -82,13 +82,13 @@ export default function Impressum() {
             </p>
             <p className="text-white/40 text-xs mt-2">
               {lang === 'de'
-                ? 'Umsatzsteuer-ID gemäß § 27a UStG: nicht vorhanden (Kleinunternehmer gem. § 19 UStG)'
-                : 'VAT ID pursuant to § 27a UStG: not applicable (small business pursuant to § 19 UStG)'}
+                ? 'Eine Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG liegt nicht vor.'
+                : 'No VAT identification number pursuant to § 27a UStG is available.'}
             </p>
           </Section>
 
-          {/* 5. Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV */}
-          <Section title={lang === 'de' ? 'Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV' : 'Responsible for Content (§ 55 Abs. 2 RStV)'}>
+          {/* 5. Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV */}
+          <Section title={lang === 'de' ? 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV' : 'Responsible for Content (§ 18 Abs. 2 MStV)'}>
             <p className="font-semibold text-white">Ivan Sarakostov</p>
             <p>Ohligser Markt 5</p>
             <p>42697 Solingen, {lang === 'de' ? 'Deutschland' : 'Germany'}</p>
