@@ -99,7 +99,7 @@ export default function Impressum() {
             <p>
               <strong className="text-white/80">{lang === 'de' ? 'Haftung für Inhalte:' : 'Liability for content:'}</strong>{' '}
               {lang === 'de'
-                ? 'Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.'
+                ? 'Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 DDG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.'
                 : 'The contents of our pages have been created with the utmost care. However, we cannot guarantee the accuracy, completeness or topicality of the content.'}
             </p>
             <p className="mt-3">
