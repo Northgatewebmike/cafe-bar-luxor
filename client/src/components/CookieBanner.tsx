@@ -45,7 +45,25 @@ export function saveConsent(analytics: boolean, maps: boolean): ConsentState {
   };
   localStorage.setItem(STORAGE_KEY, JSON.stringify(consent));
   window.dispatchEvent(new CustomEvent('luxor:consent', { detail: consent }));
+  // Load Umami analytics script if analytics consent was granted
+  if (analytics) {
+    loadUmamiIfNeeded();
+  }
   return consent;
+}
+
+/** Inject Umami script tag once — only after analytics consent */
+export function loadUmamiIfNeeded() {
+  if (document.getElementById('umami-script')) return; // already loaded
+  const endpoint = import.meta.env.VITE_ANALYTICS_ENDPOINT;
+  const websiteId = import.meta.env.VITE_ANALYTICS_WEBSITE_ID;
+  if (!endpoint || !websiteId) return;
+  const script = document.createElement('script');
+  script.id = 'umami-script';
+  script.defer = true;
+  script.src = `${endpoint}/umami`;
+  script.setAttribute('data-website-id', websiteId);
+  document.head.appendChild(script);
 }
 
 const SANS = "'Source Sans 3', sans-serif";
@@ -63,6 +81,9 @@ export default function CookieBanner() {
     if (!consent) {
       const timer = setTimeout(() => setVisible(true), 700);
       return () => clearTimeout(timer);
+    } else {
+      // Restore previously granted consents on page load
+      if (consent.analytics) loadUmamiIfNeeded();
     }
   }, []);
 

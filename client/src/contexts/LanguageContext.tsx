@@ -174,7 +174,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Impressum
     'impressum.title': 'Impressum',
-    'impressum.angaben': 'Angaben gemäß § 5 TMG',
+    'impressum.angaben': 'Angaben gemäß § 5 DDG',
     'impressum.kontakt': 'Kontakt',
     'impressum.gewerbe': 'Gewerbeanmeldung',
     'impressum.anmeldung': 'Anmeldebehörde: Stadt Solingen',
@@ -182,7 +182,7 @@ const translations: Record<Language, Record<string, string>> = {
     'impressum.steuer': 'Steuernummer',
     'impressum.ust': 'Umsatzsteuer-ID',
     'impressum.incoming': '(wird nachgereicht)',
-    'impressum.verantwortlich': 'Verantwortlich für den Inhalt nach § 55 Abs. 2 RStV',
+    'impressum.verantwortlich': 'Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV',
     'impressum.haftung': 'Haftungsausschluss',
     'impressum.haftung.inhalte': 'Haftung für Inhalte',
     'impressum.haftung.inhalte.text': 'Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen.',
@@ -377,7 +377,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Impressum
     'impressum.title': 'Legal Notice',
-    'impressum.angaben': 'Information according to § 5 TMG',
+    'impressum.angaben': 'Information according to § 5 DDG',
     'impressum.kontakt': 'Contact',
     'impressum.gewerbe': 'Business Registration',
     'impressum.anmeldung': 'Registration authority: City of Solingen',
@@ -385,7 +385,7 @@ const translations: Record<Language, Record<string, string>> = {
     'impressum.steuer': 'Tax Number',
     'impressum.ust': 'VAT ID',
     'impressum.incoming': '(to be provided)',
-    'impressum.verantwortlich': 'Responsible for content pursuant to § 55 para. 2 RStV',
+    'impressum.verantwortlich': 'Responsible for content pursuant to § 18 para. 2 MStV',
     'impressum.haftung': 'Disclaimer',
     'impressum.haftung.inhalte': 'Liability for Content',
     'impressum.haftung.inhalte.text': 'The contents of our pages were created with the utmost care. However, we cannot guarantee the accuracy, completeness or topicality of the content.',

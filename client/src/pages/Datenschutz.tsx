@@ -1,6 +1,6 @@
 /**
  * Datenschutzerklärung — Cafe&Bar Luxor
- * Gemäß DSGVO (EU) 2016/679, TDDDG (ehem. TTDSG), § 13 TMG
+ * Gemäß DSGVO (EU) 2016/679, TDDDG, DDG § 5 — Stand Mai 2026
  * Stand: Mai 2026
  */
 import { Link } from 'wouter';

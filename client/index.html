@@ -7,7 +7,7 @@
     <!-- Primary Meta Tags -->
     <title>Cafe&amp;Bar Luxor — Ohligser Markt, Solingen</title>
     <meta name="title" content="Cafe&Bar Luxor — Kaffee, Cocktails &amp; Atmosphäre in Solingen" />
-    <meta name="description" content="Cafe&Bar Luxor am Ohligser Markt 5 in Solingen. Genießen Sie erstklassigen Kaffee, handgefertigte Cocktails und eine einladende Atmosphäre. Mo–Sa 09–21 Uhr, So 10–20 Uhr." />
+    <meta name="description" content="Cafe&Bar Luxor am Ohligser Markt 5 in Solingen. Genießen Sie erstklassigen Kaffee, handgefertigte Cocktails und eine einladende Atmosphäre. Mo–Do + So 09–21 Uhr, Fr–Sa 09–23 Uhr." />
     <meta name="keywords" content="Cafe Solingen, Bar Solingen, Kaffee Solingen, Cocktails Solingen, Ohligser Markt, Cafe Bar Luxor, Café Ohligs" />
     <meta name="author" content="Ivan Sarakostov" />
     <meta name="robots" content="index, follow" />
@@ -17,7 +17,7 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://cafebarluxor.com/" />
     <meta property="og:title" content="Cafe&Bar Luxor — Kaffee &amp; Cocktails in Solingen" />
-    <meta property="og:description" content="Ihr Treffpunkt am Ohligser Markt. Kaffee, Cocktails und unvergessliche Momente. Mo–Sa 09–21 Uhr, So 10–20 Uhr." />
+    <meta property="og:description" content="Ihr Treffpunkt am Ohligser Markt. Kaffee, Cocktails und unvergessliche Momente. Mo–Do + So 09–21 Uhr, Fr–Sa 09–23 Uhr." />
     <meta property="og:locale" content="de_DE" />
     <meta property="og:locale:alternate" content="en_GB" />
 
@@ -52,22 +52,28 @@
         "@type": "PostalAddress",
         "streetAddress": "Ohligser Markt 5",
         "addressLocality": "Solingen",
-        "postalCode": "42696",
+        "postalCode": "42697",
         "addressCountry": "DE"
       },
       "email": "stoyansarakostov73@gmail.com",
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],
+          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday"],
           "opens": "09:00",
           "closes": "21:00"
         },
         {
           "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Friday","Saturday"],
+          "opens": "09:00",
+          "closes": "23:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
           "dayOfWeek": ["Sunday"],
-          "opens": "10:00",
-          "closes": "20:00"
+          "opens": "09:00",
+          "closes": "21:00"
         }
       ],
       "servesCuisine": ["Coffee", "Cocktails", "Light Bites"],
@@ -92,10 +98,6 @@
     <!-- dFlip main library -->
     <script src="/manus-storage/dflip.min_33fd7677.js"></script>
     <script type="module" src="/src/main.tsx"></script>
-    <script
-      defer
-      src="%VITE_ANALYTICS_ENDPOINT%/umami"
-      data-website-id="%VITE_ANALYTICS_WEBSITE_ID%">
-    </script>
+    <!-- Umami analytics loaded conditionally after cookie consent via CookieBanner.tsx -->
   </body>
 </html>

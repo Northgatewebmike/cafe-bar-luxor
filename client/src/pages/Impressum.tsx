@@ -1,6 +1,6 @@
 /**
  * Impressum — Cafe&Bar Luxor
- * Pflichtangaben gemäß § 5 TMG (Telemediengesetz) und § 18 Abs. 2 MStV
+ * Pflichtangaben gemäß § 5 DDG (Digitale-Dienste-Gesetz) und § 18 Abs. 2 MStV
  * Last updated: 2026
  */
 import { Link } from 'wouter';
@@ -45,7 +45,7 @@ export default function Impressum() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
           {/* 1. Angaben gemäß § 5 TMG */}
-          <Section title={lang === 'de' ? 'Angaben gemäß § 5 TMG' : 'Legal Notice (§ 5 TMG)'}>
+          <Section title={lang === 'de' ? 'Angaben gemäß § 5 DDG' : 'Legal Notice (§ 5 DDG)'}>
             <p className="font-semibold text-white">Ivan Sarakostov</p>
             <p>Cafe &amp; Bar Luxor</p>
             <p>Ohligser Markt 5</p>

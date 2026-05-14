@@ -76,9 +76,10 @@
 
 /// <reference types="@types/google.maps" />
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePersistFn } from "@/hooks/usePersistFn";
 import { cn } from "@/lib/utils";
+import { getStoredConsent, saveConsent } from "@/components/CookieBanner";
 
 declare global {
   interface Window {
@@ -135,6 +136,10 @@ export function MapView({
 }: MapViewProps) {
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<google.maps.Map | null>(null);
+  const [mapsConsent, setMapsConsent] = useState<boolean>(() => {
+    const c = getStoredConsent();
+    return c ? c.maps : false;
+  });
 
   const init = usePersistFn(async () => {
     await loadMapScript();
@@ -156,9 +161,44 @@ export function MapView({
     }
   });
 
+  // Listen for consent changes dispatched by CookieBanner
   useEffect(() => {
-    init();
-  }, [init]);
+    const handler = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      if (detail?.maps) setMapsConsent(true);
+    };
+    window.addEventListener('luxor:consent', handler);
+    return () => window.removeEventListener('luxor:consent', handler);
+  }, []);
+
+  useEffect(() => {
+    if (mapsConsent) init();
+  }, [mapsConsent, init]);
+
+  // Show consent placeholder if maps consent not yet given
+  if (!mapsConsent) {
+    return (
+      <div
+        className={cn('w-full h-[500px] flex flex-col items-center justify-center gap-4', className)}
+        style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
+      >
+        <p className="text-white/50 text-sm text-center px-6" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+          Um die interaktive Karte anzuzeigen, ist Ihre Einwilligung zur Datenübertragung an Google LLC (USA) erforderlich.
+        </p>
+        <button
+          onClick={() => {
+            const c = getStoredConsent();
+            saveConsent(c?.analytics ?? false, true);
+            setMapsConsent(true);
+          }}
+          className="px-5 py-2 bg-red-700 hover:bg-red-600 text-white text-sm transition-colors"
+          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+        >
+          Google Maps aktivieren
+        </button>
+      </div>
+    );
+  }
 
   return (
     <div ref={mapContainer} className={cn("w-full h-[500px]", className)} />
