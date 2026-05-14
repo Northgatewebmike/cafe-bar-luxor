@@ -143,7 +143,7 @@ export default function Footer() {
         {/* Northgateweb credit */}
         <div className="pt-4 text-center" style={{ borderTop: '1px solid rgba(255,255,255,0.04)', marginTop: 8 }}>
           <a
-            href="https://www.northgateweb.org"
+            href="https://www.northgateweb.com"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 transition-all duration-300 group"
@@ -159,7 +159,7 @@ export default function Footer() {
               className="text-white/30 text-xs font-semibold group-hover:text-red-400/70 transition-colors duration-300"
               style={{ fontFamily: "'Source Sans 3', sans-serif", letterSpacing: '0.08em' }}
             >
-              Northgateweb.org
+              Northgateweb.com
             </span>
           </a>
         </div>
