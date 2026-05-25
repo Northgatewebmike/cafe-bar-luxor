@@ -55,7 +55,7 @@ export default function Hours() {
     { key: 'hours.thursday', day: 4, open: '09:00', close: '21:00', isOpen: true },
     { key: 'hours.friday', day: 5, open: '09:00', close: '23:00', isOpen: true },
     { key: 'hours.saturday', day: 6, open: '09:00', close: '23:00', isOpen: true },
-    { key: 'hours.sunday', day: 0, open: '09:00', close: '21:00', isOpen: true },
+    { key: 'hours.sunday', day: 0, open: '10:00', close: '21:00', isOpen: true },
   ];
 
   return (
