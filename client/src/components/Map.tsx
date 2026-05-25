@@ -87,11 +87,14 @@ declare global {
   }
 }
 
-const API_KEY = import.meta.env.VITE_FRONTEND_FORGE_API_KEY;
+const API_KEY = import.meta.env.VITE_FRONTEND_FORGE_API_KEY || '';
 const FORGE_BASE_URL =
   import.meta.env.VITE_FRONTEND_FORGE_API_URL ||
   "https://forge.butterfly-effect.dev";
 const MAPS_PROXY_URL = `${FORGE_BASE_URL}/v1/maps/proxy`;
+
+// Check if API key is available
+const HAS_API_KEY = !!API_KEY && API_KEY.length > 0;
 
 // Singleton promise — ensures the script is injected only once per page load
 let _mapsScriptPromise: Promise<void> | null = null;
@@ -140,6 +143,7 @@ export function MapView({
     const c = getStoredConsent();
     return c ? c.maps : false;
   });
+  const [apiKeyError, setApiKeyError] = useState<boolean>(!HAS_API_KEY);
 
   const init = usePersistFn(async () => {
     await loadMapScript();
@@ -174,6 +178,20 @@ export function MapView({
   useEffect(() => {
     if (mapsConsent) init();
   }, [mapsConsent, init]);
+
+  // Show error if API key is missing
+  if (apiKeyError) {
+    return (
+      <div
+        className={cn('w-full h-[500px] flex flex-col items-center justify-center gap-4', className)}
+        style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
+      >
+        <p className="text-white/50 text-sm text-center px-6" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+          Die Karte ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns direkt.
+        </p>
+      </div>
+    );
+  }
 
   // Show consent placeholder if maps consent not yet given
   if (!mapsConsent) {
