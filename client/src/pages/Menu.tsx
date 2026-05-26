@@ -23,11 +23,12 @@ declare global {
   }
 }
 
-// v12 full-page mode — 11 pages, Sunday hours corrected to 10:00-21:00
+// v12 full-page mode — 12 pages (cover + 11 content), Sunday hours corrected to 10:00-21:00
 const MENU_PAGES = [
+  '/manus-storage/menu-cover-luxor-v2_ecb75175.png',                    // AI Cover
   '/manus-storage/p01_welcome_47e4cd88.png',                            // Welcome + Öffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
   '/manus-storage/p02_kaffee_tee_d52ec642.png',                         // Kaffee + Tee
-  '/manus-storage/p03_kalt_beecc5ad.png',                               // Kaltgetränke
+  '/manus-storage/p03_kalt_beecc5ad.png',                               // Kaltgetänke
   '/manus-storage/p04_limo_7d863050.png',                               // Hausgemachte Limonade
   '/manus-storage/p05_bier_26274e42.png',                               // Früh Kölsch + Flaschenbier
   '/manus-storage/p06_cocktails1_3c6b912e.png',                         // Cocktails (1) — ingredients only
