@@ -23,20 +23,19 @@ declare global {
   }
 }
 
-// v12 full-page mode — 12 pages (cover + 11 content), Sunday hours corrected to 10:00-21:00
+// v13 full-page mode — 11 pages (cover + 10 content), removed duplicate shots page
 const MENU_PAGES = [
   '/manus-storage/menu-cover-luxor-v2_ecb75175.png',                    // AI Cover
-  '/manus-storage/p01_welcome_47e4cd88.png',                            // Welcome + Öffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
-  '/manus-storage/p02_kaffee_tee_d52ec642.png',                         // Kaffee + Tee
-  '/manus-storage/p03_kalt_beecc5ad.png',                               // Kaltgetänke
-  '/manus-storage/p04_limo_7d863050.png',                               // Hausgemachte Limonade
-  '/manus-storage/p05_bier_26274e42.png',                               // Früh Kölsch + Flaschenbier
-  '/manus-storage/p06_cocktails1_3c6b912e.png',                         // Cocktails (1) — ingredients only
-  '/manus-storage/p07_cocktails2_4051109f.png',                         // Cocktails (2) + Alkoholfrei
-  '/manus-storage/p08_shots_c2c75bc6.png',                              // Alkohol Shots
-  '/manus-storage/p09_longdrinks_whiskey_aperitif_03ebd5e5.png',        // Long Drinks + Whiskey + Aperitif
-  '/manus-storage/p10_wein_eis_46018829.png',                           // Wein & Sekt + Eis
-  '/manus-storage/p11_thanks_1cd94c37.png',                             // Vielen Dank
+  '/manus-storage/p01_welcome_f8823647.png',                            // Welcome + Öffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
+  '/manus-storage/p02_kaffee_tee_bfee7fdf.png',                         // Kaffee + Tee
+  '/manus-storage/p03_kalt_18b40faa.png',                               // Kaltgetränke
+  '/manus-storage/p04_limo_bcfd8d68.png',                               // Hausgemachte Limonade
+  '/manus-storage/p05_bier_dd4bc5ef.png',                               // Früh Kölsch + Flaschenbier
+  '/manus-storage/p06_cocktails1_0b47a53f.png',                         // Cocktails (alkoholisch + alkoholfrei)
+  '/manus-storage/p07_cocktails2_4603c4d6.png',                         // Alkohol Shots (single page)
+  '/manus-storage/p08_longdrinks_whiskey_aperitif_a01e77aa.png',        // Long Drinks + Whiskey + Aperitif
+  '/manus-storage/p09_wein_eis_73577535.png',                           // Wein & Sekt + Eis
+  '/manus-storage/p10_thanks_2635e94f.png',                             // Vielen Dank
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
