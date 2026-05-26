@@ -188,8 +188,9 @@ export default function Contact() {
                       className="text-white/80 text-sm"
                       style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                     >
-                      Mo–Do + So: 09:00–21:00 Uhr<br />
-                      Fr–Sa: 09:00–23:00 Uhr
+                      Mo–Do: 09:00–21:00 Uhr<br />
+                      Fr–Sa: 09:00–23:00 Uhr<br />
+                      So: 10:00–21:00 Uhr
                     </p>
                   </div>
                 </div>
