@@ -1,16 +1,37 @@
-import { useState, useEffect } from 'react';
-import { useLanguage } from '@/contexts/LanguageContext';
-import { X } from 'lucide-react';
+/**
+ * Menu Page — Cafe&Bar Luxor
+ * Uses the real dFlip 3D Flipbook library (same as altohligs.de)
+ * dFlip uses Three.js WebGL for authentic page-curl animation with sound.
+ * Single-page mode: one page fills the full width — big readable text, no zoom needed.
+ */
 
-// v12 full-page mode — 11 pages, Sunday hours corrected to 10:00, all pages regenerated
+import { useEffect, useRef, useState } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
+
+// Declare global dFlip types
+declare global {
+  interface Window {
+    DFLIP: {
+      defaults: Record<string, unknown>;
+      Application: (opts: Record<string, unknown>) => unknown;
+    };
+    DEARFLIP: typeof window.DFLIP;
+    jQuery: ((selector: unknown) => unknown) & {
+      fn: Record<string, unknown>;
+    };
+    $: typeof window.jQuery;
+  }
+}
+
+// v12 full-page mode — 11 pages, Sunday hours corrected to 10:00-21:00
 const MENU_PAGES = [
-  '/manus-storage/p01_welcome_47e4cd88.png',                            // Welcome + Oeffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
+  '/manus-storage/p01_welcome_47e4cd88.png',                            // Welcome + Öffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
   '/manus-storage/p02_kaffee_tee_d52ec642.png',                         // Kaffee + Tee
-  '/manus-storage/p03_kalt_beecc5ad.png',                               // Kaltgetranke + Eischokolade + Milkshake
+  '/manus-storage/p03_kalt_beecc5ad.png',                               // Kaltgetränke
   '/manus-storage/p04_limo_7d863050.png',                               // Hausgemachte Limonade
-  '/manus-storage/p05_bier_26274e42.png',                               // Frueh Koelsch + Flaschenbier
-  '/manus-storage/p06_cocktails1_3c6b912e.png',                         // Cocktails (alkoholisch + alkoholfrei)
-  '/manus-storage/p07_cocktails2_4051109f.png',                         // Cocktails continued
+  '/manus-storage/p05_bier_26274e42.png',                               // Früh Kölsch + Flaschenbier
+  '/manus-storage/p06_cocktails1_3c6b912e.png',                         // Cocktails (1) — ingredients only
+  '/manus-storage/p07_cocktails2_4051109f.png',                         // Cocktails (2) + Alkoholfrei
   '/manus-storage/p08_shots_c2c75bc6.png',                              // Alkohol Shots
   '/manus-storage/p09_longdrinks_whiskey_aperitif_03ebd5e5.png',        // Long Drinks + Whiskey + Aperitif
   '/manus-storage/p10_wein_eis_46018829.png',                           // Wein & Sekt + Eis
@@ -20,120 +41,160 @@ const MENU_PAGES = [
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
 
-export default function Menu() {
-  const { t } = useLanguage();
-  const [currentPage, setCurrentPage] = useState(0);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+function useReveal() {
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+    );
+    const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+}
+
+function DFlipBook() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
   useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (!isFullscreen) return;
-      if (e.key === 'ArrowLeft') setCurrentPage((p) => Math.max(0, p - 1));
-      if (e.key === 'ArrowRight') setCurrentPage((p) => Math.min(MENU_PAGES.length - 1, p + 1));
-      if (e.key === 'Escape') setIsFullscreen(false);
+    let attempts = 0;
+    const maxAttempts = 80; // 8 seconds
+
+    const tryInit = () => {
+      attempts++;
+      const DFLIP = window.DFLIP || window.DEARFLIP;
+
+      if (DFLIP && containerRef.current) {
+        setStatus('ready');
+        setTimeout(() => {
+          if (!containerRef.current) return;
+          try {
+            DFLIP.Application({
+              source: MENU_PAGES,
+              element: containerRef.current,
+              // 3D WebGL mode — the key feature
+              is3D: true,
+              // Sound
+              enableSound: true,
+              soundFile: SOUND_URL,
+              // SINGLE page mode — one page fills full width, big readable text, no zoom needed
+              pageMode: 1,
+              singlePageMode: 1,
+              // No zoom controls needed — text is already big enough
+              showZoomControl: false,
+              // Appearance
+              backgroundColor: '#0a0000',
+              // Controls at bottom
+              controlsPosition: 'bottom',
+              showDownloadControl: false,
+              showShareControl: false,
+              showFullScreenControl: true,
+              // Hard cover
+              cover3DType: true,
+              flipbookHardPages: 'cover',
+              // Auto height — fills available width proportionally
+              height: 'auto',
+              // Flip speed — smooth
+              duration: 700,
+            });
+          } catch (err) {
+            console.error('dFlip init error:', err);
+            setStatus('error');
+          }
+        }, 150);
+      } else if (attempts < maxAttempts) {
+        setTimeout(tryInit, 100);
+      } else {
+        setStatus('error');
+      }
     };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [isFullscreen]);
+
+    tryInit();
+  }, []);
 
   return (
-    <div className="page-enter pt-16 md:pt-20 min-h-screen bg-[#0a0603]">
+    <div className="w-full relative">
+      {status === 'loading' && (
+        <div className="absolute inset-0 flex items-center justify-center z-10 bg-[#0a0000]" style={{ minHeight: '400px' }}>
+          <div className="text-center">
+            <div className="w-10 h-10 border-2 border-red-700/40 border-t-red-700 rounded-full animate-spin mx-auto mb-4" />
+            <p className="text-white/40 text-sm" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              Speisekarte wird geladen…
+            </p>
+          </div>
+        </div>
+      )}
+      {status === 'error' && (
+        <div className="flex items-center justify-center py-20 text-white/30 text-sm text-center" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+          Die Speisekarte konnte nicht geladen werden. Bitte Seite neu laden.
+        </div>
+      )}
+      {/* dFlip mounts here */}
+      <div
+        ref={containerRef}
+        id="luxor-flipbook"
+        style={{ width: '100%', minHeight: '500px' }}
+      />
+    </div>
+  );
+}
+
+export default function Menu() {
+  const { t } = useLanguage();
+  useReveal();
+
+  return (
+    <div className="page-enter pt-16 md:pt-20 min-h-screen bg-[#0a0000]">
       {/* ============ PAGE HERO ============ */}
       <section className="relative h-48 md:h-64 flex items-end overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center"
           style={{ backgroundImage: `url(${HERO_BG})` }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0603] via-[#0a0603]/60 to-[#0a0603]/30" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#0a0000] via-[#0a0000]/60 to-[#0a0000]/30" />
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-8 w-full">
           <div className="flex items-center gap-3 mb-2">
             <div className="h-px w-8 bg-red-700" />
-            <span className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium">
+            <span
+              className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
+              style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+            >
               Cafe&Bar Luxor
             </span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold text-white" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-            {t('menu.title')}
+          <h1
+            className="text-4xl md:text-6xl font-bold text-white"
+            style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
+          >
+            {t('nav.menu')}
           </h1>
         </div>
       </section>
 
-      {/* ============ FLIPBOOK VIEWER ============ */}
-      <section className="py-12 md:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col items-center gap-8">
-            {/* Flipbook Container */}
-            <div
-              className="w-full max-w-2xl aspect-[3/4] bg-white rounded-lg shadow-2xl overflow-hidden cursor-pointer hover:shadow-3xl transition-shadow"
-              onClick={() => setIsFullscreen(true)}
-            >
-              <img
-                src={MENU_PAGES[currentPage]}
-                alt={`Menu page ${currentPage + 1}`}
-                className="w-full h-full object-cover"
-              />
-            </div>
-
-            {/* Page Counter */}
-            <div className="text-center">
-              <p className="text-white/60 text-sm">
-                {t('menu.page')} {currentPage + 1} / {MENU_PAGES.length}
-              </p>
-            </div>
-
-            {/* Navigation Buttons */}
-            <div className="flex gap-4 justify-center">
-              <button
-                onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
-                disabled={currentPage === 0}
-                className="px-6 py-2 bg-red-700 hover:bg-red-600 disabled:bg-gray-600 text-white transition-colors"
-              >
-                ← {t('menu.prev')}
-              </button>
-              <button
-                onClick={() => setCurrentPage((p) => Math.min(MENU_PAGES.length - 1, p + 1))}
-                disabled={currentPage === MENU_PAGES.length - 1}
-                className="px-6 py-2 bg-red-700 hover:bg-red-600 disabled:bg-gray-600 text-white transition-colors"
-              >
-                {t('menu.next')} →
-              </button>
-            </div>
-          </div>
+      {/* ============ INTRO ============ */}
+      <section className="py-6 md:py-8">
+        <div className="max-w-3xl mx-auto px-4 text-center reveal">
+          <p
+            className="text-white/50 text-sm leading-relaxed"
+            style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+          >
+            Klicken Sie auf das Cover, um das Buch zu öffnen — dann auf den Seitenrand oder die Pfeile zum Blättern.
+            Auf dem Handy: Wischen Sie nach links oder rechts.
+          </p>
         </div>
       </section>
 
-      {/* ============ FULLSCREEN MODAL ============ */}
-      {isFullscreen && (
-        <div className="fixed inset-0 z-50 bg-black/95 flex items-center justify-center p-4">
-          <button
-            onClick={() => setIsFullscreen(false)}
-            className="absolute top-4 right-4 text-white hover:text-red-700 transition-colors"
-          >
-            <X size={32} />
-          </button>
-          <div className="w-full h-full max-w-4xl max-h-screen flex items-center justify-center">
-            <img
-              src={MENU_PAGES[currentPage]}
-              alt={`Menu page ${currentPage + 1}`}
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <button
-            onClick={() => setCurrentPage((p) => Math.max(0, p - 1))}
-            disabled={currentPage === 0}
-            className="absolute left-4 top-1/2 -translate-y-1/2 text-white hover:text-red-700 disabled:text-gray-600 transition-colors"
-          >
-            ← 
-          </button>
-          <button
-            onClick={() => setCurrentPage((p) => Math.min(MENU_PAGES.length - 1, p + 1))}
-            disabled={currentPage === MENU_PAGES.length - 1}
-            className="absolute right-4 top-1/2 -translate-y-1/2 text-white hover:text-red-700 disabled:text-gray-600 transition-colors"
-          >
-            →
-          </button>
+      {/* ============ FLIPBOOK ============ */}
+      <section className="pb-16 md:pb-24">
+        <div className="w-full px-0 reveal">
+          <DFlipBook />
         </div>
-      )}
+      </section>
     </div>
   );
 }
