@@ -2,19 +2,19 @@ import { useState, useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { X } from 'lucide-react';
 
-// v11 full-page mode — 12 pages, Sunday hours corrected to 10:00
+// v12 full-page mode — 11 pages, Sunday hours corrected to 10:00, all pages regenerated
 const MENU_PAGES = [
-  '/manus-storage/menu-cover-luxor-v2_ecb75175.png',                    // AI Cover
-  '/manus-storage/p01_welcome_4b3f0c89.png',                            // Welcome + Oeffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
-  '/manus-storage/p02_kaffee_tee_690ea5d1.png',                         // Kaffee + Tee (Frische Minze Tee mit echter frischer Minze inline)
-  '/manus-storage/p03_kalt_23b3f2b8.png',                               // Kaltgetranke + Eischokolade + Milkshake
-  '/manus-storage/p04_limo_6d381439.png',                               // Hausgemachte Limonade — 6 Sorten, 0,5l 4,20 EUR
-  '/manus-storage/p05_bier_b20fe718.png',                               // Frueh Koelsch + Flaschenbier
-  '/manus-storage/p06_cocktails1_4387e056.png',                         // Cocktails (alkoholisch + alkoholfrei) — 1 Seite
-  '/manus-storage/p08_shots_bd0da677.png',                              // Alkohol Shots + Waldmeister + Pfefferminz
-  '/manus-storage/p09_longdrinks_whiskey_aperitif_790cbfd7.png',        // Long Drinks + Whiskey + Aperitif
-  '/manus-storage/p10_wein_eis_de4db475.png',                           // Wein & Sekt + Eis
-  '/manus-storage/p11_thanks_9db71366.png',                             // Vielen Dank
+  '/manus-storage/p01_welcome_47e4cd88.png',                            // Welcome + Oeffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
+  '/manus-storage/p02_kaffee_tee_d52ec642.png',                         // Kaffee + Tee
+  '/manus-storage/p03_kalt_beecc5ad.png',                               // Kaltgetranke + Eischokolade + Milkshake
+  '/manus-storage/p04_limo_7d863050.png',                               // Hausgemachte Limonade
+  '/manus-storage/p05_bier_26274e42.png',                               // Frueh Koelsch + Flaschenbier
+  '/manus-storage/p06_cocktails1_3c6b912e.png',                         // Cocktails (alkoholisch + alkoholfrei)
+  '/manus-storage/p07_cocktails2_4051109f.png',                         // Cocktails continued
+  '/manus-storage/p08_shots_c2c75bc6.png',                              // Alkohol Shots
+  '/manus-storage/p09_longdrinks_whiskey_aperitif_03ebd5e5.png',        // Long Drinks + Whiskey + Aperitif
+  '/manus-storage/p10_wein_eis_46018829.png',                           // Wein & Sekt + Eis
+  '/manus-storage/p11_thanks_1cd94c37.png',                             // Vielen Dank
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';

@@ -598,10 +598,13 @@ export default function Home() {
               <Clock size={16} className="text-red-500 mt-0.5 shrink-0" />
               <div>
                 <p className="text-white text-sm font-medium" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                  Mo–Do + So: 09:00–21:00
+                  Mo–Do: 09:00–21:00
                 </p>
                 <p className="text-white/50 text-xs" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   Fr–Sa: 09:00–23:00
+                </p>
+                <p className="text-white/50 text-xs" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                  So: 10:00–21:00
                 </p>
               </div>
             </div>
@@ -636,7 +639,7 @@ export default function Home() {
             className="text-white/60 mb-8 text-base"
             style={{ fontFamily: "'Source Sans 3', sans-serif" }}
           >
-            Ohligser Markt 5 · 42697 Solingen · Mo–Do + So 09:00–21:00 · Fr–Sa 09:00–23:00
+            Ohligser Markt 5 · 42697 Solingen · Mo–Do 09:00–21:00 · Fr–Sa 09:00–23:00 · So 10:00–21:00
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/speisekarte">

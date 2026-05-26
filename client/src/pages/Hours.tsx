@@ -32,11 +32,14 @@ function isCurrentlyOpen(): boolean {
   const minutes = now.getMinutes();
   const time = hours * 60 + minutes;
 
-  if (day === 5 || day === 6) {
+  if (day === 0) {
+    // Sunday: 10:00–21:00
+    return time >= 600 && time < 1260;
+  } else if (day === 5 || day === 6) {
     // Fri–Sat: 09:00–23:00
     return time >= 540 && time < 1380;
   } else {
-    // Mo–Do + So: 09:00–21:00
+    // Mo–Do: 09:00–21:00
     return time >= 540 && time < 1260;
   }
 }
@@ -49,13 +52,13 @@ export default function Hours() {
   useReveal();
 
   const schedule = [
-    { key: 'hours.monday', day: 1, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.tuesday', day: 2, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.wednesday', day: 3, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.thursday', day: 4, open: '09:00', close: '21:00', isOpen: true },
-    { key: 'hours.friday', day: 5, open: '09:00', close: '23:00', isOpen: true },
-    { key: 'hours.saturday', day: 6, open: '09:00', close: '23:00', isOpen: true },
-    { key: 'hours.sunday', day: 0, open: '10:00', close: '21:00', isOpen: true },
+    { key: 'hours.monday', day: 1, open: '09:00', close: '21:00', isOpen: true, group: 'weekday' },
+    { key: 'hours.tuesday', day: 2, open: '09:00', close: '21:00', isOpen: true, group: 'weekday' },
+    { key: 'hours.wednesday', day: 3, open: '09:00', close: '21:00', isOpen: true, group: 'weekday' },
+    { key: 'hours.thursday', day: 4, open: '09:00', close: '21:00', isOpen: true, group: 'weekday' },
+    { key: 'hours.friday', day: 5, open: '09:00', close: '23:00', isOpen: true, group: 'weekend' },
+    { key: 'hours.saturday', day: 6, open: '09:00', close: '23:00', isOpen: true, group: 'weekend' },
+    { key: 'hours.sunday', day: 0, open: '10:00', close: '21:00', isOpen: true, group: 'sunday' },
   ];
 
   return (
@@ -124,57 +127,64 @@ export default function Hours() {
           <div className="reveal border border-white/10 overflow-hidden">
             {schedule.map((item, i) => {
               const isToday = item.day === today;
+              const prevItem = i > 0 ? schedule[i - 1] : null;
+              const needsSeparator = prevItem && prevItem.group !== item.group;
               return (
-                <div
-                  key={i}
-                  className={`flex items-center justify-between px-6 py-4 border-b border-white/5 last:border-0 transition-all duration-300 ${
-                    isToday
-                      ? 'bg-red-700/10 border-l-2 border-l-[rgba(180,0,0,0.85)]'
-                      : 'hover:bg-white/3'
-                  }`}
-                >
-                  <div className="flex items-center gap-3">
-                    {isToday && (
-                      <span
-                        className="text-red-700 text-xs font-bold tracking-widest uppercase"
-                        style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                      >
-                        {t('hours.today')}
-                      </span>
-                    )}
-                    <span
-                      className={`text-base font-medium ${
-                        isToday ? 'text-red-700' : 'text-white/80'
-                      }`}
-                      style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.1rem' }}
-                    >
-                      {t(item.key)}
-                    </span>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    {item.isOpen ? (
+                <>
+                  {needsSeparator && (
+                    <div className="h-px bg-white/20" />
+                  )}
+                  <div
+                    key={i}
+                    className={`flex items-center justify-between px-6 py-4 border-b border-white/5 last:border-0 transition-all duration-300 ${
+                      isToday
+                        ? 'bg-red-700/10 border-l-2 border-l-[rgba(180,0,0,0.85)]'
+                        : 'hover:bg-white/3'
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      {isToday && (
+                        <span
+                          className="text-red-700 text-xs font-bold tracking-widest uppercase"
+                          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                        >
+                          {t('hours.today')}
+                        </span>
+                      )}
                       <span
                         className={`text-base font-medium ${
-                          isToday ? 'text-red-700' : 'text-white/70'
+                          isToday ? 'text-red-700' : 'text-white/80'
                         }`}
-                        style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                        style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", fontSize: '1.1rem' }}
                       >
-                        {item.open} – {item.close} Uhr
+                        {t(item.key)}
                       </span>
-                    ) : (
-                      <span
-                        className="text-red-400/70 text-sm"
-                        style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                      >
-                        {t('hours.closed')}
-                      </span>
-                    )}
-                    {isToday && (
-                      <Clock size={14} className="text-red-700" />
-                    )}
+                    </div>
+
+                    <div className="flex items-center gap-3">
+                      {item.isOpen ? (
+                        <span
+                          className={`text-base font-medium ${
+                            isToday ? 'text-red-700' : 'text-white/70'
+                          }`}
+                          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                        >
+                          {item.open} – {item.close} Uhr
+                        </span>
+                      ) : (
+                        <span
+                          className="text-red-400/70 text-sm"
+                          style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                        >
+                          {t('hours.closed')}
+                        </span>
+                      )}
+                      {isToday && (
+                        <Clock size={14} className="text-red-700" />
+                      )}
+                    </div>
                   </div>
-                </div>
+                </>
               );
             })}
           </div>
