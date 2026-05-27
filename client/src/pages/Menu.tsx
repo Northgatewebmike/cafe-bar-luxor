@@ -23,19 +23,19 @@ declare global {
   }
 }
 
-// v13 full-page mode — 11 pages (cover + 10 content), removed duplicate shots page
+// v14 full-page mode — 11 pages (cover + 10 content), Eischokolade & Milchshake moved to Kaltgetränke
 const MENU_PAGES = [
   '/manus-storage/menu-cover-luxor-v2_ecb75175.png',                    // AI Cover
-  '/manus-storage/p01_welcome_f8823647.png',                            // Welcome + Öffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
-  '/manus-storage/p02_kaffee_tee_bfee7fdf.png',                         // Kaffee + Tee
-  '/manus-storage/p03_kalt_18b40faa.png',                               // Kaltgetränke
-  '/manus-storage/p04_limo_bcfd8d68.png',                               // Hausgemachte Limonade
-  '/manus-storage/p05_bier_dd4bc5ef.png',                               // Früh Kölsch + Flaschenbier
-  '/manus-storage/p06_cocktails1_0b47a53f.png',                         // Cocktails (alkoholisch + alkoholfrei)
-  '/manus-storage/p07_cocktails2_4603c4d6.png',                         // Alkohol Shots (single page)
-  '/manus-storage/p08_longdrinks_whiskey_aperitif_a01e77aa.png',        // Long Drinks + Whiskey + Aperitif
-  '/manus-storage/p09_wein_eis_73577535.png',                           // Wein & Sekt + Eis
-  '/manus-storage/p10_thanks_2635e94f.png',                             // Vielen Dank
+  '/manus-storage/p01_welcome_2fe7d80b.png',                            // Welcome + Öffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
+  '/manus-storage/p02_kaffee_tee_917ac553.png',                         // Kaffee + Tee
+  '/manus-storage/p03_kalt_e883c6f2.png',                               // Kaltgetränke + Eischokolade + Milchshake (3 flavors)
+  '/manus-storage/p04_limo_987fc853.png',                               // Hausgemachte Limonade
+  '/manus-storage/p05_bier_3fd5cd0b.png',                               // Früh Kölsch + Flaschenbier
+  '/manus-storage/p06_cocktails1_2f6d3d2e.png',                         // Cocktails (alkoholisch + alkoholfrei)
+  '/manus-storage/p07_cocktails2_0cf0286a.png',                         // Alkohol Shots (single page)
+  '/manus-storage/p08_longdrinks_whiskey_aperitif_4eab8e0b.png',        // Long Drinks + Whiskey + Aperitif
+  '/manus-storage/p09_wein_eis_e06a00d3.png',                           // Wein & Sekt + Eis (only ice cream, no Eischokolade/Milchshake)
+  '/manus-storage/p10_thanks_038d282c.png',                             // Vielen Dank
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
