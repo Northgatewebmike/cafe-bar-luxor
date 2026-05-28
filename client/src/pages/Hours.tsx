@@ -132,10 +132,10 @@ export default function Hours() {
               return (
                 <>
                   {needsSeparator && (
-                    <div key={`sep-${i}`} className="h-px bg-white/20" />
+                    <div className="h-px bg-white/20" />
                   )}
                   <div
-                    key={`day-${item.key}`}
+                    key={i}
                     className={`flex items-center justify-between px-6 py-4 border-b border-white/5 last:border-0 transition-all duration-300 ${
                       isToday
                         ? 'bg-red-700/10 border-l-2 border-l-[rgba(180,0,0,0.85)]'
