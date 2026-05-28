@@ -20,7 +20,9 @@ const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4G
 export default function Menu() {
   const [currentPage, setCurrentPage] = useState(0);
   const [isFlipping, setIsFlipping] = useState(false);
+  const [flipDirection, setFlipDirection] = useState<'next' | 'prev'>('next');
   const audioRef = useRef<HTMLAudioElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const playPageTurnSound = () => {
     if (audioRef.current) {
@@ -34,33 +36,36 @@ export default function Menu() {
   const nextPage = () => {
     if (currentPage < MENU_PAGES.length - 1 && !isFlipping) {
       setIsFlipping(true);
+      setFlipDirection('next');
       playPageTurnSound();
       setTimeout(() => {
         setCurrentPage(currentPage + 1);
         setIsFlipping(false);
-      }, 400);
+      }, 600);
     }
   };
 
   const prevPage = () => {
     if (currentPage > 0 && !isFlipping) {
       setIsFlipping(true);
+      setFlipDirection('prev');
       playPageTurnSound();
       setTimeout(() => {
         setCurrentPage(currentPage - 1);
         setIsFlipping(false);
-      }, 400);
+      }, 600);
     }
   };
 
   const goToPage = (pageNum: number) => {
     if (pageNum !== currentPage && !isFlipping) {
       setIsFlipping(true);
+      setFlipDirection(pageNum > currentPage ? 'next' : 'prev');
       playPageTurnSound();
       setTimeout(() => {
         setCurrentPage(pageNum);
         setIsFlipping(false);
-      }, 400);
+      }, 600);
     }
   };
 
@@ -95,19 +100,83 @@ export default function Menu() {
       {/* Flipbook Container */}
       <section className="py-12 md:py-20">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Main Flipbook Display */}
-          <div className="relative mb-8 group">
-            {/* Left Page */}
-            <div className="relative overflow-hidden border-2 border-white/20 hover:border-red-700/40 transition-all duration-300">
-              <div className="relative w-full aspect-[3/4] bg-black/40 flex items-center justify-center">
+          {/* Main Flipbook Display with 3D Flip Effect */}
+          <div ref={containerRef} className="relative mb-8 group perspective">
+            <div
+              className="relative w-full aspect-[3/4] bg-black/40 overflow-hidden"
+              style={{
+                perspective: '1200px',
+                transformStyle: 'preserve-3d',
+              }}
+            >
+              {/* Left Page (Back) */}
+              <div
+                className="absolute inset-0 w-1/2 left-0 origin-right transition-transform duration-600"
+                style={{
+                  transform: isFlipping && flipDirection === 'next' ? 'rotateY(-180deg)' : 'rotateY(0deg)',
+                  transformStyle: 'preserve-3d',
+                  backfaceVisibility: 'hidden',
+                }}
+              >
                 <img
                   src={MENU_PAGES[currentPage]}
                   alt={`Menu Page ${currentPage + 1}`}
-                  className={`w-full h-full object-cover transition-all duration-500 ${
-                    isFlipping ? 'opacity-50 scale-95' : 'opacity-100 scale-100'
-                  }`}
+                  className="w-full h-full object-cover"
                 />
               </div>
+
+              {/* Left Page (Front) */}
+              <div
+                className="absolute inset-0 w-1/2 left-0 origin-right"
+                style={{
+                  transform: isFlipping && flipDirection === 'prev' ? 'rotateY(-180deg)' : 'rotateY(0deg)',
+                  transformStyle: 'preserve-3d',
+                  backfaceVisibility: 'hidden',
+                  transition: 'transform 0.6s ease-out',
+                }}
+              >
+                <img
+                  src={MENU_PAGES[Math.max(0, currentPage - 1)]}
+                  alt={`Menu Page ${Math.max(1, currentPage)}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Right Page (Front) */}
+              <div
+                className="absolute inset-0 w-1/2 right-0 origin-left"
+                style={{
+                  transform: isFlipping && flipDirection === 'next' ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                  transformStyle: 'preserve-3d',
+                  backfaceVisibility: 'hidden',
+                  transition: 'transform 0.6s ease-out',
+                }}
+              >
+                <img
+                  src={MENU_PAGES[currentPage]}
+                  alt={`Menu Page ${currentPage + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Right Page (Back) */}
+              <div
+                className="absolute inset-0 w-1/2 right-0 origin-left transition-transform duration-600"
+                style={{
+                  transform: isFlipping && flipDirection === 'prev' ? 'rotateY(180deg)' : 'rotateY(0deg)',
+                  transformStyle: 'preserve-3d',
+                  backfaceVisibility: 'hidden',
+                }}
+              >
+                <img
+                  src={MENU_PAGES[Math.min(MENU_PAGES.length - 1, currentPage + 1)]}
+                  alt={`Menu Page ${Math.min(MENU_PAGES.length, currentPage + 2)}`}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Center Spine */}
+              <div className="absolute inset-y-0 left-1/2 w-1 bg-gradient-to-b from-black/40 via-black/20 to-black/40 z-10 pointer-events-none" />
             </div>
 
             {/* Navigation Arrows */}
