@@ -30,7 +30,7 @@ const MENU_PAGES = [
   '/manus-storage/p02_kaffee_tee_1715c25a.png',                         // Kaffee + Tee
   '/manus-storage/p03_kalt_e3784c3c.png',                               // Kaltgetranke + Eischokolade + Milchshake (3 flavors)
   '/manus-storage/p04_limo_1c264f90.png',                               // Hausgemachte Limonade
-  '/manus-storage/p05_bier_8be7e786.png',                               // Zapfenbier: Veltins/Frueh 0,3l=2.70EUR, 0,5l=4.50EUR
+  '/manus-storage/p05_bier_b8d067c7.png',                               // Zapfenbier: Veltins/Frueh 0,2l=2EUR, 0,3l=2.70EUR, 0,5l=4.50EUR
   '/manus-storage/p06_cocktails1_cef068f2.png',                         // Cocktails: Aperol 6EUR, Caipirinha 7EUR, Others 8EUR, Alkoholfrei 7EUR
   '/manus-storage/p07_cocktails2_3c082d8a.png',                         // Alkohol Shots (single page)
   '/manus-storage/p08_longdrinks_whiskey_aperitif_d87a187b.png',        // Long Drinks + Whiskey + Aperitif
