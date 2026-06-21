@@ -23,18 +23,18 @@ declare global {
   }
 }
 
-// v14 full-page mode — 11 pages (cover + 10 content), Beer 0.3l=3EUR 0.5l=5EUR, Wine 6EUR
+// v15 full-page mode — 11 pages (cover + 10 content), Beer 0.3l=2.70EUR 0.5l=4.50EUR, Wine 5EUR, Aperol 6EUR
 const MENU_PAGES = [
   '/manus-storage/menu-cover-luxor-v2_ecb75175.png',                    // AI Cover
-  '/manus-storage/p01_welcome_a3a4efef.png',                            // Welcome + Oeffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
-  '/manus-storage/p02_kaffee_tee_455fd07c.png',                         // Kaffee + Tee
-  '/manus-storage/p03_kalt_48642458.png',                               // Kaltgetranke + Eischokolade + Milchshake (3 flavors)
-  '/manus-storage/p04_limo_8c47c2a4.png',                               // Hausgemachte Limonade
-  '/manus-storage/p05_bier_ce1a25d3.png',                               // Zapfenbier: Veltins/Frueh 0,2l=2EUR, 0,3l=3EUR, 0,5l=5EUR
-  '/manus-storage/p06_cocktails1_71f315a1.png',                         // Cocktails: Aperol 7EUR, Caipirinha 7EUR, Others 8EUR, Alkoholfrei 7EUR
-  '/manus-storage/p07_cocktails2_a0490368.png',                         // Alkohol Shots (single page)
-  '/manus-storage/p08_longdrinks_whiskey_aperitif_db42a6be.png',        // Long Drinks + Whiskey + Aperitif
-  '/manus-storage/p09_wein_eis_a7fe6067.png',                           // Wein & Sekt (incl. Rose) 6EUR + Eis
+  '/manus-storage/p01_welcome_70aa7af8.png',                            // Welcome + Oeffnungszeiten (Mo-Do 09-21, Fr-Sa 09-23, So 10-21 separate)
+  '/manus-storage/p02_kaffee_tee_d192801e.png',                         // Kaffee + Tee
+  '/manus-storage/p03_kalt_f3896627.png',                               // Kaltgetranke + Eischokolade + Milchshake (3 flavors)
+  '/manus-storage/p04_limo_af26a299.png',                               // Hausgemachte Limonade
+  '/manus-storage/p05_bier_4f293173.png',                               // Zapfenbier: Veltins/Frueh 0,2l=2EUR, 0,3l=2.70EUR, 0,5l=4.50EUR
+  '/manus-storage/p06_cocktails1_ebb8fa2a.png',                         // Cocktails: Aperol 6EUR, Caipirinha 7EUR, Others 8EUR, Alkoholfrei 7EUR
+  '/manus-storage/p07_cocktails2_661eb2dc.png',                         // Alkohol Shots (single page)
+  '/manus-storage/p08_longdrinks_whiskey_aperitif_c082de66.png',        // Long Drinks + Whiskey + Aperitif
+  '/manus-storage/p09_wein_eis_0ad4bbda.png',                           // Wein & Sekt (incl. Rose) 5EUR + Eis
   '/manus-storage/p10_thanks_9c892491.png',                             // Vielen Dank
 ];
 
