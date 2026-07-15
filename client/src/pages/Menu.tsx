@@ -23,19 +23,20 @@ declare global {
   }
 }
 
-// v17 full-page mode — 11 pages (cover + 10 content) WITH ALLERGEN CODES per EU LMIV
+// v18 full-page mode — 11 pages (cover + 10 content) COMPLETE ALLERGEN AUDIT per EU LMIV
+// Updated: bottled beer A=Gluten, Vodka/Jager Energy coffeinhaltig, improved shots notes, full legend
 const MENU_PAGES = [
   '/manus-storage/menu-cover-luxor-v2_ecb75175.png',                    // AI Cover
-  '/manus-storage/p01_welcome_1baecfd1.png',                            // Welcome + Oeffnungszeiten
-  '/manus-storage/p02_kaffee_tee_528a3d01.png',                         // Kaffee + Tee (allergen codes)
-  '/manus-storage/p03_kalt_67f60bca.png',                               // Kaltgetranke (allergen codes)
-  '/manus-storage/p04_limo_bce9e27b.png',                               // Hausgemachte Limonade
-  '/manus-storage/p05_bier_f2e32b28.png',                               // Bier (allergen codes: A, D)
-  '/manus-storage/p06_cocktails1_834d3455.png',                         // Cocktails (allergen codes)
-  '/manus-storage/p07_cocktails2_c08f9042.png',                         // Shots (allergen notes)
-  '/manus-storage/p08_longdrinks_whiskey_aperitif_05629615.png',        // Long Drinks + Whiskey + Aperitif
-  '/manus-storage/p09_wein_eis_44518eeb.png',                           // Wein & Sekt + Eis (allergen codes: D, F)
-  '/manus-storage/p10_thanks_084b3d2c.png',                             // Vielen Dank
+  '/manus-storage/p01_welcome_a861fbd5.png',                            // Welcome + Oeffnungszeiten
+  '/manus-storage/p02_kaffee_tee_e797704d.png',                         // Kaffee + Tee (allergen codes)
+  '/manus-storage/p03_kalt_52728e96.png',                               // Kaltgetranke (allergen codes)
+  '/manus-storage/p04_limo_69773fdf.png',                               // Hausgemachte Limonade
+  '/manus-storage/p05_bier_7329c9ab.png',                               // Bier (allergen codes: A, D)
+  '/manus-storage/p06_cocktails1_345d65e1.png',                         // Cocktails (allergen codes)
+  '/manus-storage/p07_cocktails2_3552007a.png',                         // Shots (allergen notes)
+  '/manus-storage/p08_longdrinks_whiskey_aperitif_91de020e.png',        // Long Drinks + Whiskey + Aperitif
+  '/manus-storage/p09_wein_eis_8441349a.png',                           // Wein & Sekt + Eis (allergen codes: D, F)
+  '/manus-storage/p10_thanks_7d36bec1.png',                             // Vielen Dank
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
@@ -190,9 +191,55 @@ export default function Menu() {
       </section>
 
       {/* ============ FLIPBOOK ============ */}
-      <section className="pb-16 md:pb-24">
+      <section className="pb-8 md:pb-12">
         <div className="w-full px-0 reveal">
           <DFlipBook />
+        </div>
+      </section>
+
+      {/* ============ ALLERGEN NOTICE (EU LMIV) ============ */}
+      <section className="pb-16 md:pb-24">
+        <div className="max-w-3xl mx-auto px-4 reveal">
+          <div
+            className="border border-red-900/40 rounded-sm p-5 md:p-6"
+            style={{ backgroundColor: 'rgba(30,0,0,0.6)' }}
+          >
+            <div className="flex items-start gap-3">
+              <span className="text-red-700 text-xl mt-0.5 flex-shrink-0">⚠</span>
+              <div>
+                <h3
+                  className="text-white font-semibold text-sm tracking-widest uppercase mb-2"
+                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                >
+                  Allergen- & Zusatzstoffhinweis
+                </h3>
+                <p
+                  className="text-white/60 text-xs leading-relaxed mb-3"
+                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                >
+                  Unsere Speise- und Getränkekarte enthält Kennzeichnungen für die 14 kennzeichnungspflichtigen
+                  Allergene sowie Zusatzstoffe gemäß EU-Lebensmittelinformationsverordnung (LMIV 1169/2011).
+                  Die Codes sind direkt bei den jeweiligen Produkten angegeben.
+                  Trotz sorgfältiger Herstellung können Spuren anderer Stoffe nicht ausgeschlossen werden.
+                </p>
+                <p
+                  className="text-white/60 text-xs leading-relaxed mb-3"
+                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                >
+                  <strong className="text-white/80">Legende:</strong>{' '}
+                  A = Gluten &nbsp;|&nbsp; D = Sulfite/geschwefelt &nbsp;|&nbsp; F = Milch/Laktose &nbsp;|&nbsp;
+                  H = Nüsse &nbsp;|&nbsp; I = Eier &nbsp;|&nbsp; L = Soja
+                </p>
+                <a
+                  href="/allergene"
+                  className="inline-flex items-center gap-1.5 text-red-500 hover:text-red-400 text-xs font-medium transition-colors"
+                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                >
+                  Vollständige Allergenliste &amp; Zusatzstoffe ansehen →
+                </a>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </div>
