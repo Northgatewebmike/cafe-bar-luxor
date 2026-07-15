@@ -24,6 +24,7 @@ import Contact from "./pages/Contact";
 import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import Automaten from "./pages/Automaten";
+import Allergene from "./pages/Allergene";
 import NotFound from "./pages/NotFound";
 import CookieBanner from "./components/CookieBanner";
 
@@ -43,6 +44,7 @@ function Router() {
           <Route path="/impressum" component={Impressum} />
           <Route path="/datenschutz" component={Datenschutz} />
           <Route path="/automaten" component={Automaten} />
+          <Route path="/allergene" component={Allergene} />
           <Route component={NotFound} />
         </Switch>
       </main>
