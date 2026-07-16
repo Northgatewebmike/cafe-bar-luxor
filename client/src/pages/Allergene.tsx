@@ -1,293 +1,429 @@
-import { useEffect } from "react";
+import { Link } from "wouter";
 
 const allergens = [
   {
-    code: "A",
-    number: "1",
+    num: 1, letter: "A",
     name: "Glutenhaltiges Getreide",
-    description:
-      "Weizen, Roggen, Gerste, Hafer, Dinkel, Kamut und daraus hergestellte Erzeugnisse (Stärke, Brot, Nudeln, Panaden, Wurstwaren, Desserts).",
-    sub: [
-      { code: "A.1", name: "Weizen" },
-      { code: "A.2", name: "Roggen" },
-      { code: "A.3", name: "Gerste" },
-      { code: "A.4", name: "Hafer" },
-      { code: "A.5", name: "Dinkel" },
-      { code: "A.6", name: "Kamut" },
-    ],
+    detail: "Weizen, Roggen, Gerste, Hafer, Dinkel, Kamut und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "B",
-    number: "2",
+    num: 2, letter: "B",
     name: "Fisch",
-    description:
-      "Alle Süß- und Salzwasserfischarten, Kaviar, Fischextrakte, Würzpasten, Saucen.",
+    detail: "Fisch und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "C",
-    number: "3",
+    num: 3, letter: "C",
     name: "Krebstiere",
-    description:
-      "Garnelen, Hummer, Krebse, Scampi, Shrimps, Langusten und daraus gewonnene Erzeugnisse.",
+    detail: "Krebstiere und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "D",
-    number: "4",
-    name: "Schwefeldioxide und Sulfite",
-    description:
-      "In Softdrinks, Bier, Wein, Essig, Trockenfrüchten und diversen Fleisch-, Fisch- und Gemüseprodukten (ab 10 mg/kg oder 10 mg/l).",
+    num: 4, letter: "D",
+    name: "Schwefeldioxid und Sulfite",
+    detail: "In Konzentrationen von mehr als 10 mg/kg oder 10 mg/l als SO₂ angegeben",
   },
   {
-    code: "E",
-    number: "5",
+    num: 5, letter: "E",
     name: "Sellerie",
-    description:
-      "Knolle und Staude, als Gewürz in Fertiggerichten, Dressings, Ketchup, Saucen.",
+    detail: "Sellerie und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "F",
-    number: "6",
+    num: 6, letter: "F",
     name: "Milch und Laktose",
-    description:
-      "Butter, Käse, Margarine und Produkte mit Milch/Laktose (Brot, Backwaren, Wurstwaren, Pürees, Suppen, Saucen).",
+    detail: "Milch und daraus hergestellte Erzeugnisse (einschließlich Laktose)",
   },
   {
-    code: "G",
-    number: "7",
+    num: 7, letter: "G",
     name: "Sesamsamen",
-    description:
-      "Im Rohzustand, als Öl oder Paste, in Gebäck, Marinaden, Dressings, Falafel, Müsli, Hummus.",
+    detail: "Sesamsamen und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "H",
-    number: "8",
+    num: 8, letter: "H",
     name: "Nüsse",
-    description:
-      "Mandeln, Haselnüsse, Walnüsse, Cashewnüsse, Pekannüsse, Paranüsse, Pistazien, Macadamia-/Queenslandnüsse und daraus gewonnene Erzeugnisse.",
-    sub: [
-      { code: "H.1", name: "Mandeln" },
-      { code: "H.2", name: "Haselnüsse" },
-      { code: "H.3", name: "Walnüsse" },
-      { code: "H.4", name: "Cashewnüsse" },
-      { code: "H.5", name: "Pekannüsse" },
-      { code: "H.6", name: "Paranüsse" },
-      { code: "H.7", name: "Pistazien" },
-      { code: "H.8", name: "Macadamia-/Queenslandnüsse" },
-    ],
+    detail: "Mandel, Haselnuss, Walnuss, Cashew, Pekannuss, Paranuss, Pistazie, Macadamia und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "I",
-    number: "9",
+    num: 9, letter: "I",
     name: "Eier",
-    description:
-      "Als Flüssigei, Lecithin oder Albumin in Mayonnaise, Panaden, Dressings, Kuchen, Suppen, Saucen, Nudeln, Glasuren.",
+    detail: "Eier und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "J",
-    number: "10",
+    num: 10, letter: "J",
     name: "Lupinen",
-    description:
-      "Lupinensamen, Lupinenmehl, Milch, Tofu und Konzentrat in Brot, Backwaren, Nudeln, Gewürzen, Würsten, Aufstrichen, Süßspeisen.",
+    detail: "Lupinen und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "K",
-    number: "11",
+    num: 11, letter: "K",
     name: "Senf",
-    description:
-      "Senfkörner, Pulver und daraus gewonnene Erzeugnisse wie Dressings, Marinaden, Currys, Wurstwaren, Aufstriche, Gewürzmischungen.",
+    detail: "Senf und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "L",
-    number: "12",
+    num: 12, letter: "L",
     name: "Soja",
-    description:
-      "Sojabohnen und daraus gewonnene Erzeugnisse (Miso, Sojasoße, Sojaöl, Gebäck, Marinaden, Kaffeeweißer, Suppen, Saucen, Dressings).",
+    detail: "Soja und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "M",
-    number: "13",
+    num: 13, letter: "M",
     name: "Weichtiere",
-    description:
-      "Schnecken, Tintenfisch, Austern, Muscheln und alle Erzeugnisse mit Weichtieren (Gewürzmischungen, Saucen, Salate, Pasten).",
+    detail: "Weichtiere und daraus hergestellte Erzeugnisse",
   },
   {
-    code: "N",
-    number: "14",
+    num: 14, letter: "N",
     name: "Erdnüsse",
-    description:
-      "Alle Erzeugnisse aus Erdnüssen (Erdnussöl, -butter) in Gebäck, Kuchen, Desserts, Pommes Frites, Aufstrichen, Füllungen.",
+    detail: "Erdnüsse und daraus hergestellte Erzeugnisse",
   },
 ];
 
 const additives = [
-  { label: "mit Farbstoff", description: "Lebensmittel mit Farbstoffen (E 100–E 180)" },
-  { label: "mit Konservierungsstoff / konserviert", description: "Lebensmittel mit Konservierungsstoffen (E 200–E 285, E 1105)" },
-  { label: "mit Antioxidationsmittel", description: "Lebensmittel mit Antioxidationsmitteln (E 310–E 321)" },
-  { label: "mit Geschmacksverstärker", description: "Lebensmittel mit Geschmacksverstärkern (E 620–E 635)" },
-  { label: "geschwefelt", description: "Lebensmittel mit Schwefeldioxid/Sulfiten (E 220–E 228, ab 10 mg/kg)" },
-  { label: "geschwärzt", description: "Lebensmittel mit Eisensalzen (E 579, E 585) — z. B. schwarze Oliven" },
-  { label: "gewachst", description: "Lebensmittel mit Oberflächenbehandlung (E 901–E 904, E 912, E 914)" },
-  { label: "mit Süßungsmittel(n)", description: "Lebensmittel mit Süßstoffen (E 950–E 967)" },
-  { label: "mit Phosphat", description: "Fleischerzeugnisse mit Phosphaten (E 338–E 341, E 450–E 452)" },
-  { label: "coffeinhaltig", description: "Coffeinhaltige Erfrischungsgetränke" },
-  { label: "chininhaltig", description: "Getränke mit Chinin/Chininsalzen (z. B. Bitter Lemon)" },
+  { code: "geschwefelt", desc: "mit Schwefeldioxid behandelt (Sulfite) — bei Wein, Sekt, Prosecco, Bier, Aperitif" },
+  { code: "coffeinhaltig", desc: "enthält Coffein — bei Red Bull, Vodka Energy, Neon Rush, Jägermeister Energy" },
+  { code: "chininhaltig", desc: "enthält Chinin — bei Schweppes Bitter Lemon, Tonic Water" },
+  { code: "mit Farbstoff", desc: "enthält Farbstoffe — bei bestimmten Limonaden und Sodas" },
+  { code: "mit Süßungsmittel(n)", desc: "enthält Süßungsmittel — bei Schweppes Bitter Lemon, Cola Zero, Fanta Zero" },
+];
+
+// Menu items with their allergen codes
+const menuItems: { category: string; items: { name: string; codes: string[]; zusatz?: string[] }[] }[] = [
+  {
+    category: "KAFFEE",
+    items: [
+      { name: "Milchkaffee", codes: ["6/F"] },
+      { name: "Kaffee Crema", codes: [] },
+      { name: "Espresso", codes: [] },
+      { name: "Espresso Macchiato", codes: ["6/F"] },
+      { name: "Doppelter Espresso", codes: [] },
+      { name: "Cappuccino", codes: ["6/F"] },
+      { name: "Cappuccino klein", codes: ["6/F"] },
+      { name: "Eiskaffee", codes: ["6/F"] },
+      { name: "Latte Macchiato", codes: ["6/F"] },
+      { name: "Frappe weiss", codes: ["6/F"] },
+      { name: "Frappe schwarz", codes: [] },
+      { name: "Kakao", codes: ["6/F", "12/L"] },
+      { name: "Kakao mit Sahne", codes: ["6/F", "12/L"] },
+    ],
+  },
+  {
+    category: "TEE",
+    items: [
+      { name: "Grüner Tee", codes: [] },
+      { name: "Schwarzer Tee", codes: [] },
+      { name: "Pfefferminztee", codes: [] },
+      { name: "Früchtetee", codes: [] },
+      { name: "Kamillentee", codes: [] },
+      { name: "Frische Minze Tee", codes: [] },
+      { name: "Vanille Tee", codes: [] },
+      { name: "Kräuter Tee", codes: [] },
+      { name: "Zitronen/Limone Tee", codes: [] },
+      { name: "Waldbeere Tee", codes: [] },
+    ],
+  },
+  {
+    category: "KALTGETRÄNKE",
+    items: [
+      { name: "Coca Cola", codes: [] },
+      { name: "Coca Cola Zero", codes: [], zusatz: ["mit Süßungsmittel(n)"] },
+      { name: "Fanta", codes: [], zusatz: ["mit Farbstoff"] },
+      { name: "Sprite", codes: [] },
+      { name: "Spezi", codes: [] },
+      { name: "Lemon Soda", codes: [] },
+      { name: "Orange Soda", codes: [] },
+      { name: "Mojito Soda", codes: [] },
+      { name: "Apfelschorle", codes: [] },
+      { name: "Eistee Pfirsich / Zitrone", codes: [] },
+      { name: "Schweppes Bitter Lemon", codes: [], zusatz: ["chininhaltig", "mit Süßungsmittel(n)"] },
+      { name: "Red Bull", codes: [], zusatz: ["coffeinhaltig"] },
+      { name: "Orangensaft", codes: [] },
+      { name: "Apfelsaft", codes: [] },
+      { name: "Multivitaminsaft", codes: [] },
+      { name: "Wasser still", codes: [] },
+      { name: "Wasser sprudelnd", codes: [] },
+      { name: "Eischokolade", codes: ["6/F"] },
+      { name: "Milchshake (Erdbeere / Vanille / Schokolade)", codes: ["6/F"] },
+    ],
+  },
+  {
+    category: "HAUSGEMACHTE LIMONADE",
+    items: [
+      { name: "Mango", codes: [] },
+      { name: "Himbeere", codes: [] },
+      { name: "Erdbeere", codes: [] },
+      { name: "Minze", codes: [] },
+      { name: "Granatapfel", codes: [] },
+      { name: "Cranberry", codes: [] },
+    ],
+  },
+  {
+    category: "ZAPFENBIER (vom Fass)",
+    items: [
+      { name: "Veltins (0,2 l / 0,3 l / 0,5 l)", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Früh Kölsch (0,2 l / 0,3 l / 0,5 l)", codes: ["1/A"], zusatz: ["geschwefelt"] },
+    ],
+  },
+  {
+    category: "FLASCHENBIER",
+    items: [
+      { name: "Krombacher", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Krombacher Radler", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Krombacher Alkoholfrei", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Krombacher 0,0 %", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Heineken", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Frankenheim", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Früh Kölsch (Flasche)", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Maisels Weizen Original", codes: ["1/A"], zusatz: ["geschwefelt"] },
+      { name: "Maisels Weizen Alkoholfrei", codes: ["1/A"], zusatz: ["geschwefelt"] },
+    ],
+  },
+  {
+    category: "COCKTAILS (mit Alkohol)",
+    items: [
+      { name: "Aperol Spritz", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Sex on the Beach", codes: [] },
+      { name: "Caipirinha", codes: [] },
+      { name: "Mojito", codes: [] },
+      { name: "Pina Colada", codes: [] },
+      { name: "Blue Lagoon", codes: [] },
+      { name: "Neon Rush", codes: [], zusatz: ["coffeinhaltig (Red Bull)"] },
+      { name: "Vodka Energy", codes: [], zusatz: ["coffeinhaltig (Red Bull)"] },
+      { name: "Cuba Libre", codes: [] },
+    ],
+  },
+  {
+    category: "ALKOHOLFREIE COCKTAILS",
+    items: [
+      { name: "Pina Colada Alkoholfrei", codes: [] },
+      { name: "Roter Pepp", codes: [] },
+      { name: "Sunrise", codes: [] },
+    ],
+  },
+  {
+    category: "SHOTS / ALKOHOL (2 cl)",
+    items: [
+      { name: "Ramazzotti", codes: [] },
+      { name: "Sambuca", codes: [] },
+      { name: "Baileys", codes: ["6/F"] },
+      { name: "Jägermeister", codes: [] },
+      { name: "Martini", codes: [] },
+      { name: "Grappa", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Vodka", codes: [] },
+      { name: "Tequila", codes: [] },
+      { name: "Rum", codes: [] },
+      { name: "Gin", codes: [] },
+      { name: "Amaretto", codes: ["8/H"] },
+      { name: "Averna", codes: [] },
+      { name: "Brandy", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Pfirsichlikör", codes: [] },
+      { name: "Rakija", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Vermouth", codes: [] },
+      { name: "Genever", codes: [] },
+      { name: "Ouzo", codes: [] },
+      { name: "Waldmeister", codes: [] },
+      { name: "Pfefferminz", codes: [] },
+    ],
+  },
+  {
+    category: "LONG DRINKS",
+    items: [
+      { name: "Vodka Lemon", codes: [] },
+      { name: "Vodka Energy", codes: [], zusatz: ["coffeinhaltig (Red Bull)"] },
+      { name: "Whiskey Cola", codes: [] },
+      { name: "Jägermeister Energy", codes: [], zusatz: ["coffeinhaltig (Red Bull)"] },
+      { name: "Jägermeister Cola", codes: [] },
+      { name: "Rum Cola", codes: [] },
+      { name: "Gin Tonic", codes: [] },
+    ],
+  },
+  {
+    category: "WHISKEY (4 cl)",
+    items: [
+      { name: "Jack Daniel's", codes: [] },
+      { name: "Johnnie Walker", codes: [] },
+      { name: "Ballantine's", codes: [] },
+      { name: "Jim Beam", codes: [] },
+    ],
+  },
+  {
+    category: "APERITIF",
+    items: [
+      { name: "Campari", codes: [] },
+      { name: "Campari Orange", codes: [] },
+      { name: "Campari Soda", codes: [] },
+      { name: "Hugo", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Campari Spritz", codes: ["4/D"], zusatz: ["geschwefelt"] },
+    ],
+  },
+  {
+    category: "WEIN & SEKT",
+    items: [
+      { name: "Rotwein (0,2 l)", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Weisswein (0,2 l)", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Rosé Wein (0,2 l)", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Prosecco (0,2 l)", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Sekt (0,2 l)", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Flasche Wein (0,75 l)", codes: ["4/D"], zusatz: ["geschwefelt"] },
+      { name: "Glühwein Winter (0,2 l)", codes: ["4/D"], zusatz: ["geschwefelt"] },
+    ],
+  },
+  {
+    category: "EIS",
+    items: [
+      { name: "Eiskugeln (Vanille / Erdbeere / Schokolade)", codes: ["6/F"] },
+    ],
+  },
 ];
 
 export default function Allergene() {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-[#f0ead6]">
+    <div className="min-h-screen bg-[#0a0a0a] text-[#f5f0e8]">
       {/* Hero */}
-      <div className="relative py-20 px-6 text-center border-b border-[#c8a96e]/20">
-        <div className="absolute inset-0 bg-gradient-to-b from-[#1a0a0a] to-[#0a0a0a] opacity-80" />
-        <div className="relative z-10 max-w-3xl mx-auto">
-          <p className="text-[#c8293a] text-xs tracking-[0.3em] uppercase mb-4 font-medium">
-            Cafe&Bar Luxor — Solingen
-          </p>
-          <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-4">
+      <div className="bg-[#111] border-b border-[#8b1a1a]/30 py-12 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-[#8b1a1a] text-sm tracking-[0.3em] uppercase mb-3">Cafe &amp; Bar Luxor</p>
+          <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
             Allergene &amp; Zusatzstoffe
           </h1>
-          <div className="w-16 h-px bg-[#c8293a] mx-auto mb-6" />
-          <p className="text-[#a89070] text-sm leading-relaxed">
-            Gemäß EU-Lebensmittelinformationsverordnung (LMIV EU 1169/2011) informieren wir Sie
-            über allergene Zutaten und Zusatzstoffe in unseren Speisen und Getränken.
+          <div className="w-24 h-px bg-[#8b1a1a] mx-auto mb-6" />
+          <p className="text-sm text-[#999]">
+            Gemäß EU-Lebensmittelinformationsverordnung (LMIV) Nr. 1169/2011
           </p>
         </div>
       </div>
 
-      <div className="max-w-5xl mx-auto px-6 py-16 space-y-16">
+      <div className="max-w-4xl mx-auto px-4 py-10 space-y-12">
 
-        {/* Guest Notice */}
-        <div className="bg-[#1a0a0a] border border-[#c8293a]/40 rounded-lg p-6 md:p-8">
-          <div className="flex items-start gap-4">
-            <div className="w-10 h-10 rounded-full bg-[#c8293a]/20 flex items-center justify-center flex-shrink-0 mt-1">
-              <span className="text-[#c8293a] text-lg font-bold">!</span>
-            </div>
+        {/* DISCLAIMER */}
+        <div className="bg-[#1a1008] border border-[#8b1a1a]/40 rounded-lg p-6">
+          <div className="flex items-start gap-3">
+            <span className="text-[#8b1a1a] text-xl mt-0.5">⚠</span>
             <div>
-              <h2 className="text-white font-serif text-xl font-semibold mb-3">
-                Hinweis für unsere Gäste
-              </h2>
-              <p className="text-[#a89070] leading-relaxed mb-3">
-                Informationen über Zutaten in unseren Speisen und Getränken, die Allergien oder
-                Unverträglichkeiten auslösen können, erhalten Sie auf Nachfrage bei unseren
-                Servicemitarbeiterinnen und Servicemitarbeitern. Diese stellen Ihnen gerne auch
-                eine schriftliche Dokumentation zur Verfügung.
+              <h2 className="text-[#c9a84c] font-bold text-lg mb-3">Wichtiger Hinweis</h2>
+              <p className="text-[#d4c9b0] text-sm leading-relaxed">
+                Eine Nennung von Allergenen erfolgt, wenn die bezeichneten Stoffe oder daraus hergestellte Erzeugnisse
+                als Zutat im Endprodukt enthalten sind. Trotz sorgfältiger Herstellung unserer Gerichte können neben
+                den gekennzeichneten Zutaten Spuren anderer Stoffe enthalten sein, die im Produktionsprozess in der
+                Küche verwendet werden.
               </p>
-              <p className="text-[#a89070] leading-relaxed text-sm">
-                <strong className="text-[#c8a96e]">Hinweis:</strong> Eine Nennung von Allergenen
-                erfolgt, wenn die bezeichneten Stoffe oder daraus hergestellte Erzeugnisse als
-                Zutat im Endprodukt enthalten sind. Trotz sorgfältiger Herstellung unserer Speisen
-                und Getränke können neben den gekennzeichneten Zutaten Spuren anderer Stoffe
-                enthalten sein, die im Produktionsprozess in der Küche verwendet werden.
+              <p className="text-[#999] text-sm mt-3">
+                Bei Fragen zu Allergenen und Unverträglichkeiten wenden Sie sich bitte an unser Personal.
+                Wir helfen Ihnen gerne weiter.
               </p>
             </div>
           </div>
         </div>
 
-        {/* 14 Allergens */}
-        <div>
-          <h2 className="text-white font-serif text-2xl font-bold mb-2">
-            Die 14 kennzeichnungspflichtigen Allergene
-          </h2>
-          <div className="w-12 h-px bg-[#c8293a] mb-8" />
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {allergens.map((allergen) => (
-              <div
-                key={allergen.code}
-                className="bg-[#111] border border-[#c8a96e]/20 rounded-lg p-5 hover:border-[#c8293a]/40 transition-colors"
-              >
-                <div className="flex items-start gap-3 mb-2">
-                  <span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-[#c8293a]/20 text-[#c8293a] font-bold text-sm flex-shrink-0">
-                    {allergen.code}
-                  </span>
-                  <div>
-                    <h3 className="text-white font-semibold text-sm">{allergen.name}</h3>
-                    <p className="text-[#a89070] text-xs mt-1 leading-relaxed">
-                      {allergen.description}
-                    </p>
-                  </div>
-                </div>
-                {allergen.sub && (
-                  <div className="mt-3 ml-11 flex flex-wrap gap-1">
-                    {allergen.sub.map((s) => (
-                      <span
-                        key={s.code}
-                        className="text-xs bg-[#1a1a1a] border border-[#c8a96e]/20 text-[#c8a96e] px-2 py-0.5 rounded"
-                      >
-                        {s.code}: {s.name}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Additives */}
-        <div>
-          <h2 className="text-white font-serif text-2xl font-bold mb-2">
-            Kennzeichnungspflichtige Zusatzstoffe
-          </h2>
-          <div className="w-12 h-px bg-[#c8293a] mb-4" />
-          <p className="text-[#a89070] text-sm mb-6 leading-relaxed">
-            Folgende Zusatzstoffe müssen gemäß Lebensmittelrecht auf Speise- und Getränkekarten
-            kenntlich gemacht werden:
-          </p>
-          <div className="overflow-x-auto">
+        {/* SECTION 1: ALLERGEN LEGEND TABLE */}
+        <section>
+          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">Abschnitt 1</h2>
+          <h3 className="font-serif text-2xl font-bold text-white mb-6">Allergene — Legende</h3>
+          <div className="overflow-x-auto rounded-lg border border-[#2a2a2a]">
             <table className="w-full text-sm">
               <thead>
-                <tr className="border-b border-[#c8a96e]/30">
-                  <th className="text-left py-3 px-4 text-[#c8a96e] font-semibold text-xs uppercase tracking-wider">
-                    Kenntlichmachung
-                  </th>
-                  <th className="text-left py-3 px-4 text-[#c8a96e] font-semibold text-xs uppercase tracking-wider">
-                    Beschreibung
-                  </th>
+                <tr className="bg-[#1a1a1a] border-b border-[#2a2a2a]">
+                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold w-16">Nr.</th>
+                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold w-12">Code</th>
+                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold">Allergen</th>
+                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold hidden md:table-cell">Beschreibung</th>
                 </tr>
               </thead>
               <tbody>
-                {additives.map((item, i) => (
+                {allergens.map((a, i) => (
                   <tr
-                    key={i}
-                    className={`border-b border-[#c8a96e]/10 ${
-                      i % 2 === 0 ? "bg-[#111]" : "bg-[#0d0d0d]"
-                    }`}
+                    key={a.num}
+                    className={`border-b border-[#1e1e1e] ${i % 2 === 0 ? "bg-[#111]" : "bg-[#0d0d0d]"}`}
                   >
-                    <td className="py-3 px-4 text-white font-medium whitespace-nowrap">
-                      {item.label}
+                    <td className="px-4 py-3 text-[#c9a84c] font-bold">{a.num}</td>
+                    <td className="px-4 py-3">
+                      <span className="inline-block bg-[#8b1a1a] text-white text-xs font-bold px-2 py-1 rounded">
+                        {a.letter}
+                      </span>
                     </td>
-                    <td className="py-3 px-4 text-[#a89070]">{item.description}</td>
+                    <td className="px-4 py-3 text-white font-medium">{a.name}</td>
+                    <td className="px-4 py-3 text-[#999] hidden md:table-cell text-xs">{a.detail}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           </div>
-        </div>
-
-        {/* Legal basis */}
-        <div className="border-t border-[#c8a96e]/20 pt-8">
-          <h2 className="text-white font-serif text-lg font-semibold mb-3">Rechtliche Grundlagen</h2>
-          <ul className="text-[#a89070] text-sm space-y-2 leading-relaxed">
-            <li>
-              • EU-Verordnung LMIV EU 1169/2011 vom 25. Oktober 2011 zur Information der
-              Verbraucher über Lebensmittel
-            </li>
-            <li>
-              • Verordnung zur Durchführung unionsrechtlicher Vorschriften betreffend die
-              Information der Verbraucher über Lebensmittel (LMIDV)
-            </li>
-            <li>
-              • Lebensmittel-, Bedarfsgegenstände- und Futtermittelgesetzbuch (LFGB)
-            </li>
-          </ul>
-          <p className="text-[#6b5a45] text-xs mt-6">
-            Stand: gemäß LMIV EU 1169/2011 (gültig seit 13. Dezember 2014). Bei Fragen wenden
-            Sie sich bitte an unser Servicepersonal.
+          <p className="text-[#666] text-xs mt-3">
+            * Auf mobilen Geräten wird die Beschreibungsspalte ausgeblendet. Tippen Sie auf ein Allergen für Details.
           </p>
+        </section>
+
+        {/* SECTION 2: ADDITIVES */}
+        <section>
+          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">Abschnitt 2</h2>
+          <h3 className="font-serif text-2xl font-bold text-white mb-6">Zusatzstoffe — Kennzeichnung</h3>
+          <p className="text-[#999] text-sm mb-4">
+            Die folgenden Zusatzstoffe sind in unseren Produkten enthalten und werden gemäß LMIV gekennzeichnet.
+            Nur bestätigte Zusatzstoffe aus den Originalrezepten der Hersteller werden aufgeführt.
+          </p>
+          <div className="space-y-3">
+            {additives.map((a) => (
+              <div key={a.code} className="flex items-start gap-3 bg-[#111] border border-[#2a2a2a] rounded-lg px-4 py-3">
+                <span className="inline-block bg-[#1a3a1a] text-[#4caf50] text-xs font-bold px-2 py-1 rounded whitespace-nowrap mt-0.5">
+                  {a.code}
+                </span>
+                <p className="text-[#d4c9b0] text-sm">{a.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* SECTION 3: MENU ITEMS OVERVIEW */}
+        <section>
+          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">Abschnitt 3</h2>
+          <h3 className="font-serif text-2xl font-bold text-white mb-2">Speisekarte — Allergenübersicht</h3>
+          <p className="text-[#999] text-sm mb-6">
+            Alle Positionen der Speisekarte mit ihren Allergen- und Zusatzstoffkennzeichnungen.
+            Codes entsprechen der Legende oben (Nr./Buchstabe).
+          </p>
+          <div className="space-y-8">
+            {menuItems.map((cat) => (
+              <div key={cat.category}>
+                <h4 className="text-[#8b1a1a] font-bold text-sm tracking-widest uppercase mb-3 pb-2 border-b border-[#2a2a2a]">
+                  {cat.category}
+                </h4>
+                <div className="space-y-1">
+                  {cat.items.map((item) => (
+                    <div key={item.name} className="flex items-start justify-between gap-4 py-1.5 border-b border-[#1a1a1a]">
+                      <span className="text-[#d4c9b0] text-sm">{item.name}</span>
+                      <div className="flex flex-wrap gap-1 justify-end shrink-0">
+                        {item.codes.length === 0 && (!item.zusatz || item.zusatz.length === 0) && (
+                          <span className="text-[#444] text-xs">—</span>
+                        )}
+                        {item.codes.map((code) => (
+                          <span
+                            key={code}
+                            className="inline-block bg-[#8b1a1a] text-white text-xs font-bold px-2 py-0.5 rounded"
+                          >
+                            {code}
+                          </span>
+                        ))}
+                        {item.zusatz?.map((z) => (
+                          <span
+                            key={z}
+                            className="inline-block bg-[#1a3a1a] text-[#4caf50] text-xs px-2 py-0.5 rounded"
+                          >
+                            {z}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* LEGAL FOOTER */}
+        <div className="border-t border-[#2a2a2a] pt-8 text-center">
+          <p className="text-[#666] text-xs leading-relaxed max-w-2xl mx-auto mb-4">
+            Diese Allergenkennzeichnung entspricht den Anforderungen der EU-Verordnung Nr. 1169/2011
+            (Lebensmittelinformationsverordnung, LMIV) sowie der deutschen Lebensmittelinformations-Durchführungsverordnung (LMIDV).
+            Stand: Juli 2026. Änderungen vorbehalten.
+          </p>
+          <Link href="/speisekarte" className="inline-block text-[#8b1a1a] hover:text-[#c9a84c] text-sm transition-colors">
+            ← Zurück zur Speisekarte
+          </Link>
         </div>
       </div>
     </div>
