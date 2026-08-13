@@ -25,10 +25,11 @@ import Impressum from "./pages/Impressum";
 import Datenschutz from "./pages/Datenschutz";
 import Automaten from "./pages/Automaten";
 import Allergene from "./pages/Allergene";
+import FileManager from "./pages/FileManager";
 import NotFound from "./pages/NotFound";
 import CookieBanner from "./components/CookieBanner";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <div className="min-h-screen flex flex-col bg-[#0a0603]">
       <ScrollToTop />
@@ -45,6 +46,7 @@ function Router() {
           <Route path="/datenschutz" component={Datenschutz} />
           <Route path="/automaten" component={Automaten} />
           <Route path="/allergene" component={Allergene} />
+          <Route path="/dateiverwaltung" component={FileManager} />
           <Route component={NotFound} />
         </Switch>
       </main>

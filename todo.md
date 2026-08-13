@@ -1,0 +1,9 @@
+- [x] Review the full-stack project conventions and determine the secure file-storage flow
+- [x] Upgrade the static website to full-stack capabilities
+- [x] Add an owner-facing file upload and storage interface
+- [x] Persist file metadata and show stored files in the interface
+- [x] Fix and re-run file-upload validation tests
+- [x] Verify protected file-manager route, schema, server procedures, and storage validation without owner sign-in
+- [x] Create a repository asset inventory for website images, media, and storage URLs
+- [ ] Sync all deployable website source files and implementation documents to the connected GitHub repository
+- [ ] Save a verified project checkpoint and report the result
