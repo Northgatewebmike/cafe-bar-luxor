@@ -5,5 +5,5 @@
 - [x] Fix and re-run file-upload validation tests
 - [x] Verify protected file-manager route, schema, server procedures, and storage validation without owner sign-in
 - [x] Create a repository asset inventory for website images, media, and storage URLs
-- [ ] Sync all deployable website source files and implementation documents to the connected GitHub repository
-- [ ] Save a verified project checkpoint and report the result
+- [x] Sync all deployable website source files and implementation documents to the connected GitHub repository
+- [x] Save a verified project checkpoint and report the result
