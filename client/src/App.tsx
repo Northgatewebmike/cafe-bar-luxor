@@ -1,6 +1,6 @@
 import { Toaster } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
-import { Route, Switch, useLocation } from "wouter";
+import { Route, Router as WouterRouter, Switch, useLocation } from "wouter";
 import { useEffect } from "react";
 
 function ScrollToTop() {
@@ -56,15 +56,19 @@ function Router() {
   );
 }
 
+const wouterBase = import.meta.env.BASE_URL === "/" ? "" : import.meta.env.BASE_URL.replace(/\/$/, "");
+
 export default function App() {
   return (
     <ErrorBoundary>
       <ThemeProvider defaultTheme="dark">
         <LanguageProvider>
-          <TooltipProvider>
-            <Toaster />
-            <Router />
-          </TooltipProvider>
+          <WouterRouter base={wouterBase}>
+            <TooltipProvider>
+              <Toaster />
+              <Router />
+            </TooltipProvider>
+          </WouterRouter>
         </LanguageProvider>
       </ThemeProvider>
     </ErrorBoundary>

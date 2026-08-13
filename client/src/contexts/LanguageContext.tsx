@@ -42,18 +42,6 @@ const translations: Record<Language, Record<string, string>> = {
     'home.features.atmosphere.title': 'Einladende Atmosphäre',
     'home.features.atmosphere.desc': 'Ein warmer, gemütlicher Ort zum Verweilen, Entspannen und Genießen — zu jeder Tageszeit.',
 
-    // Home Testimonials
-    'home.testimonials.title': 'Was unsere Gäste sagen',
-    'home.testimonials.1.text': 'Egal ob zum Kaffee mittags oder für Cocktails abends — wir gehen gerne dorthin. Freundlicher Service, faire Preise für Ohligs.',
-    'home.testimonials.1.author': 'Joscha F.',
-    'home.testimonials.1.role': 'Stammgast',
-    'home.testimonials.2.text': 'Für 5 Euro der günstigste Aperol Spritz in Solingen! Unglaublich gutes Preis-Leistungs-Verhältnis und freundliches Personal.',
-    'home.testimonials.2.author': 'Lu K.',
-    'home.testimonials.2.role': 'Lokaler Guide · 23 Bewertungen',
-    'home.testimonials.3.text': 'Essen: 4 | Service: 5 | Atmosphäre: 5. Ruhig, entspannte Unterhaltung möglich. Kein Warten.',
-    'home.testimonials.3.author': 'Dragomir N.',
-    'home.testimonials.3.role': 'Gast',
-
     // About
     'about.title': 'Über uns',
     'about.subtitle': 'Unsere Geschichte',
@@ -204,8 +192,9 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.nav.title': 'Navigation',
     'footer.contact.title': 'Kontakt',
     'footer.hours.title': 'Öffnungszeiten',
-    'footer.hours.weekday': 'Mo–Do + So: 09:00–21:00 Uhr',
+    'footer.hours.weekday': 'Mo–Do: 09:00–21:00 Uhr',
     'footer.hours.weekend': 'Fr–Sa: 09:00–23:00 Uhr',
+    'footer.hours.sunday': 'So: 10:00–21:00 Uhr',
 
     // Common
     'common.back': 'Zurück',
@@ -244,18 +233,6 @@ const translations: Record<Language, Record<string, string>> = {
     'home.features.cocktails.desc': 'Creative cocktail creations and classic favourites — something for every taste.',
     'home.features.atmosphere.title': 'Welcoming Atmosphere',
     'home.features.atmosphere.desc': 'A warm, cosy place to linger, relax and enjoy — at any time of day.',
-
-    // Home Testimonials
-    'home.testimonials.title': 'What our guests say',
-    'home.testimonials.1.text': 'Whether for coffee at lunch or cocktails in the evening — we love coming here. Friendly service and fair prices for the Ohligs area.',
-    'home.testimonials.1.author': 'Joscha F.',
-    'home.testimonials.1.role': 'Regular Guest',
-    'home.testimonials.2.text': 'The cheapest Aperol Spritz in Solingen for just €5! Incredible value for money and friendly staff.',
-    'home.testimonials.2.author': 'Lu K.',
-    'home.testimonials.2.role': 'Local Guide · 23 Reviews',
-    'home.testimonials.3.text': 'Food: 4 | Service: 5 | Atmosphere: 5. Quiet, easy to have a conversation. No waiting.',
-    'home.testimonials.3.author': 'Dragomir N.',
-    'home.testimonials.3.role': 'Guest',
 
     // About
     'about.title': 'About Us',
@@ -407,8 +384,9 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.nav.title': 'Navigation',
     'footer.contact.title': 'Contact',
     'footer.hours.title': 'Opening Hours',
-    'footer.hours.weekday': 'Mon–Thu + Sun: 09:00–21:00',
+    'footer.hours.weekday': 'Mon–Thu: 09:00–21:00',
     'footer.hours.weekend': 'Fri–Sat: 09:00–23:00',
+    'footer.hours.sunday': 'Sun: 10:00–21:00',
 
     // Common
     'common.back': 'Back',

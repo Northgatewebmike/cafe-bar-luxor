@@ -12,3 +12,41 @@
 - [x] Document the exact Vercel environment variables required for backend, database, OAuth, and storage
 - [ ] Connect the GitHub repository to Vercel and trigger a deployment
 - [ ] Verify the Vercel deployment matches the current live website
+- [x] Research free hosting alternatives with custom-domain support for cafebarluxor.com
+- [x] Compare alternatives against the current backend, database, file storage, and media requirements
+- [x] Recommend the best no-cost hosting path and domain configuration steps
+- [x] Review the existing public build for Cloudflare Pages compatibility
+- [x] Add Cloudflare Pages configuration that preserves the current public website behavior
+- [x] Build and verify the Cloudflare-ready public website
+- [ ] Document the exact safe Cloudflare DNS cutover steps for cafebarluxor.com and www
+- [ ] Save the Cloudflare-ready project checkpoint
+- [ ] Complete the Cloudflare account verification and Pages deployment in the connected browser
+- [x] Audit every public asset referenced by the site and verify it exists in the GitHub Pages bundle
+- [x] Generate the self-contained GitHub Pages artifact and verify it has no missing managed-storage dependencies
+- [x] Document the verified public asset inventory before publishing
+- [x] Perform a final route-by-route and media-reference audit of the GitHub Pages artifact
+- [x] Rebuild the artifact with the GitHub Pages 404 fallback and verify every required public asset is bundled
+- [x] Confirm the public asset-audit document is present before publication
+- [x] Verify each public route through the GitHub Pages 404 fallback using the generated static artifact
+- [x] Fix the GitHub Pages artifact so the bundled dFlip menu initializes correctly
+- [x] Verify all complete public routes after the flipbook runtime correction
+- [x] Publish the complete verified public static website repository and check its live URL
+- [x] Complete GitHub Pages settings and public-site verification in the connected browser
+- [x] Keep the GitHub Pages preview on its default URL until cafebarluxor.com DNS is ready to switch
+- [x] Correct GitHub Pages project-path routing so all published routes render from the default URL
+- [x] Bundle and validate every dFlip browser dependency in the GitHub Pages artifact
+- [x] Create the approved public cafe-bar-luxor-pages repository and upload the artifact
+- [ ] Add a GitHub Actions workflow to build and publish the public site to GitHub Pages
+- [ ] Configure GitHub Pages to use the repository workflow deployment source
+- [ ] Verify the GitHub Pages public website and document cafebarluxor.com DNS records
+- [x] Save the GitHub Pages-ready project checkpoint
+- [ ] Build a self-contained public GitHub Pages artifact with all public images, menu files, icons, and domain configuration
+- [ ] Create the approved public cafe-bar-luxor-pages repository and upload the artifact
+- [ ] Enable GitHub Pages from the public artifact and assign cafebarluxor.com
+- [x] Verify the public GitHub Pages deployment before changing any domain DNS records
+- [x] Remove fabricated customer reviews and ratings from the public website before final GitHub Pages verification
+- [x] Verify every public route via the local GitHub Pages fallback server
+- [x] Verify every published route directly on GitHub Pages after the latest deployment
+- [x] Confirm GitHub Pages source, branch, default URL, and no custom-domain cutover yet
+- [x] Correct stale Sunday-hours metadata and translation text to show Sunday 10:00–21:00 separately
+- [x] Document the safe GitHub Pages cutover for cafebarluxor.com and www
