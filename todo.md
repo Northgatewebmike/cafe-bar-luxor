@@ -7,3 +7,8 @@
 - [x] Create a repository asset inventory for website images, media, and storage URLs
 - [x] Sync all deployable website source files and implementation documents to the connected GitHub repository
 - [x] Save a verified project checkpoint and report the result
+- [x] Assess the existing full-stack architecture for Vercel compatibility
+- [x] Add Vercel deployment configuration without changing website behavior
+- [x] Document the exact Vercel environment variables required for backend, database, OAuth, and storage
+- [ ] Connect the GitHub repository to Vercel and trigger a deployment
+- [ ] Verify the Vercel deployment matches the current live website
