@@ -4,6 +4,7 @@ import { join, relative } from "node:path";
 const sourceRoot = "/home/ubuntu/cafe-bar-luxor/dist/public";
 const mediaRoot = "/home/ubuntu/cafe-bar-luxor-assets/media";
 const outputRoot = "/home/ubuntu/cafe-bar-luxor-pages-build";
+const publishedMediaRoot = "/home/ubuntu/cafe-bar-luxor-pages-repo/media";
 const storageOrigin = "https://cafeluxor-tosj4glv.manus.space/manus-storage/";
 const cloudfrontHero = "https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp";
 const cloudfrontLogo = "https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/cafe-bar-luxor-logo-v3-ZHCckNnud7VaGAJRFa8Z7r.png";
@@ -17,6 +18,18 @@ const flipbookRuntime = [
   "pdf.min_b18585e0.js",
   "dflip.min_33fd7677.js",
 ];
+const publicRoutes = [
+  "ueber-uns",
+  "speisekarte",
+  "galerie",
+  "oeffnungszeiten",
+  "kontakt",
+  "automaten",
+  "allergene",
+  "jobs-praktikum",
+  "impressum",
+  "datenschutz",
+];
 
 async function listFiles(directory) {
   const entries = await readdir(directory, { withFileTypes: true });
@@ -29,10 +42,16 @@ async function listFiles(directory) {
   return files;
 }
 
-async function downloadPublicAsset(url, destination) {
-  const response = await fetch(url);
-  if (!response.ok) throw new Error(`Could not archive required public asset: ${url}`);
-  await writeFile(destination, Buffer.from(await response.arrayBuffer()));
+async function downloadPublicAsset(url, destination, fallbackSource) {
+  try {
+    const response = await fetch(url);
+    if (!response.ok) throw new Error(`Received HTTP ${response.status}`);
+    await writeFile(destination, Buffer.from(await response.arrayBuffer()));
+  } catch (error) {
+    if (!fallbackSource) throw new Error(`Could not archive required public asset: ${url}`, { cause: error });
+    await cp(fallbackSource, destination);
+    console.warn(`Recovered unavailable asset from published Pages archive: ${url}`);
+  }
 }
 
 await rm(outputRoot, { recursive: true, force: true });
@@ -42,13 +61,17 @@ await cp(mediaRoot, join(outputRoot, "media"), { recursive: true });
 await cp("/home/ubuntu/webdev-static-assets/cafe-bar-luxor-logo-v3.png", join(outputRoot, "media", "cafe-bar-luxor-logo-v3.png"));
 
 for (const runtimeFile of flipbookRuntime) {
-  await downloadPublicAsset(`${storageOrigin}${runtimeFile}`, join(outputRoot, "media", runtimeFile));
+  await downloadPublicAsset(
+    `${storageOrigin}${runtimeFile}`,
+    join(outputRoot, "media", runtimeFile),
+    join(publishedMediaRoot, runtimeFile),
+  );
 }
 
 await Promise.all([
-  downloadPublicAsset(externalCoffeeImage, join(outputRoot, "media", "about-coffee.jpg")),
-  downloadPublicAsset(jquerySource, join(outputRoot, "media", "jquery-3.7.1.min.js")),
-  downloadPublicAsset(pdfWorkerSource, join(outputRoot, "media", "pdf.worker.min.js")),
+  downloadPublicAsset(externalCoffeeImage, join(outputRoot, "media", "about-coffee.jpg"), join(publishedMediaRoot, "about-coffee.jpg")),
+  downloadPublicAsset(jquerySource, join(outputRoot, "media", "jquery-3.7.1.min.js"), join(publishedMediaRoot, "jquery-3.7.1.min.js")),
+  downloadPublicAsset(pdfWorkerSource, join(outputRoot, "media", "pdf.worker.min.js"), join(publishedMediaRoot, "pdf.worker.min.js")),
 ]);
 
 const textFiles = (await listFiles(outputRoot)).filter(file => /\.(?:html|js|css|json|webmanifest)$/i.test(file));
@@ -80,7 +103,18 @@ if (process.env.PAGES_CUSTOM_DOMAIN === "1") {
   await writeFile(join(outputRoot, "CNAME"), "cafebarluxor.com\n");
 }
 await writeFile(join(outputRoot, ".nojekyll"), "");
-await cp(join(outputRoot, "index.html"), join(outputRoot, "404.html"));
+const indexHtml = await readFile(join(outputRoot, "index.html"), "utf8");
+const deepLinkRecovery = `<script>\n  (function () {\n    var base = "${pagesBase}";\n    var path = window.location.pathname;\n    if (path.indexOf(base + "/") !== 0) return;\n    var target = path.slice(base.length) + window.location.search + window.location.hash;\n    window.location.replace(base + "/?luxor-route=" + encodeURIComponent(target || "/"));\n  })();\n</script>`;
+const rootRouteRecovery = `<script>\n  (function () {\n    var base = "${pagesBase}";\n    var params = new URLSearchParams(window.location.search);\n    var target = params.get("luxor-route");\n    if (!target) return;\n    window.history.replaceState(null, "", base + target);\n  })();\n</script>`;
+await writeFile(join(outputRoot, "index.html"), indexHtml.replace("</head>", `${rootRouteRecovery}</head>`));
+await writeFile(join(outputRoot, "404.html"), indexHtml.replace("</head>", `${deepLinkRecovery}</head>`));
+await Promise.all(
+  publicRoutes.map(async route => {
+    const routeDirectory = join(outputRoot, route);
+    await mkdir(routeDirectory, { recursive: true });
+    await writeFile(join(routeDirectory, "index.html"), indexHtml);
+  }),
+);
 await writeFile(
   join(outputRoot, "README.md"),
   "# Cafe&Bar Luxor public website\n\nThis repository contains the compiled public Cafe&Bar Luxor website for GitHub Pages. It intentionally excludes server code, database configuration, OAuth credentials, and the owner-only file manager.\n",

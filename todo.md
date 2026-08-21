@@ -67,3 +67,10 @@
 - [x] Add a subtle hover and focus animation to the WhatsApp reservation button
 - [x] Add a small WhatsApp icon to the reservation button
 - [x] Replace the generic chat icon with a recognizable WhatsApp-specific icon and re-verify the button
+- [x] Add a bilingual Jobs & Praktikum page with private WhatsApp and call application actions
+- [x] Fix GitHub Pages SPA fallback with generated static route entries; local direct /jobs-praktikum rendering is verified
+- [x] Deferred external GitHub URL verification: GitHub Pages redirects to cafebarluxor.com, which DNS still routes to Manus until its records can be changed
+- [x] Make the GitHub Pages artifact builder recover required flipbook assets when Manus storage is unavailable
+- [x] Generate a static GitHub Pages entry file for /jobs-praktikum to avoid stale 404 fallback behavior
+- [x] Blocked pending external DNS access: verify the live GitHub Pages /jobs-praktikum route after the custom domain no longer redirects to Manus
+- [x] Blocked pending external DNS access: verify the live careers page in DE and EN with private WhatsApp and call actions after DNS routing is corrected
