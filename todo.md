@@ -74,3 +74,5 @@
 - [x] Generate a static GitHub Pages entry file for /jobs-praktikum to avoid stale 404 fallback behavior
 - [x] Blocked pending external DNS access: verify the live GitHub Pages /jobs-praktikum route after the custom domain no longer redirects to Manus
 - [x] Blocked pending external DNS access: verify the live careers page in DE and EN with private WhatsApp and call actions after DNS routing is corrected
+- [x] Make Job im Luxor and Praktikum cards clearly clickable with distinct WhatsApp application messages
+- [x] Remove the separate careers interest section and add résumé/application attachment instructions to the job card

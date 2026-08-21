@@ -6,10 +6,13 @@ const projectRoot = resolve(import.meta.dirname, '..', '..', '..');
 const pageSource = readFileSync(resolve(projectRoot, 'client/src/pages/JobsPraktikum.tsx'), 'utf8');
 
 describe('Jobs & Praktikum page', () => {
-  it('offers private WhatsApp and call application actions without displaying the phone number', () => {
+  it('offers separate clickable WhatsApp job and internship actions without displaying the phone number', () => {
+    expect(pageSource).toContain('jobWhatsAppUrl');
+    expect(pageSource).toContain('internshipWhatsAppUrl');
     expect(pageSource).toContain("https://wa.me/${APPLICATION_PHONE}");
-    expect(pageSource).toContain('href={`tel:+${APPLICATION_PHONE}`}');
     expect(pageSource).toContain('FaWhatsapp');
+    expect(pageSource).toContain('cursor-pointer');
+    expect(pageSource).not.toContain('href={`tel:+${APPLICATION_PHONE}`}');
     expect(pageSource).not.toContain('+49 176 21899372');
   });
 
@@ -18,6 +21,9 @@ describe('Jobs & Praktikum page', () => {
     expect(pageSource).toContain('Jobs & Internships');
     expect(pageSource).toContain('Per WhatsApp bewerben');
     expect(pageSource).toContain('Apply via WhatsApp');
+    expect(pageSource).toContain('Lebenslauf oder Bewerbung im geöffneten WhatsApp-Chat anhängen.');
+    expect(pageSource).toContain('mein Name ist [Name]. Ich gehe zur Schule und möchte gerne ein Praktikum');
+    expect(pageSource).not.toContain('Interesse geweckt?');
     expect(pageSource).toContain('Datenschutzerklärung');
     expect(pageSource).toContain('Privacy policy');
   });
