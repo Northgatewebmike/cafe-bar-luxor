@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Coffee, Sparkles, MapPin, Clock, CreditCard } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa6';
 import { MapView } from '@/components/Map';
 
 // Scroll reveal hook
@@ -138,7 +139,10 @@ export default function Home() {
                   className="group px-8 py-4 border border-green-400/60 bg-green-500/10 text-white font-medium text-sm tracking-widest uppercase transition-all duration-200 hover:-translate-y-0.5 hover:scale-[1.02] hover:border-green-400 hover:bg-green-500/20 hover:shadow-[0_0_22px_rgba(34,197,94,0.35)] focus-visible:-translate-y-0.5 focus-visible:border-green-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-300/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black active:scale-[0.98] motion-reduce:transform-none motion-reduce:transition-none"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                 >
-                  {lang === 'de' ? 'Per WhatsApp reservieren' : 'Reserve via WhatsApp'}
+                  <span className="inline-flex items-center justify-center gap-2">
+                    <FaWhatsapp aria-hidden="true" className="size-4 text-green-200 transition-transform duration-200 group-hover:scale-110" />
+                    <span>{lang === 'de' ? 'Per WhatsApp reservieren' : 'Reserve via WhatsApp'}</span>
+                  </span>
                   <span className="block text-xs text-green-200/80 mt-0.5 normal-case tracking-normal transition-colors duration-200 group-hover:text-green-100" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>{lang === 'de' ? 'Reservierungsanfrage senden' : 'Send a reservation request'}</span>
                 </button>
               </a>

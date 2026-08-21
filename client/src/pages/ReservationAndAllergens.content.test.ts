@@ -11,6 +11,8 @@ describe("reservation and allergen content", () => {
   it("provides direct WhatsApp reservation requests and phone-call access", () => {
     expect(homeSource).toContain("https://wa.me/4917621899372");
     expect(homeSource).toContain("tel:+4917621899372");
+    expect(homeSource).toContain("FaWhatsapp");
+    expect(homeSource).toContain("group-hover:scale-110");
     expect(homeSource).toContain("hover:shadow-[0_0_22px_rgba(34,197,94,0.35)]");
     expect(homeSource).toContain("focus-visible:ring-2");
     expect(contactSource).toContain("https://wa.me/4917621899372");
