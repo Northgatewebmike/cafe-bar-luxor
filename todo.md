@@ -64,3 +64,4 @@
 - [x] Translate any remaining German-only item labels on the English allergen page and re-verify it
 - [x] Replace the remaining German-only Früh Kölsch menu labels in the English allergen view and re-verify it
 - [x] Hide the phone number from reservation UI while retaining click-to-call and WhatsApp actions
+- [x] Add a subtle hover and focus animation to the WhatsApp reservation button
