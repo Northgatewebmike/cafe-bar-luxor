@@ -147,15 +147,6 @@ export default function Footer() {
                 {t('footer.datenschutz')}
               </span>
             </Link>
-            <span className="text-white/15 text-xs">|</span>
-            <Link href="/dateiverwaltung">
-              <span className="text-white/25 text-xs transition-colors cursor-pointer"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(220,80,80,0.8)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
-                Dateiverwaltung
-              </span>
-            </Link>
           </div>
         </div>
 

@@ -58,3 +58,4 @@
 - [x] Verify the repaired flipbook fully closes from the final page
 - [x] Capture a browser-visible final back cover on page 12/12 with no blank sheet
 - [x] Exercise the final-cover closing interaction and verify the book remains visually intact
+- [x] Remove the public Dateiverwaltung footer link and route while retaining protected storage implementation
