@@ -23,10 +23,14 @@ declare global {
   }
 }
 
-// v18 full-page mode — 11 pages (cover + 10 content) COMPLETE ALLERGEN AUDIT per EU LMIV
+// Full-page mode — front cover, 10 content pages, and a matching hard back cover.
+// The even page count prevents dFlip from generating an empty white final sheet.
 // Updated: bottled beer A=Gluten, Vodka/Jager Energy coffeinhaltig, improved shots notes, full legend
+const MENU_FRONT_COVER = '/manus-storage/menu-cover-luxor-v2_ecb75175.png';
+const MENU_BACK_COVER = MENU_FRONT_COVER;
+
 const MENU_PAGES = [
-  '/manus-storage/menu-cover-luxor-v2_ecb75175.png',                    // AI Cover
+  MENU_FRONT_COVER,                                                      // Hard front cover
   '/manus-storage/p01_welcome_2b120f43.png',                            // Welcome + Oeffnungszeiten
   '/manus-storage/p02_kaffee_tee_7e4a1674.png',                         // Kaffee + Tee (1/A-N codes)
   '/manus-storage/p03_kalt_1318c766.png',                               // Kaltgetranke (1/A-N codes)
@@ -37,6 +41,7 @@ const MENU_PAGES = [
   '/manus-storage/p08_longdrinks_whiskey_aperitif_f953963b.png',        // Long Drinks + Whiskey + Aperitif
   '/manus-storage/p09_wein_eis_4839dc68.png',                           // Wein & Sekt + Eis (4/D, 6/F)
   '/manus-storage/p10_thanks_bf012ec9.png',                             // Vielen Dank
+  MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 
 const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';

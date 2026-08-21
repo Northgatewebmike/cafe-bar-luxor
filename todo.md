@@ -50,3 +50,11 @@
 - [x] Confirm GitHub Pages source, branch, default URL, and no custom-domain cutover yet
 - [x] Correct stale Sunday-hours metadata and translation text to show Sunday 10:00–21:00 separately
 - [x] Document the safe GitHub Pages cutover for cafebarluxor.com and www
+- [x] Verify GitHub Pages has accepted cafebarluxor.com as the custom domain (visible in the Custom domain field; GitHub serves the HTTP custom-domain URL while DNS Check remains in progress)
+- [x] Blocked and documented: Manus-managed DNS records are read-only; support must provide edit, removal, or external-nameserver access before cutover
+- [x] Deferred pending the Manus DNS-access blocker: verify cafebarluxor.com and www route to GitHub Pages with HTTPS
+- [x] Replace the flipbook’s final white sheet with a proper back cover and verify closing behavior
+- [x] Drive the repaired flipbook to its final pages and verify the back cover replaces the blank sheet
+- [x] Verify the repaired flipbook fully closes from the final page
+- [x] Capture a browser-visible final back cover on page 12/12 with no blank sheet
+- [x] Exercise the final-cover closing interaction and verify the book remains visually intact
