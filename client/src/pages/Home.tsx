@@ -37,6 +37,11 @@ export default function Home() {
   const { t, lang } = useLanguage();
   const [scrollY, setScrollY] = useState(0);
   const mapRef = useRef<google.maps.Map | null>(null);
+  const reservationWhatsAppUrl = `https://wa.me/4917621899372?text=${encodeURIComponent(
+    lang === 'de'
+      ? 'Hallo Cafe&Bar Luxor, ich möchte gerne einen Tisch reservieren.\n\nName:\nDatum:\nUhrzeit:\nPersonenanzahl:'
+      : 'Hello Cafe&Bar Luxor, I would like to request a table reservation.\n\nName:\nDate:\nTime:\nNumber of guests:'
+  )}`;
   useReveal();
 
   useEffect(() => {
@@ -127,15 +132,20 @@ export default function Home() {
                 {t('home.hero.cta')}
               </button>
             </Link>
-            <a href="tel:+4917621899372">
-              <button
-                className="px-8 py-4 border border-white/40 text-white font-medium text-sm tracking-widest uppercase hover:border-red-600 hover:text-red-400 transition-all duration-300"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-              >
-                {t('home.hero.cta2')}
-                <span className="block text-xs text-white/50 mt-0.5 normal-case tracking-normal" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>+49 176 21899372</span>
-              </button>
-            </a>
+            <div className="flex flex-col items-center gap-2">
+              <a href={reservationWhatsAppUrl} target="_blank" rel="noopener noreferrer">
+                <button
+                  className="px-8 py-4 border border-green-400/60 bg-green-500/10 text-white font-medium text-sm tracking-widest uppercase hover:border-green-400 hover:bg-green-500/20 transition-all duration-300"
+                  style={{ fontFamily: "'Source Sans 3', sans-serif" }}
+                >
+                  {lang === 'de' ? 'Per WhatsApp reservieren' : 'Reserve via WhatsApp'}
+                  <span className="block text-xs text-green-200/80 mt-0.5 normal-case tracking-normal" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>{lang === 'de' ? 'Reservierungsanfrage senden' : 'Send a reservation request'}</span>
+                </button>
+              </a>
+              <a href="tel:+4917621899372" className="text-xs text-white/60 hover:text-white transition-colors underline underline-offset-4" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+                {lang === 'de' ? 'Oder direkt anrufen' : 'Or call directly'}
+              </a>
+            </div>
           </div>
         </div>
         {/* NO scroll indicator — removed as requested */}

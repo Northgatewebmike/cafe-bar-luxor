@@ -59,3 +59,8 @@
 - [x] Capture a browser-visible final back cover on page 12/12 with no blank sheet
 - [x] Exercise the final-cover closing interaction and verify the book remains visually intact
 - [x] Remove the public Dateiverwaltung footer link and route while retaining protected storage implementation
+- [x] Add direct WhatsApp reservation and phone-call actions for +49 176 21899372
+- [x] Translate the complete allergen information page when English is selected
+- [x] Translate any remaining German-only item labels on the English allergen page and re-verify it
+- [x] Replace the remaining German-only Früh Kölsch menu labels in the English allergen view and re-verify it
+- [x] Hide the phone number from reservation UI while retaining click-to-call and WhatsApp actions

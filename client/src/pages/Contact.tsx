@@ -31,6 +31,11 @@ function useReveal() {
 export default function Contact() {
   const { t, lang } = useLanguage();
   const mapRef = useRef<google.maps.Map | null>(null);
+  const reservationWhatsAppUrl = `https://wa.me/4917621899372?text=${encodeURIComponent(
+    lang === 'de'
+      ? 'Hallo Cafe&Bar Luxor, ich möchte gerne einen Tisch reservieren.\n\nName:\nDatum:\nUhrzeit:\nPersonenanzahl:'
+      : 'Hello Cafe&Bar Luxor, I would like to request a table reservation.\n\nName:\nDate:\nTime:\nNumber of guests:'
+  )}`;
   useReveal();
 
   return (
@@ -68,7 +73,7 @@ export default function Contact() {
             className="text-center text-white/50 text-base mb-12 reveal"
             style={{ fontFamily: "'Source Sans 3', sans-serif" }}
           >
-            Rufen Sie uns an oder schreiben Sie uns — wir freuen uns auf Ihren Besuch!
+            {lang === 'de' ? 'Rufen Sie uns an oder schreiben Sie uns — wir freuen uns auf Ihren Besuch!' : 'Call or message us — we look forward to welcoming you!'}
           </p>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
@@ -81,20 +86,22 @@ export default function Contact() {
                     className="text-red-700 text-xs tracking-[0.3em] uppercase font-medium"
                     style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                   >
-                    Reservierung & Kontakt
+                    {lang === 'de' ? 'Reservierung & Kontakt' : 'Reservations & contact'}
                   </span>
                 </div>
                 <h2
                   className="text-2xl md:text-3xl font-bold text-white mb-3"
                   style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}
                 >
-                  Tisch reservieren
+                  {lang === 'de' ? 'Tisch reservieren' : 'Request a table'}
                 </h2>
                 <p
                   className="text-white/55 text-sm leading-relaxed mb-6"
                   style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                 >
-                  Rufen Sie uns einfach an — wir reservieren Ihnen gerne einen Tisch oder beantworten alle Ihre Fragen direkt.
+                  {lang === 'de'
+                    ? 'Senden Sie uns Ihre Reservierungsanfrage per WhatsApp oder rufen Sie direkt an. Ein Tisch ist erst nach unserer Bestätigung reserviert.'
+                    : 'Send your reservation request by WhatsApp or call us directly. A table is reserved only after we confirm it.'}
                 </p>
               </div>
 
@@ -109,20 +116,20 @@ export default function Contact() {
                     className="text-white/70 text-xs tracking-widest uppercase mb-1"
                     style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                   >
-                    Jetzt anrufen
+                    {lang === 'de' ? 'Jetzt anrufen' : 'Call now'}
                   </p>
                   <p
-                    className="text-white text-2xl font-bold tracking-wide"
+                    className="text-white text-lg font-bold tracking-wide"
                     style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                   >
-                    +49 176 21899372
+                    {lang === 'de' ? 'Zum Anrufen tippen' : 'Tap to call'}
                   </p>
                 </div>
               </a>
 
               {/* WhatsApp Button */}
               <a
-                href="https://wa.me/4917621899372"
+                href={reservationWhatsAppUrl}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group flex items-center gap-5 w-full py-5 px-8 border border-green-600/40 bg-green-600/5 hover:bg-green-600/15 hover:border-green-500/60 transition-all duration-300"
@@ -135,13 +142,13 @@ export default function Contact() {
                     className="text-white/60 text-xs tracking-widest uppercase mb-0.5"
                     style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                   >
-                    WhatsApp
+                    {lang === 'de' ? 'WhatsApp-Reservierung' : 'WhatsApp reservation'}
                   </p>
                   <p
                     className="text-green-400 text-lg font-semibold"
                     style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                   >
-                    Nachricht schreiben
+                    {lang === 'de' ? 'Reservierungsanfrage senden' : 'Send reservation request'}
                   </p>
                 </div>
               </a>

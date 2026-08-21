@@ -1,4 +1,40 @@
 import { Link } from "wouter";
+import { useLanguage } from "@/contexts/LanguageContext";
+
+const EN_ALLERGENS: Record<number, { name: string; detail: string }> = {
+  1: { name: "Cereals containing gluten", detail: "Wheat, rye, barley, oats, spelt, kamut and products made from them" },
+  2: { name: "Fish", detail: "Fish and products made from fish" },
+  3: { name: "Crustaceans", detail: "Crustaceans and products made from them" },
+  4: { name: "Sulphur dioxide and sulphites", detail: "In concentrations exceeding 10 mg/kg or 10 mg/l, expressed as SO₂" },
+  5: { name: "Celery", detail: "Celery and products made from celery" },
+  6: { name: "Milk and lactose", detail: "Milk and products made from milk, including lactose" },
+  7: { name: "Sesame seeds", detail: "Sesame seeds and products made from them" },
+  8: { name: "Nuts", detail: "Almonds, hazelnuts, walnuts, cashews, pecans, Brazil nuts, pistachios, macadamias and products made from them" },
+  9: { name: "Eggs", detail: "Eggs and products made from eggs" },
+  10: { name: "Lupin", detail: "Lupin and products made from lupin" },
+  11: { name: "Mustard", detail: "Mustard and products made from mustard" },
+  12: { name: "Soy", detail: "Soy and products made from soy" },
+  13: { name: "Molluscs", detail: "Molluscs and products made from them" },
+  14: { name: "Peanuts", detail: "Peanuts and products made from peanuts" },
+};
+
+const EN_CATEGORY_NAMES: Record<string, string> = {
+  "KAFFEE": "COFFEE", "TEE": "TEA", "KALTGETRÄNKE": "COLD DRINKS", "HAUSGEMACHTE LIMONADE": "HOMEMADE LEMONADE",
+  "ZAPFENBIER (vom Fass)": "DRAFT BEER", "FLASCHENBIER": "BOTTLED BEER", "COCKTAILS (mit Alkohol)": "COCKTAILS (with alcohol)",
+  "ALKOHOLFREIE COCKTAILS": "NON-ALCOHOLIC COCKTAILS", "SHOTS / ALKOHOL (2 cl)": "SHOTS / SPIRITS (2 cl)",
+  "LONG DRINKS": "LONG DRINKS", "WHISKEY (4 cl)": "WHISKEY (4 cl)", "APERITIF": "APERITIFS", "WEIN & SEKT": "WINE & SPARKLING WINE", "EIS": "ICE CREAM",
+};
+
+const EN_ITEM_NAMES: Record<string, string> = {
+  "Milchkaffee": "Café au lait", "Kaffee Crema": "Caffè crema", "Doppelter Espresso": "Double espresso", "Cappuccino klein": "Small cappuccino", "Eiskaffee": "Iced coffee", "Frappe weiss": "White frappé", "Frappe schwarz": "Black frappé", "Kakao": "Hot chocolate", "Kakao mit Sahne": "Hot chocolate with whipped cream",
+  "Grüner Tee": "Green tea", "Schwarzer Tee": "Black tea", "Pfefferminztee": "Peppermint tea", "Früchtetee": "Fruit tea", "Kamillentee": "Chamomile tea", "Frische Minze Tee": "Fresh mint tea", "Vanille Tee": "Vanilla tea", "Kräuter Tee": "Herbal tea", "Zitronen/Limone Tee": "Lemon/lime tea", "Waldbeere Tee": "Wild berry tea",
+  "Apfelschorle": "Apple spritzer", "Eistee Pfirsich / Zitrone": "Iced tea peach / lemon", "Orangensaft": "Orange juice", "Apfelsaft": "Apple juice", "Multivitaminsaft": "Multivitamin juice", "Wasser still": "Still water", "Wasser sprudelnd": "Sparkling water", "Eischokolade": "Iced chocolate", "Milchshake (Erdbeere / Vanille / Schokolade)": "Milkshake (strawberry / vanilla / chocolate)",
+  "Himbeere": "Raspberry", "Erdbeere": "Strawberry", "Minze": "Mint", "Granatapfel": "Pomegranate", "Zapfenbier (vom Fass)": "Draft beer", "Veltins (0,2 l / 0,3 l / 0,5 l)": "Veltins (0.2 l / 0.3 l / 0.5 l)", "Früh Kölsch (0,2 l / 0,3 l / 0,5 l)": "Früh beer (draft, 0.2 l / 0.3 l / 0.5 l)", "Früh Kölsch (Flasche)": "Früh beer (bottle)", "Krombacher Radler": "Krombacher shandy", "Krombacher Alkoholfrei": "Krombacher non-alcoholic", "Maisels Weizen Original": "Maisel's wheat beer original", "Maisels Weizen Alkoholfrei": "Maisel's wheat beer non-alcoholic", "Pina Colada Alkoholfrei": "Pina Colada non-alcoholic", "Roter Pepp": "Red Pepp", "Pfirsichlikör": "Peach liqueur", "Pfefferminz": "Peppermint", "Waldmeister": "Woodruff", "Rotwein (0,2 l)": "Red wine (0.2 l)", "Weisswein (0,2 l)": "White wine (0.2 l)", "Rosé Wein (0,2 l)": "Rosé wine (0.2 l)", "Prosecco (0,2 l)": "Prosecco (0.2 l)", "Sekt (0,2 l)": "Sparkling wine (0.2 l)", "Flasche Wein (0,75 l)": "Bottle of wine (0.75 l)", "Glühwein Winter (0,2 l)": "Mulled wine (winter, 0.2 l)", "Eiskugeln (Vanille / Erdbeere / Schokolade)": "Ice-cream scoops (vanilla / strawberry / chocolate)",
+};
+
+const EN_ADDITIVES: Record<string, string> = {
+  "geschwefelt": "sulphited", "coffeinhaltig": "contains caffeine", "chininhaltig": "contains quinine", "mit Farbstoff": "with colour(s)", "mit Süßungsmittel(n)": "with sweetener(s)", "coffeinhaltig (Red Bull)": "contains caffeine (Red Bull)",
+};
 
 const allergens = [
   {
@@ -271,6 +307,23 @@ const menuItems: { category: string; items: { name: string; codes: string[]; zus
 ];
 
 export default function Allergene() {
+  const { lang } = useLanguage();
+  const isEnglish = lang === "en";
+  const localizedAllergens = allergens.map((allergen) => isEnglish ? { ...allergen, ...EN_ALLERGENS[allergen.num] } : allergen);
+  const localizedAdditives = additives.map((additive) => isEnglish
+    ? { ...additive, code: EN_ADDITIVES[additive.code] ?? additive.code, desc: additive.code === "geschwefelt"
+      ? "treated with sulphur dioxide (sulphites) — in wine, sparkling wine, prosecco, beer and aperitifs"
+      : additive.code === "coffeinhaltig"
+        ? "contains caffeine — in Red Bull, Vodka Energy, Neon Rush and Jägermeister Energy"
+        : additive.code === "chininhaltig"
+          ? "contains quinine — in Schweppes Bitter Lemon and tonic water"
+          : additive.code === "mit Farbstoff"
+            ? "contains colour(s) — in selected lemonades and sodas"
+            : "contains sweetener(s) — in Schweppes Bitter Lemon, Cola Zero and Fanta Zero" }
+    : additive);
+  const translateItemName = (name: string) => isEnglish ? (EN_ITEM_NAMES[name] ?? name) : name;
+  const translateAdditive = (label: string) => isEnglish ? (EN_ADDITIVES[label] ?? label) : label;
+
   return (
     <div className="min-h-screen bg-[#0a0a0a] text-[#f5f0e8]">
       {/* Hero */}
@@ -278,11 +331,11 @@ export default function Allergene() {
         <div className="max-w-4xl mx-auto text-center">
           <p className="text-[#8b1a1a] text-sm tracking-[0.3em] uppercase mb-3">Cafe &amp; Bar Luxor</p>
           <h1 className="font-serif text-4xl md:text-5xl font-bold text-white mb-4">
-            Allergene &amp; Zusatzstoffe
+            {isEnglish ? "Allergens & Additives" : "Allergene & Zusatzstoffe"}
           </h1>
           <div className="w-24 h-px bg-[#8b1a1a] mx-auto mb-6" />
           <p className="text-sm text-[#999]">
-            Gemäß EU-Lebensmittelinformationsverordnung (LMIV) Nr. 1169/2011
+            {isEnglish ? "In accordance with EU Food Information Regulation (EU) No. 1169/2011" : "Gemäß EU-Lebensmittelinformationsverordnung (LMIV) Nr. 1169/2011"}
           </p>
         </div>
       </div>
@@ -294,16 +347,14 @@ export default function Allergene() {
           <div className="flex items-start gap-3">
             <span className="text-[#8b1a1a] text-xl mt-0.5">⚠</span>
             <div>
-              <h2 className="text-[#c9a84c] font-bold text-lg mb-3">Wichtiger Hinweis</h2>
+              <h2 className="text-[#c9a84c] font-bold text-lg mb-3">{isEnglish ? "Important notice" : "Wichtiger Hinweis"}</h2>
               <p className="text-[#d4c9b0] text-sm leading-relaxed">
-                Eine Nennung von Allergenen erfolgt, wenn die bezeichneten Stoffe oder daraus hergestellte Erzeugnisse
-                als Zutat im Endprodukt enthalten sind. Trotz sorgfältiger Herstellung unserer Gerichte können neben
-                den gekennzeichneten Zutaten Spuren anderer Stoffe enthalten sein, die im Produktionsprozess in der
-                Küche verwendet werden.
+                {isEnglish
+                  ? "Allergens are declared where the named substances or products made from them are present as ingredients in the final product. Despite careful preparation, our dishes may contain traces of other substances used in the kitchen production process."
+                  : "Eine Nennung von Allergenen erfolgt, wenn die bezeichneten Stoffe oder daraus hergestellte Erzeugnisse als Zutat im Endprodukt enthalten sind. Trotz sorgfältiger Herstellung unserer Gerichte können neben den gekennzeichneten Zutaten Spuren anderer Stoffe enthalten sein, die im Produktionsprozess in der Küche verwendet werden."}
               </p>
               <p className="text-[#999] text-sm mt-3">
-                Bei Fragen zu Allergenen und Unverträglichkeiten wenden Sie sich bitte an unser Personal.
-                Wir helfen Ihnen gerne weiter.
+                {isEnglish ? "For questions about allergens and intolerances, please speak to our staff. We are happy to help." : "Bei Fragen zu Allergenen und Unverträglichkeiten wenden Sie sich bitte an unser Personal. Wir helfen Ihnen gerne weiter."}
               </p>
             </div>
           </div>
@@ -311,20 +362,20 @@ export default function Allergene() {
 
         {/* SECTION 1: ALLERGEN LEGEND TABLE */}
         <section>
-          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">Abschnitt 1</h2>
-          <h3 className="font-serif text-2xl font-bold text-white mb-6">Allergene — Legende</h3>
+          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">{isEnglish ? "Section 1" : "Abschnitt 1"}</h2>
+          <h3 className="font-serif text-2xl font-bold text-white mb-6">{isEnglish ? "Allergen legend" : "Allergene — Legende"}</h3>
           <div className="overflow-x-auto rounded-lg border border-[#2a2a2a]">
             <table className="w-full text-sm">
               <thead>
                 <tr className="bg-[#1a1a1a] border-b border-[#2a2a2a]">
-                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold w-16">Nr.</th>
+                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold w-16">{isEnglish ? "No." : "Nr."}</th>
                   <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold w-12">Code</th>
-                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold">Allergen</th>
-                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold hidden md:table-cell">Beschreibung</th>
+                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold">{isEnglish ? "Allergen" : "Allergen"}</th>
+                  <th className="text-left px-4 py-3 text-[#c9a84c] font-semibold hidden md:table-cell">{isEnglish ? "Description" : "Beschreibung"}</th>
                 </tr>
               </thead>
               <tbody>
-                {allergens.map((a, i) => (
+                {localizedAllergens.map((a, i) => (
                   <tr
                     key={a.num}
                     className={`border-b border-[#1e1e1e] ${i % 2 === 0 ? "bg-[#111]" : "bg-[#0d0d0d]"}`}
@@ -343,20 +394,19 @@ export default function Allergene() {
             </table>
           </div>
           <p className="text-[#666] text-xs mt-3">
-            * Auf mobilen Geräten wird die Beschreibungsspalte ausgeblendet. Tippen Sie auf ein Allergen für Details.
+            {isEnglish ? "* The description column is hidden on mobile devices. Tap an allergen for details." : "* Auf mobilen Geräten wird die Beschreibungsspalte ausgeblendet. Tippen Sie auf ein Allergen für Details."}
           </p>
         </section>
 
         {/* SECTION 2: ADDITIVES */}
         <section>
-          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">Abschnitt 2</h2>
-          <h3 className="font-serif text-2xl font-bold text-white mb-6">Zusatzstoffe — Kennzeichnung</h3>
+          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">{isEnglish ? "Section 2" : "Abschnitt 2"}</h2>
+          <h3 className="font-serif text-2xl font-bold text-white mb-6">{isEnglish ? "Additive declarations" : "Zusatzstoffe — Kennzeichnung"}</h3>
           <p className="text-[#999] text-sm mb-4">
-            Die folgenden Zusatzstoffe sind in unseren Produkten enthalten und werden gemäß LMIV gekennzeichnet.
-            Nur bestätigte Zusatzstoffe aus den Originalrezepten der Hersteller werden aufgeführt.
+            {isEnglish ? "The following additives are present in our products and are declared in accordance with the Food Information Regulation. Only confirmed additives from the manufacturers’ original recipes are listed." : "Die folgenden Zusatzstoffe sind in unseren Produkten enthalten und werden gemäß LMIV gekennzeichnet. Nur bestätigte Zusatzstoffe aus den Originalrezepten der Hersteller werden aufgeführt."}
           </p>
           <div className="space-y-3">
-            {additives.map((a) => (
+            {localizedAdditives.map((a) => (
               <div key={a.code} className="flex items-start gap-3 bg-[#111] border border-[#2a2a2a] rounded-lg px-4 py-3">
                 <span className="inline-block bg-[#1a3a1a] text-[#4caf50] text-xs font-bold px-2 py-1 rounded whitespace-nowrap mt-0.5">
                   {a.code}
@@ -369,22 +419,21 @@ export default function Allergene() {
 
         {/* SECTION 3: MENU ITEMS OVERVIEW */}
         <section>
-          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">Abschnitt 3</h2>
-          <h3 className="font-serif text-2xl font-bold text-white mb-2">Speisekarte — Allergenübersicht</h3>
+          <h2 className="text-[#8b1a1a] text-xs tracking-[0.3em] uppercase mb-1">{isEnglish ? "Section 3" : "Abschnitt 3"}</h2>
+          <h3 className="font-serif text-2xl font-bold text-white mb-2">{isEnglish ? "Menu allergen overview" : "Speisekarte — Allergenübersicht"}</h3>
           <p className="text-[#999] text-sm mb-6">
-            Alle Positionen der Speisekarte mit ihren Allergen- und Zusatzstoffkennzeichnungen.
-            Codes entsprechen der Legende oben (Nr./Buchstabe).
+            {isEnglish ? "All menu items with their allergen and additive declarations. Codes correspond to the legend above (number/letter)." : "Alle Positionen der Speisekarte mit ihren Allergen- und Zusatzstoffkennzeichnungen. Codes entsprechen der Legende oben (Nr./Buchstabe)."}
           </p>
           <div className="space-y-8">
             {menuItems.map((cat) => (
               <div key={cat.category}>
                 <h4 className="text-[#8b1a1a] font-bold text-sm tracking-widest uppercase mb-3 pb-2 border-b border-[#2a2a2a]">
-                  {cat.category}
+                  {isEnglish ? (EN_CATEGORY_NAMES[cat.category] ?? cat.category) : cat.category}
                 </h4>
                 <div className="space-y-1">
                   {cat.items.map((item) => (
                     <div key={item.name} className="flex items-start justify-between gap-4 py-1.5 border-b border-[#1a1a1a]">
-                      <span className="text-[#d4c9b0] text-sm">{item.name}</span>
+                      <span className="text-[#d4c9b0] text-sm">{translateItemName(item.name)}</span>
                       <div className="flex flex-wrap gap-1 justify-end shrink-0">
                         {item.codes.length === 0 && (!item.zusatz || item.zusatz.length === 0) && (
                           <span className="text-[#444] text-xs">—</span>
@@ -402,7 +451,7 @@ export default function Allergene() {
                             key={z}
                             className="inline-block bg-[#1a3a1a] text-[#4caf50] text-xs px-2 py-0.5 rounded"
                           >
-                            {z}
+                            {translateAdditive(z)}
                           </span>
                         ))}
                       </div>
@@ -417,12 +466,12 @@ export default function Allergene() {
         {/* LEGAL FOOTER */}
         <div className="border-t border-[#2a2a2a] pt-8 text-center">
           <p className="text-[#666] text-xs leading-relaxed max-w-2xl mx-auto mb-4">
-            Diese Allergenkennzeichnung entspricht den Anforderungen der EU-Verordnung Nr. 1169/2011
-            (Lebensmittelinformationsverordnung, LMIV) sowie der deutschen Lebensmittelinformations-Durchführungsverordnung (LMIDV).
-            Stand: Juli 2026. Änderungen vorbehalten.
+            {isEnglish
+              ? "This allergen declaration follows the requirements of EU Regulation No. 1169/2011 on food information for consumers and the German Food Information Implementation Regulation. Status: July 2026. Subject to change."
+              : "Diese Allergenkennzeichnung entspricht den Anforderungen der EU-Verordnung Nr. 1169/2011 (Lebensmittelinformationsverordnung, LMIV) sowie der deutschen Lebensmittelinformations-Durchführungsverordnung (LMIDV). Stand: Juli 2026. Änderungen vorbehalten."}
           </p>
           <Link href="/speisekarte" className="inline-block text-[#8b1a1a] hover:text-[#c9a84c] text-sm transition-colors">
-            ← Zurück zur Speisekarte
+            {isEnglish ? "← Back to menu" : "← Zurück zur Speisekarte"}
           </Link>
         </div>
       </div>

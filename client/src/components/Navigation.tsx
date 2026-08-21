@@ -32,7 +32,7 @@ export default function Navigation() {
     { href: '/oeffnungszeiten', label: t('nav.hours') },
     { href: '/kontakt', label: t('nav.contact') },
     { href: '/automaten', label: t('nav.automaten') },
-    { href: '/allergene', label: 'Allergeninfo' },
+    { href: '/allergene', label: lang === 'de' ? 'Allergeninfo' : 'Allergen Info' },
   ];
 
   const isActive = (href: string) => {
