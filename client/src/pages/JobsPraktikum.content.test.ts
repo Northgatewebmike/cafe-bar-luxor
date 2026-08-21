@@ -4,6 +4,7 @@ import { describe, expect, it } from 'vitest';
 
 const projectRoot = resolve(import.meta.dirname, '..', '..', '..');
 const pageSource = readFileSync(resolve(projectRoot, 'client/src/pages/JobsPraktikum.tsx'), 'utf8');
+const htmlSource = readFileSync(resolve(projectRoot, 'client/index.html'), 'utf8');
 
 describe('Jobs & Praktikum page', () => {
   it('offers separate clickable WhatsApp job and internship actions without displaying the phone number', () => {
@@ -12,6 +13,7 @@ describe('Jobs & Praktikum page', () => {
     expect(pageSource).toContain("https://wa.me/${APPLICATION_PHONE}");
     expect(pageSource).toContain('FaWhatsapp');
     expect(pageSource).toContain('cursor-pointer');
+    expect(pageSource).toContain('group-hover:shadow-[0_0_16px_rgba(34,197,94,0.38)]');
     expect(pageSource).not.toContain('href={`tel:+${APPLICATION_PHONE}`}');
     expect(pageSource).not.toContain('+49 176 21899372');
   });
@@ -26,5 +28,9 @@ describe('Jobs & Praktikum page', () => {
     expect(pageSource).not.toContain('Interesse geweckt?');
     expect(pageSource).toContain('Datenschutzerklärung');
     expect(pageSource).toContain('Privacy policy');
+  });
+
+  it('keeps mobile zoom-in available while preventing zoom-out below the default scale', () => {
+    expect(htmlSource).toContain('initial-scale=1, minimum-scale=1, maximum-scale=5, user-scalable=yes');
   });
 });

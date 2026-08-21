@@ -81,6 +81,9 @@ export default function JobsPraktikum() {
                 className="group relative flex min-h-[24rem] cursor-pointer flex-col overflow-hidden border border-green-400/35 bg-white/[0.035] p-7 text-left transition-all duration-300 hover:-translate-y-1 hover:scale-[1.01] hover:border-green-400/80 hover:bg-green-500/[0.09] hover:shadow-[0_0_28px_rgba(34,197,94,0.18)] focus-visible:-translate-y-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green-300 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0603] active:scale-[0.99] motion-reduce:transform-none motion-reduce:transition-none sm:min-h-[26rem] sm:p-9"
               >
                 <div className="absolute right-0 top-0 h-24 w-24 bg-green-400/[0.08] blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
+                <span className="absolute right-6 top-6 flex size-9 items-center justify-center rounded-full border border-green-400/45 bg-green-500/10 text-green-200 transition-all duration-300 group-hover:scale-110 group-hover:border-green-300 group-hover:bg-green-500/20 group-hover:shadow-[0_0_16px_rgba(34,197,94,0.38)] motion-reduce:transition-none" aria-hidden="true">
+                  <FaWhatsapp className="size-5" />
+                </span>
                 <div className="flex size-12 items-center justify-center rounded-full border border-green-400/50 bg-green-500/10 text-green-200 transition-transform duration-300 group-hover:scale-110">
                   <Icon size={23} aria-hidden="true" />
                 </div>

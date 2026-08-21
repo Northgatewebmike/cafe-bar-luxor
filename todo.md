@@ -76,3 +76,5 @@
 - [x] Blocked pending external DNS access: verify the live careers page in DE and EN with private WhatsApp and call actions after DNS routing is corrected
 - [x] Make Job im Luxor and Praktikum cards clearly clickable with distinct WhatsApp application messages
 - [x] Remove the separate careers interest section and add résumé/application attachment instructions to the job card
+- [x] Add subtle hover animation and WhatsApp branding to the job and internship cards
+- [x] Configure mobile zoom so users can zoom in but cannot zoom below the default page scale
