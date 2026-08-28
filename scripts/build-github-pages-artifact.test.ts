@@ -19,6 +19,12 @@ describe('GitHub Pages artifact routing', () => {
     expect(builderSource).toContain('join(publishedMediaRoot, runtimeFile)');
   });
 
+  it('recovers the entire media archive and logo when a sandbox reset removes the local media cache', () => {
+    expect(builderSource).toContain('copyRequiredAsset(mediaRoot, join(outputRoot, "media"), publishedMediaRoot, "media directory")');
+    expect(builderSource).toContain('Recovered unavailable ${label} from published Pages archive.');
+    expect(builderSource).toContain('"Luxor logo"');
+  });
+
   it('writes static entry documents for the jobs and internship route', () => {
     expect(builderSource).toContain('"jobs-praktikum"');
     expect(builderSource).toContain('writeFile(join(routeDirectory, "index.html"), indexHtml)');

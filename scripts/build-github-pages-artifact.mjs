@@ -54,11 +54,26 @@ async function downloadPublicAsset(url, destination, fallbackSource) {
   }
 }
 
+async function copyRequiredAsset(primarySource, destination, fallbackSource, label) {
+  try {
+    await cp(primarySource, destination, { recursive: true });
+  } catch (error) {
+    if (!fallbackSource) throw new Error(`Could not archive required local asset: ${label}`, { cause: error });
+    await cp(fallbackSource, destination, { recursive: true });
+    console.warn(`Recovered unavailable ${label} from published Pages archive.`);
+  }
+}
+
 await rm(outputRoot, { recursive: true, force: true });
 await mkdir(outputRoot, { recursive: true });
 await cp(sourceRoot, outputRoot, { recursive: true });
-await cp(mediaRoot, join(outputRoot, "media"), { recursive: true });
-await cp("/home/ubuntu/webdev-static-assets/cafe-bar-luxor-logo-v3.png", join(outputRoot, "media", "cafe-bar-luxor-logo-v3.png"));
+await copyRequiredAsset(mediaRoot, join(outputRoot, "media"), publishedMediaRoot, "media directory");
+await copyRequiredAsset(
+  "/home/ubuntu/webdev-static-assets/cafe-bar-luxor-logo-v3.png",
+  join(outputRoot, "media", "cafe-bar-luxor-logo-v3.png"),
+  join(publishedMediaRoot, "cafe-bar-luxor-logo-v3.png"),
+  "Luxor logo",
+);
 
 for (const runtimeFile of flipbookRuntime) {
   await downloadPublicAsset(

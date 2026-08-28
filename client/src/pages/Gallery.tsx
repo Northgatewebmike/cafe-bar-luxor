@@ -1,10 +1,11 @@
 /**
  * Gallery Page — Cafe&Bar Luxor
- * Design: "Warme Patina" — Photo grid with 3D pop-up lightbox
+ * Design: "Warme Patina" — Flying photo posters with a 3D pop-up lightbox
  */
 import { useState, useEffect, useCallback } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { X, ChevronLeft, ChevronRight, ZoomIn } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 
 // Real photos from Cafe&Bar Luxor — café/bar photos only (no machines)
 const PHOTO_INTERIOR = '/manus-storage/real-photo-1_8c74bd6b.jpg';   // Interior blue neon bar
@@ -16,35 +17,19 @@ const PHOTO_TERRACE_NEW1 = '/manus-storage/1000011501_26ad3baf.jpg';  // Terrace
 const PHOTO_TERRACE_NEW2 = '/manus-storage/1000011502_96f266a9.jpg';  // Terrace panorama morning
 const PHOTO_TERRACE_NEW3 = '/manus-storage/1000011503_f266baf2.jpg';  // Terrace close-up tables
 
-function useReveal() {
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) entry.target.classList.add('visible');
-        });
-      },
-      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-    );
-    const elements = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-    elements.forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-}
-
 export default function Gallery() {
   const { t } = useLanguage();
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
   const [lightboxVisible, setLightboxVisible] = useState(false);
-  useReveal();
+  const reduceMotion = useReducedMotion();
 
   const galleryImages = [
-    { src: PHOTO_INTERIOR, label: t('gallery.img1'), aspect: 'portrait' },
-    { src: PHOTO_TERRACE_SUNSET, label: t('gallery.img2'), aspect: 'landscape' },
-    { src: PHOTO_TERRACE_DAY, label: t('gallery.img3'), aspect: 'landscape' },
-    { src: PHOTO_TERRACE_NEW1, label: 'Cafe & Bar Luxor — Terrasse', aspect: 'landscape' },
-    { src: PHOTO_TERRACE_NEW2, label: 'Terrasse — Panorama', aspect: 'landscape' },
-    { src: PHOTO_TERRACE_NEW3, label: 'Terrasse — Tische', aspect: 'landscape' },
+    { src: PHOTO_INTERIOR, label: t('gallery.img1'), left: '3%', top: '8%', width: '32%', rotation: -7, drift: 8, delay: 0 },
+    { src: PHOTO_TERRACE_SUNSET, label: t('gallery.img2'), left: '35%', top: '2%', width: '29%', rotation: 4, drift: 11, delay: 0.35 },
+    { src: PHOTO_TERRACE_DAY, label: t('gallery.img3'), left: '67%', top: '13%', width: '30%', rotation: 8, drift: 7, delay: 0.7 },
+    { src: PHOTO_TERRACE_NEW1, label: t('gallery.img4'), left: '18%', top: '49%', width: '31%', rotation: 7, drift: 10, delay: 0.5 },
+    { src: PHOTO_TERRACE_NEW2, label: t('gallery.img5'), left: '47%', top: '43%', width: '34%', rotation: -5, drift: 9, delay: 0.9 },
+    { src: PHOTO_TERRACE_NEW3, label: t('gallery.img6'), left: '70%', top: '62%', width: '27%', rotation: 6, drift: 7, delay: 0.2 },
   ];
 
   const openLightbox = (index: number) => {
@@ -126,34 +111,53 @@ export default function Gallery() {
             {t('gallery.subtitle')}
           </p>
 
-          {/* Masonry-style grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 md:gap-4">
+          {/* Flying posters — a Luxor-specific layered photo composition */}
+          <div className="luxor-poster-stage" aria-label={t('gallery.title')}>
             {galleryImages.map((img, i) => (
-              <div
+              <motion.button
+                type="button"
                 key={i}
-                className={`reveal group relative overflow-hidden cursor-pointer ${
-                  i === 0 || i === 3 || i === 4 || i === 7 ? 'col-span-2' : 'col-span-1'
-                }`}
+                className="luxor-poster group"
                 style={{
-                  aspectRatio: (i === 0 || i === 3 || i === 4 || i === 7) ? '16/9' : '1/1',
-                  transitionDelay: `${(i % 4) * 80}ms`,
+                  left: img.left,
+                  top: img.top,
+                  width: img.width,
+                  zIndex: i + 1,
                 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 34, scale: 0.94, rotateZ: img.rotation - 2 }}
+                animate={reduceMotion
+                  ? { opacity: 1, y: 0, scale: 1, rotateZ: img.rotation }
+                  : {
+                      opacity: 1,
+                      y: [0, -img.drift, 0],
+                      scale: 1,
+                      rotateZ: [img.rotation, img.rotation + 0.6, img.rotation],
+                    }}
+                transition={reduceMotion
+                  ? { duration: 0.01 }
+                  : {
+                      opacity: { duration: 0.55, delay: i * 0.09 },
+                      y: { duration: 7 + i * 0.45, repeat: Infinity, ease: 'easeInOut', delay: img.delay },
+                      rotateZ: { duration: 9 + i * 0.4, repeat: Infinity, ease: 'easeInOut', delay: img.delay },
+                    }}
+                whileHover={reduceMotion ? undefined : { scale: 1.045, y: -14, rotateZ: 0, zIndex: 20 }}
+                whileFocus={reduceMotion ? undefined : { scale: 1.035, y: -10, rotateZ: 0, zIndex: 20 }}
+                whileTap={{ scale: 0.985 }}
                 onClick={() => openLightbox(i)}
+                aria-label={`${img.label} — ${t('gallery.open')}`}
               >
-                {/* Image */}
                 <img
                   src={img.src}
                   alt={img.label}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
 
-                {/* Hover overlay */}
-                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-all duration-400 flex items-center justify-center">
-                  <div className="opacity-0 group-hover:opacity-100 transition-all duration-300 transform scale-75 group-hover:scale-100 flex flex-col items-center gap-2">
-                    <ZoomIn size={28} className="text-red-700" />
+                <div className="absolute inset-0 flex items-center justify-center bg-black/0 transition-all duration-300 group-hover:bg-black/45 group-focus-visible:bg-black/45">
+                  <div className="flex scale-90 flex-col items-center gap-2 opacity-0 transition-all duration-300 group-hover:scale-100 group-hover:opacity-100 group-focus-visible:scale-100 group-focus-visible:opacity-100">
+                    <ZoomIn size={26} className="text-red-400" />
                     <span
-                      className="text-white text-xs tracking-widest uppercase"
+                      className="max-w-[14rem] px-3 text-center text-xs uppercase tracking-[0.18em] text-white"
                       style={{ fontFamily: "'Source Sans 3', sans-serif" }}
                     >
                       {img.label}
@@ -161,10 +165,12 @@ export default function Gallery() {
                   </div>
                 </div>
 
-                {/* Gold corner accent */}
-                <div className="absolute top-0 left-0 w-6 h-6 border-t-2 border-l-2 border-red-700/0 group-hover:border-red-700/80 transition-all duration-300" />
-                <div className="absolute bottom-0 right-0 w-6 h-6 border-b-2 border-r-2 border-red-700/0 group-hover:border-red-700/80 transition-all duration-300" />
-              </div>
+                <div className="absolute left-0 top-0 h-6 w-6 border-l-2 border-t-2 border-red-700/30 transition-all duration-300 group-hover:border-red-500 group-focus-visible:border-red-500" />
+                <div className="absolute bottom-0 right-0 h-6 w-6 border-b-2 border-r-2 border-red-700/30 transition-all duration-300 group-hover:border-red-500 group-focus-visible:border-red-500" />
+                <span className="absolute bottom-3 left-3 rounded-full border border-white/20 bg-black/55 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] text-white/80 backdrop-blur-sm">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+              </motion.button>
             ))}
           </div>
         </div>

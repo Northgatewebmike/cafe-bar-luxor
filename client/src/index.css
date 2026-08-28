@@ -210,6 +210,67 @@
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(180, 0, 0, 0.1);
   }
 
+  /* Gallery: layered Flying Posters-style composition */
+  .luxor-poster-stage {
+    position: relative;
+    min-height: 50rem;
+    isolation: isolate;
+    perspective: 1400px;
+    perspective-origin: center 38%;
+  }
+
+  .luxor-poster {
+    position: absolute;
+    display: block;
+    aspect-ratio: 4 / 5;
+    overflow: hidden;
+    cursor: zoom-in;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background: #120a06;
+    box-shadow: 0 26px 64px rgba(0, 0, 0, 0.54), 0 0 0 5px rgba(10, 6, 3, 0.74);
+    transform-style: preserve-3d;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .luxor-poster:focus-visible {
+    outline: 2px solid rgb(248 113 113);
+    outline-offset: 5px;
+  }
+
+  @media (max-width: 767px) {
+    .luxor-poster-stage {
+      display: grid;
+      min-height: 0;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.8rem;
+      perspective: none;
+    }
+
+    .luxor-poster {
+      position: relative !important;
+      top: auto !important;
+      right: auto !important;
+      bottom: auto !important;
+      left: auto !important;
+      width: 100% !important;
+      aspect-ratio: 4 / 5;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.42), 0 0 0 3px rgba(10, 6, 3, 0.72);
+    }
+
+    .luxor-poster:first-child,
+    .luxor-poster:nth-child(5) {
+      grid-column: span 2;
+      aspect-ratio: 16 / 10;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .luxor-poster,
+    .luxor-poster img {
+      transition: none !important;
+    }
+  }
+
   /* Red text gradient */
   .text-red-gradient {
     background: linear-gradient(135deg, #dc5050, #b00000);

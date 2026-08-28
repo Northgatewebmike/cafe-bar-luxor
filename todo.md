@@ -78,3 +78,7 @@
 - [x] Remove the separate careers interest section and add résumé/application attachment instructions to the job card
 - [x] Add subtle hover animation and WhatsApp branding to the job and internship cards
 - [x] Configure mobile zoom so users can zoom in but cannot zoom below the default page scale
+- [x] Replace the fixed gallery grid with a premium Flying Posters-style composition using existing Luxor photos
+- [x] Translate remaining gallery captions and preserve lightbox accessibility, keyboard controls, and reduced-motion behavior
+- [x] Verify the gallery effect at desktop and phone sizes, then publish the updated GitHub Pages artifact
+- [x] Recover the GitHub Pages artifact media directory from the published archive when the local media cache is unavailable

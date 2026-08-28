@@ -102,9 +102,10 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.img1': 'Gemütliche Atmosphäre',
     'gallery.img2': 'Unsere Cocktails',
     'gallery.img3': 'Kaffeespezialitäten',
-    'gallery.img4': 'Die Bar',
-    'gallery.img5': 'Außenbereich',
-    'gallery.img6': 'Abendstimmung',
+    'gallery.img4': 'Terrasse am Cafe&Bar Luxor',
+    'gallery.img5': 'Terrassenpanorama',
+    'gallery.img6': 'Tische auf der Terrasse',
+    'gallery.open': 'Foto vergrößern',
 
     // Opening Hours
     'hours.title': 'Öffnungszeiten',
@@ -294,9 +295,10 @@ const translations: Record<Language, Record<string, string>> = {
     'gallery.img1': 'Cosy atmosphere',
     'gallery.img2': 'Our cocktails',
     'gallery.img3': 'Coffee specialities',
-    'gallery.img4': 'The bar',
-    'gallery.img5': 'Outdoor area',
-    'gallery.img6': 'Evening ambience',
+    'gallery.img4': 'Cafe&Bar Luxor terrace',
+    'gallery.img5': 'Terrace panorama',
+    'gallery.img6': 'Terrace tables',
+    'gallery.open': 'Enlarge photo',
 
     // Opening Hours
     'hours.title': 'Opening Hours',
