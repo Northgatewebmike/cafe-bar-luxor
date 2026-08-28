@@ -82,3 +82,5 @@
 - [x] Translate remaining gallery captions and preserve lightbox accessibility, keyboard controls, and reduced-motion behavior
 - [x] Verify the gallery effect at desktop and phone sizes, then publish the updated GitHub Pages artifact
 - [x] Recover the GitHub Pages artifact media directory from the published archive when the local media cache is unavailable
+- [x] Restore the menu flipbook runtime so the Speisekarte loads reliably
+- [x] Correct the second and third gallery captions to describe the terrace photos accurately in German and English

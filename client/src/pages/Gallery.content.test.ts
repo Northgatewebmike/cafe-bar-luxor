@@ -30,6 +30,10 @@ describe('Flying Posters gallery', () => {
   });
 
   it('uses complete German and English poster captions', () => {
+    expect(translationSource).toContain("'gallery.img2': 'Terrasse im Abendlicht'");
+    expect(translationSource).toContain("'gallery.img2': 'Terrace at sunset'");
+    expect(translationSource).toContain("'gallery.img3': 'Außentische auf der Terrasse'");
+    expect(translationSource).toContain("'gallery.img3': 'Outdoor tables on the terrace'");
     expect(translationSource).toContain("'gallery.img4': 'Terrasse am Cafe&Bar Luxor'");
     expect(translationSource).toContain("'gallery.img4': 'Cafe&Bar Luxor terrace'");
     expect(translationSource).toContain("'gallery.open': 'Foto vergrößern'");

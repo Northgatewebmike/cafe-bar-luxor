@@ -57,8 +57,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Luxor" />
 
-    <!-- dFlip 3D Flipbook CSS -->
-    <link rel="stylesheet" href="https://cafeluxor-tosj4glv.manus.space/manus-storage/dflip.min_f418d53d.css" />
+    <!-- dFlip 3D Flipbook CSS — served with CSS MIME type for reliable browser loading -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/dflip.min_f418d53d.css" />
 
     <!-- Google Fonts: Cormorant Garamond (display) + Source Sans 3 (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -116,12 +116,10 @@
     <div id="root"></div>
     <!-- jQuery (required by dFlip) -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <!-- Three.js (required by dFlip for WebGL 3D) -->
-    <script src="https://cafeluxor-tosj4glv.manus.space/manus-storage/three.min_98c01b76.js"></script>
-    <!-- PDF.js (required by dFlip for PDF mode) -->
-    <script src="https://cafeluxor-tosj4glv.manus.space/manus-storage/pdf.min_b18585e0.js"></script>
-    <!-- dFlip main library -->
-    <script src="https://cafeluxor-tosj4glv.manus.space/manus-storage/dflip.min_33fd7677.js"></script>
+    <!-- Runtime files use the public Pages archive CDN, which serves JavaScript with a browser-safe MIME type. -->
+    <script src="https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/three.min_98c01b76.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/pdf.min_b18585e0.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/dflip.min_33fd7677.js"></script>
     <script type="module" src="/src/main.tsx"></script>
     <!-- Umami analytics loaded conditionally after cookie consent via CookieBanner.tsx -->
   </body>

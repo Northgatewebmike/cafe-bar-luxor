@@ -26,25 +26,27 @@ declare global {
 // Full-page mode — front cover, 10 content pages, and a matching hard back cover.
 // The even page count prevents dFlip from generating an empty white final sheet.
 // Updated: bottled beer A=Gluten, Vodka/Jager Energy coffeinhaltig, improved shots notes, full legend
-const MENU_FRONT_COVER = '/manus-storage/menu-cover-luxor-v2_ecb75175.png';
+const MENU_MEDIA_BASE = 'https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/';
+const menuAsset = (fileName: string) => `${MENU_MEDIA_BASE}${fileName}`;
+const MENU_FRONT_COVER = menuAsset('menu-cover-luxor-v2_ecb75175.png');
 const MENU_BACK_COVER = MENU_FRONT_COVER;
 
 const MENU_PAGES = [
   MENU_FRONT_COVER,                                                      // Hard front cover
-  '/manus-storage/p01_welcome_2b120f43.png',                            // Welcome + Oeffnungszeiten
-  '/manus-storage/p02_kaffee_tee_7e4a1674.png',                         // Kaffee + Tee (1/A-N codes)
-  '/manus-storage/p03_kalt_1318c766.png',                               // Kaltgetranke (1/A-N codes)
-  '/manus-storage/p04_limo_2ef2a3b9.png',                               // Hausgemachte Limonade
-  '/manus-storage/p05_bier_53951fac.png',                               // Bier (1/A Gluten, 4/D Sulfite)
-  '/manus-storage/p06_cocktails1_0ba8d16b.png',                         // Cocktails (1/A-N codes)
-  '/manus-storage/p07_cocktails2_6e14b8dc.png',                         // Shots (1/A-N notes)
-  '/manus-storage/p08_longdrinks_whiskey_aperitif_f953963b.png',        // Long Drinks + Whiskey + Aperitif
-  '/manus-storage/p09_wein_eis_4839dc68.png',                           // Wein & Sekt + Eis (4/D, 6/F)
-  '/manus-storage/p10_thanks_bf012ec9.png',                             // Vielen Dank
+  menuAsset('p01_welcome_2b120f43.png'),                                // Welcome + Oeffnungszeiten
+  menuAsset('p02_kaffee_tee_7e4a1674.png'),                             // Kaffee + Tee (1/A-N codes)
+  menuAsset('p03_kalt_1318c766.png'),                                   // Kaltgetranke (1/A-N codes)
+  menuAsset('p04_limo_2ef2a3b9.png'),                                   // Hausgemachte Limonade
+  menuAsset('p05_bier_53951fac.png'),                                   // Bier (1/A Gluten, 4/D Sulfite)
+  menuAsset('p06_cocktails1_0ba8d16b.png'),                             // Cocktails (1/A-N codes)
+  menuAsset('p07_cocktails2_6e14b8dc.png'),                             // Shots (1/A-N notes)
+  menuAsset('p08_longdrinks_whiskey_aperitif_f953963b.png'),            // Long Drinks + Whiskey + Aperitif
+  menuAsset('p09_wein_eis_4839dc68.png'),                               // Wein & Sekt + Eis (4/D, 6/F)
+  menuAsset('p10_thanks_bf012ec9.png'),                                 // Vielen Dank
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 
-const SOUND_URL = '/manus-storage/turn_d5b169b6.mp3';
+const SOUND_URL = menuAsset('turn_d5b169b6.mp3');
 const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
 
 function useReveal() {
