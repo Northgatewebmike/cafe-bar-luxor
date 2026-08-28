@@ -29,7 +29,9 @@ declare global {
 const MENU_MEDIA_BASE = 'https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/';
 const menuAsset = (fileName: string) => `${MENU_MEDIA_BASE}${fileName}`;
 const MENU_FRONT_COVER = menuAsset('menu-cover-luxor-v2_ecb75175.png');
-const MENU_BACK_COVER = MENU_FRONT_COVER;
+// This is visually the same cover, but it must keep a distinct source identity.
+// Otherwise dFlip can reuse the first-cover texture while settling the final hard-cover turn.
+const MENU_BACK_COVER = `${MENU_FRONT_COVER}?sheet=back-cover`;
 
 const MENU_PAGES = [
   MENU_FRONT_COVER,                                                      // Hard front cover

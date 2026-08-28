@@ -6,7 +6,7 @@ When a visitor reaches the final menu sheet, the book must close smoothly and im
 
 ## Implementation
 
-The flipbook uses the matching Luxor cover as its final hard page. All menu images are preloaded when the menu opens, and the dFlip turn duration is set to 480 milliseconds to maintain a quick, physical hard-cover motion.
+The flipbook uses the matching Luxor cover as its final hard page. Its final cover now has a distinct image source identity, while retaining the identical visual asset. This prevents dFlip from reusing the front-cover texture when the final sheet turns. All menu images are preloaded when the menu opens, and the dFlip turn duration is set to 480 milliseconds to maintain a quick, physical hard-cover motion.
 
 ## Browser verification
 

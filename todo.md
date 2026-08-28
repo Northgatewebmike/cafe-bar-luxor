@@ -87,3 +87,5 @@
 - [x] Make the flipbook close immediately and smoothly like a real hard-cover book without an end-page delay
 - [x] Navigate to the final back cover and verify the repaired close interaction has no visible pause
 - [x] Record regression coverage for the final-cover close behavior after browser verification
+- [x] Remove the brief final-sheet flash that appears just before the flipbook closes onto the back cover
+- [x] Reproduce the final close after the distinct back-cover repair and verify no first-page flash remains

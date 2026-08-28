@@ -8,7 +8,7 @@ const documentSource = readFileSync(resolve(projectRoot, "client/index.html"), "
 
 describe("flipbook closing cover", () => {
   it("uses a matching back cover after the final menu page", () => {
-    expect(menuSource).toContain("const MENU_BACK_COVER = MENU_FRONT_COVER");
+    expect(menuSource).toContain("const MENU_BACK_COVER = `${MENU_FRONT_COVER}?sheet=back-cover`");
     expect(menuSource).toMatch(/p10_thanks_bf012ec9\.png[\s\S]*MENU_BACK_COVER/);
   });
 
@@ -54,5 +54,10 @@ describe("flipbook closing cover", () => {
 
     expect(pageEntries.at(-1)).toContain("MENU_BACK_COVER");
     expect(menuSource).toContain("flipbookHardPages: 'cover'");
+  });
+
+  it("keeps the final hard cover distinct from the first cover to prevent texture reuse", () => {
+    expect(menuSource).toContain("?sheet=back-cover");
+    expect(menuSource).not.toContain("const MENU_BACK_COVER = MENU_FRONT_COVER");
   });
 });
