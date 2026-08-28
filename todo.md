@@ -84,3 +84,6 @@
 - [x] Recover the GitHub Pages artifact media directory from the published archive when the local media cache is unavailable
 - [x] Restore the menu flipbook runtime so the Speisekarte loads reliably
 - [x] Correct the second and third gallery captions to describe the terrace photos accurately in German and English
+- [x] Make the flipbook close immediately and smoothly like a real hard-cover book without an end-page delay
+- [x] Navigate to the final back cover and verify the repaired close interaction has no visible pause
+- [x] Record regression coverage for the final-cover close behavior after browser verification

@@ -38,4 +38,21 @@ describe("flipbook closing cover", () => {
     expect(menuSource).toContain("menuAsset('p10_thanks_bf012ec9.png')");
     expect(menuSource).toContain("menuAsset('turn_d5b169b6.mp3')");
   });
+
+  it("preloads menu sheets and uses a fast, smooth hard-cover close duration", () => {
+    expect(menuSource).toContain("preloadedPagesRef.current = MENU_PAGES.map");
+    expect(menuSource).toContain("image.decoding = 'async'");
+    expect(menuSource).toContain("duration: 480");
+  });
+
+  it("uses the matching hard cover as the sole final state of the book", () => {
+    const pageList = menuSource.match(/const MENU_PAGES = \[([\s\S]*?)\n\];/)?.[1] ?? "";
+    const pageEntries = pageList
+      .split("\n")
+      .map(line => line.trim())
+      .filter(line => line.startsWith("MENU_") || line.startsWith("menuAsset("));
+
+    expect(pageEntries.at(-1)).toContain("MENU_BACK_COVER");
+    expect(menuSource).toContain("flipbookHardPages: 'cover'");
+  });
 });

@@ -67,11 +67,21 @@ function useReveal() {
 
 function DFlipBook() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const preloadedPagesRef = useRef<HTMLImageElement[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
 
   useEffect(() => {
     let attempts = 0;
     const maxAttempts = 80; // 8 seconds
+
+    // Keep the remaining menu sheets ready in the browser cache. This prevents
+    // a noticeable pause when the guest reaches the final hard cover to close it.
+    preloadedPagesRef.current = MENU_PAGES.map((source) => {
+      const image = new Image();
+      image.decoding = 'async';
+      image.src = source;
+      return image;
+    });
 
     const tryInit = () => {
       attempts++;
@@ -107,8 +117,8 @@ function DFlipBook() {
               flipbookHardPages: 'cover',
               // Auto height — fills available width proportionally
               height: 'auto',
-              // Flip speed — smooth
-              duration: 700,
+              // Quick, physical hard-cover turn with no noticeable closing pause.
+              duration: 480,
             });
           } catch (err) {
             console.error('dFlip init error:', err);
@@ -123,6 +133,9 @@ function DFlipBook() {
     };
 
     tryInit();
+    return () => {
+      preloadedPagesRef.current = [];
+    };
   }, []);
 
   return (
