@@ -67,6 +67,31 @@ function useReveal() {
   }, []);
 }
 
+function loadScriptOnce(source: string) {
+  return new Promise<void>((resolve, reject) => {
+    const existing = document.querySelector(`script[data-luxor-dflip="${source}"]`);
+    if (existing) {
+      resolve();
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = source;
+    script.async = false;
+    script.dataset.luxorDflip = source;
+    script.onload = () => resolve();
+    script.onerror = () => reject(new Error(`Could not load ${source}`));
+    document.body.appendChild(script);
+  });
+}
+
+async function ensureDFlipRuntime() {
+  if (window.DFLIP || window.DEARFLIP) return;
+  await loadScriptOnce(menuAsset('jquery-3.7.1.min.js'));
+  await loadScriptOnce(menuAsset('three.min_98c01b76.js'));
+  await loadScriptOnce(menuAsset('pdf.min_b18585e0.js'));
+  await loadScriptOnce(menuAsset('dflip.min_33fd7677.js'));
+}
+
 function DFlipBook() {
   const containerRef = useRef<HTMLDivElement>(null);
   const preloadedPagesRef = useRef<HTMLImageElement[]>([]);
@@ -134,7 +159,9 @@ function DFlipBook() {
       }
     };
 
-    tryInit();
+    ensureDFlipRuntime()
+      .catch((err) => console.warn('dFlip runtime recovery failed:', err))
+      .finally(tryInit);
     return () => {
       preloadedPagesRef.current = [];
     };

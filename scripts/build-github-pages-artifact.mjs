@@ -11,6 +11,8 @@ const cloudfrontLogo = "https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506
 const externalCoffeeImage = "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&q=80";
 const jquerySource = "https://code.jquery.com/jquery-3.7.1.min.js";
 const pdfWorkerSource = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
+const jsdelivrMediaSource = "https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/";
+const legacyJsdelivrMediaSource = "https://cdn.jsdelivr.net/gh/Northgatewebmike@master/media/";
 const pagesBase = "/cafe-bar-luxor-pages";
 const flipbookRuntime = [
   "dflip.min_f418d53d.css",
@@ -99,6 +101,8 @@ for (const file of textFiles) {
     .replaceAll(cloudfrontLogo, "/media/cafe-bar-luxor-logo-v3.png")
     .replaceAll(externalCoffeeImage, "/media/about-coffee.jpg")
     .replaceAll(jquerySource, "/media/jquery-3.7.1.min.js")
+    .replaceAll(jsdelivrMediaSource, "/media/")
+    .replaceAll(legacyJsdelivrMediaSource, "/media/")
     .replaceAll("/media/", `${pagesBase}/media/`);
   const withPagesPaths = file.endsWith(".html")
     ? withBundledMedia
