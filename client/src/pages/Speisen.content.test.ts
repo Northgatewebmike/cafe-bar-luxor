@@ -29,7 +29,10 @@ describe('food content inside the flipbook menu', () => {
   });
 
   it('loads the food content as a real flipbook sheet and removes the standalone page links', () => {
-    expect(menuSource).toContain("'/media/p10_speisen_food_7c4e2a1b.svg'");
+    expect(menuSource).toContain("'/media/p10_speisen_de_7c4e2a1b.svg'");
+    expect(menuSource).toContain("'/media/p10_speisen_en_7c4e2a1b.svg'");
+    expect(menuSource).toContain("'/media/p11_closing_de_9d2f6a4c.svg'");
+    expect(menuSource).toContain("'/media/p11_closing_en_9d2f6a4c.svg'");
     expect(appSource).not.toContain('path="/speisen"');
     expect(appSource).not.toContain('import Speisen from "./pages/Speisen"');
     expect(navigationSource).not.toContain("href: '/speisen'");

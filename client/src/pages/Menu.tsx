@@ -33,7 +33,7 @@ const MENU_FRONT_COVER = menuAsset('menu-cover-luxor-v2_ecb75175.png');
 // Otherwise dFlip can reuse the first-cover texture while settling the final hard-cover turn.
 const MENU_BACK_COVER = `${MENU_FRONT_COVER}?sheet=back-cover`;
 
-const MENU_PAGES = [
+const MENU_PAGES_DE = [
   MENU_FRONT_COVER,                                                      // Hard front cover
   menuAsset('p01_welcome_2b120f43.png'),                                // Welcome + Oeffnungszeiten
   menuAsset('p02_kaffee_tee_7e4a1674.png'),                             // Kaffee + Tee (1/A-N codes)
@@ -44,9 +44,16 @@ const MENU_PAGES = [
   menuAsset('p07_cocktails2_6e14b8dc.png'),                             // Shots (1/A-N notes)
   menuAsset('p08_longdrinks_whiskey_aperitif_f953963b.png'),            // Long Drinks + Whiskey + Aperitif
   menuAsset('p09_wein_eis_4839dc68.png'),                               // Wein & Sekt + Eis (4/D, 6/F)
-  '/media/p10_speisen_food_7c4e2a1b.svg',                              // Speisen + Food (bilingual)
-  '/media/p11_speisen_details_9d2f6a4c.svg',                            // Zutaten + Allergenhinweise (bilingual)
-  menuAsset('p12_thanks_bf012ec9.png'),                                 // Vielen Dank
+  '/media/p10_speisen_de_7c4e2a1b.svg',                                 // Speisen (German)
+  menuAsset('p10_thanks_bf012ec9.png'),                                 // Vielen Dank
+  '/media/p11_closing_de_9d2f6a4c.svg',                                 // Thank-you + opening hours (German)
+  MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
+];
+const MENU_PAGES_EN = [
+  ...MENU_PAGES_DE.slice(0, -4),
+  '/media/p10_speisen_en_7c4e2a1b.svg',                                 // Food (English)
+  menuAsset('p10_thanks_bf012ec9.png'),                                 // Thank you
+  '/media/p11_closing_en_9d2f6a4c.svg',                                 // Thank-you + opening hours (English)
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 
@@ -94,10 +101,11 @@ async function ensureDFlipRuntime() {
   await loadScriptOnce(menuAsset('dflip.min_33fd7677.js'));
 }
 
-function DFlipBook() {
+function DFlipBook({ lang }: { lang: 'de' | 'en' }) {
   const containerRef = useRef<HTMLDivElement>(null);
   const preloadedPagesRef = useRef<HTMLImageElement[]>([]);
   const [status, setStatus] = useState<'loading' | 'ready' | 'error'>('loading');
+  const pages = lang === 'en' ? MENU_PAGES_EN : MENU_PAGES_DE;
 
   useEffect(() => {
     let attempts = 0;
@@ -105,7 +113,7 @@ function DFlipBook() {
 
     // Keep the remaining menu sheets ready in the browser cache. This prevents
     // a noticeable pause when the guest reaches the final hard cover to close it.
-    preloadedPagesRef.current = MENU_PAGES.map((source) => {
+    preloadedPagesRef.current = pages.map((source) => {
       const image = new Image();
       image.decoding = 'async';
       image.src = source;
@@ -122,7 +130,7 @@ function DFlipBook() {
           if (!containerRef.current) return;
           try {
             DFLIP.Application({
-              source: MENU_PAGES,
+              source: pages,
               element: containerRef.current,
               // 3D WebGL mode — the key feature
               is3D: true,
@@ -167,7 +175,7 @@ function DFlipBook() {
     return () => {
       preloadedPagesRef.current = [];
     };
-  }, []);
+  }, [pages]);
 
   return (
     <div className="w-full relative">
@@ -197,7 +205,7 @@ function DFlipBook() {
 }
 
 export default function Menu() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   useReveal();
 
   return (
@@ -244,7 +252,7 @@ export default function Menu() {
       {/* ============ FLIPBOOK ============ */}
       <section className="pb-8 md:pb-12">
         <div className="w-full px-0 reveal">
-          <DFlipBook />
+          <DFlipBook lang={lang} />
         </div>
       </section>
 

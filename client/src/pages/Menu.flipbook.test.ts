@@ -9,11 +9,11 @@ const documentSource = readFileSync(resolve(projectRoot, "client/index.html"), "
 describe("flipbook closing cover", () => {
   it("uses a matching back cover after the final menu page", () => {
     expect(menuSource).toContain("const MENU_BACK_COVER = `${MENU_FRONT_COVER}?sheet=back-cover`");
-    expect(menuSource).toMatch(/p12_thanks_bf012ec9\.png[\s\S]*MENU_BACK_COVER/);
+    expect(menuSource).toMatch(/p11_closing_de_9d2f6a4c\.svg[\s\S]*MENU_BACK_COVER/);
   });
 
   it("keeps an even page count so dFlip has no empty closing sheet", () => {
-    const pageList = menuSource.match(/const MENU_PAGES = \[([\s\S]*?)\n\];/)?.[1] ?? "";
+    const pageList = menuSource.match(/const MENU_PAGES_DE = \[([\s\S]*?)\n\];/)?.[1] ?? "";
     const pageEntries = pageList
       .split("\n")
       .filter(line => /^\s*(MENU_|menuAsset\(|['"])/.test(line));
@@ -35,20 +35,22 @@ describe("flipbook closing cover", () => {
   it("loads menu pages and sound from the browser-safe public archive", () => {
     expect(menuSource).toContain("const MENU_MEDIA_BASE = 'https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/'");
     expect(menuSource).toContain("menuAsset('p01_welcome_2b120f43.png')");
-    expect(menuSource).toContain("'/media/p10_speisen_food_7c4e2a1b.svg'");
-    expect(menuSource).toContain("menuAsset('p12_thanks_bf012ec9.png')");
-    expect(menuSource).toContain("'/media/p11_speisen_details_9d2f6a4c.svg'");
+    expect(menuSource).toContain("'/media/p10_speisen_de_7c4e2a1b.svg'");
+    expect(menuSource).toContain("'/media/p10_speisen_en_7c4e2a1b.svg'");
+    expect(menuSource).toContain("menuAsset('p10_thanks_bf012ec9.png')");
+    expect(menuSource).toContain("'/media/p11_closing_de_9d2f6a4c.svg'");
+    expect(menuSource).toContain("'/media/p11_closing_en_9d2f6a4c.svg'");
     expect(menuSource).toContain("menuAsset('turn_d5b169b6.mp3')");
   });
 
   it("preloads menu sheets and uses a fast, smooth hard-cover close duration", () => {
-    expect(menuSource).toContain("preloadedPagesRef.current = MENU_PAGES.map");
+    expect(menuSource).toContain("preloadedPagesRef.current = pages.map");
     expect(menuSource).toContain("image.decoding = 'async'");
     expect(menuSource).toContain("duration: 480");
   });
 
   it("uses the matching hard cover as the sole final state of the book", () => {
-    const pageList = menuSource.match(/const MENU_PAGES = \[([\s\S]*?)\n\];/)?.[1] ?? "";
+    const pageList = menuSource.match(/const MENU_PAGES_DE = \[([\s\S]*?)\n\];/)?.[1] ?? "";
     const pageEntries = pageList
       .split("\n")
       .map(line => line.trim())
