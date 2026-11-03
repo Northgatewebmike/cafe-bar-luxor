@@ -44,16 +44,24 @@ const MENU_PAGES_DE = [
   menuAsset('p07_cocktails2_6e14b8dc.png'),                             // Shots (1/A-N notes)
   menuAsset('p08_longdrinks_whiskey_aperitif_f953963b.png'),            // Long Drinks + Whiskey + Aperitif
   menuAsset('p09_wein_eis_4839dc68.png'),                               // Wein & Sekt + Eis (4/D, 6/F)
-  '/media/p10_speisen_de_7c4e2a1b.svg',                                 // Speisen (German)
-  '/media/p10_contact_de_4a7e1c2d.svg',                                  // Contact (German)
-  '/media/p11_closing_de_9d2f6a4c.svg',                                 // Thank-you + opening hours (German)
+  '/media/p10_speisen_de_7c4e2a1b.png',                                 // Speisen (German)
+  '/media/p11_closing_de_9d2f6a4c.png',                                 // Thank-you + opening hours (German)
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 const MENU_PAGES_EN = [
-  ...MENU_PAGES_DE.slice(0, -4),
-  '/media/p10_speisen_en_7c4e2a1b.svg',                                 // Food (English)
-  '/media/p10_contact_en_4a7e1c2d.svg',                                 // Contact (English)
-  '/media/p11_closing_en_9d2f6a4c.svg',                                 // Thank-you + opening hours (English)
+  MENU_FRONT_COVER,
+  '/media/p01_welcome_en_5a1f3c8d.png',
+  '/media/p02_coffee_tea_en_5a1f3c8d.png',
+  '/media/p03_cold_drinks_en_5a1f3c8d.png',
+  '/media/p04_lemonade_en_5a1f3c8d.png',
+  '/media/p05_beer_en_5a1f3c8d.png',
+  '/media/p06_cocktails_en_5a1f3c8d.png',
+  '/media/p07_shots_en_5a1f3c8d.png',
+  '/media/p08_longdrinks_en_5a1f3c8d.png',
+  '/media/p09_wine_ice_en_5a1f3c8d.png',
+  '/media/p10_speisen_en_7c4e2a1b.png',                                 // Food (English)
+  '/media/p10_contact_en_4a7e1c2d.png',                                  // Contact (English)
+  '/media/p11_closing_en_9d2f6a4c.png',                                 // Thank-you + opening hours (English)
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 
