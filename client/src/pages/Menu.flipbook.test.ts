@@ -37,7 +37,8 @@ describe("flipbook closing cover", () => {
     expect(menuSource).toContain("menuAsset('p01_welcome_2b120f43.png')");
     expect(menuSource).toContain("'/media/p10_speisen_de_7c4e2a1b.svg'");
     expect(menuSource).toContain("'/media/p10_speisen_en_7c4e2a1b.svg'");
-    expect(menuSource).toContain("menuAsset('p10_thanks_bf012ec9.png')");
+    expect(menuSource).toContain("'/media/p10_contact_de_4a7e1c2d.svg'");
+    expect(menuSource).toContain("'/media/p10_contact_en_4a7e1c2d.svg'");
     expect(menuSource).toContain("'/media/p11_closing_de_9d2f6a4c.svg'");
     expect(menuSource).toContain("'/media/p11_closing_en_9d2f6a4c.svg'");
     expect(menuSource).toContain("menuAsset('turn_d5b169b6.mp3')");
@@ -47,6 +48,7 @@ describe("flipbook closing cover", () => {
     expect(menuSource).toContain("preloadedPagesRef.current = pages.map");
     expect(menuSource).toContain("image.decoding = 'async'");
     expect(menuSource).toContain("duration: 480");
+    expect(menuSource).toContain("containerRef.current.innerHTML = ''");
   });
 
   it("uses the matching hard cover as the sole final state of the book", () => {

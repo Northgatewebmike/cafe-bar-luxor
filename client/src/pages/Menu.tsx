@@ -45,14 +45,14 @@ const MENU_PAGES_DE = [
   menuAsset('p08_longdrinks_whiskey_aperitif_f953963b.png'),            // Long Drinks + Whiskey + Aperitif
   menuAsset('p09_wein_eis_4839dc68.png'),                               // Wein & Sekt + Eis (4/D, 6/F)
   '/media/p10_speisen_de_7c4e2a1b.svg',                                 // Speisen (German)
-  menuAsset('p10_thanks_bf012ec9.png'),                                 // Vielen Dank
+  '/media/p10_contact_de_4a7e1c2d.svg',                                  // Contact (German)
   '/media/p11_closing_de_9d2f6a4c.svg',                                 // Thank-you + opening hours (German)
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 const MENU_PAGES_EN = [
   ...MENU_PAGES_DE.slice(0, -4),
   '/media/p10_speisen_en_7c4e2a1b.svg',                                 // Food (English)
-  menuAsset('p10_thanks_bf012ec9.png'),                                 // Thank you
+  '/media/p10_contact_en_4a7e1c2d.svg',                                 // Contact (English)
   '/media/p11_closing_en_9d2f6a4c.svg',                                 // Thank-you + opening hours (English)
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
@@ -110,6 +110,11 @@ function DFlipBook({ lang }: { lang: 'de' | 'en' }) {
   useEffect(() => {
     let attempts = 0;
     const maxAttempts = 80; // 8 seconds
+    setStatus('loading');
+    // dFlip appends its own canvas and controls into the mount node. Clear the
+    // previous instance before rebuilding so a language switch never creates a
+    // second visible book on top of the first one.
+    if (containerRef.current) containerRef.current.innerHTML = '';
 
     // Keep the remaining menu sheets ready in the browser cache. This prevents
     // a noticeable pause when the guest reaches the final hard cover to close it.
@@ -129,6 +134,7 @@ function DFlipBook({ lang }: { lang: 'de' | 'en' }) {
         setTimeout(() => {
           if (!containerRef.current) return;
           try {
+            containerRef.current.innerHTML = '';
             DFLIP.Application({
               source: pages,
               element: containerRef.current,
@@ -174,6 +180,7 @@ function DFlipBook({ lang }: { lang: 'de' | 'en' }) {
       .finally(tryInit);
     return () => {
       preloadedPagesRef.current = [];
+      if (containerRef.current) containerRef.current.innerHTML = '';
     };
   }, [pages]);
 
