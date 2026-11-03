@@ -61,7 +61,6 @@ export default function Footer() {
                 { href: '/oeffnungszeiten', label: t('nav.hours') },
                 { href: '/kontakt', label: t('nav.contact') },
                 { href: '/automaten', label: t('nav.automaten') },
-                { href: '/speisen', label: lang === 'de' ? 'Speisen' : 'Food' },
               ].map((link) => (
                 <Link key={link.href} href={link.href}>
                   <div className="text-white/40 text-sm transition-colors cursor-pointer flex items-center gap-2 group"
@@ -137,15 +136,6 @@ export default function Footer() {
                 onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(220,80,80,0.8)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
                 Allergene
-              </span>
-            </Link>
-            <span className="text-white/15 text-xs">|</span>
-            <Link href="/speisen">
-              <span className="text-white/25 text-xs transition-colors cursor-pointer"
-                style={{ fontFamily: "'Source Sans 3', sans-serif" }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(220,80,80,0.8)')}
-                onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.25)')}>
-                {lang === 'de' ? 'Speisen' : 'Food'}
               </span>
             </Link>
             <span className="text-white/15 text-xs">|</span>

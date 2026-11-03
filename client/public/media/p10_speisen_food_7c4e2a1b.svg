@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="1200" viewBox="0 0 900 1200">
+<rect width="900" height="1200" fill="#100504"/>
+<rect x="28" y="28" width="844" height="1144" rx="4" fill="none" stroke="#7f1d1d" stroke-width="2"/>
+<rect x="46" y="46" width="808" height="1108" rx="3" fill="none" stroke="#c9a84c" stroke-opacity=".38"/>
+<text x="450" y="92" text-anchor="middle" fill="#c9a84c" font-family="Georgia,serif" font-size="16" letter-spacing="6">CAFE &amp; BAR LUXOR</text>
+<text x="450" y="140" text-anchor="middle" fill="#fff8ef" font-family="Georgia,serif" font-size="38" font-weight="bold">SPEISEN · FOOD</text>
+<line x1="315" y1="160" x2="585" y2="160" stroke="#8b1a1a" stroke-width="2"/>
+<text x="450" y="188" text-anchor="middle" fill="#d4c9b0" font-family="Arial,sans-serif" font-size="14" letter-spacing="2">FRÜHSTÜCK · SNACKS · HAUSGEMACHT</text>
+
+<g font-family="Georgia,serif" fill="#fff8ef">
+<text x="78" y="245" fill="#c9a84c" font-size="15" letter-spacing="3">01 · FRÜHSTÜCK / BREAKFAST</text>
+<text x="78" y="284" font-size="25" font-weight="bold">Kleines Frühstück</text><text x="822" y="284" text-anchor="end" fill="#fff" font-size="22" font-weight="bold">5,90 €</text>
+<text x="78" y="312" fill="#d4c9b0" font-family="Arial,sans-serif" font-size="15">Brötchen, Butter, Marmelade/Honig, Käse oder Wurst</text>
+<text x="78" y="334" fill="#a99b87" font-family="Arial,sans-serif" font-size="12">Small breakfast · rolls, butter, jam/honey, cheese or cold cuts · A, F</text>
+
+<text x="78" y="390" font-size="25" font-weight="bold">Großes Frühstück</text><text x="822" y="390" text-anchor="end" fill="#fff" font-size="22" font-weight="bold">8,50 €</text>
+<text x="78" y="418" fill="#d4c9b0" font-family="Arial,sans-serif" font-size="15">Brötchen, Butter, Marmelade, Käse, Aufschnitt und Ei</text>
+<text x="78" y="440" fill="#a99b87" font-family="Arial,sans-serif" font-size="12">Large breakfast · rolls, butter, jam, cheese, cold cuts and egg · A, F, I</text>
+
+<text x="78" y="496" fill="#c9a84c" font-size="15" letter-spacing="3">02 · HERZHAFT / SAVOURY</text>
+<text x="78" y="535" font-size="25" font-weight="bold">Hähnchenschnitzel</text><text x="822" y="535" text-anchor="end" fill="#fff" font-size="22" font-weight="bold">7,90 €</text>
+<text x="78" y="563" fill="#d4c9b0" font-family="Arial,sans-serif" font-size="15">Paniertes Hähnchenbrustfilet mit Zitrone</text>
+<text x="78" y="585" fill="#a99b87" font-family="Arial,sans-serif" font-size="12">Breaded chicken breast fillet with lemon · A, I</text>
+
+<text x="78" y="641" font-size="25" font-weight="bold">Wurst</text><text x="822" y="641" text-anchor="end" fill="#fff" font-size="22" font-weight="bold">3,50 €</text>
+<text x="78" y="669" fill="#d4c9b0" font-family="Arial,sans-serif" font-size="15">Bratwurst oder Bockwurst, gebraten oder gekocht</text>
+<text x="78" y="691" fill="#a99b87" font-family="Arial,sans-serif" font-size="12">German sausage · pan-fried or boiled · E, K · ggf. Nitritpökelsalz</text>
+
+<text x="78" y="747" font-size="25" font-weight="bold">Frikadellen</text><text x="822" y="747" text-anchor="end" fill="#fff" font-size="22" font-weight="bold">2,50 €</text>
+<text x="78" y="775" fill="#d4c9b0" font-family="Arial,sans-serif" font-size="15">Hausgemachte Hackfleischfrikadelle mit Kräutern</text>
+<text x="78" y="797" fill="#a99b87" font-family="Arial,sans-serif" font-size="12">Seasoned German meatball · herbs and spices · A, I, K</text>
+
+<text x="78" y="853" fill="#c9a84c" font-size="15" letter-spacing="3">03 · BEILAGE / SIDE</text>
+<text x="78" y="892" font-size="25" font-weight="bold">Kartoffelsalat</text><text x="822" y="892" text-anchor="end" fill="#fff" font-size="22" font-weight="bold">3,50 €</text>
+<text x="78" y="920" fill="#d4c9b0" font-family="Arial,sans-serif" font-size="15">Klassischer Kartoffelsalat mit Mayonnaise oder Dressing</text>
+<text x="78" y="942" fill="#a99b87" font-family="Arial,sans-serif" font-size="12">Traditional potato salad with mayonnaise or dressing · I, K, E*</text>
+</g>
+
+<line x1="78" y1="1000" x2="822" y2="1000" stroke="#7f1d1d" stroke-width="1"/>
+<text x="78" y="1035" fill="#c9a84c" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">ALLERGENE / ALLERGENS</text>
+<text x="78" y="1062" fill="#d4c9b0" font-family="Arial,sans-serif" font-size="13">A Gluten · E Sellerie/Celery · F Milch/Milk · I Eier/Egg · K Senf/Mustard</text>
+<text x="78" y="1090" fill="#9d8e7c" font-family="Arial,sans-serif" font-size="11">* Sellerie je nach Brühe · recipes and suppliers may vary</text>
+<text x="450" y="1128" text-anchor="middle" fill="#8b1a1a" font-family="Georgia,serif" font-size="13" letter-spacing="3">GUTEN APPETIT · ENJOY</text>
+</svg>

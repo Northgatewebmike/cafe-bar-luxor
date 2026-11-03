@@ -33,7 +33,6 @@ export default function Navigation() {
     { href: '/kontakt', label: t('nav.contact') },
     { href: '/automaten', label: t('nav.automaten') },
     { href: '/allergene', label: lang === 'de' ? 'Allergeninfo' : 'Allergen Info' },
-    { href: '/speisen', label: lang === 'de' ? 'Speisen' : 'Food' },
     { href: '/jobs-praktikum', label: lang === 'de' ? 'Jobs & Praktikum' : 'Jobs & Internships' },
   ];
 

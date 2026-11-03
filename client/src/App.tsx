@@ -26,7 +26,6 @@ import Datenschutz from "./pages/Datenschutz";
 import Automaten from "./pages/Automaten";
 import Allergene from "./pages/Allergene";
 import JobsPraktikum from "./pages/JobsPraktikum";
-import Speisen from "./pages/Speisen";
 import NotFound from "./pages/NotFound";
 import CookieBanner from "./components/CookieBanner";
 function Router() {
@@ -47,7 +46,6 @@ function Router() {
           <Route path="/datenschutz" component={Datenschutz} />
           <Route path="/automaten" component={Automaten} />
           <Route path="/allergene" component={Allergene} />
-          <Route path="/speisen" component={Speisen} />
           <Route path="/jobs-praktikum" component={JobsPraktikum} />
           <Route component={NotFound} />
         </Switch>

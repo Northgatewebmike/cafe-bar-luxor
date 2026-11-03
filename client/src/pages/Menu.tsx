@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-// Full-page mode — front cover, 10 content pages, and a matching hard back cover.
+// Full-page mode — front cover, 11 content pages, and a matching hard back cover.
 // The even page count prevents dFlip from generating an empty white final sheet.
 // Updated: bottled beer A=Gluten, Vodka/Jager Energy coffeinhaltig, improved shots notes, full legend
 const MENU_MEDIA_BASE = 'https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/';
@@ -44,7 +44,9 @@ const MENU_PAGES = [
   menuAsset('p07_cocktails2_6e14b8dc.png'),                             // Shots (1/A-N notes)
   menuAsset('p08_longdrinks_whiskey_aperitif_f953963b.png'),            // Long Drinks + Whiskey + Aperitif
   menuAsset('p09_wein_eis_4839dc68.png'),                               // Wein & Sekt + Eis (4/D, 6/F)
-  menuAsset('p10_thanks_bf012ec9.png'),                                 // Vielen Dank
+  '/media/p10_speisen_food_7c4e2a1b.svg',                              // Speisen + Food (bilingual)
+  '/media/p11_speisen_details_9d2f6a4c.svg',                            // Zutaten + Allergenhinweise (bilingual)
+  menuAsset('p12_thanks_bf012ec9.png'),                                 // Vielen Dank
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 
