@@ -54,6 +54,14 @@ describe("flipbook closing cover", () => {
     expect(menuSource).toContain("'/media/p11_closing_en_9d2f6a4c.png'");
     expect(menuSource).toContain("'/media/p01_welcome_en_exact_2d6f4a91.png'");
     expect(menuSource).toContain("'/media/p03_cold_en_exact_2d6f4a91.png'");
+    for (const asset of [
+      "p02_coffee_tea_en_exact_2d6f4a91.png",
+      "p03_cold_en_exact_2d6f4a91.png",
+      "p04_lemonade_en_exact_2d6f4a91.png",
+      "p05_beer_en_exact_2d6f4a91.png",
+    ]) {
+      expect(existsSync(resolve(projectRoot, "client/public/media", asset))).toBe(true);
+    }
     expect(menuSource).toContain("'/media/p04_lemonade_en_exact_2d6f4a91.png'");
     expect(menuSource).toContain("'/media/p09_wine_ice_en_exact_2d6f4a91.png'");
     expect(menuSource).toContain("'/media/p11_inner_cover_light_8b1d2e3f.png'");
