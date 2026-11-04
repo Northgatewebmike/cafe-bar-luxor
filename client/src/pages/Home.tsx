@@ -29,10 +29,10 @@ function useReveal() {
   }, []);
 }
 
-const HERO_BG = '/manus-storage/real-photo-8_da6a67e8.jpg';
-const ABOUT_BG = '/manus-storage/real-photo-3_90e7752e.jpg';
-const COCKTAIL_IMG = '/manus-storage/real-photo-2_e4b6d6ba.jpg';
-const COFFEE_IMG = '/manus-storage/real-photo-1_8c74bd6b.jpg';
+const HERO_BG = '/media/real-photo-8_da6a67e8.jpg';
+const ABOUT_BG = '/media/real-photo-3_90e7752e.jpg';
+const COCKTAIL_IMG = '/media/real-photo-2_e4b6d6ba.jpg';
+const COFFEE_IMG = '/media/real-photo-1_8c74bd6b.jpg';
 
 export default function Home() {
   const { t, lang } = useLanguage();

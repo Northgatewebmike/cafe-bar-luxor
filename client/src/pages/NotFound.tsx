@@ -4,7 +4,7 @@
  */
 import { Link } from 'wouter';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
+const HERO_BG = '/media/hero-bg.webp';
 
 export default function NotFound() {
   return (

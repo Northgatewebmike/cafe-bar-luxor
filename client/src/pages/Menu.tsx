@@ -67,7 +67,7 @@ const MENU_PAGES_EN = [
 ];
 
 const SOUND_URL = menuAsset('turn_d5b169b6.mp3');
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
+const HERO_BG = '/media/hero-bg.webp';
 
 function useReveal() {
   useEffect(() => {

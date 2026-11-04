@@ -6,7 +6,7 @@
 import { Link } from 'wouter';
 import { useLanguage } from '@/contexts/LanguageContext';
 
-const HERO_BG = 'https://d2xsxph8kpxj0f.cloudfront.net/310519663501764506/ToSJ4GLVSPtLhFJydzwdTV/hero-bg-TiiQnZUxf7WXxAPwW5fEL7.webp';
+const HERO_BG = '/media/hero-bg.webp';
 const SERIF = "'Cormorant Garamond', Georgia, serif";
 const SANS  = "'Source Sans 3', sans-serif";
 

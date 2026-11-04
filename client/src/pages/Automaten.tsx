@@ -7,13 +7,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Cigarette, Dices, AlertTriangle, Phone } from 'lucide-react';
 
-const HERO_BG = '/manus-storage/real-photo-7_0555fc42.jpg';   // Slot machines - real photo
+const HERO_BG = '/media/real-photo-7_0555fc42.jpg';   // Slot machines - real photo
 const CIGS_PHOTOS = [
-  '/manus-storage/cigarette-machine_e20343bd.jpg',    // Front view
-  '/manus-storage/cigarette-selection_0bce1145.jpg',  // Selection panel
-  '/manus-storage/cigarette-side_ff22e91c.jpg',       // Side / contactless payment
+  '/media/cigarette-machine_e20343bd.jpg',    // Front view
+  '/media/cigarette-selection_0bce1145.jpg',  // Selection panel
+  '/media/cigarette-side_ff22e91c.jpg',       // Side / contactless payment
 ];
-const SLOTS_PHOTO = '/manus-storage/real-photo-7_0555fc42.jpg'; // Slot machines - real photo
+const SLOTS_PHOTO = '/media/real-photo-7_0555fc42.jpg'; // Slot machines - real photo
 
 function useScrollReveal() {
   const ref = useRef<HTMLDivElement>(null);

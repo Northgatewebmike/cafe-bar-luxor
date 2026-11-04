@@ -6,9 +6,9 @@ import { useEffect } from 'react';
 import { useLanguage } from '@/contexts/LanguageContext';
 import { Wifi, Calendar, CreditCard, Dog, Accessibility, Tv } from 'lucide-react';
 
-const ABOUT_BG = '/manus-storage/real-photo-3_90e7752e.jpg';  // Terrace golden hour
-const HERO_BG = '/manus-storage/real-photo-2_e4b6d6ba.jpg';   // Terrace daytime
-const INTERIOR_BG = '/manus-storage/real-photo-1_8c74bd6b.jpg'; // Interior blue neon
+const ABOUT_BG = '/media/real-photo-3_90e7752e.jpg';  // Terrace golden hour
+const HERO_BG = '/media/real-photo-2_e4b6d6ba.jpg';   // Terrace daytime
+const INTERIOR_BG = '/media/real-photo-1_8c74bd6b.jpg'; // Interior blue neon
 
 function useReveal() {
   useEffect(() => {
@@ -229,7 +229,7 @@ export default function About() {
             <div className="reveal-right relative overflow-hidden group" style={{ border: '1px solid rgba(180,0,0,0.2)' }}>
               <div
                 className="absolute inset-0 bg-cover bg-center opacity-35 group-hover:opacity-45 transition-opacity duration-700"
-                style={{ backgroundImage: `url(/manus-storage/menu-bg-veltins_56de1f1c.jpg)` }}
+                style={{ backgroundImage: `url(/media/menu-bg-veltins_56de1f1c.jpg)` }}
               />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(135deg, rgba(10,0,0,0.90) 0%, rgba(10,0,0,0.72) 100%)' }} />
               <div className="relative p-8 md:p-10">
