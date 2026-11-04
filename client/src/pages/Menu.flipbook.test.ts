@@ -40,6 +40,7 @@ describe("flipbook closing cover", () => {
     expect(menuSource).toContain("'/media/p03_kalt_de_prices_20261104.png'");
     expect(menuSource).toContain("'/media/p04_limo_de_prices_20261104.png'");
     expect(menuSource).toContain("'/media/p05_bier_de_prices_20261104.png'");
+    expect(menuSource).toContain("'/media/p05_beer_en_exact_2d6f4a91.png'");
     for (const asset of [
       "p02_kaffee_tee_de_prices_20261104.png",
       "p04_limo_de_prices_20261104.png",
