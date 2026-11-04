@@ -440,7 +440,7 @@ export default function Home() {
                   { size: lang === 'de' ? '0,2 l' : '0.2 l', price: lang === 'de' ? '€2,20' : '€2.20' },
                   { size: lang === 'de' ? '0,3 l' : '0.3 l', price: lang === 'de' ? '€3,00' : '€3.00' },
                   { size: lang === 'de' ? '0,4 l' : '0.4 l', price: lang === 'de' ? '€4,00' : '€4.00' },
-                  { size: lang === 'de' ? 'Königshof 0,5 l' : 'Königshof 0.5 l', price: lang === 'de' ? '€5,00' : '€5.00' },
+                  { size: lang === 'de' ? '0,5 l' : '0.5 l', price: lang === 'de' ? '€5,00' : '€5.00' },
                 ].map((s, i) => (
                   <div key={i} className="text-center py-2" style={{ background: 'rgba(180,0,0,0.1)', border: '1px solid rgba(180,0,0,0.25)' }}>
                     <div className="text-white text-sm font-bold" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>{s.size}</div>
