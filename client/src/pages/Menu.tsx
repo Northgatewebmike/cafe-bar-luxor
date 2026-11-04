@@ -23,7 +23,7 @@ declare global {
   }
 }
 
-// Full-page mode — front cover, 11 content pages, and a matching hard back cover.
+// Full-page mode — front cover, 12 content pages, and a matching hard back cover.
 // The even page count prevents dFlip from generating an empty white final sheet.
 // Updated: bottled beer A=Gluten, Vodka/Jager Energy coffeinhaltig, improved shots notes, full legend
 const MENU_MEDIA_BASE = 'https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/';
@@ -46,22 +46,23 @@ const MENU_PAGES_DE = [
   menuAsset('p09_wein_eis_4839dc68.png'),                               // Wein & Sekt + Eis (4/D, 6/F)
   '/media/p10_speisen_de_7c4e2a1b.png',                                 // Speisen (German)
   '/media/p11_closing_de_9d2f6a4c.png',                                 // Thank-you + opening hours (German)
+  '/media/p11_inner_cover_light_8b1d2e3f.png',                           // Inner closing page — prevents a blank final sheet
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 const MENU_PAGES_EN = [
   MENU_FRONT_COVER,
-  '/media/p01_welcome_en_5a1f3c8d.png',
-  '/media/p02_coffee_tea_en_5a1f3c8d.png',
-  '/media/p03_cold_drinks_en_5a1f3c8d.png',
-  '/media/p04_lemonade_en_5a1f3c8d.png',
-  '/media/p05_beer_en_5a1f3c8d.png',
-  '/media/p06_cocktails_en_5a1f3c8d.png',
-  '/media/p07_shots_en_5a1f3c8d.png',
-  '/media/p08_longdrinks_en_5a1f3c8d.png',
-  '/media/p09_wine_ice_en_5a1f3c8d.png',
-  '/media/p10_speisen_en_7c4e2a1b.png',                                 // Food (English)
-  '/media/p10_contact_en_4a7e1c2d.png',                                  // Contact (English)
-  '/media/p11_closing_en_9d2f6a4c.png',                                 // Thank-you + opening hours (English)
+  '/media/p01_welcome_en_light_8b1d2e3f.png',
+  '/media/p02_coffee_tea_en_light_8b1d2e3f.png',
+  '/media/p03_cold_drinks_en_light_8b1d2e3f.png',
+  '/media/p04_lemonade_en_light_8b1d2e3f.png',
+  '/media/p05_beer_en_light_8b1d2e3f.png',
+  '/media/p06_cocktails_en_light_8b1d2e3f.png',
+  '/media/p07_shots_en_light_8b1d2e3f.png',
+  '/media/p08_longdrinks_en_light_8b1d2e3f.png',
+  '/media/p09_wine_ice_en_light_8b1d2e3f.png',
+  '/media/p10_speisen_en_light_8b1d2e3f.png',                              // Food (English)
+  '/media/p11_closing_en_light_8b1d2e3f.png',                              // Thank-you + opening hours (English)
+  '/media/p11_inner_cover_light_8b1d2e3f.png',                              // Inner closing page
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
 
