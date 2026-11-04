@@ -30,8 +30,8 @@ function useReveal() {
 }
 
 const HERO_BG = '/media/real-photo-8_da6a67e8.jpg';
-const ABOUT_BG = '/media/real-photo-3_90e7752e.jpg';
-const COCKTAIL_IMG = '/media/real-photo-2_e4b6d6ba.jpg';
+const ABOUT_BG = '/manus-storage/real-photo-3_90e7752e_1f5e1473.jpg';
+const COCKTAIL_IMG = '/manus-storage/real-photo-2_e4b6d6ba_6dbf3328.jpg';
 const COFFEE_IMG = '/media/real-photo-1_8c74bd6b.jpg';
 
 export default function Home() {

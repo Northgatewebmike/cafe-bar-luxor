@@ -36,6 +36,10 @@ describe("flipbook closing cover", () => {
   it("loads menu pages and sound from the browser-safe public archive", () => {
     expect(menuSource).toContain("const MENU_MEDIA_BASE = 'https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/'");
     expect(menuSource).toContain("menuAsset('p01_welcome_2b120f43.png')");
+    expect(menuSource).toContain("'/media/p02_kaffee_tee_de_prices_20261104.png'");
+    expect(menuSource).toContain("'/media/p03_kalt_de_prices_20261104.png'");
+    expect(menuSource).toContain("'/media/p04_limo_de_prices_20261104.png'");
+    expect(menuSource).toContain("'/media/p05_bier_de_prices_20261104.png'");
     expect(menuSource).toContain("'/media/p10_speisen_de_7c4e2a1b.png'");
     expect(menuSource).toContain("'/media/p10_speisen_en_7c4e2a1b.png'");
     expect(menuSource).not.toContain("'/media/p10_contact_de_4a7e1c2d.png'");

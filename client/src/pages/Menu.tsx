@@ -36,10 +36,10 @@ const MENU_BACK_COVER = `${MENU_FRONT_COVER}?sheet=back-cover`;
 const MENU_PAGES_DE = [
   MENU_FRONT_COVER,                                                      // Hard front cover
   menuAsset('p01_welcome_2b120f43.png'),                                // Welcome + Oeffnungszeiten
-  menuAsset('p02_kaffee_tee_7e4a1674.png'),                             // Kaffee + Tee (1/A-N codes)
-  menuAsset('p03_kalt_1318c766.png'),                                   // Kaltgetranke (1/A-N codes)
-  menuAsset('p04_limo_2ef2a3b9.png'),                                   // Hausgemachte Limonade
-  menuAsset('p05_bier_53951fac.png'),                                   // Bier (1/A Gluten, 4/D Sulfite)
+  '/media/p02_kaffee_tee_de_prices_20261104.png',                       // Kaffee + Tee — updated German prices
+  '/media/p03_kalt_de_prices_20261104.png',                             // Kaltgetränke — updated German prices
+  '/media/p04_limo_de_prices_20261104.png',                             // Hausgemachte Limonade — updated German price
+  '/media/p05_bier_de_prices_20261104.png',                             // Bier — updated German prices
   menuAsset('p06_cocktails1_0ba8d16b.png'),                             // Cocktails (1/A-N codes)
   menuAsset('p07_cocktails2_6e14b8dc.png'),                             // Shots (1/A-N notes)
   menuAsset('p08_longdrinks_whiskey_aperitif_f953963b.png'),            // Long Drinks + Whiskey + Aperitif
