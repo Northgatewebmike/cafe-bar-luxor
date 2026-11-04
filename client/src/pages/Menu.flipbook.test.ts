@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { describe, expect, it } from "vitest";
 
@@ -40,6 +40,13 @@ describe("flipbook closing cover", () => {
     expect(menuSource).toContain("'/media/p03_kalt_de_prices_20261104.png'");
     expect(menuSource).toContain("'/media/p04_limo_de_prices_20261104.png'");
     expect(menuSource).toContain("'/media/p05_bier_de_prices_20261104.png'");
+    for (const asset of [
+      "p02_kaffee_tee_de_prices_20261104.png",
+      "p04_limo_de_prices_20261104.png",
+      "p05_bier_de_prices_20261104.png",
+    ]) {
+      expect(existsSync(resolve(projectRoot, "client/public/media", asset))).toBe(true);
+    }
     expect(menuSource).toContain("'/media/p10_speisen_de_7c4e2a1b.png'");
     expect(menuSource).toContain("'/media/p10_speisen_en_7c4e2a1b.png'");
     expect(menuSource).not.toContain("'/media/p10_contact_de_4a7e1c2d.png'");
