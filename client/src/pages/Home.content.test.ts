@@ -18,14 +18,21 @@ describe("homepage content integrity", () => {
     expect(languageSource).not.toContain("home.testimonials.");
   });
 
-  it("keeps Sunday hours separate at 10:00–21:00", () => {
-    expect(indexSource).toContain("Mo–Do 09–21 Uhr, Fr–Sa 09–23 Uhr, So 10–21 Uhr");
-    expect(indexSource).not.toContain("Mo–Do + So 09–21 Uhr");
-    expect(languageSource).toContain("'footer.hours.sunday': 'So: 10:00–21:00 Uhr'");
-    expect(languageSource).toContain("'footer.hours.sunday': 'Sun: 10:00–21:00'");
-  });
+	 it("keeps Sunday hours separate at 10:00–21:00", () => {
+		expect(indexSource).toContain("Mo–Do 09–21 Uhr, Fr–Sa 09–23 Uhr, So 10–21 Uhr");
+		expect(indexSource).not.toContain("Mo–Do + So 09–21 Uhr");
+		expect(languageSource).toContain("'footer.hours.sunday': 'So: 10:00–21:00 Uhr'");
+		expect(languageSource).toContain("'footer.hours.sunday': 'Sun: 10:00–21:00'");
+	});
 
-  it("keeps the homepage map visible on Netlify when the Manus loader is unavailable", () => {
+	it("shows the current Espresso price and keeps homepage photos in Manus storage", () => {
+		expect(homeSource).toContain("num: lang === 'de' ? '€2,50' : '€2.50'");
+		expect(homeSource).not.toContain("num: '€2'");
+		expect(homeSource).toContain("/manus-storage/real-photo-3_90e7752e_1f5e1473_964b47e3.jpg");
+		expect(homeSource).toContain("/manus-storage/real-photo-2_e4b6d6ba_6dbf3328_bd76cd61.jpg");
+	});
+
+	it("keeps the homepage map visible on Netlify when the Manus loader is unavailable", () => {
     expect(homeSource).toContain("<MapView");
     expect(mapSource).toContain("mapLoadError");
     expect(mapSource).toContain("www.google.com/maps?q=Cafe%26Bar%20Luxor");

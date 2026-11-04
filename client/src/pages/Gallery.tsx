@@ -9,13 +9,13 @@ import { motion, useReducedMotion } from 'framer-motion';
 
 // Real photos from Cafe&Bar Luxor — café/bar photos only (no machines)
 const PHOTO_INTERIOR = '/media/real-photo-1_8c74bd6b.jpg';   // Interior blue neon bar
-const PHOTO_TERRACE_DAY = '/manus-storage/real-photo-2_e4b6d6ba_6dbf3328.jpg'; // Terrace daytime
-const PHOTO_TERRACE_SUNSET = '/manus-storage/real-photo-3_90e7752e_1f5e1473.jpg'; // Terrace golden hour
+const PHOTO_TERRACE_DAY = '/manus-storage/real-photo-2_e4b6d6ba_6dbf3328_bd76cd61.jpg'; // Terrace daytime
+const PHOTO_TERRACE_SUNSET = '/manus-storage/real-photo-3_90e7752e_1f5e1473_964b47e3.jpg'; // Terrace golden hour
 const PHOTO_EVENING = '/media/real-photo-8_da6a67e8.jpg';     // Evening with guests
 // New terrace photos (May 2026)
-const PHOTO_TERRACE_NEW1 = '/manus-storage/1000011501_26ad3baf_d298c594.jpg';  // Terrace wide view with Luxor sign
-const PHOTO_TERRACE_NEW2 = '/manus-storage/1000011502_96f266a9_23a1f7b8.jpg';  // Terrace panorama morning
-const PHOTO_TERRACE_NEW3 = '/manus-storage/1000011503_f266baf2_422a2734.jpg';  // Terrace close-up tables
+const PHOTO_TERRACE_NEW1 = '/manus-storage/1000011501_26ad3baf_d298c594_ab864c9e.jpg';  // Terrace wide view with Luxor sign
+const PHOTO_TERRACE_NEW2 = '/manus-storage/1000011502_96f266a9_23a1f7b8_0a9f3ab6.jpg';  // Terrace panorama morning
+const PHOTO_TERRACE_NEW3 = '/manus-storage/1000011503_f266baf2_422a2734_e2a28e48.jpg';  // Terrace close-up tables
 
 export default function Gallery() {
   const { t } = useLanguage();

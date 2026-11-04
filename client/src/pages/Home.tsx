@@ -30,8 +30,8 @@ function useReveal() {
 }
 
 const HERO_BG = '/media/real-photo-8_da6a67e8.jpg';
-const ABOUT_BG = '/manus-storage/real-photo-3_90e7752e_1f5e1473.jpg';
-const COCKTAIL_IMG = '/manus-storage/real-photo-2_e4b6d6ba_6dbf3328.jpg';
+const ABOUT_BG = '/manus-storage/real-photo-3_90e7752e_1f5e1473_964b47e3.jpg';
+const COCKTAIL_IMG = '/manus-storage/real-photo-2_e4b6d6ba_6dbf3328_bd76cd61.jpg';
 const COFFEE_IMG = '/media/real-photo-1_8c74bd6b.jpg';
 
 export default function Home() {
@@ -288,7 +288,7 @@ export default function Home() {
               {[
                 { num: '2024', label: lang === 'de' ? 'Eröffnet' : 'Founded' },
                 { num: '☕', label: lang === 'de' ? 'Kaffee & Bar' : 'Coffee & Bar' },
-                { num: '€2', label: lang === 'de' ? 'Espresso ab' : 'Espresso from' },
+                { num: lang === 'de' ? '€2,50' : '€2.50', label: lang === 'de' ? 'Espresso ab' : 'Espresso from' },
                 { num: '∞', label: lang === 'de' ? 'Herzlichkeit' : 'Warmth' },
               ].map((stat, i) => (
                 <div
