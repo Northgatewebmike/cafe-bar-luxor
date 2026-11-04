@@ -37,10 +37,10 @@ describe("flipbook closing cover", () => {
     expect(menuSource).toContain("const MENU_MEDIA_BASE = 'https://cdn.jsdelivr.net/gh/Northgatewebmike/cafe-bar-luxor-pages@master/media/'");
     expect(menuSource).toContain("menuAsset('p01_welcome_2b120f43.png')");
     expect(menuSource).toContain("'/media/p10_speisen_de_7c4e2a1b.png'");
-    expect(menuSource).toContain("'/media/p10_speisen_en_light_8b1d2e3f.png'");
+    expect(menuSource).toContain("'/media/p10_speisen_en_7c4e2a1b.png'");
     expect(menuSource).not.toContain("'/media/p10_contact_de_4a7e1c2d.png'");
     expect(menuSource).toContain("'/media/p11_closing_de_9d2f6a4c.png'");
-    expect(menuSource).toContain("'/media/p11_closing_en_light_8b1d2e3f.png'");
+    expect(menuSource).toContain("'/media/p11_closing_en_9d2f6a4c.png'");
     expect(menuSource).toContain("'/media/p01_welcome_en_light_8b1d2e3f.png'");
     expect(menuSource).toContain("'/media/p09_wine_ice_en_light_8b1d2e3f.png'");
     expect(menuSource).toContain("'/media/p11_inner_cover_light_8b1d2e3f.png'");

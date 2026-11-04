@@ -60,8 +60,8 @@ const MENU_PAGES_EN = [
   '/media/p07_shots_en_light_8b1d2e3f.png',
   '/media/p08_longdrinks_en_light_8b1d2e3f.png',
   '/media/p09_wine_ice_en_light_8b1d2e3f.png',
-  '/media/p10_speisen_en_light_8b1d2e3f.png',                              // Food (English)
-  '/media/p11_closing_en_light_8b1d2e3f.png',                              // Thank-you + opening hours (English)
+  '/media/p10_speisen_en_7c4e2a1b.png',                                    // Food (English, matching German dark design)
+  '/media/p11_closing_en_9d2f6a4c.png',                                    // Thank-you + opening hours (English, matching German dark design)
   '/media/p11_inner_cover_light_8b1d2e3f.png',                              // Inner closing page
   MENU_BACK_COVER,                                                       // Hard back cover — no blank final sheet
 ];
