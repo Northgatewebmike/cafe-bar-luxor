@@ -51,15 +51,15 @@ const MENU_PAGES_DE = [
 ];
 const MENU_PAGES_EN = [
   MENU_FRONT_COVER,
-  '/media/p01_welcome_en_light_8b1d2e3f.png',
-  '/media/p02_coffee_tea_en_light_8b1d2e3f.png',
-  '/media/p03_cold_drinks_en_light_8b1d2e3f.png',
-  '/media/p04_lemonade_en_light_8b1d2e3f.png',
-  '/media/p05_beer_en_light_8b1d2e3f.png',
-  '/media/p06_cocktails_en_light_8b1d2e3f.png',
-  '/media/p07_shots_en_light_8b1d2e3f.png',
-  '/media/p08_longdrinks_en_light_8b1d2e3f.png',
-  '/media/p09_wine_ice_en_light_8b1d2e3f.png',
+  '/media/p01_welcome_en_exact_2d6f4a91.png',
+  '/media/p02_coffee_tea_en_exact_2d6f4a91.png',
+  '/media/p03_cold_en_exact_2d6f4a91.png',
+  '/media/p04_lemonade_en_exact_2d6f4a91.png',
+  '/media/p05_beer_en_exact_2d6f4a91.png',
+  '/media/p06_cocktails_en_exact_2d6f4a91.png',
+  '/media/p07_shots_en_exact_2d6f4a91.png',
+  '/media/p08_longdrinks_en_exact_2d6f4a91.png',
+  '/media/p09_wine_ice_en_exact_2d6f4a91.png',
   '/media/p10_speisen_en_7c4e2a1b.png',                                    // Food (English, matching German dark design)
   '/media/p11_closing_en_9d2f6a4c.png',                                    // Thank-you + opening hours (English, matching German dark design)
   '/media/p11_inner_cover_light_8b1d2e3f.png',                              // Inner closing page
