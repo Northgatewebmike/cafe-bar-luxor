@@ -27,7 +27,7 @@ function useReveal() {
 }
 
 export default function About() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
   useReveal();
 
   const features = [
@@ -235,19 +235,21 @@ export default function About() {
               <div className="relative p-8 md:p-10">
                 <div className="text-5xl mb-5" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif", color: 'rgba(180,0,0,0.8)' }}>🍺</div>
                 <h3 className="text-2xl md:text-3xl font-bold text-white mb-3" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>
-                  Frisch Gezapftes Bier vom Fass
+                  {lang === 'de' ? 'Frisch Gezapftes Bier vom Fass' : 'Fresh Draft Beer'}
                 </h3>
                 <div className="h-px w-12 bg-red-700 mb-4" />
                 <p className="text-white/70 text-sm leading-relaxed mb-5" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-                  Unser Bier kommt direkt vom Fass — frisch gezapft, eiskalt und mit der perfekten Schaumkrone. Veltins und Früh Kölsch, zwei der beliebtesten deutschen Biere, stehen bei uns immer frisch an der Zapfanlage bereit. Jeder Schluck ist ein Erlebnis: das unverwechselbare Aroma, die natürliche Frische und der unvergleichliche Geschmack eines echten Fassbiers. Besonders im Sommer — aber auch in jeder anderen Jahreszeit — gibt es nichts Erfrischenderes als ein eiskaltes Bier vom Fass. Und das Beste: Wir bieten das günstigste Fassbier im Umkreis von Solingen, Remscheid und Wuppertal.
+                  {lang === 'de'
+                    ? 'Unser Bier kommt direkt vom Fass — frisch gezapft, eiskalt und mit der perfekten Schaumkrone. Veltins und Früh Kölsch stehen frisch an der Zapfanlage bereit. Dazu bieten wir Königshof Pils. Jeder Schluck ist ein Erlebnis — und unser Fassbier gehört zu den günstigsten im Umkreis von Solingen, Remscheid und Wuppertal.'
+                    : 'Our beer comes straight from the tap — freshly poured, ice cold and finished with the perfect head. Veltins and Früh Kölsch are always fresh at the bar, joined by Königshof Pils. Every sip is an experience — and our draft beer is among the best-value options around Solingen, Remscheid and Wuppertal.'}
                 </p>
                 {/* Sizes & prices */}
                 <div className="grid grid-cols-3 gap-2 mb-4">
                   {[
-                    { size: '0,2 l', price: '€2,00' },
-                    { size: '0,3 l', price: '€2,70' },
-                    { size: '0,4 l', price: '€3,60' },
-                    { size: '0,5 l', price: '€4,50' },
+                    { size: lang === 'de' ? '0,2 l' : '0.2 l', price: lang === 'de' ? '€2,20' : '€2.20' },
+                    { size: lang === 'de' ? '0,3 l' : '0.3 l', price: lang === 'de' ? '€3,00' : '€3.00' },
+                    { size: lang === 'de' ? '0,4 l' : '0.4 l', price: lang === 'de' ? '€4,00' : '€4.00' },
+                    { size: lang === 'de' ? 'Königshof 0,5 l' : 'Königshof 0.5 l', price: lang === 'de' ? '€5,00' : '€5.00' },
                   ].map((s, i) => (
                     <div key={i} className="text-center py-2 px-1" style={{ background: 'rgba(180,0,0,0.1)', border: '1px solid rgba(180,0,0,0.25)' }}>
                       <div className="text-white text-sm font-bold" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>{s.size}</div>
@@ -257,7 +259,7 @@ export default function About() {
                 </div>
                 <div className="flex items-center gap-2 mt-2">
                   <div className="h-px flex-1 bg-red-700/20" />
-                  <span className="text-red-400/80 text-xs tracking-wide" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>🏆 Günstigstes Bier · Solingen · Remscheid · Wuppertal</span>
+                  <span className="text-red-400/80 text-xs tracking-wide" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>{lang === 'de' ? '🏆 Günstigstes Bier · Solingen · Remscheid · Wuppertal' : '🏆 Best-value beer · Solingen · Remscheid · Wuppertal'}</span>
                   <div className="h-px flex-1 bg-red-700/20" />
                 </div>
               </div>

@@ -407,7 +407,10 @@ export default function Home() {
                   : 'No time to stay? No problem. Our coffee to go is freshly brewed and the perfect companion for your day — espresso, cappuccino or latte macchiato.'}
               </p>
               <div className="flex flex-wrap gap-2">
-                {['Espresso €2', 'Cappuccino €3', 'Latte Macchiato €3', 'Frappé €3–3,50'].map(item => (
+                {(lang === 'de'
+                  ? ['Espresso €2,50', 'Cappuccino €3,50', 'Latte Macchiato €3,50', 'Frappé €3,50–4,00']
+                  : ['Espresso €2.50', 'Cappuccino €3.50', 'Latte Macchiato €3.50', 'Frappé €3.50–4.00']
+                ).map(item => (
                   <span key={item} className="px-3 py-1 text-xs border border-red-700/30 text-red-400"
                     style={{ fontFamily: "'Source Sans 3', sans-serif" }}>{item}</span>
                 ))}
@@ -434,10 +437,10 @@ export default function Home() {
               {/* Sizes grid */}
               <div className="grid grid-cols-4 gap-2 mb-4">
                 {[
-                  { size: '0,2 l', price: '€2,00' },
-                  { size: '0,3 l', price: '€2,70' },
-                  { size: '0,4 l', price: '€3,60' },
-                  { size: '0,5 l', price: '€4,50' },
+                  { size: lang === 'de' ? '0,2 l' : '0.2 l', price: lang === 'de' ? '€2,20' : '€2.20' },
+                  { size: lang === 'de' ? '0,3 l' : '0.3 l', price: lang === 'de' ? '€3,00' : '€3.00' },
+                  { size: lang === 'de' ? '0,4 l' : '0.4 l', price: lang === 'de' ? '€4,00' : '€4.00' },
+                  { size: lang === 'de' ? 'Königshof 0,5 l' : 'Königshof 0.5 l', price: lang === 'de' ? '€5,00' : '€5.00' },
                 ].map((s, i) => (
                   <div key={i} className="text-center py-2" style={{ background: 'rgba(180,0,0,0.1)', border: '1px solid rgba(180,0,0,0.25)' }}>
                     <div className="text-white text-sm font-bold" style={{ fontFamily: "'Cormorant Garamond', Georgia, serif" }}>{s.size}</div>

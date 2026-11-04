@@ -143,25 +143,34 @@ export function MapView({
     const c = getStoredConsent();
     return c ? c.maps : false;
   });
-  const [apiKeyError, setApiKeyError] = useState<boolean>(!HAS_API_KEY);
+  // Netlify does not have access to the Manus Maps proxy credentials. Keep the
+  // interactive Manus map when available, but fall back to a consent-gated
+  // Google Maps embed instead of leaving an empty rectangle on the live site.
+  const [mapLoadError, setMapLoadError] = useState<boolean>(!HAS_API_KEY);
 
   const init = usePersistFn(async () => {
-    await loadMapScript();
-    if (!mapContainer.current) {
-      console.error("Map container not found");
-      return;
-    }
-    map.current = new window.google.maps.Map(mapContainer.current, {
-      zoom: initialZoom,
-      center: initialCenter,
-      mapTypeControl: true,
-      fullscreenControl: true,
-      zoomControl: true,
-      streetViewControl: true,
-      mapId: "DEMO_MAP_ID",
-    });
-    if (onMapReady) {
-      onMapReady(map.current);
+    try {
+      await loadMapScript();
+      if (!mapContainer.current) {
+        console.error("Map container not found");
+        return;
+      }
+      map.current = new window.google.maps.Map(mapContainer.current, {
+        zoom: initialZoom,
+        center: initialCenter,
+        mapTypeControl: true,
+        fullscreenControl: true,
+        zoomControl: true,
+        streetViewControl: true,
+        mapId: "DEMO_MAP_ID",
+      });
+      setMapLoadError(false);
+      if (onMapReady) {
+        onMapReady(map.current);
+      }
+    } catch (error) {
+      console.error("Google Maps loader unavailable; using embed fallback", error);
+      setMapLoadError(true);
     }
   });
 
@@ -176,22 +185,8 @@ export function MapView({
   }, []);
 
   useEffect(() => {
-    if (mapsConsent) init();
-  }, [mapsConsent, init]);
-
-  // Show error if API key is missing
-  if (apiKeyError) {
-    return (
-      <div
-        className={cn('w-full h-[500px] flex flex-col items-center justify-center gap-4', className)}
-        style={{ background: 'rgba(255,255,255,0.03)', border: '1px solid rgba(255,255,255,0.08)' }}
-      >
-        <p className="text-white/50 text-sm text-center px-6" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
-          Die Karte ist derzeit nicht verfügbar. Bitte kontaktieren Sie uns direkt.
-        </p>
-      </div>
-    );
-  }
+    if (mapsConsent && !mapLoadError) init();
+  }, [mapsConsent, mapLoadError, init]);
 
   // Show consent placeholder if maps consent not yet given
   if (!mapsConsent) {
@@ -215,6 +210,18 @@ export function MapView({
           Google Maps aktivieren
         </button>
       </div>
+    );
+  }
+
+  if (mapLoadError) {
+    return (
+      <iframe
+        title="Cafe&Bar Luxor location on Google Maps"
+        src="https://www.google.com/maps?q=Cafe%26Bar%20Luxor%2C%20Ohligser%20Markt%205%2C%2042697%20Solingen&output=embed"
+        className={cn("w-full h-[500px] border-0", className)}
+        loading="lazy"
+        referrerPolicy="no-referrer-when-downgrade"
+      />
     );
   }
 

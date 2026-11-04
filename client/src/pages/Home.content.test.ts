@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 
 const projectRoot = resolve(import.meta.dirname, "..", "..", "..");
 const homeSource = readFileSync(resolve(projectRoot, "client/src/pages/Home.tsx"), "utf8");
+const mapSource = readFileSync(resolve(projectRoot, "client/src/components/Map.tsx"), "utf8");
 const languageSource = readFileSync(resolve(projectRoot, "client/src/contexts/LanguageContext.tsx"), "utf8");
 const indexSource = readFileSync(resolve(projectRoot, "client/index.html"), "utf8");
 
@@ -22,5 +23,12 @@ describe("homepage content integrity", () => {
     expect(indexSource).not.toContain("Mo–Do + So 09–21 Uhr");
     expect(languageSource).toContain("'footer.hours.sunday': 'So: 10:00–21:00 Uhr'");
     expect(languageSource).toContain("'footer.hours.sunday': 'Sun: 10:00–21:00'");
+  });
+
+  it("keeps the homepage map visible on Netlify when the Manus loader is unavailable", () => {
+    expect(homeSource).toContain("<MapView");
+    expect(mapSource).toContain("mapLoadError");
+    expect(mapSource).toContain("www.google.com/maps?q=Cafe%26Bar%20Luxor");
+    expect(mapSource).toContain("if (!mapsConsent)");
   });
 });
