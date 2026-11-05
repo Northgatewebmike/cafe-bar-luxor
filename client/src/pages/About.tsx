@@ -240,8 +240,8 @@ export default function About() {
                 <div className="h-px w-12 bg-red-700 mb-4" />
                 <p className="text-white/70 text-sm leading-relaxed mb-5" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
                   {lang === 'de'
-                    ? 'Unser Bier kommt direkt vom Fass — frisch gezapft, eiskalt und mit der perfekten Schaumkrone. Veltins und Früh Kölsch stehen frisch an der Zapfanlage bereit. Dazu bieten wir Königshof Pils. Jeder Schluck ist ein Erlebnis — und unser Fassbier gehört zu den günstigsten im Umkreis von Solingen, Remscheid und Wuppertal.'
-                    : 'Our beer comes straight from the tap — freshly poured, ice cold and finished with the perfect head. Veltins and Früh Kölsch are always fresh at the bar, joined by Königshof Pils. Every sip is an experience — and our draft beer is among the best-value options around Solingen, Remscheid and Wuppertal.'}
+                    ? 'Unser Bier kommt direkt vom Fass — frisch gezapft, eiskalt und mit der perfekten Schaumkrone. Veltins und Früh Kölsch stehen frisch an der Zapfanlage bereit. Jeder Schluck ist ein Erlebnis — und unser Fassbier gehört zu den günstigsten im Umkreis von Solingen, Remscheid und Wuppertal.'
+                    : 'Our beer comes straight from the tap — freshly poured, ice cold and finished with the perfect head. Veltins and Früh Kölsch are always fresh at the bar. Every sip is an experience — and our draft beer is among the best-value options around Solingen, Remscheid and Wuppertal.'}
                 </p>
                 {/* Sizes & prices */}
                 <div className="grid grid-cols-3 gap-2 mb-4">
