@@ -14,6 +14,7 @@ describe("bilingual beverage price update", () => {
     expect(germanGenerator).toContain("cover_price(d, 530, '2,80 €')");
     expect(germanGenerator).toContain("'2,30 €'");
     expect(germanGenerator).toContain("cover_price(d, 812, '5,00 €')");
+    expect(germanGenerator).toContain("cover_price(d, 856, '5,00 €')");
   });
 
   it("sets English cold drinks to the requested prices", () => {
