@@ -30,4 +30,9 @@ describe("bilingual beverage price update", () => {
     expect(englishGenerator).not.toContain("('Königshof Pils'");
     expect(aboutSource).not.toContain("Königshof");
   });
+
+  it("includes Veltins 0.5 l at 4.50 euros in both languages", () => {
+    expect(readFileSync("/tmp/rebuild_german_drinks_clean.py", "utf8")).toContain("('Veltins', '0,5 l', '4,50 €')");
+    expect(englishGenerator).toContain("('Veltins','0.5 l','4.50 €')");
+  });
 });
