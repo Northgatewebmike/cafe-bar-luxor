@@ -4,6 +4,7 @@ import { describe, expect, it } from "vitest";
 
 const projectRoot = resolve(import.meta.dirname, "..", "..", "..");
 const germanGenerator = readFileSync("/tmp/update_luxor_prices.py", "utf8");
+const cleanGermanGenerator = readFileSync("/tmp/rebuild_german_drinks_clean.py", "utf8");
 const germanBeerGenerator = readFileSync("/tmp/fix_luxor_menu_layout.py", "utf8");
 const englishGenerator = readFileSync("/tmp/make_updated_english_prices.py", "utf8");
 const aboutSource = readFileSync(resolve(projectRoot, "client/src/pages/About.tsx"), "utf8");
@@ -34,5 +35,10 @@ describe("bilingual beverage price update", () => {
   it("includes Veltins 0.5 l at 4.50 euros in both languages", () => {
     expect(readFileSync("/tmp/rebuild_german_drinks_clean.py", "utf8")).toContain("('Veltins', '0,5 l', '4,50 €')");
     expect(englishGenerator).toContain("('Veltins','0.5 l','4.50 €')");
+  });
+
+  it("sets Espresso Macchiato to 3 euros in both languages", () => {
+    expect(cleanGermanGenerator).toContain("298:'3,00 €'");
+    expect(englishGenerator).toContain("('Espresso Macchiato','3.00 €'");
   });
 });
