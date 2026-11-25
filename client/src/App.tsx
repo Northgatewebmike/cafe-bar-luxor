@@ -19,6 +19,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import Menu from "./pages/Menu";
 import Gallery from "./pages/Gallery";
+import Events from "./pages/Events";
 import Hours from "./pages/Hours";
 import Contact from "./pages/Contact";
 import Impressum from "./pages/Impressum";
@@ -40,6 +41,7 @@ function Router() {
           <Route path="/ueber-uns" component={About} />
           <Route path="/speisekarte" component={Menu} />
           <Route path="/galerie" component={Gallery} />
+          <Route path="/events" component={Events} />
           <Route path="/oeffnungszeiten" component={Hours} />
           <Route path="/kontakt" component={Contact} />
           <Route path="/impressum" component={Impressum} />

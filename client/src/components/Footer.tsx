@@ -58,6 +58,7 @@ export default function Footer() {
                 { href: '/ueber-uns', label: t('nav.about') },
                 { href: '/speisekarte', label: t('nav.menu') },
                 { href: '/galerie', label: t('nav.gallery') },
+                { href: '/events', label: t('nav.events') },
                 { href: '/oeffnungszeiten', label: t('nav.hours') },
                 { href: '/kontakt', label: t('nav.contact') },
                 { href: '/automaten', label: t('nav.automaten') },

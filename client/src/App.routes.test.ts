@@ -21,4 +21,11 @@ describe("public routes", () => {
     expect(navigationSource).toContain("href: '/jobs-praktikum'");
     expect(navigationSource).toContain("Jobs & Internships");
   });
+
+  it("exposes the public bilingual Events route", () => {
+    expect(appSource).toContain('path="/events"');
+    expect(appSource).toContain('import Events from "./pages/Events"');
+    expect(navigationSource).toContain("href: '/events'");
+    expect(footerSource).toContain("href: '/events'");
+  });
 });

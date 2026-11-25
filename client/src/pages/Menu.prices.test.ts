@@ -8,6 +8,9 @@ const cleanGermanGenerator = readFileSync("/tmp/rebuild_german_drinks_clean.py",
 const germanBeerGenerator = readFileSync("/tmp/fix_luxor_menu_layout.py", "utf8");
 const englishGenerator = readFileSync("/tmp/make_updated_english_prices.py", "utf8");
 const aboutSource = readFileSync(resolve(projectRoot, "client/src/pages/About.tsx"), "utf8");
+const menuSource = readFileSync(resolve(projectRoot, "client/src/pages/Menu.tsx"), "utf8");
+const germanFoodSheet = readFileSync(resolve(projectRoot, "client/public/media/p10_speisen_de_7c4e2a1b.svg"), "utf8");
+const englishFoodSheet = readFileSync(resolve(projectRoot, "client/public/media/p10_speisen_en_7c4e2a1b.svg"), "utf8");
 
 describe("bilingual beverage price update", () => {
   it("sets German cold drinks to the requested prices", () => {
@@ -40,5 +43,20 @@ describe("bilingual beverage price update", () => {
   it("sets Espresso Macchiato to 3 euros in both languages", () => {
     expect(cleanGermanGenerator).toContain("298:'3,00 €'");
     expect(englishGenerator).toContain("('Espresso Macchiato','3.00 €'");
+  });
+
+  it("includes Schnitzel mit Pommes at 14,99 euros on the German Speisen sheet", () => {
+    expect(germanFoodSheet).toContain("Schnitzel mit Pommes");
+    expect(germanFoodSheet).toContain("14,99 €");
+  });
+
+  it("includes the translated Schnitzel with Fries at 14.99 euros on the English sheet", () => {
+    expect(englishFoodSheet).toContain("Schnitzel with Fries");
+    expect(englishFoodSheet).toContain("€14.99");
+  });
+
+  it("keeps the bilingual flipbook mapped to the localized food sheets", () => {
+    expect(menuSource).toContain("'/media/p10_speisen_de_7c4e2a1b.png'");
+    expect(menuSource).toContain("'/media/p10_speisen_en_7c4e2a1b.png'");
   });
 });
