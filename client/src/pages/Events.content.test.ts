@@ -24,9 +24,11 @@ describe('Events page', () => {
     expect(translationsSource).toContain("'events.time.value': 'Ab 18:00 Uhr'");
     expect(translationsSource).toContain("'events.time.value': 'From 18:00'");
     expect(translationsSource).toContain('Ohligser Markt 5, 42697 Solingen');
-    expect(translationsSource).toContain('DJ Adrice');
+    expect(translationsSource).toContain('DJ ADNCE');
     expect(translationsSource).toContain('Querbeats');
     expect(translationsSource).toContain('Indoors at Cafe&Bar Luxor');
+    expect(translationsSource).toContain('Everybody is welcome — with or without a reservation.');
+    expect(translationsSource).toContain('Alle sind herzlich willkommen — mit oder ohne Reservierung.');
   });
 
   it('keeps the supplied poster on managed storage rather than in the static bundle', () => {

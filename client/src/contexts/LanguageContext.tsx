@@ -114,7 +114,8 @@ const translations: Record<Language, Record<string, string>> = {
     'events.subtitle': 'Besondere Abende, gute Musik und unvergessliche Momente im Cafe&Bar Luxor.',
     'events.card.label': '05.12.2026 · Winterparty',
     'events.card.title': 'Winterparty im Luxor',
-    'events.card.description': 'Feiern Sie mit uns in den Winter! Am Samstag, den 05.12.2026, erwartet Sie ein besonderer Abend mit DJ Adrice und Querbeats. Die Veranstaltung findet indoor statt — wir freuen uns auf Ihren Besuch.',
+    'events.card.description': 'Feiern Sie mit uns in den Winter! Am Samstag, den 05.12.2026, erwartet Sie ein besonderer Abend mit DJ ADNCE und Querbeats. Die Veranstaltung findet indoor statt — wir freuen uns auf Ihren Besuch.',
+    'events.welcome': 'Alle sind herzlich willkommen — mit oder ohne Reservierung.',
     'events.date.label': 'Datum',
     'events.date.value': 'Samstag, 05.12.2026',
     'events.time.label': 'Beginn',
@@ -122,9 +123,9 @@ const translations: Record<Language, Record<string, string>> = {
     'events.venue.label': 'Veranstaltungsort',
     'events.venue.value': 'Indoor im Cafe&Bar Luxor',
     'events.music.label': 'Musik',
-    'events.music.value': 'DJ Adrice · Querbeats',
+    'events.music.value': 'DJ ADNCE · Querbeats',
     'events.location': 'Ohligser Markt 5, 42697 Solingen',
-    'events.poster.alt': 'Poster zur Winterparty im Cafe&Bar Luxor am Samstag, 05.12.2026 ab 18:00 Uhr mit DJ Adrice und Querbeats',
+    'events.poster.alt': 'Poster zur Winterparty im Cafe&Bar Luxor am Samstag, 05.12.2026 ab 18:00 Uhr mit DJ ADNCE und Querbeats',
 
     // Opening Hours
     'hours.title': 'Öffnungszeiten',
@@ -326,7 +327,8 @@ const translations: Record<Language, Record<string, string>> = {
     'events.subtitle': 'Special evenings, great music and unforgettable moments at Cafe&Bar Luxor.',
     'events.card.label': '05.12.2026 · Winter Party',
     'events.card.title': 'Winter Party at Luxor',
-    'events.card.description': 'Celebrate the start of winter with us! On Saturday, 05.12.2026, enjoy a special evening with DJ Adrice and Querbeats. The event takes place indoors — we look forward to welcoming you.',
+    'events.card.description': 'Celebrate the start of winter with us! On Saturday, 05.12.2026, enjoy a special evening with DJ ADNCE and Querbeats. The event takes place indoors — we look forward to welcoming you.',
+    'events.welcome': 'Everybody is welcome — with or without a reservation.',
     'events.date.label': 'Date',
     'events.date.value': 'Saturday, 05.12.2026',
     'events.time.label': 'Starts',
@@ -334,9 +336,9 @@ const translations: Record<Language, Record<string, string>> = {
     'events.venue.label': 'Venue',
     'events.venue.value': 'Indoors at Cafe&Bar Luxor',
     'events.music.label': 'Music',
-    'events.music.value': 'DJ Adrice · Querbeats',
+    'events.music.value': 'DJ ADNCE · Querbeats',
     'events.location': 'Ohligser Markt 5, 42697 Solingen',
-    'events.poster.alt': 'Poster for the Cafe&Bar Luxor winter party on Saturday, 05.12.2026 from 18:00 with DJ Adrice and Querbeats',
+    'events.poster.alt': 'Poster for the Cafe&Bar Luxor winter party on Saturday, 05.12.2026 from 18:00 with DJ ADNCE and Querbeats',
 
     // Opening Hours
     'hours.title': 'Opening Hours',

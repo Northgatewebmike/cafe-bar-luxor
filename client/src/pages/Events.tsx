@@ -80,6 +80,9 @@ export default function Events() {
             <p className="mt-5 text-base leading-8 text-white/65" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
               {t('events.card.description')}
             </p>
+            <p className="mt-5 border-l-2 border-red-700/70 pl-4 text-sm font-medium leading-relaxed text-red-200/85" style={{ fontFamily: "'Source Sans 3', sans-serif" }}>
+              {t('events.welcome')}
+            </p>
 
             <div className="mt-8 grid gap-4 border-t border-white/10 pt-7 sm:grid-cols-2">
               {details.map(({ icon: Icon, label, value }) => (
